@@ -263,8 +263,16 @@ function quickAddToCart(productHandle) {
     })
     .catch(error => {
       console.error('Error:', error);
-      btn.textContent = '→';
-      setTimeout(() => window.location.href = `/products/${productHandle}`, 500);
+      // Product doesn't exist - show error
+      btn.textContent = '×';
+      btn.style.background = '#d32f2f';
+      alert('This product is not available yet. Please contact us to order!');
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '#ff6f00';
+        btn.disabled = false;
+      }, 2000);
     });
 }
 </script>
