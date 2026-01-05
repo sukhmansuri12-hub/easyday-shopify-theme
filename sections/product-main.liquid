@@ -457,3 +457,334 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
   setInterval(updateCountdown, 1000);
   updateCountdown();
 </script>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Images (Swipeable Gallery)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Product Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Product Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Product Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Product Image 4"
+    },
+    {
+      "type": "header",
+      "content": "Product Information"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product Title",
+      "default": "RC Stunt Car 360° Drift"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating Display",
+      "default": "4.8/5 (2,450 Reviews)"
+    },
+    {
+      "type": "header",
+      "content": "Countdown Timer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Show Countdown Timer",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "countdown_label",
+      "label": "Timer Label",
+      "default": "⏰ Offer Ends in"
+    },
+    {
+      "type": "header",
+      "content": "Pricing"
+    },
+    {
+      "type": "text",
+      "id": "current_price",
+      "label": "Current Price",
+      "default": "₹1,499"
+    },
+    {
+      "type": "text",
+      "id": "compare_price",
+      "label": "Compare At Price",
+      "default": "₹3,499"
+    },
+    {
+      "type": "text",
+      "id": "save_percentage",
+      "label": "Save Percentage",
+      "default": "57%"
+    },
+    {
+      "type": "header",
+      "content": "Buy Buttons"
+    },
+    {
+      "type": "text",
+      "id": "prepaid_button_text",
+      "label": "Prepaid Button Main Text",
+      "default": "💳 PAY ONLINE & SAVE ₹130 (10% OFF)"
+    },
+    {
+      "type": "text",
+      "id": "prepaid_price_text",
+      "label": "Prepaid Final Price",
+      "default": "Final Price: ₹1,169"
+    },
+    {
+      "type": "text",
+      "id": "cod_button_text",
+      "label": "COD Button Main Text",
+      "default": "📦 ORDER NOW - CASH ON DELIVERY"
+    },
+    {
+      "type": "text",
+      "id": "cod_sub_text",
+      "label": "COD Button Sub Text",
+      "default": "Pay when you receive | Free Shipping"
+    },
+    {
+      "type": "text",
+      "id": "quick_order_text",
+      "label": "Quick Order Button Text",
+      "default": "🚀 Quick Order (No Cart Required)"
+    },
+    {
+      "type": "header",
+      "content": "Description Section"
+    },
+    {
+      "type": "text",
+      "id": "desc_heading",
+      "label": "Description Main Heading",
+      "default": "Description goes here"
+    },
+    {
+      "type": "text",
+      "id": "block1_title",
+      "label": "Block 1 Title",
+      "default": "🎯 ULTIMATE FUN FOR KIDS!"
+    },
+    {
+      "type": "textarea",
+      "id": "block1_text",
+      "label": "Block 1 Text",
+      "default": "Watch your kids' faces light up as this powerful RC stunt car performs incredible 360° flips, spins, and drifts! Perfect for indoor and outdoor play."
+    },
+    {
+      "type": "text",
+      "id": "block2_title",
+      "label": "Block 2 Title",
+      "default": "⚡ POWERFUL FEATURES"
+    },
+    {
+      "type": "textarea",
+      "id": "feature1",
+      "label": "Feature 1",
+      "default": "360° Rotation & Drift: Amazing stunts with one-button control"
+    },
+    {
+      "type": "textarea",
+      "id": "feature2",
+      "label": "Feature 2",
+      "default": "High Speed: Up to 15 km/h"
+    },
+    {
+      "type": "textarea",
+      "id": "feature3",
+      "label": "Feature 3",
+      "default": "Long Range: 50+ meters"
+    },
+    {
+      "type": "textarea",
+      "id": "feature4",
+      "label": "Feature 4",
+      "default": "Rechargeable: 40 minutes playtime"
+    },
+    {
+      "type": "textarea",
+      "id": "feature5",
+      "label": "Feature 5",
+      "default": "LED Lights: Cool night play"
+    },
+    {
+      "type": "text",
+      "id": "block3_title",
+      "label": "Block 3 Title",
+      "default": "💪 BUILT TO LAST"
+    },
+    {
+      "type": "textarea",
+      "id": "block3_text",
+      "label": "Block 3 Text",
+      "default": "Premium ABS plastic with shock-resistant design. Works on concrete, grass, carpet - anywhere!"
+    },
+    {
+      "type": "text",
+      "id": "block4_title",
+      "label": "Block 4 Title",
+      "default": "🎁 PERFECT GIFT"
+    },
+    {
+      "type": "textarea",
+      "id": "block4_text",
+      "label": "Block 4 Text",
+      "default": "Amazing birthday or festival gift for kids aged 6-12 years. Encourages outdoor play!"
+    },
+    {
+      "type": "header",
+      "content": "Specifications"
+    },
+    {
+      "type": "text",
+      "id": "specs_title",
+      "label": "Specifications Heading",
+      "default": "📋 Specifications"
+    },
+    {
+      "type": "text",
+      "id": "spec_age",
+      "label": "Age Range",
+      "default": "6-12 Years"
+    },
+    {
+      "type": "text",
+      "id": "spec_material",
+      "label": "Material",
+      "default": "ABS Plastic"
+    },
+    {
+      "type": "text",
+      "id": "spec_battery",
+      "label": "Battery",
+      "default": "Rechargeable 3.7V"
+    },
+    {
+      "type": "text",
+      "id": "spec_remote",
+      "label": "Remote Control",
+      "default": "2.4GHz Wireless"
+    },
+    {
+      "type": "text",
+      "id": "spec_contents",
+      "label": "Box Contents",
+      "default": "Car, Remote, Charger"
+    },
+    {
+      "type": "header",
+      "content": "Customer Reviews"
+    },
+    {
+      "type": "text",
+      "id": "reviews_title",
+      "label": "Reviews Section Title",
+      "default": "Customer Reviews (500+)"
+    },
+    {
+      "type": "text",
+      "id": "review1_name",
+      "label": "Review 1 - Customer Name",
+      "default": "Rahul Sharma"
+    },
+    {
+      "type": "textarea",
+      "id": "review1_text",
+      "label": "Review 1 - Text",
+      "default": "My son loves this car! Very sturdy."
+    },
+    {
+      "type": "text",
+      "id": "review2_name",
+      "label": "Review 2 - Customer Name",
+      "default": "Priya Patel"
+    },
+    {
+      "type": "textarea",
+      "id": "review2_text",
+      "label": "Review 2 - Text",
+      "default": "Best birthday gift ever. Battery life is good."
+    },
+    {
+      "type": "text",
+      "id": "review3_name",
+      "label": "Review 3 - Customer Name",
+      "default": "Amit Kumar"
+    },
+    {
+      "type": "textarea",
+      "id": "review3_text",
+      "label": "Review 3 - Text",
+      "default": "Excellent! The 360° flip is amazing!"
+    },
+    {
+      "type": "header",
+      "content": "Sticky Bottom Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticky_bar",
+      "label": "Show Sticky Buy Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sticky_button_text",
+      "label": "Sticky Button Text",
+      "default": "Order Now"
+    },
+    {
+      "type": "header",
+      "content": "Colors & Styling"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary Color (Orange)",
+      "default": "#FF6F00"
+    },
+    {
+      "type": "color",
+      "id": "success_color",
+      "label": "Success Color (Green)",
+      "default": "#00C853"
+    },
+    {
+      "type": "color",
+      "id": "sale_color",
+      "label": "Sale Badge Color (Red)",
+      "default": "#d32f2f"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Page"
+    }
+  ]
+}
+{% endschema %}
