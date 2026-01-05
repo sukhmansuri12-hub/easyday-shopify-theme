@@ -21,7 +21,7 @@
              <a href="/products/necklace-set" class="product-link">
                 <div class="mock-image" style="background-image: url('https://img.freepik.com/free-photo/luxury-necklace-display_23-2150036224.jpg?w=740');"></div>
              </a>
-             <button class="add-btn">+</button>
+             <button class="add-btn" onclick="quickAddToCart('necklace-set')">+</button>
            </div>
            <div class="product-content">
              <h3 class="product-title"><a href="/products/necklace-set">Austrian Diamond Necklace Set | 🔥SET of 3 Necklace🔥</a></h3>
@@ -40,7 +40,7 @@
              <a href="/products/shoulder-brace" class="product-link">
                 <div class="mock-image" style="background-image: url('https://img.freepik.com/free-photo/man-wearing-shoulder-brace_23-2149176313.jpg?w=740');"></div>
              </a>
-             <button class="add-btn">+</button>
+             <button class="add-btn" onclick="quickAddToCart('shoulder-brace')">+</button>
            </div>
            <div class="product-content">
              <h3 class="product-title"><a href="/products/shoulder-brace">Shoulder Brace For Pain Relief | 🔥FLAT 50% OFF SALE🔥</a></h3>
@@ -59,7 +59,7 @@
              <a href="/products/knee-sleeves" class="product-link">
                 <div class="mock-image" style="background-image: url('https://img.freepik.com/free-photo/knee-brace-support_23-2149234876.jpg?w=740');"></div>
              </a>
-             <button class="add-btn">+</button>
+             <button class="add-btn" onclick="quickAddToCart('knee-sleeves')">+</button>
            </div>
            <div class="product-content">
              <h3 class="product-title"><a href="/products/knee-sleeves">Bamboo Compression Knee Sleeves- 🔥Buy 1 Get 1 Free🔥</a></h3>
@@ -78,7 +78,7 @@
              <a href="/products/cut-shred-knife" class="product-link">
                  <div class="mock-image" style="background-image: url('https://img.freepik.com/free-photo/chopping-vegetables-kitchen_23-2148535048.jpg?w=740');"></div>
              </a>
-             <button class="add-btn">+</button>
+             <button class="add-btn" onclick="quickAddToCart('cut-shred-knife')">+</button>
            </div>
            <div class="product-content">
              <h3 class="product-title"><a href="/products/cut-shred-knife">CUT & SHRED KNIFE</a></h3>
@@ -200,3 +200,70 @@
       .mock-product-grid { grid-template-columns: repeat(4, 1fr); }
   }
 </style>
+
+<script>
+function quickAddToCart(productHandle) {
+  event.stopPropagation();
+  event.preventDefault();
+  
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.textContent = '⏳';
+  btn.disabled = true;
+  
+  // Get product and add to cart
+  fetch(`/products/${productHandle}.js`)
+    .then(response => {
+      if (!response.ok) throw new Error('Product not found');
+      return response.json();
+    })
+    .then(product => {
+      const variant = product.variants.find(v => v.available) || product.variants[0];
+      if (!variant) throw new Error('No variants');
+      
+      return fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: [{ id: variant.id, quantity: 1 }] })
+      });
+    })
+    .then(response => response.json())
+    .then(data => {
+      btn.textContent = '✓';
+      btn.style.background = '#00C853';
+      
+      // Update cart and open drawer
+      fetch('/cart.js')
+        .then(r => r.json())
+        .then(cart => {
+          const cartCount = document.querySelector('.cart-count');
+          if (cartCount) {
+            cartCount.textContent = cart.item_count;
+            cartCount.style.display = cart.item_count > 0 ? 'flex' : 'none';
+          }
+          
+          // Auto-open cart drawer
+          setTimeout(() => {
+            const cartDrawer = document.getElementById('cart-drawer');
+            const cartBackdrop = document.getElementById('cart-backdrop');
+            if (cartDrawer && cartBackdrop) {
+              cartDrawer.classList.add('open');
+              cartBackdrop.classList.add('open');
+              if (window.loadCartItems) window.loadCartItems();
+            }
+          }, 300);
+        });
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '#ff6f00';
+        btn.disabled = false;
+      }, 1500);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      btn.textContent = '→';
+      setTimeout(() => window.location.href = `/products/${productHandle}`, 500);
+    });
+}
+</script>
