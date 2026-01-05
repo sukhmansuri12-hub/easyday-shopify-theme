@@ -3,10 +3,17 @@
   Displays selected collection products in grid
 {% endcomment %}
 
-<section class="section-padding" style="padding-top: 20px !important;">
+<section class="section-padding" style="padding-top: 20px !important; position: relative; overflow: hidden;">
   <div class="container">
+    <!-- Decorative Background Lines -->
+    <svg class="decorative-lines" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.06; pointer-events: none;">
+      <path d="M 0 150 Q 150 100, 300 150 T 600 150" stroke="#FF6F00" stroke-width="2" fill="none"/>
+      <path d="M 100 250 Q 250 200, 400 250 T 700 250" stroke="#00C853" stroke-width="2" fill="none"/>
+      <path d="M 50 350 Q 200 300, 350 350 T 650 350" stroke="#2196F3" stroke-width="1.5" fill="none"/>
+    </svg>
+    
     {%- if section.settings.heading != blank -%}
-      <h2 class="section-title animate-on-scroll" data-animation="fade-in-up">
+      <h2 class="section-title animate-on-scroll" data-animation="fade-in-up" style="position: relative; z-index: 1;">
         {{ section.settings.heading }}
       </h2>
     {%- endif -%}
@@ -239,6 +246,20 @@ function quickAddToCart(productHandle) {
             cartCount.textContent = cart.item_count;
             cartCount.style.display = cart.item_count > 0 ? 'flex' : 'none';
           }
+          
+          // Automatically open cart drawer
+          setTimeout(() => {
+            const cartDrawer = document.getElementById('cart-drawer');
+            const cartBackdrop = document.getElementById('cart-backdrop');
+            if (cartDrawer && cartBackdrop) {
+              cartDrawer.classList.add('open');
+              cartBackdrop.classList.add('open');
+              // Trigger cart reload
+              if (window.loadCartItems) {
+                window.loadCartItems();
+              }
+            }
+          }, 300);
         });
       
       // Reset button after 1.5 seconds

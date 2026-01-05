@@ -210,7 +210,7 @@
     function openCart() {
       cartDrawer.classList.add('open');
       cartBackdrop.classList.add('open');
-      loadCartItems();
+      window.loadCartItems();
     }
     
     function closeCartDrawer() {
@@ -290,6 +290,62 @@
     }
     
     // Make functions global
+    window.loadCartItems = function() {
+      fetch('/cart.js')
+        .then(response => response.json())
+        .then(data => {
+          const itemsContainer = document.getElementById('cart-items');
+          const subtotalEl = document.getElementById('cart-subtotal');
+          const totalEl = document.getElementById('cart-total');
+          const discountEl = document.getElementById('cart-discount');
+          const discountRow = document.getElementById('cart-discount-row');
+          
+          if (data.items.length === 0) {
+            itemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+            subtotalEl.textContent = '₹0';
+            totalEl.textContent = '₹0';
+            discountRow.style.display = 'none';
+          } else {
+            let html = '';
+            data.items.forEach(item => {
+              html += `
+                <div class="cart-item">
+                  <img src="${item.image}" class="cart-item-image" alt="${item.title}">
+                  <div class="cart-item-details">
+                    <div class="cart-item-title">${item.title}</div>
+                    <div class="cart-item-price">₹${(item.price / 100).toFixed(2)}</div>
+                    <div class="cart-item-quantity">
+                      <button class="qty-btn" onclick="updateQuantity(${item.variant_id}, ${item.quantity - 1})">-</button>
+                      <span>${item.quantity}</span>
+                      <button class="qty-btn" onclick="updateQuantity(${item.variant_id}, ${item.quantity + 1})">+</button>
+                      <span class="cart-item-remove" onclick="removeItem(${item.variant_id})">Remove</span>
+                    </div>
+                  </div>
+                </div>
+              `;
+            });
+            itemsContainer.innerHTML = html;
+            
+            const subtotal = data.total_price / 100;
+            subtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
+            
+            // Check if prepaid discount applies
+            const hasPrepaid = data.items.some(item => item.properties && item.properties['Payment Method'] === 'Prepaid');
+            if (hasPrepaid) {
+              const discount = subtotal * 0.1;
+              const total = subtotal - discount;
+              discountEl.textContent = `-₹${discount.toFixed(2)}`;
+              totalEl.textContent = `₹${total.toFixed(2)}`;
+              discountRow.style.display = 'flex';
+            } else {
+              totalEl.textContent = `₹${subtotal.toFixed(2)}`;
+              discountRow.style.display = 'none';
+            }
+          }
+        })
+        .catch(error => console.error('Error loading cart:', error));
+    };
+    
     window.updateQuantity = function(variantId, qty) {
       if (qty < 1) return removeItem(variantId);
       
@@ -298,7 +354,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: variantId, quantity: qty })
       })
-      .then(() => loadCartItems())
+      .then(() => window.loadCartItems())
       .catch(error => console.error('Error updating quantity:', error));
     };
     
@@ -309,7 +365,7 @@
         body: JSON.stringify({ id: variantId, quantity: 0 })
       })
       .then(() => {
-        loadCartItems();
+        window.loadCartItems();
         // Update cart count
         const cartCount = document.querySelector('.cart-count');
         if (cartCount) {
