@@ -1,357 +1,459 @@
 {% comment %}
-  Product Main Section - Attrangi Optimized
-  Enhanced with conversion features: 2026-01-05
+  RC Stunt Car - Professional Product Page  
+  Mobile-First Design
 {% endcomment %}
 
-<section class="product-main-section section-padding">
-  <div class="container product-container">
-    
-    {% comment %} Product Gallery (Top) {% endcomment %}
-    <div class="product-gallery">
-      {%- if product.featured_image != blank -%}
-        <div class="main-image">
-          <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
-        </div>
-      {%- else -%}
-        <div class="main-image">
-           {% comment %} DEMO PRODUCT IMAGE - Uses same image from homepage {% endcomment %}
-           <img src="{{ 'product-rc-car.png' | asset_url }}" alt="{{ section.settings.demo_title }}">
-        </div>
-      {%- endif -%}
+<section class="product-page-rc-car">
+  
+  {% comment %} Mobile Image Gallery - Swipeable {% endcomment %}
+  <div class="product-image-gallery">
+    <div class="gallery-container" id="gallery-container">
+      <div class="slide"><img src="{{ 'rc_car_action_1.png' | asset_url }}" alt="RC Car Action 1"></div>
+      <div class="slide"><img src="{{ 'rc_car_action_2.png' | asset_url }}" alt="RC Car Action 2"></div>
+      <div class="slide"><img src="{{ 'rc_car_closeup.png' | asset_url }}" alt="RC Car Close-up"></div>
+      <div class="slide"><img src="{{ 'rc_car_kids_playing.png' | asset_url }}" alt="Kids Playing"></div>
     </div>
-
-    {% comment %} Product Info {% endcomment %}
-    <div class="product-info">
-        
-        <h1 class="product-title">{{ product.title | default: section.settings.demo_title }}</h1>
-        
-        <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="count">4.8 (1,150 Reviews)</span>
-        </div>
-
-        <span class="urgency-text">🔥 LIMITED TIME OFFER: ENDS TONIGHT!</span>
-
-        <div class="price-container">
-            <span class="current-price">{{ product.price | default: section.settings.demo_price | money }}</span>
-            <span class="compare-price">{{ product.compare_at_price | default: section.settings.demo_compare_price | money }}</span>
-            <span class="save-badge">SAVE 56%</span>
-        </div>
-
-        {% comment %} Trust Badges - Attrangi 4-Icon Style {% endcomment %}
-        <div class="trust-icons-row-attrangi">
-            <div class="trust-icon-attrangi">
-                <svg viewBox="0 0 24 24" class="icon-svg"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" /></svg>
-                <span>FREE SHIPPING</span>
-            </div>
-            <div class="trust-icon-attrangi">
-                <svg viewBox="0 0 24 24" class="icon-svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
-                <span>NO-HASSLE RETURNS</span>
-            </div>
-            <div class="trust-icon-attrangi">
-                <svg viewBox="0 0 24 24" class="icon-svg"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
-                <span>SATISFACTION GUARANTEED</span>
-            </div>
-            <div class="trust-icon-attrangi">
-                <svg viewBox="0 0 24 24" class="icon-svg"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                <span>SECURE CHECKOUT</span>
-            </div>
-        </div>
-
-        {% comment %} PREPAID DISCOUNT BOX - Shows 10% savings {% endcomment %}
-        {% render 'prepaid-discount-box' %}
-
-        {% comment %} COUNTDOWN TIMER - Attrangi Style {% endcomment %}
-        <div class="countdown-container">
-            <div class="countdown-header">
-                🔥 <strong>Limited Time Deal🔥</strong>
-            </div>
-            <div class="countdown-subheader">⏰ Offer Ends in</div>
-            <div class="countdown-timer">
-                <div class="time-unit">
-                    <div class="time-number" id="countdown-days">00</div>
-                    <div class="time-label">Days</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-number" id="countdown-hours">00</div>
-                    <div class="time-label">Hours</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-number" id="countdown-minutes">03</div>
-                    <div class="time-label">Minutes</div>
-                </div>
-                <div class="time-unit">
-                    <div class="time-number" id="countdown-seconds">18</div>
-                    <div class="time-label">Seconds</div>
-                </div>
-            </div>
-        </div>
-
-        {% comment %} DUAL CTA BUTTONS - Attrangi Style {% endcomment %}
-        {% if product.id %}{%- assign prepaid_price = product.price | times: 0.9 | money -%}
-            {%- assign savings = product.price | minus: prepaid_price | money -%}
-            
-            {% form 'product', product, class: 'product-form' %}
-              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-              <input type="hidden" name="properties[Payment Method]" value="" id="payment-method-input">
-              
-              <div class="product-actions-dual">
-                  {% comment %} PREPAID CTA - 10% Discount {% endcomment %}
-                  <button type="submit" name="add" class="btn btn-prepaid" onclick="document.getElementById('payment-method-input').value='Prepaid'">
-                     💳 PAY ONLINE & SAVE ₹{{ product.price | times: 0.1 | divided_by: 100 }} (10% OFF)
-                     <span class="sub-text">Final Price: {{ prepaid_price }}</span>
-                  </button>
-    
-                  {% comment %} COD CTA {% endcomment %}
-                  <button type="submit" name="add" class="btn btn-cod" onclick="document.getElementById('payment-method-input').value='COD'">
-                     📦 ORDER NOW - CASH ON DELIVERY
-                     <span class="sub-text">Pay when you receive | Free Shipping</span>
-                  </button>
-              </div>
-            {% endform %}
-        {% else %}
-             {% comment %} DEMO MODE {% endcomment %}
-             <div class="product-actions-dual">
-                 <button class="btn btn-prepaid">
-                    💳 PAY ONLINE & SAVE ₹130 (10% OFF)
-                    <span class="sub-text">Final Price: ₹1,169</span>
-                 </button>
-    
-                 <button class="btn btn-cod">
-                    📦 ORDER NOW - CASH ON DELIVERY
-                    <span class="sub-text">Pay when you receive | Free Shipping</span>
-                 </button>
-              </div>
-        {% endif %}
-
-        {% comment %} QUICK ORDER FORM - Direct COD Checkout {% endcomment %}
-        {% render 'quick-order-form' %}
-
-        <div class="product-description">
-            {% if section.settings.demo_desc != blank %}
-                {{ section.settings.demo_desc }}
-            {% else %}
-                <p><strong>Unleash the Fun!</strong> The ultimate stunt car that defies gravity. Perfect for kids and adults alike.</p>
-                {% comment %} DEMO DESCRIPTION {% endcomment %}
-                <div class="feature-block">
-                    <h3 class="feature-heading">✨ 360° ROTATION & DOUBLE-SIDED FUN</h3>
-                    <p>Experience unstoppable action! This RC stunt car performs incredible 360° flips and can drive on both sides. Watch it flip, spin, and race like never before!</p>
-                    <img class="desc-gif" src="https://via.placeholder.com/600x300/FF6F00/FFFFFF?text=360+Rotation+GIF" alt="360 Rotation Demo">
-                </div>
-                
-                <div class="feature-block">
-                    <h3 class="feature-heading">⚡ HIGH-SPEED PERFORMANCE</h3>
-                    <p>Powered by a rechargeable battery, enjoy up to 30 minutes of high-speed racing action. Perfect for indoor and outdoor use!</p>
-                    <img class="desc-gif" src="https://via.placeholder.com/600x300/FFD600/333333?text=High+Speed+Action+GIF" alt="High Speed Demo">
-                </div>
-                
-                <div class="feature-block">
-                    <h3 class="feature-heading">🎁 COMPLETE PACKAGE</h3>
-                    <p>Includes everything you need: RC Car, Remote Control, Rechargeable Battery, and USB Charger. Ready to play right out of the box!</p>
-                    <a href="#product-form" class="cta-order-now">ORDER NOW - SAVE 50%</a>
-                </div>
-            {% endif %}
-        </div>
-
-        {% comment %} Indian Reviews Section {% endcomment %}
-        {% comment %} Indian Reviews Section (Masonry Grid) {% endcomment %}
-        <div class="review-section">
-            <h3>Customer Reviews (500+)</h3>
-            
-            <div class="review-grid">
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="reviewer-name">Rahul Sharma <span class="verified-badge">✔ Verified</span></span>
-                        <span class="stars">★★★★★</span>
-                    </div>
-                    <p class="review-text">My son loves this car! Very sturdy.</p>
-                    <img src="https://via.placeholder.com/80?text=Car+1" class="review-img">
-                </div>
-
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="reviewer-name">Priya Patel <span class="verified-badge">✔ Verified</span></span>
-                        <span class="stars">★★★★★</span>
-                    </div>
-                    <p class="review-text">Best birthday gift ever. Battery life is good.</p>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="reviewer-name">Amit Singh <span class="verified-badge">✔ Verified</span></span>
-                        <span class="stars">★★★★★</span>
-                    </div>
-                    <p class="review-text">Value for money. Ordered on Monday, received on Wednesday. Fast shipping!</p>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="reviewer-name">Sneha Gupta <span class="verified-badge">✔ Verified</span></span>
-                        <span class="stars">★★★★★</span>
-                    </div>
-                    <p class="review-text">Amazing product quality.</p>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="reviewer-name">Vikram R. <span class="verified-badge">✔ Verified</span></span>
-                        <span class="stars">★★★★☆</span>
-                    </div>
-                    <p class="review-text">Good car, but instructions were average.</p>
-                </div>
-                
-                 <div class="review-card">
-                    <div class="review-header">
-                        <span class="reviewer-name">Anjali M. <span class="verified-badge">✔ Verified</span></span>
-                        <span class="stars">★★★★★</span>
-                    </div>
-                    <p class="review-text">Highly recommended site!</p>
-                </div>
-
-            </div>
-        </div>
-
+    <div class="gallery-dots">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+      <span class="dot" data-slide="3"></span>
     </div>
   </div>
+
+  {% comment %} Product Info {% endcomment %}
+  <div class="product-info-section">
+    
+    <h1 class="product-title-rc">RC Stunt Car 360° Drift</h1>
+    
+    <div class="product-rating-rc">
+      <span class="stars">⭐⭐⭐⭐⭐</span>
+      <span class="rating-count">4.8/5 (2,450 Reviews)</span>
+    </div>
+
+    {% comment %} Countdown Timer {% endcomment %}
+    <div class="countdown-timer-rc">
+      <span class="timer-label">⏰ Offer Ends in</span>
+      <div class="timer-display">
+        <div class="time-box"><span id="days">00</span><span class="label">Days</span></div>
+        <div class="time-box"><span id="hours">23</span><span class="label">Hours</span></div>
+        <div class="time-box"><span id="mins">59</span><span class="label">Minutes</span></div>
+        <div class="time-box"><span id="secs">52</span><span class="label">Seconds</span></div>
+      </div>
+    </div>
+
+    {% comment %} Price {% endcomment %}
+    <div class="price-section-rc">
+      <div class="current-price-rc">₹1,499</div>
+      <div class="compare-price-rc">₹3,499</div>
+      <div class="save-badge-rc">SAVE 57%</div>
+    </div>
+
+    {% comment %} Buy Buttons {% endcomment %}
+    <div class="buy-section-rc">
+      <button class="btn-buy-prepaid-rc">
+        💳 PAY ONLINE & SAVE ₹130 (10% OFF)<br>
+        <span class="final-price">Final Price: ₹1,169</span>
+      </button>
+      
+      <button class="btn-buy-cod-rc">
+        📦 ORDER NOW - CASH ON DELIVERY<br>
+        <span class="sub-text">Pay when you receive | Free Shipping</span>
+      </button>
+
+      <button class="btn-quick-order-rc">
+        🚀 Quick Order (No Cart Required)
+      </button>
+    </div>
+
+  </div>
+
+  {% comment %} Description {% endcomment %}
+  <div class="product-description-rc">
+    
+    <h2 class="desc-section-title">Description goes here</h2>
+    
+    <div class="desc-block-rc">
+      <h3>🎯 ULTIMATE FUN FOR KIDS!</h3>
+      <p>Watch your kids' faces light up as this powerful RC stunt car performs incredible 360° flips, spins, and drifts! Perfect for indoor and outdoor play.</p>
+      <img src="{{ 'rc_car_action_1.png' | asset_url }}" alt="Action" style="width:100%; border-radius:12px; margin:15px 0;">
+    </div>
+
+    <div class="desc-block-rc">
+      <h3>⚡ POWERFUL FEATURES</h3>
+      <ul class="feature-list-rc">
+        <li><strong>360° Rotation & Drift:</strong> Amazing stunts with one-button control</li>
+        <li><strong>High Speed:</strong> Up to 15 km/h</li>
+        <li><strong>Long Range:</strong> 50+ meters</li>
+        <li><strong>Rechargeable:</strong> 40 minutes playtime</li>
+        <li><strong>LED Lights:</strong> Cool night play</li>
+      </ul>
+      <img src="{{ 'rc_car_clos
+
+eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; margin:15px 0;">
+    </div>
+
+    <div class="desc-block-rc">
+      <h3>💪 BUILT TO LAST</h3>
+      <p>Premium ABS plastic with shock-resistant design. Works on concrete, grass, carpet - anywhere!</p>
+      <img src="{{ 'rc_car_action_2.png' | asset_url }}" alt="Drifting" style="width:100%; border-radius:12px; margin:15px 0;">
+    </div>
+
+    <div class="desc-block-rc">
+      <h3>🎁 PERFECT GIFT</h3>
+      <p>Amazing birthday or festival gift for kids aged 6-12 years. Encourages outdoor play!</p>
+      <img src="{{ 'rc_car_kids_playing.png' | asset_url }}" alt="Kids" style="width:100%; border-radius:12px; margin:15px 0;">
+    </div>
+
+    <div class="specs-table-rc">
+      <h3>📋 Specifications</h3>
+      <table>
+        <tr><td><strong>Age</strong></td><td>6-12 Years</td></tr>
+        <tr><td><strong>Material</strong></td><td>ABS Plastic</td></tr>
+        <tr><td><strong>Battery</strong></td><td>Rechargeable 3.7V</td></tr>
+        <tr><td><strong>Remote</strong></td><td>2.4GHz Wireless</td></tr>
+        <tr><td><strong>Box Contents</strong></td><td>Car, Remote, Charger</td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  {% comment %} Reviews {% endcomment %}
+  <div class="reviews-section-rc">
+    <h2 class="reviews-title">Customer Reviews (500+)</h2>
+    
+    <div class="review-card">
+      <div class="reviewer-info">
+        <strong>Rahul Sharma</strong> <span class="verified">✓ Verified</span>
+      </div>
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">My son loves this car! Very sturdy.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="reviewer-info">
+        <strong>Priya Patel</strong> <span class="verified">✓ Verified</span>
+      </div>
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Best birthday gift ever. Battery life is good.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="reviewer-info">
+        <strong>Amit Kumar</strong> <span class="verified">✓ Verified</span>
+      </div>
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Excellent! The 360° flip is amazing!</p>
+    </div>
+
+  </div>
+
 </section>
 
-{% render 'sticky-add-to-cart' %}
-{% render 'countdown-timer-script' %}
+<div class="sticky-buy-bar-rc">
+  <div class="sticky-price">₹1,499</div>
+  <button class="sticky-btn-buy">Order Now</button>
+</div>
 
 <style>
-/* Attrangi Mobile Layout Styles (V21 - Optimized) */
-.product-container { display: grid; grid-template-columns: 1fr; gap: 20px; }
-@media(min-width: 990px) { .product-container { grid-template-columns: 1.2fr 1fr; } }
-
-/* Gallery */
-.main-image { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-.main-image img { width: 100%; display: block; }
-.gallery-thumbs { display: flex; gap: 10px; margin-top: 10px; overflow-x: auto; padding-bottom: 5px; }
-.thumb { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; opacity: 0.7; border: 1px solid #eee; transition: all 0.2s; }
-.thumb.active { opacity: 1; border: 2px solid #FF6F00; transform: scale(1.05); }
-
-/* Info Area */
-.product-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; line-height: 1.3; color: #222; }
-
-/* Ratings */
-.product-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
-.stars { color: #FFB300; letter-spacing: 1px; font-size: 1.1rem; }
-.count { color: #555; font-size: 0.9rem; text-decoration: underline; }
-
-/* Urgency Text (Red) */
-.urgency-text { color: #d32f2f; font-weight: 800; font-size: 0.9rem; margin-bottom: 10px; display: block; letter-spacing: 0.5px; animation: flash 2s infinite; }
-
-/* Price */
-.price-container { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; background: #fff8e1; padding: 10px; border-radius: 8px; display: inline-flex; }
-.current-price { font-size: 1.8rem; font-weight: 800; color: #222; }
-.compare-price { text-decoration: line-through; color: #888; font-size: 1.1rem; }
-.save-badge { background: #d32f2f; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
-
-/* Attrangi 4-Icon Trust Badges */
-.trust-icons-row-attrangi { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 25px; }
-.trust-icon-attrangi { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 0.65rem; font-weight: 600; color: #555; text-align: center; }
-.trust-icon-attrangi .icon-svg { width: 28px; height: 28px; margin-bottom: 4px; fill: #666; }
-.trust-icon-attrangi span { line-height: 1.2; }
-
-/* Countdown Timer - Attrangi Style */
-.countdown-container { background: linear-gradient(135deg, #fff 0%, #fff8e8 100%); border: 2px solid #FF6F00; border-radius: 12px; padding: 15px; margin-bottom: 25px; text-align: center; }
-.countdown-header { font-size: 1rem; font-weight: 800; color: #d32f2f; margin-bottom: 5px; }
-.countdown-subheader { font-size: 0.85rem; color: #666; margin-bottom: 12px; }
-.countdown-timer { display: flex; justify-content: space-around; gap: 8px; }
-.time-unit { display: flex; flex-direction: column; align-items: center; }
-.time-number { background: #222; color: white; font-size: 1.8rem; font-weight: 800; padding: 10px 12px; border-radius: 8px; min-width: 55px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-.time-label { font-size: 0.7rem; color: #666; margin-top: 4px; font-weight: 600; text-transform: capitalize; }
-
-/* Dual CTA Buttons */
-.product-actions-dual { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
-.btn { width: 100%; border: none; padding: 16px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; letter-spacing: 0.3px; transition: all 0.3s; text-align: center; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
-
-/* PREPAID - Green/Blue (Trust Color) */
-.btn-prepaid { background: linear-gradient(135deg, #00C853 0%, #00E676 100%); color: white; border: 2px solid #00C853; font-size: 0.95rem; }
-.btn-prepaid .sub-text { font-size: 0.75rem; font-weight: 500; margin-top: 4px; opacity: 0.95; }
-
-/* COD - Orange (Urgency Color) */
-.btn-cod { background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%); color: white; border: 2px solid #FF6F00; }
-.btn-cod .sub-text { font-size: 0.7rem; font-weight: 400; opacity: 0.9; margin-top: 3px; }
-
-/* Description - Rich Format */
-.product-description-rich { font-size: 1rem; line-height: 1.6; color: #444; margin-top: 30px; }
-.feature-block { margin-bottom: 30px; }
-.feature-heading { font-size: 1.1rem; font-weight: 700; color: #FF6F00; margin-bottom: 10px; letter-spacing: 0.3px; }
-.desc-gif { width: 100%; border-radius: 12px; margin: 15px 0; display: block; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.cta-order-now { display: inline-block; background: #d32f2f; color: white; padding: 12px 30px; border-radius: 25px; font-weight: 700; text-decoration: none; margin-top: 10px; transition: all 0.3s; }
-.cta-order-now:hover { background: #b71c1c; transform: scale(1.05); }
-
-/* Reviews */
-/* Reviews Masonry */
-.review-section { margin-top: 40px; border-top: 5px solid #f1f1f1; padding-top: 20px; }
-.review-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: flex-start; /* Masonry-like */
-}
-.review-card { 
-    background: white; border: 1px solid #eee; padding: 12px; border-radius: 8px; margin-bottom: 0; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.03); 
-    width: calc(50% - 6px); /* 2 Columns */
-    box-sizing: border-box;
-}
-.review-header { display: flex; flex-direction: column; margin-bottom: 5px; } /* Stack on tiny cards */
-.reviewer-name { font-weight: bold; color: #333; font-size: 0.8rem; }
-.verified-badge { color: #2e7d32; font-size: 0.7rem; }
-.stars { color: #FFB300; font-size: 0.8rem; }
-.review-text { color: #555; font-size: 0.85rem; margin-bottom: 5px; line-height: 1.3; }
-.review-img { width: 60px; height: 60px; border-radius: 4px; object-fit: cover; border: 1px solid #eee; }
-
-/* Subtle Rotation "Jumbled" Effect */
-.review-card:nth-child(odd) { transform: rotate(-1deg); margin-top: 10px; }
-.review-card:nth-child(even) { transform: rotate(1deg); }
-
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 111, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 111, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 111, 0, 0); } }
-@keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .product-page-rc-car { background:#fff; padding-bottom:80px; }
+  
+  .product-image-gallery { width:100%; background:#f9f9f9; }
+  
+  .gallery-container {
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .gallery-container::-webkit-scrollbar { display:none; }
+  
+  .slide {
+    min-width:100%;
+    scroll-snap-align:start;
+  }
+  .slide img { width:100%; display:block; }
+  
+  .gallery-dots {
+    text-align:center;
+    padding:15px 0;
+  }
+  .dot {
+    height:8px;
+    width:8px;
+    margin:0 5px;
+    background:#bbb;
+    border-radius:50%;
+    display:inline-block;
+    cursor:pointer;
+  }
+  .dot.active {
+    background:#FF6F00;
+    width:24px;
+    border-radius:4px;
+  }
+  
+  .product-info-section { padding:20px 15px; }
+  
+  .product-title-rc {
+    font-size:1.4rem;
+    font-weight:700;
+    margin-bottom:12px;
+  }
+  
+  .product-rating-rc {
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+  }
+  .stars { color:#FFB800; }
+  .rating-count { color:#666; font-size:0.95rem; }
+  
+  .countdown-timer-rc {
+    background:white;
+    border:2px solid #FF6F00;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
+  }
+  .timer-label {
+    display:block;
+    text-align:center;
+    color:#FF6F00;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .timer-display {
+    display:flex;
+    justify-content:center;
+    gap:8px;
+  }
+  .time-box {
+    background:#000;
+    color:white;
+    padding:10px;
+    border-radius:8px;
+    text-align:center;
+    min-width:70px;
+  }
+  .time-box span:first-child {
+    font-size:1.8rem;
+    font-weight:700;
+    display:block;
+  }
+  .time-box .label {
+    font-size:0.7rem;
+    margin-top:2px;
+  }
+  
+  .price-section-rc {
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+    align-items:center;
+  }
+  .current-price-rc {
+    font-size:2rem;
+    font-weight:700;
+    color:#00C853;
+  }
+  .compare-price-rc {
+    text-decoration:line-through;
+    color:#999;
+  }
+  .save-badge-rc {
+    background:#d32f2f;
+    color:white;
+    padding:6px 12px;
+    border-radius:6px;
+    font-weight:700;
+  }
+  
+  .buy-section-rc button {
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+    font-weight:700;
+    margin-bottom:12px;
+    cursor:pointer;
+    line-height:1.4;
+  }
+  .btn-buy-prepaid-rc {
+    background:linear-gradient(135deg,#00C853,#00E676);
+    color:white;
+  }
+  .btn-buy-cod-rc {
+    background:linear-gradient(135deg,#FF6F00,#FF8F00);
+    color:white;
+  }
+  .btn-quick-order-rc {
+    background:white;
+    border:2px solid #FF6F00 !important;
+    color:#FF6F00;
+  }
+  .final-price, .sub-text {
+    font-size:0.85rem;
+    font-weight:400;
+    display:block;
+  }
+  
+  .product-description-rc {
+    padding:0 15px 30px;
+    }
+  .desc-section-title {
+    font-size:1.5rem;
+    font-weight:700;
+    margin-bottom:20px;
+    padding-bottom:10px;
+    border-bottom:2px solid #FF6F00;
+  }
+  .desc-block-rc {
+    margin-bottom:30px;
+  }
+  .desc-block-rc h3 {
+    font-weight:700;
+    margin-bottom:12px;
+  }
+  .desc-block-rc p {
+    line-height:1.7;
+    color:#555;
+  }
+  .feature-list-rc {
+    list-style:none;
+    padding:0;
+  }
+  .feature-list-rc li {
+    padding:12px 0;
+    border-bottom:1px solid #f0f0f0;
+  }
+  
+  .specs-table-rc {
+    background:#f9f9f9;
+    padding:20px;
+    border-radius:12px;
+    margin-top:30px;
+  }
+  .specs-table-rc h3 {
+    font-weight:700;
+    margin-bottom:15px;
+  }
+  .specs-table-rc table {
+    width:100%;
+  }
+  .specs-table-rc td {
+    padding:14px 10px;
+    border-bottom:1px solid #eee;
+  }
+  
+  .reviews-section-rc {
+    padding:30px 15px;
+    background:#f9f9f9;
+  }
+  .reviews-title {
+    font-size:1.5rem;
+    font-weight:700;
+    margin-bottom:20px;
+  }
+  .review-card {
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+  }
+  .verified { color:#00C853; font-size:0.85rem; }
+  .review-stars { color:#FFB800; margin:8px 0; }
+  .review-text { color:#555; line-height:1.6; }
+  
+  .sticky-buy-bar-rc {
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:white;
+    border-top:2px solid #eee;
+    padding:12px 15px;
+    display:flex;
+    gap:15px;
+    z-index:1000;
+    box-shadow:0 -3px 15px rgba(0,0,0,0.1);
+  }
+  .sticky-price {
+    font-size:1.6rem;
+    font-weight:700;
+    color:#00C853;
+  }
+  .sticky-btn-buy {
+    flex:1;
+    background:linear-gradient(135deg,#FF6F00,#FF8F00);
+    color:white;
+    border:none;
+    padding:14px 20px;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+  }
 </style>
 
-{% schema %}
-{
-  "name": "Product Main",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Demo Product Settings"
-    },
-    {
-      "type": "text",
-      "id": "demo_title",
-      "label": "Demo Product Title",
-      "default": "RC Stunt Car"
-    },
-    {
-      "type": "text",
-      "id": "demo_price",
-      "label": "Demo Price (Cents)",
-      "default": "129900"
-    },
-    {
-        "type": "text",
-        "id": "demo_compare_price",
-        "label": "Demo Compare Price (Cents)",
-        "default": "299900"
-    },
-    {
-        "type": "image_picker",
-        "id": "demo_image",
-        "label": "Demo Main Image"
-    },
-    {
-        "type": "textarea",
-        "id": "demo_desc",
-        "label": "Demo Description Html",
-        "default": "<p>Description goes here</p>"
+<script>
+  // Gallery swipe
+  const container = document.getElementById('gallery-container');
+  const dots = document.querySelectorAll('.dot');
+  let currentSlide = 0;
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      currentSlide = i;
+      updateGallery();
+    });
+  });
+
+  let touchStartX = 0;
+  container.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  container.addEventListener('touchend', e => {
+    const touchEndX = e.changedTouches[0].screenX;
+    if (touchEndX < touchStartX - 50 && currentSlide < 3) {
+      currentSlide++;
+      updateGallery();
     }
-  ],
-  "presets": [{ "name": "Product Main" }]
-}
-{% endschema %}
+    if (touchEndX > touchStartX + 50 && currentSlide > 0) {
+      currentSlide--;
+      updateGallery();
+    }
+  });
+
+  function updateGallery() {
+    container.scrollTo({
+      left: container.offsetWidth * currentSlide,
+      behavior: 'smooth'
+    });
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  // Countdown
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const midnight = new Date();
+    midnight.setHours(24,0,0,0);
+    const distance = midnight - now;
+    
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    document.getElementById('days').textContent = String(d).padStart(2, '0');
+    document.getElementById('hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('mins').textContent = String(m).padStart(2, '0');
+    document.getElementById('secs').textContent = String(s).padStart(2, '0');
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
