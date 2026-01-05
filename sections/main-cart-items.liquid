@@ -1,0 +1,50 @@
+{% comment %} Cart Section {% endcomment %}
+<div class="cart-section section-padding" style="background:#f9f9f9; min-height: 500px;">
+  <div class="container">
+    <h1 class="text-center" style="margin-bottom: 20px;">Your Cart</h1>
+
+    {% if cart.item_count > 0 %}
+      <div class="cart-items">
+         {% for item in cart.items %}
+           <div class="cart-item" style="background:white; padding:15px; margin-bottom:10px; border-radius:8px; display:flex; gap:15px; align-items:center;">
+              <img src="{{ item.image | image_url: width: 80 }}" style="border-radius:8px;">
+              <div>
+                  <h3 style="margin:0; font-size:1rem;">{{ item.title }}</h3>
+                  <p>{{ item.price | money }}</p>
+              </div>
+           </div>
+         {% endfor %}
+      </div>
+      
+      <div class="cart-footer" style="background:white; padding:20px; border-radius:8px; margin-top:20px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+              <span>Subtotal</span>
+              <span>{{ cart.total_price | money }}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:10px; color: green; font-weight:bold;">
+              <span>Prepaid Discount (10%)</span>
+              <span>- {{ cart.total_price | times: 0.1 | money }}</span>
+          </div>
+          <hr>
+          <div style="display:flex; justify-content:space-between; margin-top:10px; font-size:1.2rem; font-weight:bold;">
+              <span>Total (Prepaid)</span>
+              <span>{{ cart.total_price | times: 0.9 | money }}</span>
+          </div>
+          
+          <button class="btn btn-cod" style="width:100%; margin-top:20px; padding:15px; background: #FF6F00; color:white; border:none; border-radius:30px; font-weight:bold;">
+             PROCEED TO CHECKOUT
+          </button>
+      </div>
+
+    {% else %}
+       <div class="empty-cart text-center">
+           <p>Your cart is empty.</p>
+           <a href="/" class="btn" style="text-decoration: underline;">Continue Shopping</a>
+       </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Cart Items", "presets": [{"name": "Cart Items"}] }
+{% endschema %}

@@ -1,0 +1,16 @@
+{
+    "name": "Footer",
+    "type": "footer",
+    "sections": {
+        "footer": {
+            "type": "footer",
+            "settings": {
+                "contact_email": "support@easyday.com",
+                "contact_phone": "+91 XXXXXXXXXX"
+            }
+        }
+    },
+    "order": [
+        "footer"
+    ]
+}

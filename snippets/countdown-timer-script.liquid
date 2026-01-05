@@ -1,0 +1,38 @@
+<script>
+// Countdown Timer Script
+document.addEventListener('DOMContentLoaded', function() {
+  // Set countdown end time (24 hours from now)
+  const countdownEnd = new Date().getTime() + (24 * 60 * 60 * 1000);
+  
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = countdownEnd - now;
+    
+    if (distance < 0) {
+      // Reset to 24 hours
+      countdownEnd = new Date().getTime() + (24 * 60 * 60 * 1000);
+      return;
+    }
+    
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Update DOM
+    const daysEl = document.getElementById('countdown-days');
+    const hoursEl = document.getElementById('countdown-hours');
+    const minutesEl = document.getElementById('countdown-minutes');
+    const secondsEl = document.getElementById('countdown-seconds');
+    
+    if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+    if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+    if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+  }
+  
+  // Update immediately and then every second
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+});
+</script>

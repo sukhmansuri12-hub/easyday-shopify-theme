@@ -1,0 +1,172 @@
+<section class="category-section" style="background: white; padding: 40px 0;">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 30px; font-size: 1.8rem; font-weight: 700; color: #222;">Popular Categories</h2>
+
+    <div class="category-grid">
+      <a href="/pages/toys-gifts" class="category-card">
+        <div class="category-image-wrapper">
+          <img src="{{ 'category-toys-gifts.png' | asset_url }}" alt="Toys & Gifts" loading="lazy">
+        </div>
+        <p class="category-title">Toys & Gifts</p>
+      </a>
+
+      <a href="/pages/home-kitchen" class="category-card">
+        <div class="category-image-wrapper">
+          <img src="{{ 'category-home-kitchen.png' | asset_url }}" alt="Home & Kitchen" loading="lazy">
+        </div>
+        <p class="category-title">Home & Kitchen</p>
+      </a>
+
+      <a href="/pages/clothing-accessories" class="category-card">
+        <div class="category-image-wrapper">
+          <img src="{{ 'category-clothing-accessories.png' | asset_url }}" alt="Clothing & Accessories" loading="lazy">
+        </div>
+        <p class="category-title">Clothing & Accessories</p>
+      </a>
+
+      <a href="/pages/personal-care-wellness" class="category-card">
+        <div class="category-image-wrapper">
+          <img src="{{ 'category-wellness.png' | asset_url }}" alt="Personal Care & Wellness" loading="lazy">
+        </div>
+        <p class="category-title">Personal Care & Wellness</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .category-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+    }
+  }
+
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    animation: float 6s ease-in-out infinite;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  /* Staggered animation delays */
+  .category-card:nth-child(1) { animation-delay: 0s; }
+  .category-card:nth-child(2) { animation-delay: 1.5s; }
+  .category-card:nth-child(3) { animation-delay: 3s; }
+  .category-card:nth-child(4) { animation-delay: 4.5s; }
+
+  .category-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    overflow: hidden;
+    box-shadow: 
+      0 8px 20px rgba(0,0,0,0.08),
+      0 2px 6px rgba(0,0,0,0.04);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+  }
+  
+  .category-image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,111,0,0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  
+  .category-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  /* Floating animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Hover effects */
+  .category-card:hover {
+    transform: translateY(-8px) scale(1.02);
+  }
+  
+  .category-card:hover .category-image-wrapper {
+    box-shadow: 
+      0 15px 35px rgba(255, 111, 0, 0.25),
+      0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 28px;
+  }
+  
+  .category-card:hover .category-image-wrapper::before {
+    opacity: 1;
+  }
+  
+  .category-card:hover .category-image-wrapper img {
+    transform: scale(1.08) rotate(2deg);
+  }
+  
+  .category-card:active {
+    transform: translateY(-4px) scale(0.98);
+  }
+
+  .category-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .category-card:hover .category-title {
+    color: #ff6f00;
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 767px) {
+    .category-title { 
+      font-size: 0.9rem; 
+    }
+    .category-grid {
+      gap: 15px;
+    }
+    .category-image-wrapper {
+      border-radius: 20px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Category Grid",
+  "presets": [{ "name": "Category Grid" }]
+}
+{% endschema %}

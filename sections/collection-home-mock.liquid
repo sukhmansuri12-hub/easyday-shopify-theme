@@ -1,0 +1,31 @@
+{% comment %}
+  Home Essentials Collection - Mock Page
+{% endcomment %}
+
+<section class="collection-page" style="padding: 20px 0;">
+  <div class="container">
+    <h1 style="text-align: center; margin-bottom: 30px; font-size: 1.8rem;">Home Essentials</h1>
+    
+    <div class="mock-product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+        
+        {% comment %} Home Product - Using Knee Sleeves {% endcomment %}
+        <div class="product-card">
+           <div class="product-image-wrapper" style="position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 10px; background: #f4f4f4; aspect-ratio: 1 / 1;">
+             <span class="mock-sale-badge" style="position: absolute; top: 10px; left: 10px; background: #e63946; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; z-index: 2;">SALE 46%</span>
+             <a href="/products/knee-sleeves">
+                <div class="mock-image" style="width: 100%; height: 100%; background-image: url('https://img.freepik.com/free-photo/knee-brace-support_23-2149234876.jpg?w=740'); background-size: cover; background-position: center;"></div>
+             </a>
+           </div>
+           <div class="product-content">
+             <h3 class="product-title" style="font-size: 0.9rem; margin-bottom: 8px;"><a href="/products/knee-sleeves" style="text-decoration: none; color: #333;">Bamboo Compression Knee Sleeves- 🔥Buy 1 Get 1 Free🔥</a></h3>
+             <div class="product-price">
+               <span class="sale-price" style="color: #e63946; font-weight: bold; font-size: 1.1rem;">Rs. 699.00</span>
+               <span class="compare-price" style="text-decoration: line-through; color: #999; font-size: 0.9rem; margin-left: 8px;">Rs. 1,299.00</span>
+               <div class="save-text" style="color: #28a745; font-size: 0.8rem; margin-top: 4px;">Save 46%</div>
+             </div>
+           </div>
+        </div>
+
+    </div>
+  </div>
+</section>

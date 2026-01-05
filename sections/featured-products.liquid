@@ -1,0 +1,186 @@
+{% comment %}
+  Featured Products Section
+  Displays selected collection products in grid
+{% endcomment %}
+
+<section class="section-padding">
+  <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="section-title animate-on-scroll" data-animation="fade-in-up">
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+    {%- assign collection = collections[section.settings.collection] -%}
+    
+    {%- if collection != blank and collection.products.size > 0 -%}
+<div class="product-grid featured-products-mock">
+    
+        <!-- Product 1: Vegetable Chopper -->
+        <div class="product-card animate-on-scroll" data-animation="scale-in">
+             <div class="product-image-wrapper">
+                <span class="badge-sale">50% OFF</span>
+                <img src="https://m.media-amazon.com/images/I/61Sgd-b9D-L._SL1500_.jpg" alt="12-in-1 Vegetable Chopper" class="product-image">
+             </div>
+             <div class="product-info">
+                <h3 class="product-title">12-in-1 Vegetable Chopper</h3>
+                <div class="price-container">
+                    <span class="current-price">₹899.00</span>
+                    <span class="original-price">₹1,799.00</span>
+                </div>
+                <!-- Fake Add to Cart for Visuals -->
+                <button class="btn-atc-mock">ADD TO CART</button>
+             </div>
+             <a href="/products/vegetable-chopper" class="product-link-overlay"></a>
+        </div>
+
+        <!-- Product 2: Knee Sleeves -->
+        <div class="product-card animate-on-scroll" data-animation="scale-in" style="animation-delay: 0.1s">
+             <div class="product-image-wrapper">
+                <span class="badge-sale">HOT</span>
+                <img src="https://m.media-amazon.com/images/I/71qY+2x3jXL._SL1500_.jpg" alt="Bamboo Knee Sleeves (Pair)" class="product-image">
+             </div>
+             <div class="product-info">
+                <h3 class="product-title">Bamboo Knee Sleeves (Pair)</h3>
+                <div class="price-container">
+                    <span class="current-price">₹699.00</span>
+                    <span class="original-price">₹1,499.00</span>
+                </div>
+                <button class="btn-atc-mock">ADD TO CART</button>
+             </div>
+             <a href="/products/bamboo-knee-sleeves" class="product-link-overlay"></a>
+        </div>
+
+        <!-- Product 3: Austrian Diamond Necklace -->
+        <div class="product-card animate-on-scroll" data-animation="scale-in" style="animation-delay: 0.2s">
+             <div class="product-image-wrapper">
+                 <span class="badge-sale">PREMIUM</span>
+                <img src="https://m.media-amazon.com/images/I/71Wj+Zc2b+L._UY695_.jpg" alt="Austrian Diamond Necklace Set" class="product-image">
+             </div>
+             <div class="product-info">
+                <h3 class="product-title">Austrian Diamond Necklace Set</h3>
+                <div class="price-container">
+                    <span class="current-price">₹1,299.00</span>
+                    <span class="original-price">₹2,999.00</span>
+                </div>
+                <button class="btn-atc-mock">ADD TO CART</button>
+             </div>
+             <a href="/products/austrian-diamond-necklace" class="product-link-overlay"></a>
+        </div>
+
+        <!-- Product 4: RC Stunt Car -->
+        <div class="product-card animate-on-scroll" data-animation="scale-in" style="animation-delay: 0.3s">
+             <div class="product-image-wrapper">
+                <span class="badge-sale">KIDS LOVE</span>
+                <img src="https://m.media-amazon.com/images/I/61N+0n8kLpL._SL1000_.jpg" alt="RC Stunt Car 360°" class="product-image">
+             </div>
+             <div class="product-info">
+                <h3 class="product-title">RC Stunt Car 360° Drift</h3>
+                <div class="price-container">
+                    <span class="current-price">₹1,499.00</span>
+                    <span class="original-price">₹3,499.00</span>
+                </div>
+                <button class="btn-atc-mock">ADD TO CART</button>
+             </div>
+              <a href="/products/rc-stunt-car" class="product-link-overlay"></a>
+        </div>
+
+      </div>
+  </div>
+</section>
+
+<style>
+    .featured-products-mock {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 15px;
+    }
+    .product-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #eee;
+        position: relative;
+    }
+    .product-image-wrapper {
+        position: relative;
+        padding-top: 100%; /* 1:1 Aspect Ratio */
+        background: #f4f4f4;
+    }
+    .product-image {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .product-info { padding: 10px; text-align: left; }
+    .product-title {
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .price-container {
+        display: flex; gap: 8px; align-items: center; margin-bottom: 8px;
+    }
+    .current-price { font-weight: bold; color: #333; }
+    .original-price { text-decoration: line-through; color: #999; font-size: 0.85rem; }
+    
+    .badge-sale {
+        position: absolute; top: 8px; left: 8px;
+        background: #d32f2f; color: white;
+        font-size: 0.7rem; font-weight: bold;
+        padding: 2px 6px; border-radius: 4px;
+        z-index: 2;
+    }
+    .btn-atc-mock {
+        width: 100%;
+        background: #ff6f00; color: white;
+        border: none; padding: 8px;
+        font-weight: bold; border-radius: 4px;
+        font-size: 0.8rem;
+    }
+    .product-link-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
+    }
+</style>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured Products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to Show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' Button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "collection-content": {
+            "type": "collection-kitchen-mock",
+            "settings": {}
+        }
+    },
+    "order": [
+        "collection-content"
+    ]
+}

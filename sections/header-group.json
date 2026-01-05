@@ -1,0 +1,21 @@
+{
+    "name": "Header",
+    "type": "header",
+    "sections": {
+        "announcement-bar": {
+            "type": "announcement-bar",
+            "settings": {
+                "announcement_1": "Free Shipping All OVER India",
+                "announcement_2": "SAVE 10% Extra on Prepaid Orders"
+            }
+        },
+        "header": {
+            "type": "header",
+            "settings": {}
+        }
+    },
+    "order": [
+        "announcement-bar",
+        "header"
+    ]
+}

@@ -1,0 +1,96 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "EasyDay",
+    "theme_version": "1.0.0",
+    "theme_author": "EasyDay Store",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary_nav",
+        "label": "Primary Navigation Color",
+        "default": "#1E88E5"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_cta",
+        "label": "Primary CTA Color",
+        "default": "#FF6F00"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "label": "Success Color",
+        "default": "#4CAF50"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color",
+        "default": "#333333"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading Font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body Font",
+        "default": "assistant_n4"
+      }
+    ]
+  },
+  {
+    "name": "Trust Signals",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_cod_messaging",
+        "label": "Enable COD Messaging",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "delivery_time_text",
+        "label": "Delivery Time Text",
+        "default": "2-3 Days Delivery"
+      },
+      {
+        "type": "text",
+        "id": "prepaid_discount_text",
+        "label": "Prepaid Discount Text",
+        "default": "SAVE 10% EXTRA"
+      }
+    ]
+  },
+  {
+    "name": "Product Page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "cod_button_text",
+        "label": "COD Button Text",
+        "default": "Order Now - Cash on Delivery"
+      },
+      {
+        "type": "text",
+        "id": "prepaid_button_text",
+        "label": "Prepaid Button Text",
+        "default": "💳 PAY ONLINE & SAVE 10% EXTRA"
+      }
+    ]
+  }
+]

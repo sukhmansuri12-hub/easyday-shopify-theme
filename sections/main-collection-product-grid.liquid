@@ -1,0 +1,99 @@
+{% comment %}
+  Main Collection Product Grid
+  Displays products in collection
+{% endcomment %}
+
+{%- paginate collection.products by 12 -%}
+  <section class="section-padding">
+    <div class="container">
+      {%- if collection.products.size > 0 -%}
+        <div class="product-grid">
+          {%- for product in collection.products -%}
+            <div class="animate-on-scroll delay-{{ forloop.index | modulo: 4 }}" data-animation="scale-in">
+              {% render 'product-card', product: product %}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <div style="margin-top: 3rem; text-align: center;">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="btn btn-secondary" style="margin-right: 1rem;">Previous</a>
+            {%- endif -%}
+            
+            <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+            
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="btn btn-secondary" style="margin-left: 1rem;">Next</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        {% comment %} EMPTY COLLECTION FALLBACK - MOCK PRODUCTS {% endcomment %}
+        {% comment %} EMPTY COLLECTION MOCKUP LOGIC {% endcomment %}
+        <div class="product-grid mock-grid">
+           
+           {% assign mock_title = "Featured Product" %}
+           {% assign mock_price = "999.00" %}
+           {% assign mock_compare = "1999.00" %}
+           {% assign mock_image = "" %}
+           {% assign mock_link = "" %}
+
+           {% if collection.handle == 'kitchen' %}
+                {% assign mock_title = "CUT & SHRED KNIFE" %}
+                {% assign mock_price = "799.00" %}
+                {% assign mock_compare = "1,799.00" %}
+                {% assign mock_image = "https://img.freepik.com/free-photo/chopping-vegetables-kitchen_23-2148535048.jpg?w=740" %}
+                {% assign mock_link = "/products/cut-shred-knife" %}
+           {% elsif collection.handle == 'home-essentials' %}
+                {% assign mock_title = "Austrian Diamond Necklace Set" %}
+                {% assign mock_price = "899.00" %}
+                {% assign mock_compare = "2,199.00" %}
+                {% assign mock_image = "https://img.freepik.com/free-photo/luxury-necklace-display_23-2150036224.jpg?w=740" %}
+                {% assign mock_link = "/products/necklace-set" %}
+           {% elsif collection.handle == 'cleaning' %}
+                 {% assign mock_title = "Bamboo Knee Sleeves" %}
+                {% assign mock_price = "699.00" %}
+                {% assign mock_compare = "1,299.00" %}
+                {% assign mock_image = "https://img.freepik.com/free-photo/knee-brace-support_23-2149234876.jpg?w=740" %}
+                {% assign mock_link = "/products/knee-sleeves" %}
+           {% else %}
+                {% assign mock_title = "RC Stunt Car - 360° Drift" %}
+                {% assign mock_price = "1,299.00" %}
+                {% assign mock_compare = "2,999.00" %}
+                {% assign mock_image = "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-1_large.png?v=1530129081" %}
+                {% assign mock_link = "/products/toy-car" %}
+           {% endif %}
+
+           {% comment %} RENDER THE MOCK PRODUCT {% endcomment %}
+           <div class="product-card">
+               <div class="product-image-wrapper" style="position:relative; aspect-ratio:1; background:#f4f4f4; border-radius:8px; overflow:hidden;">
+                    <span style="position:absolute; top:5px; left:0; background:#d32f2f; color:white; padding:2px 8px; font-size:0.7rem; font-weight:bold;">SALE</span>
+                    <a href="{{ mock_link }}" style="display:block; width:100%; height:100%;">
+                        <img src="{{ mock_image }}" style="width:100%; height:100%; object-fit:cover;">
+                    </a>
+               </div>
+               <div style="padding:10px 0;">
+                   <h3 style="font-size:0.9rem; margin:0; margin-bottom:5px;"><a href="{{ mock_link }}" style="color:black; text-decoration:none;">{{ mock_title }}</a></h3>
+                   <div style="display:flex; gap:10px; align-items:center;">
+                       <span style="font-weight:bold; font-size:1rem;">Rs. {{ mock_price }}</span>
+                       <span style="text-decoration:line-through; color:#888; font-size:0.8rem;">Rs. {{ mock_compare }}</span>
+                   </div>
+               </div>
+           </div>
+
+        </div>
+        
+        <style>
+            .mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        </style>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collection Product Grid"
+}
+{% endschema %}

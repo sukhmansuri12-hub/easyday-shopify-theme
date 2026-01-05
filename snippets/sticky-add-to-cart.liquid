@@ -1,0 +1,108 @@
+{% comment %}
+  Sticky Add to Cart - Mobile Only
+  Appears at bottom of screen to drive conversions (Attrangi Style)
+{% endcomment %}
+
+<div id="sticky-atc-bar" class="sticky-atc-bar">
+  <div class="sticky-atc-wrapper">
+    
+    <div class="sticky-product-info">
+      {%- if product -%}
+        <div class="sticky-title">{{ product.title | truncate: 25 }}</div>
+        <div class="sticky-price">{{ product.price | money }}</div>
+      {%- else -%}
+        <div class="sticky-title">Shop This Item</div>
+        <div class="sticky-price">Best Price</div>
+      {%- endif -%}
+    </div>
+
+    <button type="button" class="btn-sticky-atc" onclick="document.querySelector('.btn-prepaid').click()">
+      💳 PAY ONLINE & SAVE 10%
+    </button>
+  
+  </div>
+</div>
+
+<style>
+  .sticky-atc-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+    z-index: 9999;
+    padding: 10px 15px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    display: none; /* Hidden by default on desktop */
+  }
+
+  @media (max-width: 768px) {
+    .sticky-atc-bar {
+      display: block; /* Show on mobile */
+    }
+    .sticky-atc-bar.visible {
+      transform: translateY(0);
+    }
+  }
+
+  .sticky-atc-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .sticky-product-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sticky-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .sticky-price {
+    font-size: 0.9rem;
+    color: #FF6F00;
+    font-weight: 700;
+  }
+
+  .btn-sticky-atc {
+    background-color: #FF6F00; /* Attrangi Orange */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex: 1;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(255, 111, 0, 0.3);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const stickyBar = document.getElementById('sticky-atc-bar');
+    const mainBtn = document.querySelector('.btn-prepaid');
+    
+    if (mainBtn) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          // Show sticky bar when main button scrolls OUT of view
+          if (!entry.isIntersecting) {
+            stickyBar.classList.add('visible');
+          } else {
+            stickyBar.classList.remove('visible');
+          }
+        });
+      }, { threshold: 0 });
+      
+      observer.observe(mainBtn);
+    }
+  });
+</script>

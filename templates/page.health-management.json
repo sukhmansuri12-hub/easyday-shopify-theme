@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "collection-content": {
+            "type": "collection-health-mock",
+            "settings": {}
+        }
+    },
+    "order": [
+        "collection-content"
+    ]
+}

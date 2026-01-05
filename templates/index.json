@@ -1,0 +1,29 @@
+{
+    "sections": {
+        "hero": {
+            "type": "hero-section",
+            "settings": {
+                "heading": "Smart Solutions for Everyday Life",
+                "show_sale_btn": true
+            }
+        },
+        "category_grid": {
+            "type": "category-grid",
+            "settings": {}
+        },
+        "featured_products": {
+            "type": "featured-products-mock",
+            "settings": {}
+        },
+        "customer_reviews": {
+            "type": "customer-reviews",
+            "settings": {}
+        }
+    },
+    "order": [
+        "hero",
+        "category_grid",
+        "featured_products",
+        "customer_reviews"
+    ]
+}

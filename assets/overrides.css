@@ -1,0 +1,93 @@
+/* === V12 EMERGENCY FIXES === */
+
+/* 1. LOGO OVERLAP FIX */
+/* Remove background and pointer-events from container so it doesn't block clicks */
+.header-logo {
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translateX(-60%) !important;
+    /* Shift Left */
+    width: auto !important;
+    height: 60px !important;
+    /* Increased container height */
+    z-index: 100 !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.header-logo a {
+    pointer-events: auto !important;
+    display: block;
+}
+
+.header-logo img {
+    height: auto !important;
+    max-height: 120px !important;
+    /* Much bigger logo (40% increase) */
+    width: auto !important;
+    max-width: 300px !important;
+    object-fit: contain !important;
+    position: relative !important;
+    top: 5px !important;
+}
+
+/* 2. HEADER ICONS Z-INDEX FIX */
+.header-icons {
+    position: relative !important;
+    z-index: 1000 !important;
+    pointer-events: auto !important;
+    transform: scale(0.85) !important;
+    /* Smaller icons */
+}
+
+.mobile-menu-toggle {
+    position: relative !important;
+    z-index: 1000 !important;
+    pointer-events: auto !important;
+    transform: scale(0.7) !important;
+    /* 30% smaller hamburger menu */
+}
+
+/* 3. CATEGORY GRID FORCED 2x2 */
+/* Nuke any flex/scroll behavior */
+.category-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+    padding: 15px !important;
+    overflow: visible !important;
+    white-space: normal !important;
+}
+
+.category-grid>* {
+    width: auto !important;
+    flex: none !important;
+    max-width: none !important;
+}
+
+/* 4. PRODUCT CARD LINKS FIX */
+/* Ensure the link covers the whole card and sits on top */
+.product-card {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.product-link {
+    display: block !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10 !important;
+}
+
+/* 5. STICKY FOOTER VISIBILITY */
+.sticky-atc-bar {
+    z-index: 2147483647 !important;
+    /* Max safe z-index */
+}

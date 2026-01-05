@@ -1,0 +1,202 @@
+{% schema %}
+{
+  "name": "Featured Products Mock",
+  "settings": [],
+  "presets": [{ "name": "Featured Products Mock" }]
+}
+{% endschema %}
+
+<section class="featured-products-mock section-padding">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2>Featured Products</h2>
+    </div>
+
+    <div class="mock-product-grid" id="featured-products">
+        
+        {% comment %} Product 1: Necklace {% endcomment %}
+        <div class="product-card animate-on-scroll delay-1" data-animation="scale-in">
+           <div class="product-image-wrapper">
+             <span class="mock-sale-badge">SALE 59%</span>
+             <a href="/products/necklace-set" class="product-link">
+                <div class="mock-image" style="background-image: url('https://img.freepik.com/free-photo/luxury-necklace-display_23-2150036224.jpg?w=740');"></div>
+             </a>
+             <button class="add-btn">+</button>
+           </div>
+           <div class="product-content">
+             <h3 class="product-title"><a href="/products/necklace-set">Austrian Diamond Necklace Set | 🔥SET of 3 Necklace🔥</a></h3>
+             <div class="product-price">
+               <span class="sale-price">Rs. 899.00</span>
+               <span class="compare-price">Rs. 2,199.00</span>
+               <div class="save-text">Save 59%</div>
+             </div>
+           </div>
+        </div>
+
+        {% comment %} Product 2: Shoulder Brace {% endcomment %}
+        <div class="product-card animate-on-scroll delay-2" data-animation="scale-in">
+           <div class="product-image-wrapper">
+             <span class="mock-sale-badge">SALE 50%</span>
+             <a href="/products/shoulder-brace" class="product-link">
+                <div class="mock-image" style="background-image: url('https://img.freepik.com/free-photo/man-wearing-shoulder-brace_23-2149176313.jpg?w=740');"></div>
+             </a>
+             <button class="add-btn">+</button>
+           </div>
+           <div class="product-content">
+             <h3 class="product-title"><a href="/products/shoulder-brace">Shoulder Brace For Pain Relief | 🔥FLAT 50% OFF SALE🔥</a></h3>
+             <div class="product-price">
+               <span class="sale-price">Rs. 799.00</span>
+               <span class="compare-price">Rs. 1,599.00</span>
+               <div class="save-text">Save 50%</div>
+             </div>
+           </div>
+        </div>
+
+        {% comment %} Product 3: Knee Sleeves {% endcomment %}
+        <div class="product-card animate-on-scroll delay-1" data-animation="scale-in">
+           <div class="product-image-wrapper">
+             <span class="mock-sale-badge">SALE 46%</span>
+             <a href="/products/knee-sleeves" class="product-link">
+                <div class="mock-image" style="background-image: url('https://img.freepik.com/free-photo/knee-brace-support_23-2149234876.jpg?w=740');"></div>
+             </a>
+             <button class="add-btn">+</button>
+           </div>
+           <div class="product-content">
+             <h3 class="product-title"><a href="/products/knee-sleeves">Bamboo Compression Knee Sleeves- 🔥Buy 1 Get 1 Free🔥</a></h3>
+             <div class="product-price">
+               <span class="sale-price">Rs. 699.00</span>
+               <span class="compare-price">Rs. 1,299.00</span>
+               <div class="save-text">Save 46%</div>
+             </div>
+           </div>
+        </div>
+
+        {% comment %} Product 4: Knife {% endcomment %}
+        <div class="product-card animate-on-scroll delay-2" data-animation="scale-in">
+           <div class="product-image-wrapper">
+             <span class="mock-sale-badge">SALE 56%</span>
+             <a href="/products/cut-shred-knife" class="product-link">
+                 <div class="mock-image" style="background-image: url('https://img.freepik.com/free-photo/chopping-vegetables-kitchen_23-2148535048.jpg?w=740');"></div>
+             </a>
+             <button class="add-btn">+</button>
+           </div>
+           <div class="product-content">
+             <h3 class="product-title"><a href="/products/cut-shred-knife">CUT & SHRED KNIFE</a></h3>
+             <div class="product-price">
+               <span class="sale-price">Rs. 799.00</span>
+               <span class="compare-price">Rs. 1,799.00</span>
+               <div class="save-text">Save 56%</div>
+             </div>
+           </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .mock-product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px; /* Keep tight gap */
+  }
+
+  /* Image Area */
+  .product-image-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: #f4f4f4;
+    aspect-ratio: 1 / 1; /* Square images */
+  }
+  
+  .mock-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .mock-sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    background: #d32f2f;
+    color: white;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    z-index: 2;
+  }
+  
+  .add-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff6f00;
+      color: white;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  /* Content */
+  .product-content {
+    text-align: left;
+    padding: 0 5px;
+  }
+
+  .product-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.6em; /* Align cards */
+  }
+
+  .product-title a { color: #333; text-decoration: none; }
+
+  .product-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sale-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .compare-price {
+    font-size: 0.8rem;
+    color: #888;
+    text-decoration: line-through;
+  }
+  
+  .save-text {
+      color: #d32f2f;
+      font-size: 0.8rem;
+      font-weight: 600;
+  }
+  
+  @media(min-width: 768px) {
+      .mock-product-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>

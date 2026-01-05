@@ -1,0 +1,145 @@
+{% comment %}
+  Header Section - FIXED Hamburger Menu
+{% endcomment %}
+
+<header class="site-header">
+  <div class="container header-container">
+    
+    {% comment %} Mobile Menu Toggle (Hamburger) - LEFT {% endcomment %}
+    <div class="mobile-menu-toggle" id="hamburger-btn">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
+    {% comment %} Logo - CENTER {% endcomment %}
+    <div class="header-logo">
+      <a href="{{ routes.root_url }}">
+          <img src="{{ 'brand-logo.png' | asset_url }}" alt="{{ shop.name }}" width="100%" height="auto" loading="eager">
+      </a>
+    </div>
+
+    {% comment %} Icons - RIGHT {% endcomment %}
+    <div class="header-icons">
+      <a href="{{ routes.search_url }}" class="header-icon search-icon" aria-label="Search">
+        {% render 'icon-search' %}
+      </a>
+      
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header-icon account-icon" aria-label="Account">
+          {% render 'icon-account' %}
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="header-icon cart-icon" id="cart-icon-bubble" aria-label="Cart">
+        {% render 'icon-cart' %}
+        {%- if cart.item_count > 0 -%}
+          <span class="cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+
+  </div>
+</header>
+
+{% comment %} Mobile Menu Drawer {% endcomment %}
+<div id="mobile-drawer" style="position: fixed; top: 0; left: -100%; width: 85%; max-width: 350px; height: 100vh; background: white; z-index: 999999; box-shadow: 2px 0 10px rgba(0,0,0,0.1); transition: left 0.3s ease;">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee;">
+        <h3 style="margin: 0; font-size: 1.2rem; font-weight: 600;">Menu</h3>
+        <span id="close-drawer" style="font-size: 2rem; cursor: pointer; line-height: 1; color: #333;">&times;</span>
+    </div>
+    <div style="padding: 10px 0;">
+      <a href="{{ routes.root_url }}" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">HOME PAGE</a>
+      <a href="/#featured-products" id="featured-link" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">FEATURED PRODUCTS</a>
+      <a href="/pages/toys-gifts" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">TOYS & GIFTS</a>
+      <a href="/pages/home-kitchen" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">HOME & KITCHEN</a>
+      <a href="/pages/clothing-accessories" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">CLOTHING & ACCESSORIES</a>
+      <a href="/pages/personal-care-wellness" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">PERSONAL CARE & WELLNESS</a>
+      <a href="/collections/all" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500;">CATALOG</a>
+    </div>
+</div>
+
+<script>
+  console.log('Header script loading...');
+  
+  window.addEventListener('load', function() {
+    console.log('Page loaded, initializing menu...');
+    
+    const hamburger = document.getElementById('hamburger-btn');
+    const drawer = document.getElementById('mobile-drawer');
+    const closeBtn = document.getElementById('close-drawer');
+    const featuredLink = document.getElementById('featured-link');
+    
+    console.log('Hamburger:', hamburger);
+    console.log('Drawer:', drawer);
+    console.log('Close btn:', closeBtn);
+    
+    if (hamburger) {
+      hamburger.addEventListener('click', function() {
+        console.log('Hamburger clicked!');
+        if (drawer) {
+          drawer.style.left = '0';
+          console.log('Drawer opened');
+        }
+      });
+    }
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        console.log('Close clicked!');
+        if (drawer) {
+          drawer.style.left = '-100%';
+          console.log('Drawer closed');
+        }
+      });
+    }
+    
+    // Handle Featured Products link
+    if (featuredLink) {
+      featuredLink.addEventListener('click', function(e) {
+        console.log('Featured Products clicked');
+        const isHomepage = window.location.pathname === '/' || window.location.pathname === '';
+        
+        if (isHomepage) {
+          // If on homepage, scroll to section
+          e.preventDefault();
+          const target = document.querySelector('#featured-products');
+          if (target && drawer) {
+            drawer.style.left = '-100%';
+            setTimeout(function() {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+          }
+        } else {
+          // If not on homepage, let it navigate to /#featured-products
+          if (drawer) {
+            drawer.style.left = '-100%';
+          }
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "default": 150,
+      "unit": "px",
+      "label": "Custom logo width"
+    }
+  ]
+}
+{% endschema %}

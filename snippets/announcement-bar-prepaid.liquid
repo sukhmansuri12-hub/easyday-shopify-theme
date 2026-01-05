@@ -1,0 +1,59 @@
+{% comment %}
+  Announcement Bar - Prepaid Discount
+  Displays at top of all pages, mobile-optimized
+{% endcomment %}
+
+<div class="announcement-bar">
+  <div class="announcement-content">
+    <span class="announcement-icon">🎉</span>
+    <span class="announcement-text">SAVE 10% Extra on Prepaid Orders</span>
+    <span class="announcement-icon">💳</span>
+  </div>
+</div>
+
+<style>
+.announcement-bar {
+  background: linear-gradient(135deg, #FF6F00 0%, #FFA000 100%);
+  padding: 10px 15px;
+  text-align: center;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.announcement-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.announcement-text {
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.announcement-icon {
+  font-size: 1.1rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@media (max-width: 768px) {
+  .announcement-text {
+    font-size: 0.8rem;
+  }
+  .announcement-icon {
+    font-size: 1rem;
+  }
+}
+</style>

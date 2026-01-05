@@ -1,0 +1,99 @@
+{% comment %}
+  Product Benefits Section
+  Highlights why the product is useful
+{% endcomment %}
+
+{%- if section.blocks.size > 0 -%}
+<section class="product-benefits">
+  <div class="container">
+    <h2 class="section-title animate-on-scroll" data-animation="fade-in-up">
+      {{ section.settings.heading | default: 'Why This Product is Useful' }}
+    </h2>
+
+    <div class="benefits-list">
+      {%- for block in section.blocks -%}
+        <div class="benefit-item animate-on-scroll delay-{{ forloop.index }}" data-animation="slide-in-left" {{ block.shopify_attributes }}>
+          <div class="benefit-icon">
+            {{ block.settings.icon | default: '✓' }}
+          </div>
+          <div class="benefit-content">
+            <h4>{{ block.settings.title }}</h4>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Why This Product is Useful"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji)",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Benefit Title",
+          "default": "High Quality"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Benefit Description",
+          "default": "Made with premium materials for lasting durability"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Benefits",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "✓",
+            "title": "Easy to Use",
+            "description": "Simple design that anyone can use without instructions"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "⭐",
+            "title": "High Quality",
+            "description": "Made with premium materials for lasting durability"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🎯",
+            "title": "Problem Solver",
+            "description": "Solves everyday problems efficiently and effectively"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

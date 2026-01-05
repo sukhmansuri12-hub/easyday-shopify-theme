@@ -1,0 +1,32 @@
+{
+    "general": {
+        "search": {
+            "title": "Search",
+            "placeholder": "Search products..."
+        },
+        "cart": {
+            "title": "Cart",
+            "empty": "Your cart is empty",
+            "subtotal": "Subtotal",
+            "checkout": "Checkout"
+        },
+        "accessibility": {
+            "skip_to_content": "Skip to content"
+        }
+    },
+    "products": {
+        "product": {
+            "add_to_cart": "Add to Cart",
+            "sold_out": "Sold Out",
+            "sale": "Sale",
+            "save_amount": "Save {{ amount }}",
+            "quantity": "Quantity",
+            "view_full_details": "View full details"
+        }
+    },
+    "sections": {
+        "header": {
+            "menu": "Menu"
+        }
+    }
+}

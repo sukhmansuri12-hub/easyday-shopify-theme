@@ -1,0 +1,174 @@
+{% comment %}
+  Customer Reviews Section - Indians
+{% endcomment %}
+
+<section class="reviews-section" style="padding: 20px 0 10px 0;">
+  <div class="container">
+    <div class="reviews-header text-center" style="margin-bottom: 1rem;">
+      <h2 class="section-title" style="margin-bottom: 5px;">Trusted by 1150+ Customers</h2>
+      <div class="stars-rating" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span style="color: #FFB300; font-size: 1.4rem;">★★★★<span style="position: relative; display: inline-block; width: 0.7em; overflow: hidden; vertical-align: top;">★</span></span>
+        <span style="font-weight: bold; color: #333; font-size: 1.1rem;">4.7/5</span>
+      </div>
+    </div>
+
+    <div class="reviews-grid masonry-style">
+        
+       {% comment %} Review 1 - Rotated Left {% endcomment %}
+       <div class="review-card" style="transform: rotate(-1deg); margin-top: 10px;">
+          <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
+              <span style="font-weight:bold;">Rahul S. <span style="color:green; font-size:0.8rem;">✔ Verified</span></span>
+              <span style="color:#FFB300;">★★★★★</span>
+          </div>
+          <p class="review-text" style="font-size:0.9rem; margin-bottom:10px;">"Ordered the vegetable chopper and it saves me so much time in the kitchen. The blades are sharp and it's very easy to clean. Must buy for every home! Worth every rupee."</p>
+       </div>
+
+       {% comment %} Review 2 - Rotated Right {% endcomment %}
+       <div class="review-card" style="transform: rotate(1deg);">
+          <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
+              <span style="font-weight:bold;">Priya M. <span style="color:green; font-size:0.8rem;">✔ Verified</span></span>
+              <span style="color:#FFB300;">★★★★★</span>
+          </div>
+          <p class="review-text" style="font-size:0.9rem; margin-bottom:10px;">"Best gadgets store I've found online. Delivery was super fast and the cash on delivery option makes it very convenient. Products are exactly as shown in pictures. Very happy with my purchase."</p>
+       </div>
+
+       {% comment %} Review 3 - Left {% endcomment %}
+       <div class="review-card" style="transform: rotate(-1deg); margin-top: 15px;">
+          <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
+              <span style="font-weight:bold;">Amit K. <span style="color:green; font-size:0.8rem;">✔ Verified</span></span>
+              <span style="color:#FFB300;">★★★★★</span>
+          </div>
+          <p class="review-text" style="font-size:0.9rem; margin-bottom:10px;">"Quality is very good compared to other online sites. Products are durable and well-packaged. Customer service is also responsive. Highly recommended to everyone looking for quality gadgets at reasonable prices."</p>
+       </div>
+
+       {% comment %} Review 4 - Right {% endcomment %}
+       <div class="review-card" style="transform: rotate(1deg); margin-top: 5px;">
+          <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
+              <span style="font-weight:bold;">Sneha R. <span style="color:green; font-size:0.8rem;">✔ Verified</span></span>
+              <span style="color:#FFB300;">★★★★★</span>
+          </div>
+          <p class="review-text" style="font-size:0.9rem; margin-bottom:10px;">"I love the knee sleeves. Helped my joint pain immediately."</p>
+       </div>
+       
+         {% comment %} Review 5 - Left {% endcomment %}
+       <div class="review-card" style="transform: rotate(-1deg); margin-top: 10px;">
+          <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
+              <span style="font-weight:bold;">Vikram J. <span style="color:green; font-size:0.8rem;">✔ Verified</span></span>
+              <span style="color:#FFB300;">★★★★★</span>
+          </div>
+          <p class="review-text" style="font-size:0.9rem; margin-bottom:10px;">"The necklace set looks even better in person. Wife loved it."</p>
+       </div>
+
+       {% comment %} Review 6 - Right {% endcomment %}
+       <div class="review-card" style="transform: rotate(1deg);">
+          <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
+              <span style="font-weight:bold;">Anjali D. <span style="color:green; font-size:0.8rem;">✔ Verified</span></span>
+              <span style="color:#FFB300;">★★★★★</span>
+          </div>
+          <p class="review-text" style="font-size:0.9rem; margin-bottom:10px;">"Good pricing and excellent support crew."</p>
+       </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* CAROUSEL STYLES (Side by Side Scroll) */
+  .reviews-section {
+    padding: 1rem 0 0 0 !important; /* NO BOTTOM PADDING */
+    background: transparent !important; /* Remove grey bg to look cleaner */
+    margin-bottom: 0 !important;
+  }
+  
+  .reviews-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding: 10px 20px 30px 20px !important; /* Padding for scroll interaction */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+  }
+  
+  .reviews-grid::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+  
+  .review-card {
+    min-width: 85% !important; /* Show 1 full + peek at next */
+    scroll-snap-align: center;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Nice shadow */
+    margin: 0 !important;
+    transform: none !important; /* NO ROTATION */
+    border: 1px solid #f0f0f0;
+  }
+  
+  @media(min-width: 768px) {
+      .review-card { min-width: 300px !important; }
+  }
+
+  .review-text {
+    font-style: italic;
+    color: #444;
+    line-height: 1.4;
+    font-size: 0.95rem;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Customer Reviews",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "Rahul S."
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "Amazing product! Completely changed how I organize my kitchen. Fast delivery too."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Reviews",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "author_name": "Priya M.",
+            "review_text": "Very useful gadget. Quality is top notch and it came within 2 days."
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "author_name": "Amit K.",
+            "review_text": "Best purchase I made this month. Highly recommended for every Indian home!"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "author_name": "Sneha R.",
+            "review_text": "Customer support was very helpful. I love the product quality."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

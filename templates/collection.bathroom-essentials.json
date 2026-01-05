@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "collection-content": {
+            "type": "collection-bathroom-mock",
+            "settings": {}
+        }
+    },
+    "order": [
+        "collection-content"
+    ]
+}

@@ -1,0 +1,38 @@
+{% comment %}
+  Product Card Snippet
+  Reusable product card for collections and featured products
+  Usage: {% render 'product-card', product: product %}
+{% endcomment %}
+
+{%- assign product = product -%}
+
+<a href="{{ product.url }}" class="product-card">
+  <div class="product-card-image">
+    <img 
+      src="{{ product.featured_image | image_url: width: 600 }}" 
+      alt="{{ product.featured_image.alt | default: product.title }}"
+      loading="lazy"
+      width="600"
+      height="600"
+    >
+    
+    {%- if product.compare_at_price > product.price -%}
+      <div class="product-badge">Sale</div>
+    {%- endif -%}
+  </div>
+
+  <div class="product-card-content">
+    <h3 class="product-title">{{ product.title }}</h3>
+    
+    <div class="product-price">
+      {%- if product.compare_at_price > product.price -%}
+        <span class="price-sale">₹{{ product.price | money_without_currency }}</span>
+        <span class="price-regular">₹{{ product.compare_at_price | money_without_currency }}</span>
+        {%- assign savings_percent = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+        <span class="price-savings">Save {{ savings_percent }}%</span>
+      {%- else -%}
+        <span class="price-sale">₹{{ product.price | money_without_currency }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</a>
