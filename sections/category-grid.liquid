@@ -1,6 +1,6 @@
-<section class="category-section" style="background: white; padding: 40px 0;">
+<section class="category-section" style="background: white; padding: 30px 0;">
   <div class="container" style="max-width: 100%; padding: 0;">
-    <h2 style="text-align: center; margin-bottom: 30px; font-size: 1.8rem; font-weight: 700; color: #222; padding: 0 15px;">Popular Categories</h2>
+    <h2 style="text-align: center; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700; color: #222; padding: 0 15px;">Popular Categories</h2>
 
     <div class="category-grid">
       <a href="/pages/toys-gifts" class="category-card">
@@ -38,7 +38,7 @@
   .category-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
+    gap: 0px;
     width: 100%;
     padding: 0 !important;
   }
@@ -46,7 +46,7 @@
   @media (min-width: 768px) {
     .category-grid {
       grid-template-columns: repeat(4, 1fr);
-      gap: 3px;
+      gap: 0px;
     }
   }
 
@@ -57,26 +57,38 @@
     text-align: center;
     text-decoration: none;
     color: inherit;
-    padding: 10px;
-    animation: float 6s ease-in-out infinite;
+    padding: 5px;
+    animation: float 6s ease-in-out infinite !important;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   
-  /* Staggered animation delays */
-  .category-card:nth-child(1) { animation-delay: 0s; }
-  .category-card:nth-child(2) { animation-delay: 1.5s; }
-  .category-card:nth-child(3) { animation-delay: 3s; }
-  .category-card:nth-child(4) { animation-delay: 4.5s; }
+  /* Staggered animation delays - ENSURE ALL CARDS ANIMATE */
+  .category-card:nth-child(1) { 
+    animation: float 6s ease-in-out infinite !important;
+    animation-delay: 0s !important; 
+  }
+  .category-card:nth-child(2) { 
+    animation: float 6s ease-in-out infinite !important;
+    animation-delay: 1.5s !important; 
+  }
+  .category-card:nth-child(3) { 
+    animation: float 6s ease-in-out infinite !important;
+    animation-delay: 3s !important; 
+  }
+  .category-card:nth-child(4) { 
+    animation: float 6s ease-in-out infinite !important;
+    animation-delay: 4.5s !important; 
+  }
 
   .category-image-wrapper {
     width: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 20px;
+    border-radius: 16px;
     background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     overflow: hidden;
     box-shadow: 
       0 8px 20px rgba(0,0,0,0.08),
@@ -104,7 +116,7 @@
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   
-  /* Floating animation */
+  /* Floating animation - CRITICAL: Ensure it works */
   @keyframes float {
     0%, 100% {
       transform: translateY(0px);
@@ -123,7 +135,7 @@
     box-shadow: 
       0 15px 35px rgba(255, 111, 0, 0.25),
       0 5px 15px rgba(0,0,0,0.1);
-    border-radius: 24px;
+    border-radius: 20px;
   }
   
   .category-card:hover .category-image-wrapper::before {
@@ -139,7 +151,7 @@
   }
 
   .category-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     margin: 0;
     color: #333;
@@ -153,13 +165,16 @@
   
   @media (max-width: 767px) {
     .category-title { 
-      font-size: 0.9rem; 
+      font-size: 0.85rem; 
     }
     .category-grid {
-      gap: 2px;
+      gap: 0px;
     }
     .category-image-wrapper {
-      border-radius: 16px;
+      border-radius: 12px;
+    }
+    .category-card {
+      padding: 3px;
     }
   }
 </style>
