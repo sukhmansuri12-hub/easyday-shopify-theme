@@ -105,7 +105,7 @@
   .product-image-wrapper {
     position: relative;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: visible !important;
     margin-bottom: 10px;
     background: #f4f4f4;
     aspect-ratio: 1 / 1; /* Square images */
@@ -133,23 +133,24 @@
   }
   
   .add-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ff6f00;
-      color: white;
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 5;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      position: absolute !important;
+      top: 10px !important;
+      right: 10px !important;
+      background: #ff6f00 !important;
+      color: white !important;
+      border: none !important;
+      width: 35px !important;
+      height: 35px !important;
+      border-radius: 50% !important;
+      font-size: 1.3rem !important;
+      line-height: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      z-index: 9999 !important;
+      box-shadow: 0 3px 8px rgba(255, 111, 0, 0.6) !important;
+      pointer-events: auto !important;
   }
 
   /* Content */
