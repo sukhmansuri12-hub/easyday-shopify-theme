@@ -52,6 +52,11 @@
           50% { opacity: 0; transform: translateY(-100%); }
           100% { opacity: 0; transform: translateY(-100%); }
       }
+      
+      /* Force animation to keep running even during scroll */
+      * {  
+          animation-play-state: running !important;
+      }
   </style>
 {%- endif -%}
 

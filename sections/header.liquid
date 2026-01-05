@@ -42,79 +42,79 @@
   </div>
 </header>
 
+{% comment %} Backdrop Overlay {% endcomment %}
+<div id="menu-backdrop" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;"></div>
+
 {% comment %} Mobile Menu Drawer {% endcomment %}
-<div id="mobile-drawer" style="position: fixed; top: 0; left: -100%; width: 85%; max-width: 350px; height: 100vh; background: white; z-index: 999999; box-shadow: 2px 0 10px rgba(0,0,0,0.1); transition: left 0.3s ease;">
+<div id="mobile-drawer" style="position: fixed; top: 0; left: -100%; width: auto; max-width: 85%; height: 100vh; background: white; z-index: 999999; box-shadow: 2px 0 10px rgba(0,0,0,0.1); transition: left 0.3s ease;">
     <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee;">
         <h3 style="margin: 0; font-size: 1.2rem; font-weight: 600;">Menu</h3>
         <span id="close-drawer" style="font-size: 2rem; cursor: pointer; line-height: 1; color: #333;">&times;</span>
     </div>
     <div style="padding: 10px 0;">
-      <a href="{{ routes.root_url }}" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">HOME PAGE</a>
-      <a href="/#featured-products" id="featured-link" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">FEATURED PRODUCTS</a>
-      <a href="/pages/toys-gifts" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">TOYS & GIFTS</a>
-      <a href="/pages/home-kitchen" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">HOME & KITCHEN</a>
-      <a href="/pages/clothing-accessories" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">CLOTHING & ACCESSORIES</a>
-      <a href="/pages/personal-care-wellness" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5;">PERSONAL CARE & WELLNESS</a>
-      <a href="/collections/all" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500;">CATALOG</a>
+      <a href="{{ routes.root_url }}" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">HOME PAGE</a>
+      <a href="/#featured-products" id="featured-link" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">FEATURED PRODUCTS</a>
+      <a href="/pages/toys-gifts" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">TOYS & GIFTS</a>
+      <a href="/pages/home-kitchen" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">HOME & KITCHEN</a>
+      <a href="/pages/clothing-accessories" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">CLOTHING & ACCESSORIES</a>
+      <a href="/pages/personal-care-wellness" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">PERSONAL CARE & WELLNESS</a>
+      <a href="/collections/all" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; white-space: nowrap;">CATALOG</a>
     </div>
 </div>
 
 <script>
-  console.log('Header script loading...');
-  
   window.addEventListener('load', function() {
-    console.log('Page loaded, initializing menu...');
-    
     const hamburger = document.getElementById('hamburger-btn');
     const drawer = document.getElementById('mobile-drawer');
     const closeBtn = document.getElementById('close-drawer');
+    const backdrop = document.getElementById('menu-backdrop');
     const featuredLink = document.getElementById('featured-link');
     
-    console.log('Hamburger:', hamburger);
-    console.log('Drawer:', drawer);
-    console.log('Close btn:', closeBtn);
+    function openDrawer() {
+      if (drawer && backdrop) {
+        drawer.style.left = '0';
+        backdrop.style.opacity = '1';
+        backdrop.style.pointerEvents = 'auto';
+      }
+    }
+    
+    function closeDrawer() {
+      if (drawer && backdrop) {
+        drawer.style.left = '-100%';
+        backdrop.style.opacity = '0';
+        backdrop.style.pointerEvents = 'none';
+      }
+    }
     
     if (hamburger) {
-      hamburger.addEventListener('click', function() {
-        console.log('Hamburger clicked!');
-        if (drawer) {
-          drawer.style.left = '0';
-          console.log('Drawer opened');
-        }
-      });
+      hamburger.addEventListener('click', openDrawer);
     }
     
     if (closeBtn) {
-      closeBtn.addEventListener('click', function() {
-        console.log('Close clicked!');
-        if (drawer) {
-          drawer.style.left = '-100%';
-          console.log('Drawer closed');
-        }
-      });
+      closeBtn.addEventListener('click', closeDrawer);
+    }
+    
+    // Close when clicking backdrop
+    if (backdrop) {
+      backdrop.addEventListener('click', closeDrawer);
     }
     
     // Handle Featured Products link
     if (featuredLink) {
       featuredLink.addEventListener('click', function(e) {
-        console.log('Featured Products clicked');
         const isHomepage = window.location.pathname === '/' || window.location.pathname === '';
         
         if (isHomepage) {
-          // If on homepage, scroll to section
           e.preventDefault();
           const target = document.querySelector('#featured-products');
-          if (target && drawer) {
-            drawer.style.left = '-100%';
+          if (target) {
+            closeDrawer();
             setTimeout(function() {
               target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 300);
           }
         } else {
-          // If not on homepage, let it navigate to /#featured-products
-          if (drawer) {
-            drawer.style.left = '-100%';
-          }
+          closeDrawer();
         }
       });
     }
