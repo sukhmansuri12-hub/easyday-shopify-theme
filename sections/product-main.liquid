@@ -57,6 +57,9 @@
             </div>
         </div>
 
+        {% comment %} PREPAID DISCOUNT BOX - Shows 10% savings {% endcomment %}
+        {% render 'prepaid-discount-box' %}
+
         {% comment %} COUNTDOWN TIMER - Attrangi Style {% endcomment %}
         <div class="countdown-container">
             <div class="countdown-header">
@@ -119,6 +122,9 @@
                  </button>
               </div>
         {% endif %}
+
+        {% comment %} QUICK ORDER FORM - Direct COD Checkout {% endcomment %}
+        {% render 'quick-order-form' %}
 
         <div class="product-description">
             {% if section.settings.demo_desc != blank %}
@@ -209,6 +215,7 @@
   </div>
 </section>
 
+{% render 'sticky-add-to-cart' %}
 {% render 'countdown-timer-script' %}
 
 <style>

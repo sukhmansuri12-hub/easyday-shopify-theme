@@ -1,0 +1,82 @@
+{% comment %}
+  Prepaid Discount Box - Highlights savings for online payment
+  Shows 10% discount incentive prominently
+{% endcomment %}
+
+{%- if product.price -%}
+  {%- assign prepaid_discount_percent = 10 -%}
+  {%- assign prepaid_savings = product.price | times: prepaid_discount_percent | divided_by: 100 -%}
+  {%- assign prepaid_final_price = product.price | minus: prepaid_savings -%}
+{%- else -%}
+  {%- assign prepaid_savings = 13000 -%}
+  {%- assign prepaid_final_price = 116900 -%}
+{%- endif -%}
+
+<div class="prepaid-discount-box">
+  <div class="prepaid-icon">💳</div>
+  <div class="prepaid-content">
+    <div class="prepaid-title">Extra {{ prepaid_savings | money }} OFF on Prepaid Orders</div>
+    <div class="prepaid-subtitle">Pay online & save {{ prepaid_discount_percent }}%! Final Price: <strong>{{ prepaid_final_price | money }}</strong></div>
+  </div>
+</div>
+
+<style>
+  .prepaid-discount-box {
+    background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
+    border: 2px solid #00C853;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(0, 200, 83, 0.2);
+  }
+
+  .prepaid-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .prepaid-content {
+    flex: 1;
+  }
+
+  .prepaid-title {
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .prepaid-subtitle {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .prepaid-subtitle strong {
+    font-weight: 800;
+    color: #FFFDE7;
+  }
+
+  @media (max-width: 480px) {
+    .prepaid-discount-box {
+      padding: 14px;
+    }
+    
+    .prepaid-icon {
+      font-size: 1.8rem;
+    }
+    
+    .prepaid-title {
+      font-size: 0.95rem;
+    }
+    
+    .prepaid-subtitle {
+      font-size: 0.8rem;
+    }
+  }
+</style>

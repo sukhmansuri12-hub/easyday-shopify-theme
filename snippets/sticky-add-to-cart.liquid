@@ -1,24 +1,37 @@
 {% comment %}
-  Sticky Add to Cart - Mobile Only
-  Appears at bottom of screen to drive conversions (Attrangi Style)
+  Sticky Add to Cart - Enhanced Mobile CTA Bar
+  Features: Dual CTAs (Prepaid + COD), Product thumbnail, COD badge
 {% endcomment %}
 
 <div id="sticky-atc-bar" class="sticky-atc-bar">
   <div class="sticky-atc-wrapper">
     
+    {%- if product -%}
+      {%- assign prepaid_savings = product.price | times: 10 | divided_by: 100 -%}
+      {%- assign prepaid_final_price = product.price | minus: prepaid_savings -%}
+    {%- else -%}
+      {%- assign prepaid_savings = 13000 -%}
+      {%- assign prepaid_final_price = 116900 -%}
+    {%- endif -%}
+    
     <div class="sticky-product-info">
-      {%- if product -%}
-        <div class="sticky-title">{{ product.title | truncate: 25 }}</div>
-        <div class="sticky-price">{{ product.price | money }}</div>
-      {%- else -%}
-        <div class="sticky-title">Shop This Item</div>
-        <div class="sticky-price">Best Price</div>
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 60 }}" alt="{{ product.title }}" class="sticky-product-img">
       {%- endif -%}
+      <div class="sticky-text">
+        <div class="sticky-title">{{ product.title | default: "Product" | truncate: 30 }}</div>
+        <div class="sticky-price">{{ product.price | default: 129900 | money }} <span class="cod-badge">COD ✓</span></div>
+      </div>
     </div>
 
-    <button type="button" class="btn-sticky-atc" onclick="document.querySelector('.btn-prepaid').click()">
-      💳 PAY ONLINE & SAVE 10%
-    </button>
+    <div class="sticky-cta-buttons">
+      <button type="button" class="btn-sticky-prepaid" onclick="scrollToAddCart('prepaid')">
+        💳 Save {{ prepaid_savings | money }}
+      </button>
+      <button type="button" class="btn-sticky-cod" onclick="scrollToAddCart('cod')">
+        📦 Order COD
+      </button>
+    </div>
   
   </div>
 </div>
@@ -30,17 +43,25 @@
     left: 0;
     width: 100%;
     background: white;
-    box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
     z-index: 9999;
     padding: 10px 15px;
     transform: translateY(100%);
     transition: transform 0.3s ease-in-out;
-    display: none; /* Hidden by default on desktop */
+    display: none;
+    border-top: 3px solid #FF6F00;
+  }
+
+  /* Safe area for iPhone notch */
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .sticky-atc-bar {
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
   }
 
   @media (max-width: 768px) {
     .sticky-atc-bar {
-      display: block; /* Show on mobile */
+      display: block;
     }
     .sticky-atc-bar.visible {
       transform: translateY(0);
@@ -51,46 +72,135 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
+    gap: 12px;
   }
 
   .sticky-product-info {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sticky-product-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #eee;
+    flex-shrink: 0;
+  }
+
+  .sticky-text {
+    flex: 1;
+    min-width: 0;
   }
 
   .sticky-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .sticky-price {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #FF6F00;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cod-badge {
+    background: #00C853;
+    color: white;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
     font-weight: 700;
   }
 
-  .btn-sticky-atc {
-    background-color: #FF6F00; /* Attrangi Orange */
-    color: white;
+  .sticky-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .btn-sticky-prepaid,
+  .btn-sticky-cod {
     border: none;
     border-radius: 8px;
-    padding: 12px 20px;
+    padding: 8px 14px;
     font-weight: 700;
-    font-size: 0.95rem;
-    flex: 1;
-    text-transform: uppercase;
-    box-shadow: 0 4px 6px rgba(255, 111, 0, 0.3);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .btn-sticky-prepaid {
+    background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 200, 83, 0.3);
+  }
+
+  .btn-sticky-cod {
+    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(255, 111, 0, 0.3);
+  }
+
+  .btn-sticky-prepaid:active,
+  .btn-sticky-cod:active {
+    transform: scale(0.95);
+  }
+
+  /* Desktop: Show single large button */
+  @media (min-width: 769px) {
+    .sticky-cta-buttons {
+      flex-direction: row;
+    }
+    .btn-sticky-prepaid,
+    .btn-sticky-cod {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Very small screens: Stack buttons vertically */
+  @media (max-width: 360px) {
+    .sticky-atc-wrapper {
+      flex-wrap: wrap;
+    }
+    
+    .sticky-product-info {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    
+    .sticky-cta-buttons {
+      width: 100%;
+      flex-direction: row;
+    }
+    
+    .btn-sticky-prepaid,
+    .btn-sticky-cod {
+      flex: 1;
+    }
   }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const stickyBar = document.getElementById('sticky-atc-bar');
-    const mainBtn = document.querySelector('.btn-prepaid');
+    const mainBtn = document.querySelector('.btn-prepaid') || document.querySelector('.btn-cod');
     
-    if (mainBtn) {
+    if (mainBtn && stickyBar) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           // Show sticky bar when main button scrolls OUT of view
@@ -105,4 +215,16 @@
       observer.observe(mainBtn);
     }
   });
+
+  function scrollToAddCart(type) {
+    const targetBtn = type === 'prepaid' ? 
+      document.querySelector('.btn-prepaid') : 
+      document.querySelector('.btn-cod');
+    
+    if (targetBtn) {
+      targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => targetBtn.click(), 400);
+    }
+  }
 </script>
+

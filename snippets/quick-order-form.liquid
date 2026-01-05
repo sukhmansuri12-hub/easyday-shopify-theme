@@ -1,0 +1,318 @@
+{% comment %}
+  Quick Order Form - Direct COD Checkout
+  Allows customers to order without adding to cart
+{% endcomment %}
+
+<div class="quick-order-section">
+  <div class="quick-order-header" onclick="toggleQuickOrder()">
+    <span>🛒 Quick Order (No Cart Required)</span>
+    <span class="toggle-icon" id="quick-order-toggle">▼</span>
+  </div>
+  
+  <div class="quick-order-form" id="quick-order-form" style="display: none;">
+    {% if product.id %}
+      {% form 'product', product, class: 'quick-order-product-form', id: 'quick-checkout-form' %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="properties[Payment Method]" value="COD">
+        <input type="hidden" name="properties[Quick Order]" value="Yes">
+        
+        <div class="form-group">
+          <label for="customer-name">Your Name <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="customer-name" 
+            name="properties[Customer Name]" 
+            placeholder="Enter your full name" 
+            required
+            class="form-input"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="customer-phone">Phone Number <span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="customer-phone" 
+            name="properties[Phone Number]" 
+            placeholder="10-digit mobile number" 
+            required
+            pattern="[0-9]{10}"
+            maxlength="10"
+            class="form-input"
+          >
+          <small class="form-hint">We'll contact you to confirm your order</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="customer-pincode">Pincode <span class="required">*</span></label>
+          <div class="pincode-wrapper">
+            <input 
+              type="text" 
+              id="customer-pincode" 
+              name="properties[Pincode]" 
+              placeholder="6-digit pincode" 
+              required
+              pattern="[0-9]{6}"
+              maxlength="6"
+              class="form-input pincode-input"
+            >
+            <button type="button" class="check-delivery-btn" onclick="checkDelivery()">
+              Check
+            </button>
+          </div>
+          <small class="form-hint" id="delivery-status"></small>
+        </div>
+        
+        <div class="form-group">
+          <label for="customer-address">Delivery Address <span class="required">*</span></label>
+          <textarea 
+            id="customer-address" 
+            name="properties[Delivery Address]" 
+            placeholder="House no., Street, Landmark" 
+            required
+            rows="3"
+            class="form-input"
+          ></textarea>
+        </div>
+        
+        <button type="submit" class="btn-quick-order-submit">
+          📦 ORDER NOW - CASH ON DELIVERY
+          <span class="sub-text">Pay when you receive | Free Shipping</span>
+        </button>
+        
+        <div class="quick-order-trust">
+          <span>✅ 100% Secure</span>
+          <span>🚚 Free Delivery</span>
+          <span>↩️ 7-Day Returns</span>
+        </div>
+      {% endform %}
+    {% else %}
+      <p style="text-align: center; color: #666; padding: 20px;">Please add a product to enable quick order.</p>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .quick-order-section {
+    background: #f9f9f9;
+    border: 2px solid #FF6F00;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    overflow: hidden;
+  }
+
+  .quick-order-header {
+    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
+    color: white;
+    padding: 14px 18px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  .toggle-icon {
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+  }
+
+  .toggle-icon.open {
+    transform: rotate(180deg);
+  }
+
+  .quick-order-form {
+    padding: 20px;
+    background: white;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+    font-size: 0.9rem;
+  }
+
+  .required {
+    color: #d32f2f;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: #FF6F00;
+  }
+
+  .form-input:invalid:not(:placeholder-shown) {
+    border-color: #d32f2f;
+  }
+
+  .form-input:valid:not(:placeholder-shown) {
+    border-color: #00C853;
+  }
+
+  .form-hint {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .pincode-wrapper {
+    display: flex;
+    gap: 8px;
+  }
+
+  .pincode-input {
+    flex: 1;
+  }
+
+  .check-delivery-btn {
+    padding: 12px 20px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+  }
+
+  .check-delivery-btn:hover {
+    background: #1976D2;
+  }
+
+  .btn-quick-order-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+  }
+
+  .btn-quick-order-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 111, 0, 0.3);
+  }
+
+  .btn-quick-order-submit .sub-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.95;
+    margin-top: 4px;
+  }
+
+  .quick-order-trust {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 12px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #555;
+    text-align: center;
+  }
+
+  .quick-order-trust span {
+    flex: 1;
+  }
+
+  @media (max-width: 480px) {
+    .quick-order-header {
+      font-size: 0.95rem;
+      padding: 12px 15px;
+    }
+
+    .form-input {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    .quick-order-trust {
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.75rem;
+    }
+  }
+</style>
+
+<script>
+  function toggleQuickOrder() {
+    const form = document.getElementById('quick-order-form');
+    const toggle = document.getElementById('quick-order-toggle');
+    
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+      toggle.classList.add('open');
+    } else {
+      form.style.display = 'none';
+      toggle.classList.remove('open');
+    }
+  }
+
+  function checkDelivery() {
+    const pincodeInput = document.getElementById('customer-pincode');
+    const deliveryStatus = document.getElementById('delivery-status');
+    const pincode = pincodeInput.value;
+    
+    if (pincode.length === 6 && /^[0-9]{6}$/.test(pincode)) {
+      deliveryStatus.textContent = '✅ Delivery available in 3-5 days';
+      deliveryStatus.style.color = '#00C853';
+    } else {
+      deliveryStatus.textContent = '❌ Please enter a valid 6-digit pincode';
+      deliveryStatus.style.color = '#d32f2f';
+    }
+  }
+
+  // Form validation
+  document.addEventListener('DOMContentLoaded', function() {
+    const quickForm = document.getElementById('quick-checkout-form');
+    
+    if (quickForm) {
+      const phoneInput = document.getElementById('customer-phone');
+      
+      phoneInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+      });
+      
+      quickForm.addEventListener('submit', function(e) {
+        const phone = phoneInput.value;
+        
+        if (phone.length !== 10) {
+          e.preventDefault();
+          alert('Please enter a valid 10-digit mobile number');
+          phoneInput.focus();
+        }
+      });
+    }
+  });
+</script>
