@@ -26,7 +26,7 @@
       </a>
       
       {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header-icon account-icon" aria-label="Account">
+        <a href="#" class="header-icon account-icon" aria-label="Account" id="login-icon" onclick="event.preventDefault(); openLoginModal();">
           {% render 'icon-account' %}
         </a>
       {%- endif -%}
