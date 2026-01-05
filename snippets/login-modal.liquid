@@ -1,6 +1,6 @@
 {% comment %}
-  Login Modal - Modern OTP-Based Authentication
-  Passwordless login and signup with email OTP
+  Login Modal - Integrated with Shopify Shop App
+  Uses Shopify's native authentication with OTP support
 {% endcomment %}
 
 <div id="login-modal" class="login-modal">
@@ -13,46 +13,20 @@
         <h2>Welcome Back!</h2>
         <p class="login-subtitle">Login with OTP</p>
         
-        <div id="login-email-step">
-          <div class="login-form-group">
-            <label for="login-email">Email Address</label>
-            <input
-              type="email"
-              id="login-email"
-              placeholder="your@email.com"
-              required
-              class="login-input"
-            >
-          </div>
-          
-          <button type="button" class="btn-login-submit" onclick="sendLoginOTP()">
-            SEND OTP
-          </button>
+        <div class="login-form-group">
+          <label for="login-email">Email Address</label>
+          <input
+            type="email"
+            id="login-email"
+            placeholder="your@email.com"
+            required
+            class="login-input"
+          >
         </div>
         
-        <div id="login-otp-step" style="display: none;">
-          <p class="otp-sent-msg">OTP sent to <strong id="login-email-display"></strong></p>
-          
-          <div class="login-form-group">
-            <label for="login-otp">Enter OTP</label>
-            <input
-              type="text"
-              id="login-otp"
-              placeholder="Enter 6-digit OTP"
-              maxlength="6"
-              required
-              class="login-input otp-input"
-            >
-          </div>
-          
-          <button type="button" class="btn-login-submit" onclick="verifyLoginOTP()">
-            VERIFY & LOGIN
-          </button>
-          
-          <div class="resend-link">
-            Didn't receive? <a href="#" onclick="event.preventDefault(); sendLoginOTP();">Resend OTP</a>
-          </div>
-        </div>
+        <button type="button" class="btn-login-submit" onclick="proceedToLogin()">
+          SEND OTP
+        </button>
         
         <div class="auth-switch">
           Don't have an account? <a href="#" onclick="event.preventDefault(); switchToSignup();">Sign Up</a>
@@ -64,46 +38,20 @@
         <h2>Create Account</h2>
         <p class="login-subtitle">Sign up with OTP</p>
         
-        <div id="signup-email-step">
-          <div class="login-form-group">
-            <label for="signup-email">Email Address</label>
-            <input
-              type="email"
-              id="signup-email"
-              placeholder="your@email.com"
-              required
-              class="login-input"
-            >
-          </div>
-          
-          <button type="button" class="btn-login-submit" onclick="sendSignupOTP()">
-            CONTINUE
-          </button>
+        <div class="login-form-group">
+          <label for="signup-email">Email Address</label>
+          <input
+            type="email"
+            id="signup-email"
+            placeholder="your@email.com"
+            required
+            class="login-input"
+          >
         </div>
         
-        <div id="signup-otp-step" style="display: none;">
-          <p class="otp-sent-msg">OTP sent to <strong id="signup-email-display"></strong></p>
-          
-          <div class="login-form-group">
-            <label for="signup-otp">Enter OTP</label>
-            <input
-              type="text"
-              id="signup-otp"
-              placeholder="Enter 6-digit OTP"
-              maxlength="6"
-              required
-              class="login-input otp-input"
-            >
-          </div>
-          
-          <button type="button" class="btn-login-submit" onclick="verifySignupOTP()">
-            VERIFY & SIGN UP
-          </button>
-          
-          <div class="resend-link">
-            Didn't receive? <a href="#" onclick="event.preventDefault(); sendSignupOTP();">Resend OTP</a>
-          </div>
-        </div>
+        <button type="button" class="btn-login-submit" onclick="proceedToSignup()">
+          CONTINUE
+        </button>
         
         <div class="auth-switch">
           Already have an account? <a href="#" onclick="event.preventDefault(); switchToLogin();">Login</a>
@@ -190,16 +138,6 @@
     font-size: 0.95rem;
   }
   
-  .otp-sent-msg {
-    background: #e8f5e9;
-    border-left: 4px solid #00C853;
-    padding: 12px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-    color: #2e7d32;
-    font-size: 0.9rem;
-  }
-  
   .login-form-group {
     margin-bottom: 20px;
   }
@@ -226,13 +164,6 @@
     border-color: #FF6F00;
   }
   
-  .otp-input {
-    text-align: center;
-    font-size: 1.5rem;
-    letter-spacing: 8px;
-    font-weight: 700;
-  }
-  
   .btn-login-submit {
     width: 100%;
     padding: 15px;
@@ -251,19 +182,6 @@
   .btn-login-submit:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 111, 0, 0.4);
-  }
-  
-  .resend-link {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #666;
-    margin-top: 10px;
-  }
-  
-  .resend-link a {
-    color: #2196F3;
-    text-decoration: none;
-    font-weight: 600;
   }
   
   .auth-switch {
@@ -293,8 +211,8 @@
     if (modal) {
       modal.classList.remove('open');
       // Reset views
-      resetLoginView();
-      resetSignupView();
+      document.getElementById('login-email').value = '';
+      document.getElementById('signup-email').value = '';
     }
   }
   
@@ -308,81 +226,27 @@
     document.getElementById('login-view').classList.add('active');
   }
   
-  function resetLoginView() {
-    document.getElementById('login-email-step').style.display = 'block';
-    document.getElementById('login-otp-step').style.display = 'none';
-    document.getElementById('login-email').value = '';
-    document.getElementById('login-otp').value = '';
-  }
-  
-  function resetSignupView() {
-    document.getElementById('signup-email-step').style.display = 'block';
-    document.getElementById('signup-otp-step').style.display = 'none';
-    document.getElementById('signup-email').value = '';
-    document.getElementById('signup-otp').value = '';
-  }
-  
-  function sendLoginOTP() {
+  function proceedToLogin() {
     const email = document.getElementById('login-email').value;
     if (!email || !email.includes('@')) {
       alert('Please enter a valid email address');
       return;
     }
     
-    // Show OTP step
-    document.getElementById('login-email-display').textContent = email;
-    document.getElementById('login-email-step').style.display = 'none';
-    document.getElementById('login-otp-step').style.display = 'block';
-    
-    // In production, this would call your OTP service
-    // For now, we'll simulate it
-    console.log('OTP would be sent to:', email);
-    alert('OTP sent to ' + email + '!\n\nFor demo: Use any 6-digit code');
+    // Redirect to Shopify's login page - Shop App will handle OTP automatically
+    // Store email in URL parameter so Shopify can pre-fill it
+    window.location.href = '/account/login?checkout_url=/account&email=' + encodeURIComponent(email);
   }
   
-  function verifyLoginOTP() {
-    const otp = document.getElementById('login-otp').value;
-    const email = document.getElementById('login-email').value;
-    
-    if (!otp || otp.length !== 6) {
-      alert('Please enter a 6-digit OTP');
-      return;
-    }
-    
-    // In production, this would verify OTP and log user in
-    // For now, redirect to account login with email
-    window.location.href = '/account/login?checkout_url=' + encodeURIComponent(email);
-  }
-  
-  function sendSignupOTP() {
+  function proceedToSignup() {
     const email = document.getElementById('signup-email').value;
     if (!email || !email.includes('@')) {
       alert('Please enter a valid email address');
       return;
     }
     
-    // Show OTP step
-    document.getElementById('signup-email-display').textContent = email;
-    document.getElementById('signup-email-step').style.display = 'none';
-    document.getElementById('signup-otp-step').style.display = 'block';
-    
-    // In production, this would call your OTP service
-    console.log('Signup OTP would be sent to:', email);
-    alert('OTP sent to ' + email + '!\n\nFor demo: Use any 6-digit code');
-  }
-  
-  function verifySignupOTP() {
-    const otp = document.getElementById('signup-otp').value;
-    const email = document.getElementById('signup-email').value;
-    
-    if (!otp || otp.length !== 6) {
-      alert('Please enter a 6-digit OTP');
-      return;
-    }
-    
-    // In production, this would verify OTP and create account
-    // For now, redirect to registration
-    window.location.href = '/account/register?email=' + encodeURIComponent(email);
+    // Redirect to Shopify's register page - will use Shop App if available
+    window.location.href = '/account/register?checkout_url=/account&email=' + encodeURIComponent(email);
   }
   
   // Close on backdrop click
@@ -396,12 +260,17 @@
       });
     }
     
-    // OTP input auto-format
-    const otpInputs = document.querySelectorAll('.otp-input');
-    otpInputs.forEach(input => {
-      input.addEventListener('input', function(e) {
-        this.value = this.value.replace(/[^0-9]/g, '');
-      });
+    // Allow Enter key to submit
+    document.getElementById('login-email')?.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        proceedToLogin();
+      }
+    });
+    
+    document.getElementById('signup-email')?.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        proceedToSignup();
+      }
     });
   });
 </script>
