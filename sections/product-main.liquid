@@ -378,6 +378,11 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
     gap:15px;
     z-index:1000;
     box-shadow:0 -3px 15px rgba(0,0,0,0.1);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  .sticky-buy-bar-rc.visible {
+    transform: translateY(0);
   }
   .sticky-price {
     font-size:1.6rem;
@@ -459,6 +464,18 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
 
   setInterval(updateCountdown, 1000);
   updateCountdown();
+
+  // Sticky Buy Bar - Show on scroll
+  const stickyBar = document.querySelector('.sticky-buy-bar-rc');
+  if (stickyBar) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+    });
+  }
 
   // Releasit COD Form will automatically handle clicks on links to /rs-bin-hook
 </script>
