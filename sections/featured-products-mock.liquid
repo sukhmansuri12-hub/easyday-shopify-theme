@@ -6,9 +6,17 @@
 }
 {% endschema %}
 
-<section class="featured-products-mock section-padding">
+<section class="featured-products-mock section-padding" style="position: relative; overflow: hidden;">
   <div class="container">
-    <div class="section-header text-center">
+    <!-- Decorative Background Lines -->
+    <svg class="decorative-lines" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.08; pointer-events: none;">
+      <path d="M 0 100 Q 150 50, 300 100 T 600 100" stroke="#FF6F00" stroke-width="2" fill="none"/>
+      <path d="M 100 200 Q 250 150, 400 200 T 700 200" stroke="#00C853" stroke-width="2" fill="none"/>
+      <path d="M 50 300 Q 200 250, 350 300 T 650 300" stroke="#2196F3" stroke-width="1.5" fill="none"/>
+      <path d="M 150 50 Q 300 0, 450 50 T 750 50" stroke="#FF6F00" stroke-width="1.5" fill="none"/>
+    </svg>
+    
+    <div class="section-header text-center" style="position: relative; z-index: 1;">
       <h2>Featured Products</h2>
     </div>
 
