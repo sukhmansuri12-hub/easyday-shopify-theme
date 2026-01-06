@@ -467,22 +467,11 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
       return;
     }
     
-    // Method 3: Try dispatching custom event that Releasit might listen to
+    // Method 3: Try dispatching custom event
     const event = new CustomEvent('releaseit:open', { bubbles: true });
     document.dispatchEvent(event);
     
-    // Method 4: Try clicking Releasit's hidden trigger (if they inject one)
-    const releasitTrigger = document.querySelector('[data-releaseit-trigger]');
-    if (releasitTrigger) {
-      releasitTrigger.click();
-      return;
-    }
-    
-    // Method 5: Last resort - redirect to checkout with note
-    console.log('Releasit form not available, contact support or use alternative');
-    
-    // Fallback: Show alert to contact for COD
-    alert('Please contact us at [YOUR PHONE] to place a COD order, or use the Pay Online option below.');
+    // Releaseit will handle the rest once properly configured
   }
 </script>
 
