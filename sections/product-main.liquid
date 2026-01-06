@@ -56,10 +56,10 @@
         <span class="final-price">Final Price: ₹1,169</span>
       </button>
       
-      <button class="btn-buy-cod-rc releasit-btn" id="releasit-cod-btn" data-releasit="true" onclick="openReleasitForm()">
+      <a href="/rs-bin-hook" class="btn-buy-cod-rc">
         📦 ORDER NOW - CASH ON DELIVERY<br>
         <span class="sub-text">Pay when you receive</span>
-      </button>
+      </a>
     </div>
 
   </div>
@@ -148,7 +148,7 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
 
 <div class="sticky-buy-bar-rc">
   <div class="sticky-price">₹1,499</div>
-  <button class="sticky-btn-buy releasit-btn" data-releasit="true" onclick="openReleasitForm()">Order Now - COD</button>
+  <a href="/rs-bin-hook" class="sticky-btn-buy">Order Now - COD</a>
 </div>
 
 <style>
@@ -266,7 +266,9 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
     font-weight:700;
   }
   
-  .buy-section-rc button {
+  .buy-section-rc button,
+  .buy-section-rc a {
+    display: block;
     width:100%;
     padding:16px;
     border:none;
@@ -275,6 +277,8 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
     margin-bottom:12px;
     cursor:pointer;
     line-height:1.4;
+    text-decoration: none;
+    text-align: center;
   }
   .btn-buy-prepaid-rc {
     background:linear-gradient(135deg,#00C853,#00E676);
@@ -382,6 +386,7 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
   }
   .sticky-btn-buy {
     flex:1;
+    display: block;
     background:linear-gradient(135deg,#FF6F00,#FF8F00);
     color:white;
     border:none;
@@ -389,6 +394,8 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
     border-radius:8px;
     font-weight:700;
     cursor:pointer;
+    text-decoration: none;
+    text-align: center;
   }
 </style>
 
@@ -453,26 +460,7 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // Function to open Releasit COD Form
-  function openReleasitForm() {
-    // Method 1: Try window.releaseit global function
-    if (typeof window.releaseit !== 'undefined' && typeof window.releaseit.open === 'function') {
-      window.releaseit.open();
-      return;
-    }
-    
-    // Method 2: Try window.Releasit (capitalized)
-    if (typeof window.Releasit !== 'undefined' && typeof window.Releasit.open === 'function') {
-      window.Releasit.open();
-      return;
-    }
-    
-    // Method 3: Try dispatching custom event
-    const event = new CustomEvent('releaseit:open', { bubbles: true });
-    document.dispatchEvent(event);
-    
-    // Releaseit will handle the rest once properly configured
-  }
+  // Releasit COD Form will automatically handle clicks on links to /rs-bin-hook
 </script>
 
 {% schema %}
