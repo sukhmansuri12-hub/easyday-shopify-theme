@@ -56,7 +56,7 @@
         <span class="final-price">Final Price: ₹1,169</span>
       </button>
       
-      <button class="btn-buy-cod-rc releasit-btn" id="releasit-cod-btn" data-releasit="true">
+      <button class="btn-buy-cod-rc releasit-btn" id="releasit-cod-btn" data-releasit="true" onclick="openReleasitForm()">
         📦 ORDER NOW - CASH ON DELIVERY<br>
         <span class="sub-text">Pay when you receive</span>
       </button>
@@ -148,7 +148,7 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
 
 <div class="sticky-buy-bar-rc">
   <div class="sticky-price">₹1,499</div>
-  <button class="sticky-btn-buy releasit-btn" data-releasit="true">Order Now - COD</button>
+  <button class="sticky-btn-buy releasit-btn" data-releasit="true" onclick="openReleasitForm()">Order Now - COD</button>
 </div>
 
 <style>
@@ -452,6 +452,38 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
 
   setInterval(updateCountdown, 1000);
   updateCountdown();
+
+  // Function to open Releasit COD Form
+  function openReleasitForm() {
+    // Method 1: Try window.releaseit global function
+    if (typeof window.releaseit !== 'undefined' && typeof window.releaseit.open === 'function') {
+      window.releaseit.open();
+      return;
+    }
+    
+    // Method 2: Try window.Releasit (capitalized)
+    if (typeof window.Releasit !== 'undefined' && typeof window.Releasit.open === 'function') {
+      window.Releasit.open();
+      return;
+    }
+    
+    // Method 3: Try dispatching custom event that Releasit might listen to
+    const event = new CustomEvent('releaseit:open', { bubbles: true });
+    document.dispatchEvent(event);
+    
+    // Method 4: Try clicking Releasit's hidden trigger (if they inject one)
+    const releasitTrigger = document.querySelector('[data-releaseit-trigger]');
+    if (releasitTrigger) {
+      releasitTrigger.click();
+      return;
+    }
+    
+    // Method 5: Last resort - redirect to checkout with note
+    console.log('Releasit form not available, contact support or use alternative');
+    
+    // Fallback: Show alert to contact for COD
+    alert('Please contact us at [YOUR PHONE] to place a COD order, or use the Pay Online option below.');
+  }
 </script>
 
 {% schema %}
