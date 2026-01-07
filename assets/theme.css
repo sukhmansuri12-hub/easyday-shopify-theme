@@ -983,4 +983,17 @@ body {
   width: 22px !important;
   height: 22px !important;
 }
-
+/* === RELEASIT COD BUTTON ORANGE OVERRIDE === */
+a[href="/rsi-btn-hook"],
+a[href*="rsi-btn-hook"] {
+  background: linear-gradient(135deg, #FF6F00, #FF8F00) !important;
+  color: white !important;
+  border: none !important;
+  padding: 16px !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  text-align: center !important;
+  display: block !important;
+  margin-bottom: 12px !important;
+}
