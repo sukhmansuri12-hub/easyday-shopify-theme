@@ -7,7 +7,11 @@
       <div class="cart-items">
          {% for item in cart.items %}
            <div class="cart-item" style="background:white; padding:15px; margin-bottom:10px; border-radius:8px; display:flex; gap:15px; align-items:center;" data-line-item="{{ forloop.index }}">
-              <img src="{{ item.image | image_url: width: 80 }}" style="border-radius:8px; width: 80px; height: 80px; object-fit: cover;">
+              {% if item.image %}
+                <img src="{{ item.image | image_url: width: 80 }}" style="border-radius:8px; width: 80px; height: 80px; object-fit: cover;">
+              {% else %}
+                <div style="border-radius:8px; width: 80px; height: 80px; background: #f0f0f0;"></div>
+              {% endif %}
               <div style="flex: 1;">
                   <h3 style="margin:0 0 8px 0; font-size:1rem;">{{ item.title }}</h3>
                   <p style="margin:0; color: #666; font-size:0.9rem;">{{ item.price | money }}</p>

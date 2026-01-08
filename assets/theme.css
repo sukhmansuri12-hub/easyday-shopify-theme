@@ -1038,3 +1038,37 @@ button[class*="rsi"],
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   text-align: center !important;
 }
+
+/* === RELEASIT APP - ZERO INTERFERENCE POLICY === */
+/* Reset ANY theme CSS that might affect Releasit's COD popup */
+/* Releasit uses their own CSS - we must not interfere */
+*[id*="rsi"],
+*[id*="rsi"] *,
+*[class*="rsi"],
+*[class*="rsi"] *,
+*[data-rsi],
+*[data-rsi] *,
+iframe[src*="releas"] *,
+iframe[src*="releas"] {
+  all: revert !important;
+}
+
+/* Explicitly allow Releasit's text to display normally */
+*[id*="rsi"] h1,
+*[id*="rsi"] h2,
+*[id*="rsi"] h3,
+*[id*="rsi"] h4,
+*[id*="rsi"] span,
+*[id*="rsi"] p,
+*[id*="rsi"] div,
+*[class*="rsi"] h1,
+*[class*="rsi"] h2,
+*[class*="rsi"] h3,
+*[class*="rsi"] h4,
+*[class*="rsi"] span,
+*[class*="rsi"] p,
+*[class*="rsi"] div {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  direction: ltr !important;
+}
