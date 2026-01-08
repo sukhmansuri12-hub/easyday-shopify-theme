@@ -53,7 +53,7 @@
     <div class="buy-section-rc">
       <button class="btn-buy-prepaid-rc" onclick="buyNowPrepaid()">
         💳 PAY ONLINE & SAVE ₹130 (10% OFF)<br>
-        <span class="final-price">Final Price: ₹1,169</span>
+        <span class="final-price">✓ Add to cart</span>
       </button>
       
       
@@ -458,8 +458,11 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
     })
     .then(response => response.json())
     .then(data => {
-      // Redirect to checkout immediately
-      window.location.href = '/checkout';
+      // Show success and redirect to cart
+      console.log('Added to cart:', data);
+      setTimeout(() => {
+        window.location.href = '/cart';
+      }, 200);
     })
     .catch(error => {
       console.error('Error adding to cart:', error);

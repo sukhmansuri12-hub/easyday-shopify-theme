@@ -6,12 +6,24 @@
     {% if cart.item_count > 0 %}
       <div class="cart-items">
          {% for item in cart.items %}
-           <div class="cart-item" style="background:white; padding:15px; margin-bottom:10px; border-radius:8px; display:flex; gap:15px; align-items:center;">
-              <img src="{{ item.image | image_url: width: 80 }}" style="border-radius:8px;">
-              <div>
-                  <h3 style="margin:0; font-size:1rem;">{{ item.title }}</h3>
-                  <p>{{ item.price | money }}</p>
+           <div class="cart-item" style="background:white; padding:15px; margin-bottom:10px; border-radius:8px; display:flex; gap:15px; align-items:center;" data-line-item="{{ forloop.index }}">
+              <img src="{{ item.image | image_url: width: 80 }}" style="border-radius:8px; width: 80px; height: 80px; object-fit: cover;">
+              <div style="flex: 1;">
+                  <h3 style="margin:0 0 8px 0; font-size:1rem;">{{ item.title }}</h3>
+                  <p style="margin:0; color: #666; font-size:0.9rem;">{{ item.price | money }}</p>
+                  
+                  {% comment %} Quantity Controls {% endcomment %}
+                  <div style="display:flex; gap:10px; align-items:center; margin-top:10px;">
+                    <button class="qty-btn" onclick="updateQuantity({{ forloop.index }}, {{ item.quantity }} - 1)" style="width:30px; height:30px; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center;">−</button>
+                    <span style="min-width:30px; text-align:center; font-weight:600;">{{ item.quantity }}</span>
+                    <button class="qty-btn" onclick="updateQuantity({{ forloop.index }}, {{ item.quantity }} + 1)" style="width:30px; height:30px; border:1px solid #ddd; background:white; border-radius:4px; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center;">+</button>
+                  </div>
               </div>
+              
+              {% comment %} Remove Button {% endcomment %}
+              <button onclick="removeFromCart({{ forloop.index }})" style="background:transparent; border:none; color:#999; font-size:20px; cursor:pointer; padding:8px; transition: color 0.2s;" onmouseover="this.style.color='#FF0000'" onmouseout="this.style.color='#999'" title="Remove item">
+                🗑️
+              </button>
            </div>
          {% endfor %}
       </div>
@@ -44,6 +56,69 @@
     {% endif %}
   </div>
 </div>
+
+<script>
+  // Remove item from cart
+  function removeFromCart(lineItem) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        line: lineItem,
+        quantity: 0
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Reload page to show updated cart
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error removing item:', error);
+      alert('Failed to remove item. Please try again.');
+    });
+  }
+
+  // Update item quantity
+  function updateQuantity(lineItem, newQuantity) {
+    // Prevent negative quantities
+    if (newQuantity < 0) return;
+    
+    // If quantity is 0, remove the item
+    if (newQuantity === 0) {
+      removeFromCart(lineItem);
+      return;
+    }
+
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        line: lineItem,
+        quantity: newQuantity
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Reload page to show updated cart
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error updating quantity:', error);
+      alert('Failed to update quantity. Please try again.');
+    });
+  }
+
+  // Make checkout button functional
+  document.addEventListener('DOMContentLoaded', function() {
+    const checkoutBtn = document.querySelector('.btn-cod');
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', function() {
+        window.location.href = '/checkout';
+      });
+    }
+  });
+</script>
 
 {% schema %}
 { "name": "Cart Items", "presets": [{"name": "Cart Items"}] }
