@@ -1038,37 +1038,3 @@ button[class*="rsi"],
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   text-align: center !important;
 }
-
-/* === FIX RELEASIT POPUP STYLING === */
-/* Fix broken text wrapping in popup - NUCLEAR OVERRIDE */
-div[id*="rsi"],
-div[class*="rsi"],
-iframe[id*="rsi"],
-iframe[id*="rsi"] * {
-  white-space: normal !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-}
-
-/* Target the specific header elements that show "CASH ON DELIVERY" */
-div[id*="rsi"] h1,
-div[id*="rsi"] h2,
-div[id*="rsi"] h3,
-div[id*="rsi"] h4,
-div[class*="rsi"] h1,
-div[class*="rsi"] h2,
-div[class*="rsi"] h3,
-div[class*="rsi"] h4,
-[data-rsi] h1,
-[data-rsi] h2,
-[data-rsi] h3,
-[data-rsi] h4 {
-  white-space: normal !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-}
