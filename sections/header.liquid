@@ -33,9 +33,7 @@
 
       <a href="{{ routes.cart_url }}" class="header-icon cart-icon" id="cart-icon-bubble" aria-label="Cart">
         {% render 'icon-cart' %}
-        {%- if cart.item_count > 0 -%}
-          <span class="cart-count">{{ cart.item_count }}</span>
-        {%- endif -%}
+        <span class="cart-count" style="display: {% if cart.item_count > 0 %}flex{% else %}none{% endif %};">{{ cart.item_count }}</span>
       </a>
     </div>
 
