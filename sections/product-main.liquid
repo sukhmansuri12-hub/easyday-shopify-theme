@@ -51,7 +51,7 @@
 
     {% comment %} Buy Buttons {% endcomment %}
     <div class="buy-section-rc">
-      <button class="btn-buy-prepaid-rc">
+      <button class="btn-buy-prepaid-rc" onclick="buyNowPrepaid()">
         💳 PAY ONLINE & SAVE ₹130 (10% OFF)<br>
         <span class="final-price">Final Price: ₹1,169</span>
       </button>
@@ -439,6 +439,30 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
       } else {
         stickyBar.classList.remove('visible');
       }
+  }
+
+  // Prepaid Checkout - Add to cart and redirect to Shopify checkout with Razorpay
+  function buyNowPrepaid() {
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: {{ product.selected_or_first_available_variant.id }},
+        quantity: 1,
+        properties: {
+          '_payment_method': 'Prepaid - Razorpay',
+          '_discount': '10% OFF'
+        }
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Redirect to checkout immediately
+      window.location.href = '/checkout';
+    })
+    .catch(error => {
+      console.error('Error adding to cart:', error);
+      alert('Error processing order. Please try again.');
     });
   }
 
