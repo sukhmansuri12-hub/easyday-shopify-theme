@@ -1000,8 +1000,20 @@ body {
 }
 
 /* === RELEASIT BUTTON TEXT ALIGNMENT FIX === */
-/* Only fix text alignment, don't touch anything else */
+/* Force text centering in COD buttons */
 a[href="/rsi-btn-hook"],
 a[href*="rsi-btn-hook"] {
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Center all text inside the button */
+a[href="/rsi-btn-hook"] *,
+a[href*="rsi-btn-hook"] * {
   text-align: center !important;
 }
