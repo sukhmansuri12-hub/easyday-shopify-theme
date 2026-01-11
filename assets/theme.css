@@ -998,3 +998,10 @@ body {
   width: 22px !important;
   height: 22px !important;
 }
+
+/* === RELEASIT BUTTON TEXT ALIGNMENT FIX === */
+/* Only fix text alignment, don't touch anything else */
+a[href="/rsi-btn-hook"],
+a[href*="rsi-btn-hook"] {
+  text-align: center !important;
+}
