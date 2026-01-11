@@ -52,8 +52,8 @@
     {% comment %} Buy Buttons {% endcomment %}
     <div class="buy-section-rc">
       <button class="btn-buy-prepaid-rc" onclick="buyNowPrepaid()">
-        💳 PAY ONLINE & SAVE ₹130 (10% OFF)<br>
-        <span class="final-price">✓ Add to cart</span>
+        <span class="main-text-prepaid">✓ Add to cart</span><br>
+        <span class="sub-text-prepaid">💳 PAY ONLINE & SAVE ₹130 (10% OFF)</span>
       </button>
       
       
@@ -296,6 +296,19 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
     font-size:0.85rem;
     font-weight:400;
     display:block;
+  }
+  
+  /* Green button text sizing to match orange button */
+  .main-text-prepaid {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: block;
+  }
+  .sub-text-prepaid {
+    font-size: 0.9rem;
+    font-weight: 400;
+    display: block;
+    opacity: 0.95;
   }
   
   .product-description-rc {

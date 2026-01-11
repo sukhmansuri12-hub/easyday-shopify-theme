@@ -1000,7 +1000,7 @@ body {
 }
 
 /* === RELEASIT BUTTON TEXT ALIGNMENT FIX === */
-/* Force text centering in COD buttons */
+/* Force perfect centering in COD buttons */
 a[href="/rsi-btn-hook"],
 a[href*="rsi-btn-hook"] {
   text-align: center !important;
@@ -1012,8 +1012,19 @@ a[href*="rsi-btn-hook"] {
   padding-right: 0 !important;
 }
 
+/* Remove any icons or elements that cause offset */
+a[href="/rsi-btn-hook"]::before,
+a[href*="rsi-btn-hook"]::before,
+a[href="/rsi-btn-hook"]::after,
+a[href*="rsi-btn-hook"]::after {
+  display: none !important;
+  content: none !important;
+}
+
 /* Center all text inside the button */
 a[href="/rsi-btn-hook"] *,
 a[href*="rsi-btn-hook"] * {
   text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
