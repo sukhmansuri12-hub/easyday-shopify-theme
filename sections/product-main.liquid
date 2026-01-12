@@ -503,16 +503,9 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
     .then(data => {
       console.log('Added to cart:', data);
       
-      // Fetch cart state to get updated count
-      return fetch('/cart.js');
-    })
-    .then(response => response.json())
-    .then(cart => {
-      // Update cart count in header
-      const cartCountElement = document.querySelector('.cart-count');
-      if (cartCountElement) {
-        cartCountElement.textContent = cart.item_count;
-        cartCountElement.style.display = cart.item_count > 0 ? 'flex' : 'none';
+      // Update cart count using global function
+      if (window.updateCartCount) {
+        window.updateCartCount();
       }
       
       // Redirect to cart
