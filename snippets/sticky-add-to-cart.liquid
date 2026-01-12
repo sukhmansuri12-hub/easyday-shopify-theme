@@ -198,7 +198,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const stickyBar = document.getElementById('sticky-atc-bar');
-    const mainBtn = document.querySelector('.btn-prepaid') || document.querySelector('.btn-cod');
+    const mainBtn = document.querySelector('.btn-buy-prepaid-rc') || document.querySelector('.btn-buy-cod-simple');
     
     if (mainBtn && stickyBar) {
       const observer = new IntersectionObserver((entries) => {
@@ -218,8 +218,8 @@
 
   function scrollToAddCart(type) {
     const targetBtn = type === 'prepaid' ? 
-      document.querySelector('.btn-prepaid') : 
-      document.querySelector('.btn-cod');
+      document.querySelector('.btn-buy-prepaid-rc') : 
+      document.querySelector('.btn-buy-cod-simple');
     
     if (targetBtn) {
       targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
