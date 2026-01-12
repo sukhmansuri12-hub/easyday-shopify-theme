@@ -507,6 +507,29 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
       alert('Error processing order. Please try again.');
     });
   }
+  
+  // COD Checkout
+  function orderCOD() {
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: {{ product.selected_or_first_available_variant.id }},
+        quantity: 1,
+        properties: {
+          '_payment_method': 'COD'
+        }
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      window.location.href = '/checkout';
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Error processing order. Please try again.');
+    });
+  }
 
   // Releasit COD Form will automatically handle clicks on links to /rs-bin-hook
 </script>
