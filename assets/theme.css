@@ -1028,3 +1028,23 @@ a[href*="rsi-btn-hook"] * {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+
+/* Force text container to take full width to fix left-alignment */
+a[href="/rsi-btn-hook"]>div,
+a[href*="rsi-btn-hook"]>div {
+  width: 100% !important;
+  flex-grow: 1 !important;
+  flex-shrink: 1 !important;
+}
+
+/* Hide/collapse any trailing elements causing offset */
+a[href="/rsi-btn-hook"]>div~*,
+a[href*="rsi-btn-hook"]>div~* {
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  flex-grow: 0 !important;
+  flex-shrink: 1 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+}
