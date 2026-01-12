@@ -1,34 +1,53 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-        "hero": {
-            "type": "hero-section",
-            "settings": {
-                "heading": "Smart Solutions for Everyday Life",
-                "show_sale_btn": true
-            }
-        },
-        "category_grid": {
-            "type": "category-grid",
-            "settings": {}
-        },
-        "featured_products": {
-            "type": "featured-products-mock",
-            "settings": {}
-        },
-        "customer_reviews": {
-            "type": "customer-reviews",
-            "settings": {}
-        },
-        "show_all_cta": {
-            "type": "show-all-products-cta",
-            "settings": {}
-        }
+  "sections": {
+    "hero": {
+      "type": "hero-section",
+      "settings": {
+        "bg_image": "shopify://shop_images/Ideal_nuclear_family_with_one_dog_and_one_duaghter_part_2.jpg",
+        "heading": "Smart Solutions for Everyday Life",
+        "subheading": "Discover problem-solving products that make your day easier",
+        "description": "We make things that work better and last longer. Our products solve real problems with clean design and honest materials.",
+        "show_sale_btn": true,
+        "cta_text": "Shop Now",
+        "cta_link": ""
+      }
     },
-    "order": [
-        "hero",
-        "category_grid",
-        "featured_products",
-        "show_all_cta",
-        "customer_reviews"
-    ]
+    "category_grid": {
+      "type": "category-grid",
+      "settings": {}
+    },
+    "featured_products": {
+      "type": "featured-products-mock",
+      "settings": {}
+    },
+    "show_all_cta": {
+      "type": "show-all-products-cta",
+      "settings": {
+        "heading": "Discover More Amazing Products",
+        "subtext": "Browse our complete collection of innovative products designed to make your life easier",
+        "button_text": "EXPLORE ALL PRODUCTS",
+        "button_link": "shopify://collections/all"
+      }
+    },
+    "customer_reviews": {
+      "type": "customer-reviews",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "category_grid",
+    "featured_products",
+    "show_all_cta",
+    "customer_reviews"
+  ]
 }
