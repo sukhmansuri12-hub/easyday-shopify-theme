@@ -25,11 +25,8 @@
     </div>
 
     <div class="sticky-cta-buttons">
-      <button type="button" class="btn-sticky-prepaid" onclick="scrollToAddCart('prepaid')">
-        💳 Save {{ prepaid_savings | money }}
-      </button>
       <button type="button" class="btn-sticky-cod" onclick="scrollToAddCart('cod')">
-        📦 Order COD
+        📦 ORDER NOW - COD
       </button>
     </div>
   
@@ -129,6 +126,7 @@
     flex-direction: column;
     gap: 6px;
     flex-shrink: 0;
+    min-width: 140px;
   }
 
   .btn-sticky-prepaid,
