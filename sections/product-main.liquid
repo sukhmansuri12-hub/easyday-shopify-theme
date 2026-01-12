@@ -56,10 +56,10 @@
         <span class="sub-text-prepaid">PAY ONLINE & SAVE ₹130 (10% OFF)</span>
       </button>
       
-      <button class="btn-buy-cod-simple" onclick="orderCOD()">
+      <a href="/rsi-btn-hook" class="btn-buy-cod-simple">
         <span class="main-text-cod">Order Now - Cash on Delivery</span>
         <span class="sub-text-cod">Pay when you receive | Free Shipping</span>
-      </button>
+      </a>
 
 
     </div>
@@ -318,6 +318,8 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
   .btn-buy-cod-simple {
     background: linear-gradient(135deg, #FF6F00, #FF8F00);
     color: white;
+    display: block;
+    text-decoration: none;
   }
   
   .main-text-cod {
