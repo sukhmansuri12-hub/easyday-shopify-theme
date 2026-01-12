@@ -69,7 +69,10 @@
   {% comment %} Description {% endcomment %}
   <div class="product-description-rc">
     
-    <h2 class="desc-section-title">Description goes here</h2>
+    
+    <div style="text-align: center; margin-bottom: 30px;">
+      <img src="{{ 'trust-badges.png' | asset_url }}" alt="Free Shipping, No-Hassle Returns, Satisfaction Guaranteed, Secure Checkout" style="max-width: 100%; height: auto;">
+    </div>
     
     <div class="desc-block-rc">
       <h3>🎯 ULTIMATE FUN FOR KIDS!</h3>
@@ -498,8 +501,21 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
     })
     .then(response => response.json())
     .then(data => {
-      // Show success and redirect to cart
       console.log('Added to cart:', data);
+      
+      // Fetch cart state to get updated count
+      return fetch('/cart.js');
+    })
+    .then(response => response.json())
+    .then(cart => {
+      // Update cart count in header
+      const cartCountElement = document.querySelector('.cart-count');
+      if (cartCountElement) {
+        cartCountElement.textContent = cart.item_count;
+        cartCountElement.style.display = cart.item_count > 0 ? 'flex' : 'none';
+      }
+      
+      // Redirect to cart
       setTimeout(() => {
         window.location.href = '/cart';
       }, 200);
@@ -658,20 +674,14 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
     },
     {
       "type": "text",
-      "id": "desc_heading",
-      "label": "Description Main Heading",
-      "default": "Description goes here"
-    },
-    {
-      "type": "text",
       "id": "block1_title",
       "label": "Block 1 Title",
       "default": "🎯 ULTIMATE FUN FOR KIDS!"
     },
     {
-      "type": "textarea",
+      "type": "html",
       "id": "block1_text",
-      "label": "Block 1 Text",
+      "label": "Block 1 Text (HTML Supported - Add GIFs here)",
       "default": "Watch your kids' faces light up as this powerful RC stunt car performs incredible 360° flips, spins, and drifts! Perfect for indoor and outdoor play."
     },
     {
@@ -681,33 +691,33 @@ eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; m
       "default": "⚡ POWERFUL FEATURES"
     },
     {
-      "type": "textarea",
+      "type": "html",
       "id": "feature1",
-      "label": "Feature 1",
+      "label": "Feature 1 (HTML Supported)",
       "default": "360° Rotation & Drift: Amazing stunts with one-button control"
     },
     {
-      "type": "textarea",
+      "type": "html",
       "id": "feature2",
-      "label": "Feature 2",
+      "label": "Feature 2 (HTML Supported)",
       "default": "High Speed: Up to 15 km/h"
     },
     {
-      "type": "textarea",
+      "type": "html",
       "id": "feature3",
-      "label": "Feature 3",
+      "label": "Feature 3 (HTML Supported)",
       "default": "Long Range: 50+ meters"
     },
     {
-      "type": "textarea",
+      "type": "html",
       "id": "feature4",
-      "label": "Feature 4",
+      "label": "Feature 4 (HTML Supported)",
       "default": "Rechargeable: 40 minutes playtime"
     },
     {
-      "type": "textarea",
+      "type": "html",
       "id": "feature5",
-      "label": "Feature 5",
+      "label": "Feature 5 (HTML Supported)",
       "default": "LED Lights: Cool night play"
     },
     {
