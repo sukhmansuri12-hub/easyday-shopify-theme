@@ -1,0 +1,179 @@
+{% comment %}
+  Show All Products CTA
+  Prominent call-to-action button linking to full catalog
+{% endcomment %}
+
+<section class="show-all-cta-section" style="padding: 40px 20px; background: linear-gradient(135deg, #fff5f0 0%, #f0fff4 100%);">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <div class="cta-content" style="position: relative; z-index: 1;">
+      <h2 class="cta-heading" style="font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; color: #333;">
+        Discover More Amazing Products
+      </h2>
+      <p class="cta-subtext" style="font-size: 1rem; color: #666; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Browse our complete collection of innovative products designed to make your life easier
+      </p>
+      <a href="/collections/all" class="btn-show-all">
+        <span class="btn-icon">🛍️</span>
+        <span class="btn-text">EXPLORE ALL PRODUCTS</span>
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+    
+    <!-- Decorative elements -->
+    <svg class="cta-decoration" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.08; pointer-events: none;">
+      <circle cx="10%" cy="30%" r="40" fill="#FF6F00"/>
+      <circle cx="90%" cy="70%" r="60" fill="#00C853"/>
+      <circle cx="85%" cy="20%" r="30" fill="#2196F3"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .show-all-cta-section {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-show-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 40px;
+    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 50%, #00C853 100%);
+    background-size: 200% 100%;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 20px rgba(255, 111, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-show-all::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .btn-show-all:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 111, 0, 0.5);
+    background-position: 100% 0;
+  }
+  
+  .btn-show-all:hover::before {
+    left: 100%;
+  }
+  
+  .btn-show-all:active {
+    transform: translateY(-1px) scale(1.02);
+  }
+  
+  .btn-icon {
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+  }
+  
+  .btn-arrow {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .btn-show-all:hover .btn-arrow {
+    transform: translateX(5px);
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  /* Mobile optimization */
+  @media (max-width: 640px) {
+    .show-all-cta-section {
+      padding: 30px 15px;
+    }
+    
+    .cta-heading {
+      font-size: 1.4rem !important;
+      margin-bottom: 10px !important;
+    }
+    
+    .cta-subtext {
+      font-size: 0.9rem !important;
+      margin-bottom: 20px !important;
+      padding: 0 10px;
+    }
+    
+    .btn-show-all {
+      width: 100%;
+      max-width: 350px;
+      padding: 16px 30px;
+      font-size: 1rem;
+      gap: 10px;
+    }
+    
+    .btn-icon {
+      font-size: 1.3rem;
+    }
+    
+    .btn-arrow {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .btn-text {
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Show All Products CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Discover More Amazing Products"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Browse our complete collection of innovative products designed to make your life easier"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "EXPLORE ALL PRODUCTS"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Show All Products CTA"
+    }
+  ]
+}
+{% endschema %}

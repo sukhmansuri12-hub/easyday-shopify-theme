@@ -18,12 +18,17 @@
         "customer_reviews": {
             "type": "customer-reviews",
             "settings": {}
+        },
+        "show_all_cta": {
+            "type": "show-all-products-cta",
+            "settings": {}
         }
     },
     "order": [
         "hero",
         "category_grid",
         "featured_products",
+        "show_all_cta",
         "customer_reviews"
     ]
 }

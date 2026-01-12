@@ -15,7 +15,7 @@
         autocomplete="off"
         class="search-input"
       >
-      <button type="submit" class="search-submit">Search</button>
+      <button type="submit" class="search-submit"><span class="search-submit-text">Search</span></button>
     </form>
     <div id="search-results" class="search-results"></div>
   </div>
@@ -76,6 +76,37 @@
     font-size: 1.1rem;
     outline: none;
     transition: all 0.3s ease;
+  }
+  
+  /* Mobile optimization */
+  @media (max-width: 640px) {
+    .search-container {
+      width: 95%;
+      padding: 0 10px;
+    }
+    
+    .search-input {
+      padding: 14px 16px;
+      font-size: 0.95rem;
+    }
+    
+    .search-submit {
+      padding: 14px 20px !important;
+      font-size: 0.9rem;
+    }
+    
+    .search-submit::after {
+      content: '🔍';
+    }
+    
+    .search-submit-text {
+      display: none;
+    }
+    
+    .search-close {
+      font-size: 2.5rem;
+      top: -45px;
+    }
   }
   
   .search-input:focus {
