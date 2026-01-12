@@ -998,3 +998,18 @@ body {
   width: 22px !important;
   height: 22px !important;
 }
+
+/* FIX RELEASIT BUTTON TEXT CENTERING - Hide spacer div that shifts text left */
+#rsi_buy_now_button>div:nth-child(2) {
+  display: none !important;
+}
+
+#rsi_buy_now_button>div {
+  flex: 1 1 100% !important;
+  text-align: center !important;
+}
+
+#rsi_buy_now_button {
+  justify-content: center !important;
+  text-align: center !important;
+}
