@@ -1,14 +1,35 @@
 {
     "sections": {
+        "announcement-bar": {
+            "type": "announcement-bar",
+            "settings": {
+                "announcement_1": "Free Shipping All OVER India",
+                "announcement_2": "SAVE 10% Extra on Prepaid Orders"
+            }
+        },
+        "header": {
+            "type": "header",
+            "settings": {}
+        },
         "collection-header": {
             "type": "collection-header"
         },
         "product-grid": {
             "type": "main-collection-product-grid"
+        },
+        "footer": {
+            "type": "footer",
+            "settings": {
+                "contact_email": "support@easyday.com",
+                "contact_phone": "+91 XXXXXXXXXX"
+            }
         }
     },
     "order": [
+        "announcement-bar",
+        "header",
         "collection-header",
-        "product-grid"
+        "product-grid",
+        "footer"
     ]
 }
