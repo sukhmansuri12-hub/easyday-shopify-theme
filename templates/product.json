@@ -1,11 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-        "main": {
-            "type": "product-main",
-            "settings": {}
-        }
-    },
-    "order": [
-        "main"
-    ]
+  "sections": {
+    "main": {
+      "type": "product-main",
+      "settings": {
+        "product_title": "RC Stunt Car 360° Drift",
+        "rating_text": "4.8/5 (2,450 Reviews)",
+        "show_countdown": true,
+        "countdown_label": "⏰ Offer Ends in",
+        "current_price": "₹1,499",
+        "compare_price": "₹3,499",
+        "save_percentage": "57%",
+        "prepaid_button_text": "💳 PAY ONLINE & SAVE ₹130 (10% OFF)",
+        "prepaid_price_text": "Final Price: ₹1,169",
+        "cod_button_text": "📦 ORDER NOW - CASH ON DELIVERY",
+        "cod_sub_text": "Pay when you receive | Free Shipping",
+        "quick_order_text": "🚀 Quick Order (No Cart Required)",
+        "block1_title": "🎯 THE ULTIMATE FAUCET",
+        "block1_text": "Watch your kids' faces light up as this powerful RC stunt car performs incredible 360° flips, spins, and drifts! Perfect for indoor and outdoor play.",
+        "block2_title": "⚡ POWERFUL FEATURES",
+        "feature1": "360° Rotation &amp; Drift: Amazing stunts with one-button control",
+        "feature2": "High Speed: Up to 15 km/h",
+        "feature3": "Long Range: 50+ meters",
+        "feature4": "Rechargeable: 40 minutes playtime",
+        "feature5": "LED Lights: Cool night play",
+        "block3_title": "💪 BUILT TO LAST",
+        "block3_text": "Premium ABS plastic with shock-resistant design. Works on concrete, grass, carpet - anywhere!",
+        "block4_title": "🎁 PERFECT GIFT",
+        "block4_text": "Amazing birthday or festival gift for kids aged 6-12 years. Encourages outdoor play!",
+        "specs_title": "📋 Specifications",
+        "spec_age": "6-12 Years",
+        "spec_material": "ABS Plastic",
+        "spec_battery": "Rechargeable 3.7V",
+        "spec_remote": "2.4GHz Wireless",
+        "spec_contents": "Car, Remote, Charger",
+        "reviews_title": "Customer Reviews (500+)",
+        "review1_name": "Rahul Sharma",
+        "review1_text": "My son loves this car! Very sturdy.",
+        "review2_name": "Priya Patel",
+        "review2_text": "Best birthday gift ever. Battery life is good.",
+        "review3_name": "Amit Kumar",
+        "review3_text": "Excellent! The 360° flip is amazing!",
+        "show_sticky_bar": true,
+        "sticky_button_text": "Order Now",
+        "primary_color": "#ff6f00",
+        "success_color": "#00c853",
+        "sale_color": "#d32f2f"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
 }
