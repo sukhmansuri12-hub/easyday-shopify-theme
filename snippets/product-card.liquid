@@ -115,7 +115,7 @@
 
 <script>
 (function() {
-  // Auto-rotate product images on hover
+  // Auto-rotate product images continuously
   document.addEventListener('DOMContentLoaded', function() {
     const productCards = document.querySelectorAll('.product-card');
     
@@ -127,7 +127,6 @@
       if (images.length <= 1) return; // Skip if only one image
       
       let currentIndex = 0;
-      let interval = null;
       
       function showImage(index) {
         images.forEach((img, i) => {
@@ -152,17 +151,8 @@
         showImage(currentIndex);
       }
       
-      // Start carousel on hover
-      card.addEventListener('mouseenter', function() {
-        interval = setInterval(nextImage, 2000); // Change image every 2 seconds
-      });
-      
-      // Stop carousel when not hovering
-      card.addEventListener('mouseleave', function() {
-        clearInterval(interval);
-        currentIndex = 0;
-        showImage(0); // Reset to first image
-      });
+      // Start carousel automatically - continuous rotation
+      setInterval(nextImage, 2000); // Change image every 2 seconds
     });
   });
 })();
