@@ -61,6 +61,20 @@
 </div>
 
 <script>
+  // Global cart count update function
+  window.updateCartCount = function() {
+    fetch('/cart.js')
+      .then(response => response.json())
+      .then(cart => {
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount) {
+          cartCount.textContent = cart.item_count;
+          cartCount.style.display = cart.item_count > 0 ? 'flex' : 'none';
+        }
+      })
+      .catch(error => console.error('Error updating cart count:', error));
+  };
+
   window.addEventListener('load', function() {
     const hamburger = document.getElementById('hamburger-btn');
     const drawer = document.getElementById('mobile-drawer');

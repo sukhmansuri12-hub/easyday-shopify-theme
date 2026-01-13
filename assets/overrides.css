@@ -91,3 +91,36 @@
     z-index: 2147483647 !important;
     /* Max safe z-index */
 }
+
+/* 6. PRODUCT CARD TITLE TRUNCATION - Ensures all cards have uniform height */
+.product-card .product-title {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.4 !important;
+    min-height: 2.8em !important;  /* 2 lines minimum */
+    max-height: 2.8em !important;  /* Limit to 2 lines */
+}
+
+/* Catalog page product card consistency */
+.product-item {
+    height: 100% !important;
+}
+
+.product-item .product-card {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.product-item .product-card-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.product-item .product-price {
+    margin-top: auto !important;
+}
