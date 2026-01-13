@@ -75,51 +75,55 @@
       <img src="{{ 'trust-badges.png' | asset_url }}" alt="Free Shipping, No-Hassle Returns, Satisfaction Guaranteed, Secure Checkout" style="max-width: 100%; height: auto;">
     </div>
     
-    <div class="desc-block-rc">
-      <h3>{{ section.settings.block1_title }}</h3>
-      <p>{{ section.settings.block1_text }}</p>
-      {%- if product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[0] -%}
-        <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
+    {%- if product.description != blank -%}
+      {{ product.description }}
+    {%- else -%}
+      <div class="desc-block-rc">
+        <h3>✨ PREMIUM QUALITY PRODUCT</h3>
+        <p>This amazing product will transform your daily life with innovative features and unbeatable quality. Get yours today!</p>
+        {%- if product.images[1] -%}
+          <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- elsif product.images[0] -%}
+          <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- endif -%}
+      </div>
 
-    <div class="desc-block-rc">
-      <h3>{{ section.settings.block2_title }}</h3>
-      <ul class="feature-list-rc">
-        <li>{{ section.settings.feature1 }}</li>
-        <li>{{ section.settings.feature2 }}</li>
-        <li>{{ section.settings.feature3 }}</li>
-        <li>{{ section.settings.feature4 }}</li>
-        <li>{{ section.settings.feature5 }}</li>
-      </ul>
-      {%- if product.images[2] -%}
-        <img src="{{ product.images[2] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
+      <div class="desc-block-rc">
+        <h3>⚡ KEY FEATURES</h3>
+        <ul class="feature-list-rc">
+          <li>Premium materials and construction</li>
+          <li>Easy to use and maintain</li>
+          <li>Perfect for everyday use</li>
+          <li>Great value for money</li>
+          <li>Satisfaction guaranteed</li>
+        </ul>
+        {%- if product.images[2] -%}
+          <img src="{{ product.images[2] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- elsif product.images[1] -%}
+          <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- endif -%}
+      </div>
 
-    <div class="desc-block-rc">
-      <h3>{{ section.settings.block3_title }}</h3>
-      <p>{{ section.settings.block3_text }}</p>
-      {%- if product.images[3] -%}
-        <img src="{{ product.images[3] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[0] -%}
-        <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
+      <div class="desc-block-rc">
+        <h3>💪 QUALITY YOU CAN TRUST</h3>
+        <p>Crafted with attention to detail and built to last. We stand behind every product we sell.</p>
+        {%- if product.images[3] -%}
+          <img src="{{ product.images[3] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- elsif product.images[0] -%}
+          <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- endif -%}
+      </div>
 
-    <div class="desc-block-rc">
-      <h3>{{ section.settings.block4_title }}</h3>
-      <p>{{ section.settings.block4_text }}</p>
-      {%- if product.images[4] -%}
-        <img src="{{ product.images[4] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
+      <div class="desc-block-rc">
+        <h3>🎁 PERFECT GIFT CHOICE</h3>
+        <p>Makes an excellent gift for anyone who appreciates quality and value. Order now and enjoy fast shipping!</p>
+        {%- if product.images[4] -%}
+          <img src="{{ product.images[4] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- elsif product.images[1] -%}
+          <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- endif -%}
+      </div>
+    {%- endif -%}
 
   </div>
 
