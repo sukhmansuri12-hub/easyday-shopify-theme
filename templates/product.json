@@ -1,13 +1,8 @@
 {
     "sections": {
         "main": {
-            "type": "main-product-elite",
-            "settings": {
-                "enable_urgency_stack": true,
-                "enable_sticky_buy_bar": true,
-                "enable_trust_injection": true,
-                "enable_savings_calculator": true
-            }
+            "type": "product-main",
+            "settings": {}
         }
     },
     "order": [
