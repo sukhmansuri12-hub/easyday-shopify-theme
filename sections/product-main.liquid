@@ -75,55 +75,18 @@
       <img src="{{ 'trust-badges.png' | asset_url }}" alt="Free Shipping, No-Hassle Returns, Satisfaction Guaranteed, Secure Checkout" style="max-width: 100%; height: auto;">
     </div>
     
-    <div class="desc-block-rc">
-      <h3>✨ {{ product.title | upcase }}</h3>
-      <p>{{ product.description | strip_html | truncatewords: 30 | default: "Premium quality product at an amazing price!" }}</p>
-      {%- if product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[0] -%}
-        <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
-
-    <div class="desc-block-rc">
-      <h3>⚡ KEY FEATURES</h3>
-      <ul class="feature-list-rc">
-        <li><strong>Premium Quality:</strong> Made with high-grade materials</li>
-        <li><strong>Easy to Use:</strong> Simple and convenient</li>
-        <li><strong>Durable:</strong> Built to last</li>
-        <li><strong>Great Value:</strong> Best price guarantee</li>
-        <li><strong>Perfect Gift:</strong> Ideal for any occasion</li>
-      </ul>
-      {%- if product.images[2] -%}
-        <img src="{{ product.images[2] | img_url: '800x' }}" alt="{{ product.title }} features" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }} features" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
-
-    <div class="desc-block-rc">
-      <h3>💪 QUALITY YOU CAN TRUST</h3>
-      <p>Made with premium materials and designed for long-lasting performance. Perfect for everyday use!</p>
-      {%- if product.images[3] -%}
-        <img src="{{ product.images[3] | img_url: '800x' }}" alt="{{ product.title }} quality" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[0] -%}
-        <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }} quality" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
-
-    <div class="desc-block-rc">
-      <h3>🎁 PERFECT FOR GIFTING</h3>
-      <p>An amazing gift choice for your loved ones. High quality and value for money!</p>
-      {%- if product.images[4] -%}
-        <img src="{{ product.images[4] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
+    {%- if product.description != blank -%}
+      {{ product.description }}
+    {%- else -%}
+      <div class="desc-block-rc">
+        <h3>Product Information</h3>
+        <p>{{ product.title }}</p>
+      </div>
+    {%- endif -%}
 
   </div>
 
-  {% comment %} Reviews - Indian customers with images {% endcomment %}
+  {% comment %} Reviews {% endcomment %}
   <div class="reviews-section-rc">
     <h2 class="reviews-title">Customer Reviews ⭐⭐⭐⭐⭐</h2>
     
