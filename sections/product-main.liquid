@@ -75,14 +75,51 @@
       <img src="{{ 'trust-badges.png' | asset_url }}" alt="Free Shipping, No-Hassle Returns, Satisfaction Guaranteed, Secure Checkout" style="max-width: 100%; height: auto;">
     </div>
     
-    {%- if product.description != blank -%}
-      {{ product.description }}
-    {%- else -%}
-      <div class="desc-block-rc">
-        <h3>Product Information</h3>
-        <p>{{ product.title }}</p>
-      </div>
-    {%- endif -%}
+    <div class="desc-block-rc">
+      <h3>🎯 ULTIMATE FUN FOR KIDS!</h3>
+      <p>Watch your kids' faces light up as this powerful RC stunt car performs incredible 360° flips, spins, and drifts! Perfect for indoor and outdoor play.</p>
+      {%- if product.images[1] -%}
+        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+      {%- elsif product.images[0] -%}
+        <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+      {%- endif -%}
+    </div>
+
+    <div class="desc-block-rc">
+      <h3>⚡ POWERFUL FEATURES</h3>
+      <ul class="feature-list-rc">
+        <li><strong>360° Rotation & Drift:</strong> Amazing stunts with one-button control</li>
+        <li><strong>High Speed:</strong> Up to 15 km/h</li>
+        <li><strong>Long Range:</strong> 50+ meters</li>
+        <li><strong>Rechargeable:</strong> 40 minutes playtime</li>
+        <li><strong>LED Lights:</strong> Cool night play</li>
+      </ul>
+      {%- if product.images[2] -%}
+        <img src="{{ product.images[2] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+      {%- elsif product.images[1] -%}
+        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+      {%- endif -%}
+    </div>
+
+    <div class="desc-block-rc">
+      <h3>💪 BUILT TO LAST</h3>
+      <p>Premium ABS plastic with shock-resistant design. Works on concrete, grass, carpet - anywhere!</p>
+      {%- if product.images[3] -%}
+        <img src="{{ product.images[3] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+      {%- elsif product.images[0] -%}
+        <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+      {%- endif -%}
+    </div>
+
+    <div class="desc-block-rc">
+      <h3>🎁 PERFECT GIFT</h3>
+      <p>Amazing birthday or festival gift for kids aged 6-12 years. Encourages outdoor play!</p>
+      {%- if product.images[4] -%}
+        <img src="{{ product.images[4] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+      {%- elsif product.images[1] -%}
+        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+      {%- endif -%}
+    </div>
 
   </div>
 
