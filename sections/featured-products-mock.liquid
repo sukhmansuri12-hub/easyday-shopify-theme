@@ -18,17 +18,21 @@
         {%- assign featured_collection = collections.all -%}
         {%- if featured_collection.products.size > 0 -%}
           {%- for product in featured_collection.products limit: 4 -%}
-            <div class="product-card animate-on-scroll delay-{{ forloop.index | modulo: 2 }}" data-animation="scale-in">
-              <div class="product-image-wrapper">
+            <div class="product-card animate-on-scroll delay-{{ forloop.index | modulo: 2 }}" data-animation="scale-in" data-product-handle="{{ product.handle }}">
+              <div class="product-image-wrapper homepage-carousel">
                 {%- if product.compare_at_price > product.price -%}
                   {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
                   <span class="mock-sale-badge">SALE {{ discount }}%</span>
                 {%- endif -%}
                 <a href="{{ product.url }}" class="product-link">
-                  {%- if product.featured_image -%}
-                    <div class="mock-image" style="background-image: url('{{ product.featured_image | img_url: '600x' }}');"></div>
+                  {%- if product.images.size > 1 -%}
+                    {%- for image in product.images limit: 4 -%}
+                      <div class="mock-image carousel-image {% if forloop.first %}active{% endif %}" style="background-image: url('{{ image | img_url: '600x' }}');" data-index="{{ forloop.index0 }}"></div>
+                    {%- endfor -%}
+                  {%- elsif product.featured_image -%}
+                    <div class="mock-image carousel-image active" style="background-image: url('{{ product.featured_image | img_url: '600x' }}');"></div>
                   {%- else -%}
-                    <div class="mock-image" style="background: #f4f4f4;"></div>
+                    <div class="mock-image carousel-image active" style="background: #f4f4f4;"></div>
                   {%- endif -%}
                 </a>
                 <button class="add-btn" onclick="quickAddToCart('{{ product.handle }}')">+</button>
@@ -75,6 +79,22 @@
     height: 100%;
     background-size: cover;
     background-position: center;
+  }
+  
+  /* Carousel images for homepage */
+  .homepage-carousel .carousel-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .homepage-carousel .carousel-image.active {
+    opacity: 1;
+    position: relative;
   }
 
   .mock-sale-badge {
@@ -162,6 +182,40 @@
 </style>
 
 <script>
+// Homepage carousel auto-rotation
+document.addEventListener('DOMContentLoaded', function() {
+  const homepageCards = document.querySelectorAll('.homepage-carousel');
+  
+  homepageCards.forEach(container => {
+    const images = container.querySelectorAll('.carousel-image');
+    
+    if (images.length <= 1) return;
+    
+    let currentIndex = 0;
+    
+    function showImage(index) {
+      images.forEach((img, i) => {
+        if (i === index) {
+          img.classList.add('active');
+          img.style.opacity = '1';
+          img.style.position = 'relative';
+        } else {
+          img.classList.remove('active');
+          img.style.opacity = '0';
+          img.style.position = 'absolute';
+        }
+      });
+    }
+    
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }
+    
+    setInterval(nextImage, 2000);
+  });
+});
+
 function quickAddToCart(productHandle) {
   event.stopPropagation();
   event.preventDefault();

@@ -20,14 +20,6 @@
           data-index="{{ forloop.index0 }}"
         >
       {%- endfor -%}
-      
-      {%- if product.images.size > 1 -%}
-        <div class="carousel-dots">
-          {%- for image in product.images limit: 4 -%}
-            <span class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}"></span>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
     {%- else -%}
       <img 
         src="{{ product.featured_image | image_url: width: 600 }}" 
@@ -83,33 +75,6 @@
   .product-carousel-image.active {
     opacity: 1;
     position: relative;
-  }
-  
-  .carousel-dots {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 6px;
-    z-index: 10;
-    padding: 6px 12px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 20px;
-  }
-  
-  .carousel-dots .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.5);
-    transition: all 0.3s;
-  }
-  
-  .carousel-dots .dot.active {
-    background: white;
-    width: 20px;
-    border-radius: 3px;
   }
 </style>
 
