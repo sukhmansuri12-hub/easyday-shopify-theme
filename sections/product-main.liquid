@@ -8,10 +8,9 @@
   {% comment %} Mobile Image Gallery - Swipeable {% endcomment %}
   <div class="product-image-gallery">
     <div class="gallery-container" id="gallery-container">
-      <div class="slide"><img src="{{ 'rc_car_action_1.png' | asset_url }}" alt="RC Car Action 1"></div>
-      <div class="slide"><img src="{{ 'rc_car_action_2.png' | asset_url }}" alt="RC Car Action 2"></div>
-      <div class="slide"><img src="{{ 'rc_car_closeup.png' | asset_url }}" alt="RC Car Close-up"></div>
-      <div class="slide"><img src="{{ 'rc_car_kids_playing.png' | asset_url }}" alt="Kids Playing"></div>
+      {% for image in product.images %}
+        <div class="slide"><img src="{{ image | img_url: 'large' }}" alt="{{ product.title }}"></div>
+      {% endfor %}
     </div>
     <div class="gallery-dots">
       <span class="dot active" data-slide="0"></span>
@@ -24,7 +23,7 @@
   {% comment %} Product Info {% endcomment %}
   <div class="product-info-section">
     
-    <h1 class="product-title-rc">RC Stunt Car 360° Drift</h1>
+    <h1 class="product-title-rc">{{ product.title }}</h1>
     
     <div class="product-rating-rc">
       <span class="stars">⭐⭐⭐⭐⭐</span>
@@ -44,9 +43,12 @@
 
     {% comment %} Price {% endcomment %}
     <div class="price-section-rc">
-      <div class="current-price-rc">₹1,499</div>
-      <div class="compare-price-rc">₹3,499</div>
-      <div class="save-badge-rc">SAVE 57%</div>
+      <div class="current-price-rc">{{ product.price | money }}</div>
+      {% if product.compare_at_price > product.price %}
+        <div class="compare-price-rc">{{ product.compare_at_price | money }}</div>
+        {% assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+        <div class="save-badge-rc">SAVE {{ savings }}%</div>
+      {% endif %}
     </div>
 
     {% comment %} Buy Buttons {% endcomment %}
