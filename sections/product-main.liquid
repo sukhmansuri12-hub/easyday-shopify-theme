@@ -165,6 +165,25 @@
       <p class="review-text">Amazing! Exactly what I was looking for. Will order again!</p>
     </div>
 
+    <div class="review-card">
+      <div class="reviewer-info">
+        <strong>Neha Gupta</strong> <span class="verified">✓ Verified Purchase</span>
+      </div>
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Superb product! My family loves it. Perfect quality and fast shipping!</p>
+    </div>
+
+    <div class="review-card">
+      <div class="reviewer-info">
+        <strong>Arjun Reddy</strong> <span class="verified">✓ Verified Purchase</span>
+      </div>
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">Best purchase ever! Totally worth the price. Highly recommend to everyone!</p>
+      {%- if product.images[2] -%}
+        <img src="{{ product.images[2] | img_url: '300x' }}" alt="Customer photo" style="width:150px; border-radius:8px; margin-top:10px;">
+      {%- endif -%}
+    </div>
+
   </div>
 
 
