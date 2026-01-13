@@ -71,85 +71,23 @@
   {% comment %} Description {% endcomment %}
   <div class="product-description-rc">
     
-    
     <div style="text-align: center; margin-bottom: 30px;">
       <img src="{{ 'trust-badges.png' | asset_url }}" alt="Free Shipping, No-Hassle Returns, Satisfaction Guaranteed, Secure Checkout" style="max-width: 100%; height: auto;">
     </div>
     
-    <div class="desc-block-rc">
-      <h3>🎯 ULTIMATE FUN FOR KIDS!</h3>
-      <p>Watch your kids' faces light up as this powerful RC stunt car performs incredible 360° flips, spins, and drifts! Perfect for indoor and outdoor play.</p>
-      <img src="{{ 'rc_car_action_1.png' | asset_url }}" alt="Action" style="width:100%; border-radius:12px; margin:15px 0;">
-    </div>
-
-    <div class="desc-block-rc">
-      <h3>⚡ POWERFUL FEATURES</h3>
-      <ul class="feature-list-rc">
-        <li><strong>360° Rotation & Drift:</strong> Amazing stunts with one-button control</li>
-        <li><strong>High Speed:</strong> Up to 15 km/h</li>
-        <li><strong>Long Range:</strong> 50+ meters</li>
-        <li><strong>Rechargeable:</strong> 40 minutes playtime</li>
-        <li><strong>LED Lights:</strong> Cool night play</li>
-      </ul>
-      <img src="{{ 'rc_car_clos
-
-eup.png' | asset_url }}" alt="Close-up" style="width:100%; border-radius:12px; margin:15px 0;">
-    </div>
-
-    <div class="desc-block-rc">
-      <h3>💪 BUILT TO LAST</h3>
-      <p>Premium ABS plastic with shock-resistant design. Works on concrete, grass, carpet - anywhere!</p>
-      <img src="{{ 'rc_car_action_2.png' | asset_url }}" alt="Drifting" style="width:100%; border-radius:12px; margin:15px 0;">
-    </div>
-
-    <div class="desc-block-rc">
-      <h3>🎁 PERFECT GIFT</h3>
-      <p>Amazing birthday or festival gift for kids aged 6-12 years. Encourages outdoor play!</p>
-      <img src="{{ 'rc_car_kids_playing.png' | asset_url }}" alt="Kids" style="width:100%; border-radius:12px; margin:15px 0;">
-    </div>
-
-    <div class="specs-table-rc">
-      <h3>📋 Specifications</h3>
-      <table>
-        <tr><td><strong>Age</strong></td><td>6-12 Years</td></tr>
-        <tr><td><strong>Material</strong></td><td>ABS Plastic</td></tr>
-        <tr><td><strong>Battery</strong></td><td>Rechargeable 3.7V</td></tr>
-        <tr><td><strong>Remote</strong></td><td>2.4GHz Wireless</td></tr>
-        <tr><td><strong>Box Contents</strong></td><td>Car, Remote, Charger</td></tr>
-      </table>
-    </div>
+    {%- if product.description != blank -%}
+      <div class="product-description-content">
+        {{ product.description }}
+      </div>
+    {%- else -%}
+      <div class="desc-block-rc">
+        <p>{{ product.title }}</p>
+      </div>
+    {%- endif -%}
 
   </div>
 
-  {% comment %} Reviews {% endcomment %}
-  <div class="reviews-section-rc">
-    <h2 class="reviews-title">Customer Reviews (500+)</h2>
-    
-    <div class="review-card">
-      <div class="reviewer-info">
-        <strong>Rahul Sharma</strong> <span class="verified">✓ Verified</span>
-      </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">My son loves this car! Very sturdy.</p>
-    </div>
 
-    <div class="review-card">
-      <div class="reviewer-info">
-        <strong>Priya Patel</strong> <span class="verified">✓ Verified</span>
-      </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">Best birthday gift ever. Battery life is good.</p>
-    </div>
-
-    <div class="review-card">
-      <div class="reviewer-info">
-        <strong>Amit Kumar</strong> <span class="verified">✓ Verified</span>
-      </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">Excellent! The 360° flip is amazing!</p>
-    </div>
-
-  </div>
 
 </section>
 
