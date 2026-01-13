@@ -16,18 +16,10 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {}
-    },
-    "footer": {
-      "type": "footer",
-      "settings": {
-        "contact_email": "support@easyday.com",
-        "contact_phone": "+91 XXXXXXXXXX"
-      }
     }
   },
   "order": [
     "collection-header",
-    "product-grid",
-    "footer"
+    "product-grid"
   ]
 }
