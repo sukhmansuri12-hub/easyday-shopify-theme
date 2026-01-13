@@ -75,51 +75,45 @@
       <img src="{{ 'trust-badges.png' | asset_url }}" alt="Free Shipping, No-Hassle Returns, Satisfaction Guaranteed, Secure Checkout" style="max-width: 100%; height: auto;">
     </div>
     
-    <div class="desc-block-rc">
-      <h3>{{ section.settings.block1_title }}</h3>
-      <p>{{ section.settings.block1_text }}</p>
-      {%- if product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[0] -%}
-        <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
+    {%- if product.description != blank -%}
+      {{ product.description }}
+    {%- else -%}
+      <div class="desc-block-rc">
+        <h3>🎯 PRODUCT HIGHLIGHT</h3>
+        <p>{{ product.title }} - Add your product description in Shopify Admin!</p>
+        {%- if product.images[0] -%}
+          <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- endif -%}
+      </div>
 
-    <div class="desc-block-rc">
-      <h3>{{ section.settings.block2_title }}</h3>
-      <ul class="feature-list-rc">
-        <li>{{ section.settings.feature1 }}</li>
-        <li>{{ section.settings.feature2 }}</li>
-        <li>{{ section.settings.feature3 }}</li>
-        <li>{{ section.settings.feature4 }}</li>
-        <li>{{ section.settings.feature5 }}</li>
-      </ul>
-      {%- if product.images[2] -%}
-        <img src="{{ product.images[2] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
+      <div class="desc-block-rc">
+        <h3>⚡ KEY FEATURES</h3>
+        <ul class="feature-list-rc">
+          <li>Premium Quality</li>
+          <li>Easy to Use</li>
+          <li>Great Value</li>
+        </ul>
+        {%- if product.images[1] -%}
+          <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- endif -%}
+      </div>
 
-    <div class="desc-block-rc">
-      <h3>{{ section.settings.block3_title }}</h3>
-      <p>{{ section.settings.block3_text }}</p>
-      {%- if product.images[3] -%}
-        <img src="{{ product.images[3] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[0] -%}
-        <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
+      <div class="desc-block-rc">
+        <h3>💪 QUALITY YOU CAN TRUST</h3>
+        <p>High-quality product designed to last!</p>
+        {%- if product.images[2] -%}
+          <img src="{{ product.images[2] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- endif -%}
+      </div>
 
-    <div class="desc-block-rc">
-      <h3>{{ section.settings.block4_title }}</h3>
-      <p>{{ section.settings.block4_text }}</p>
-      {%- if product.images[4] -%}
-        <img src="{{ product.images[4] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- elsif product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-      {%- endif -%}
-    </div>
+      <div class="desc-block-rc">
+        <h3>🎁 PERFECT GIFT</h3>
+        <p>Great value for money!</p>
+        {%- if product.images[3] -%}
+          <img src="{{ product.images[3] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
+        {%- endif -%}
+      </div>
+    {%- endif -%}
 
   </div>
 
