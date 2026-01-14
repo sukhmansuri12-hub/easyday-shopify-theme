@@ -136,10 +136,8 @@
         <strong>Priya Sharma</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">Absolutely love this product! Worth every rupee. Fast delivery too!</p>
-      {%- if product.images[0] -%}
-        <img src="{{ product.images[0] | img_url: '300x' }}" alt="Customer photo" style="width:150px; border-radius:8px; margin-top:10px;">
-      {%- endif -%}
+      <p class="review-text">My golden retriever sheds like crazy! These gloves are a lifesaver. Works perfectly on furniture and my dog loves the massage. Bought one for the car too!</p>
+      <img src="https://via.placeholder.com/300x300/f0f0f0/666?text=Customer+Photo+1" alt="Customer using pet glove" style="width:150px; border-radius:8px; margin-top:10px;">
     </div>
 
     <div class="review-card">
@@ -155,10 +153,8 @@
         <strong>Anita Patel</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">Very satisfied with this purchase. Great product at this price!</p>
-      {%- if product.images[1] -%}
-        <img src="{{ product.images[1] | img_url: '300x' }}" alt="Customer photo" style="width:150px; border-radius:8px; margin-top:10px;">
-      {%- endif -%}
+      <p class="review-text">My fluffy Persian cat absolutely loves these! So easy to clean - just peel the hair off. No more lint rollers for me. Highly recommend!</p>
+      <img src="https://via.placeholder.com/300x300/f0f0f0/666?text=Customer+Photo+2" alt="Customer using pet glove" style="width:150px; border-radius:8px; margin-top:10px;">
     </div>
 
     <div class="review-card">
@@ -182,10 +178,8 @@
         <strong>Arjun Reddy</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">Best purchase ever! Totally worth the price. Highly recommend to everyone!</p>
-      {%- if product.images[2] -%}
-        <img src="{{ product.images[2] | img_url: '300x' }}" alt="Customer photo" style="width:150px; border-radius:8px; margin-top:10px;">
-      {%- endif -%}
+      <p class="review-text">Wife loves this! Our long-haired cat doesn't scratch or run away anymore. The silicone tips are so gentle. Worth every rupee!</p>
+      <img src="https://via.placeholder.com/300x300/f0f0f0/666?text=Customer+Photo+3" alt="Customer using pet glove" style="width:150px; border-radius:8px; margin-top:10px;">
     </div>
 
   </div>
@@ -221,6 +215,29 @@
     }
   </script>
 
+
+  {% comment %} You May Also Like Section {% endcomment %}
+  <div class="you-may-also-like-section">
+    <h2 class="ymal-title">You may also like</h2>
+    <div class="ymal-products-grid">
+      {% assign current_product_id = product.id %}
+      {% assign products_shown = 0 %}
+      {% for p in collections.all.products limit: 20 %}
+        {% if p.id != current_product_id and products_shown < 4 %}
+          <div class="ymal-product-card">
+            <a href="{{ p.url }}" style="text-decoration:none;">
+              {% if p.featured_image %}
+                <img src="{{ p.featured_image | img_url: '400x' }}" alt="{{ p.title }}" class="ymal-product-img">
+              {% endif %}
+              <h3 class="ymal-product-name">{{ p.title }}</h3>
+              <div class="ymal-product-price">{{ p.price | money }}</div>
+            </a>
+          </div>
+          {% assign products_shown = products_shown | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 </section>
 
 
@@ -496,7 +513,61 @@
   .review-stars { color:#FFB800; margin:8px 0; }
   .review-text { color:#555; line-height:1.6; }
   
-  
+  /* You May Also Like Section */
+  .you-may-also-like-section {
+    padding:30px 15px 40px;
+    background:#fff;
+  }
+  .ymal-title {
+    font-size:1.5rem;
+    font-weight:700;
+    margin-bottom:20px;
+    color:#333;
+  }
+  .ymal-products-grid {
+    display:flex;
+    gap:15px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-bottom:10px;
+  }
+  .ymal-products-grid::-webkit-scrollbar { display:none; }
+  .ymal-product-card {
+    min-width:45%;
+    max-width:48%;
+    flex-shrink:0;
+    scroll-snap-align:start;
+    background:#f5f5f5;
+    border-radius:12px;
+    overflow:hidden;
+    transition:transform 0.2s;
+  }
+  .ymal-product-card:hover {
+    transform:translateY(-4px);
+  }
+  .ymal-product-img {
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    display:block;
+  }
+  .ymal-product-name {
+    font-size:0.95rem;
+    font-weight:600;
+    padding:10px 12px 5px;
+    margin:0;
+    color:#333;
+    line-height:1.3;
+    min-height:42px;
+  }
+  .ymal-product-price {
+    font-size:1.1rem;
+    font-weight:700;
+    color:#00C853;
+    padding:0 12px 12px;
+  }
 
 </style>
 
@@ -957,3 +1028,4 @@
   ]
 }
 {% endschema %}
+
