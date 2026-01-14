@@ -12,6 +12,7 @@
     "main": {
       "type": "product-main",
       "settings": {
+        "image_1": "shopify://shop_images/image1.webp",
         "product_title": "RC Stunt Car 360° Drift",
         "rating_text": "4.8/5 (2,450 Reviews)",
         "show_countdown": true,
