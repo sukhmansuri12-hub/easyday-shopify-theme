@@ -230,7 +230,14 @@
                 <img src="{{ p.featured_image | img_url: '400x' }}" alt="{{ p.title }}" class="ymal-product-img">
               {% endif %}
               <h3 class="ymal-product-name">{{ p.title }}</h3>
-              <div class="ymal-product-price">{{ p.price | money }}</div>
+              <div class="ymal-product-price">
+                {% if p.compare_at_price > p.price %}
+                  <span class="ymal-price-sale">{{ p.price | money }}</span>
+                  <span class="ymal-price-compare">{{ p.compare_at_price | money }}</span>
+                {% else %}
+                  <span class="ymal-price-sale">{{ p.price | money }}</span>
+                {% endif %}
+              </div>
             </a>
           </div>
           {% assign products_shown = products_shown | plus: 1 %}
@@ -567,6 +574,21 @@
     font-weight:700;
     color:#00C853;
     padding:0 12px 12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .ymal-price-sale {
+    color:#00C853;
+    font-size:1.1rem;
+    font-weight:700;
+  }
+  .ymal-price-compare {
+    color:#999;
+    font-size:0.9rem;
+    font-weight:400;
+    text-decoration:line-through;
   }
 
 </style>
@@ -1028,4 +1050,6 @@
   ]
 }
 {% endschema %}
+
+
 
