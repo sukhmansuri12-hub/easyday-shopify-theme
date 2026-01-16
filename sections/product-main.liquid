@@ -153,7 +153,7 @@
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
       <p class="review-text">My fluffy Persian cat absolutely loves these! So easy to clean - just peel the hair off. No more lint rollers for me. Highly recommend!</p>
-      <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/Customer_reveiw_section_photo.jpg?v=1768463501" alt="Customer review photo" style="width:150px; border-radius:8px; margin-top:10px;">
+      <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/Gemini_Generated_Image_n3rpitn3rpitn3rp.png?v=1768477365" alt="Customer review photo" style="width:150px; border-radius:8px; margin-top:10px;">
     </div>
 
     <div class="review-card">
@@ -178,7 +178,7 @@
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
       <p class="review-text">Wife loves this! Our long-haired cat doesn't scratch or run away anymore. The silicone tips are so gentle. Worth every rupee!</p>
-      <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/Gemini_Generated_Image_n3rpitn3rpitn3rp.png?v=1768477365" alt="Customer review photo" style="width:150px; border-radius:8px; margin-top:10px;">
+      <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/Customer_reveiw_section_photo.jpg?v=1768463501" alt="Customer review photo" style="width:150px; border-radius:8px; margin-top:10px;">
     </div>
 
   </div>
@@ -210,7 +210,13 @@
 
   <script>
     function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Scroll to buy buttons section
+      const buySection = document.querySelector('.buy-section-rc');
+      if (buySection) {
+        buySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   </script>
 
@@ -667,7 +673,8 @@
 
   container.addEventListener('touchend', e => {
     const touchEndX = e.changedTouches[0].screenX;
-    if (touchEndX < touchStartX - 50 && currentSlide < 3) {
+    const maxSlide = dots.length - 1;
+    if (touchEndX < touchStartX - 50 && currentSlide < maxSlide) {
       currentSlide++;
       updateGallery();
     }
