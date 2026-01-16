@@ -25,7 +25,7 @@
     <h1 class="product-title-rc">{{ product.title }}</h1>
     
     <div class="product-rating-rc">
-      <span class="stars">⭐⭐⭐⭐<span style="display:inline-block;width:12px;overflow:hidden;position:relative;top:-1px;">⭐</span></span>
+      <span class="stars">⭐⭐⭐⭐<span style="display:inline-block;width:12px;overflow:hidden;vertical-align:middle;">⭐</span></span>
       <span class="rating-count">4.6 (437 Reviews)</span>
     </div>
 
@@ -128,7 +128,11 @@
 
   {% comment %} Reviews {% endcomment %}
   <div class="reviews-section-rc">
-    <h2 class="reviews-title">Customer Reviews <span class="stars">⭐⭐⭐⭐<span style="display:inline-block;width:12px;overflow:hidden;position:relative;top:-1px;">⭐</span></span></h2>
+    <h2 class="reviews-title">Customer Reviews</h2>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:20px;">
+      <span class="stars" style="font-size:1.5rem;">⭐⭐⭐⭐<span style="display:inline-block;width:12px;overflow:hidden;vertical-align:middle;">⭐</span></span>
+      <span style="font-size:1.1rem;color:#666;font-weight:600;">4.6 (437 Reviews)</span>
+    </div>
     
     <div class="review-card">
       <div class="reviewer-info">
