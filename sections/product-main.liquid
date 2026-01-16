@@ -13,10 +13,9 @@
       {% endfor %}
     </div>
     <div class="gallery-dots">
-      <span class="dot active" data-slide="0"></span>
-      <span class="dot" data-slide="1"></span>
-      <span class="dot" data-slide="2"></span>
-      <span class="dot" data-slide="3"></span>
+      {% for image in product.images %}
+        <span class="dot {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></span>
+      {% endfor %}
     </div>
   </div>
 
