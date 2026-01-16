@@ -233,8 +233,15 @@
       {% assign products_shown = 0 %}
       {% for p in collections.all.products limit: 20 %}
         {% if p.id != current_product_id and products_shown < 4 %}
-          <div class="ymal-product-card">
+          <div class="ymal-product-card" style="position:relative;">
             <a href="{{ p.url }}" style="text-decoration:none;">
+              {% if p.compare_at_price > p.price %}
+                {% assign discount = p.compare_at_price | minus: p.price %}
+                {% assign discount_percent = discount | times: 100 | divided_by: p.compare_at_price %}
+                <div style="position:absolute;top:10px;right:10px;background:#e74c3c;color:white;padding:5px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;z-index:2;">
+                  SAVE {{ discount_percent }}%
+                </div>
+              {% endif %}
               {% if p.featured_image %}
                 <img src="{{ p.featured_image | img_url: '400x' }}" alt="{{ p.title }}" class="ymal-product-img">
               {% endif %}
