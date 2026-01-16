@@ -314,6 +314,61 @@
   .stars { color:#FFB800; }
   .rating-count { color:#666; font-size:0.95rem; }
   
+  .bundle-selector-rc {
+    margin-bottom: 20px;
+  }
+  .bundle-label {
+    display: block;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: #333;
+  }
+  .bundle-options {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .bundle-option {
+    flex: 1;
+    min-width: 140px;
+    padding: 14px 18px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .bundle-option:hover {
+    border-color: #FF6F00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255,111,0,0.15);
+  }
+  .bundle-option.active {
+    border-color: #FF6F00;
+    background: #FFF5E6;
+    border-width: 3px;
+  }
+  .bundle-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #333;
+  }
+  .bundle-price {
+    font-size: 1.1rem;
+    color: #FF6F00;
+    font-weight: 700;
+  }
+  .bundle-savings {
+    font-size: 0.85rem;
+    color: #28a745;
+    font-weight: 600;
+  }
+  
   .countdown-timer-rc {
     background:white;
     border:2px solid #FF6F00;
@@ -666,13 +721,30 @@
     });
   }
 
+  // Bundle Selector
+  let selectedVariantId = {{ product.selected_or_first_available_variant.id }};
+  
+  function selectBundle(button, variantId, price) {
+    // Update selected variant
+    selectedVariantId = variantId;
+    
+    // Update active state
+    document.querySelectorAll('.bundle-option').forEach(opt => opt.classList.remove('active'));
+    button.classList.add('active');
+    
+    // Update URL without reload
+    const url = new URL(window.location);
+    url.searchParams.set('variant', variantId);
+    window.history.replaceState({}, '', url);
+  }
+
   // Prepaid Checkout - Add to cart and redirect to Shopify checkout with Razorpay
   function buyNowPrepaid() {
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        id: {{ product.selected_or_first_available_variant.id }},
+        id: selectedVariantId,
         quantity: 1,
         properties: {
           '_payment_method': 'Prepaid - Razorpay',
