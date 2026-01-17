@@ -14,7 +14,14 @@
               {% endif %}
               <div style="flex: 1;">
                   <h3 style="margin:0 0 8px 0; font-size:1rem;">{{ item.title }}</h3>
-                  <p style="margin:0; color: #666; font-size:0.9rem;">{{ item.price | money }}</p>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <p style="margin:0; font-size:1.1rem; font-weight:700; color:#00C853;">{{ item.price | money }}</p>
+                    {% if item.variant.compare_at_price > item.price %}
+                      <p style="margin:0; font-size:0.95rem; color:#999; text-decoration:line-through;">{{ item.variant.compare_at_price | money }}</p>
+                      {% assign item_discount = item.variant.compare_at_price | minus: item.price | times: 100 | divided_by: item.variant.compare_at_price %}
+                      <span style="background:#e74c3c; color:white; padding:3px 8px; border-radius:12px; font-size:0.75rem; font-weight:700;">{{ item_discount }}% OFF</span>
+                    {% endif %}
+                  </div>
                   
                   {% comment %} Quantity Controls {% endcomment %}
                   <div style="display:flex; gap:10px; align-items:center; margin-top:10px;">

@@ -32,7 +32,8 @@
     {%- endif -%}
     
     {%- if product.compare_at_price > product.price -%}
-      <div class="product-badge">Sale</div>
+      {%- assign savings_percent = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+      <div class="product-discount-badge">SAVE {{ savings_percent }}%</div>
     {%- endif -%}
   </div>
 
@@ -43,14 +44,14 @@
       {%- if product.compare_at_price > product.price -%}
         <span class="price-sale">₹{{ product.price | money_without_currency }}</span>
         <span class="price-regular">₹{{ product.compare_at_price | money_without_currency }}</span>
-        {%- assign savings_percent = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
-        <span class="price-savings">Save {{ savings_percent }}%</span>
       {%- else -%}
         <span class="price-sale">₹{{ product.price | money_without_currency }}</span>
       {%- endif -%}
     </div>
   </div>
 </a>
+<button class="quick-add-btn-catalog" onclick="quickAddProductCatalog(event, {{ product.selected_or_first_available_variant.id }})">+</button>
+
 
 <style>
   .product-card-image {
@@ -75,6 +76,45 @@
   .product-carousel-image.active {
     opacity: 1;
     position: relative;
+  }
+  
+  /* Discount Badge */
+  .product-discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 2;
+  }
+  
+  /* Quick Add Button */
+  .quick-add-btn-catalog {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #00C853;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,200,83,0.3);
+    z-index: 3;
+    transition: transform 0.2s;
+  }
+  
+  .quick-add-btn-catalog:hover {
+    transform: scale(1.1);
   }
 </style>
 
@@ -121,4 +161,29 @@
     });
   });
 })();
+
+// Quick Add to Cart Function for Catalog
+function quickAddProductCatalog(event, variantId) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      id: variantId,
+      quantity: 1
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert('✅ Added to cart!');
+    // Update cart count if function exists
+    if (window.updateCartCount) window.updateCartCount();
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Failed to add to cart. Please try again.');
+  });
+}
 </script>
