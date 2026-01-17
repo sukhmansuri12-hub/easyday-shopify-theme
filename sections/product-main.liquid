@@ -75,7 +75,7 @@
         <span class="sub-text-prepaid">PAY ONLINE & SAVE ₹130 (10% OFF)</span>
       </button>
       
-      <a href="/rsi-btn-hook" class="btn-buy-cod-simple">
+      <a href="/rsi-btn-hook" id="cod-btn-link" class="btn-buy-cod-simple" onclick="handleCODClick(event)">
         <span class="main-text-cod">Order Now - Cash on Delivery</span>
         <span class="sub-text-cod">Pay when you receive | Free Shipping</span>
       </a>
@@ -355,6 +355,23 @@
         console.error('Error:', error);
         alert('Failed to add to cart. Please try again.');
       });
+    }
+    
+    // Handle COD button click with variant selection
+    function handleCODClick(event) {
+      event.preventDefault();
+      
+      // Get selected variant ID
+      const variantId = selectedVariantId || document.querySelector('input[name="variant-select"]:checked')?.value;
+      
+      if (!variantId) {
+        alert('Please select a variant');
+        return;
+      }
+      
+      // Update the COD link with variant ID
+      const codLink = '/rsi-btn-hook?variant=' + variantId;
+      window.location.href = codLink;
     }
     
     function scrollToTop() {
