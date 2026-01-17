@@ -50,6 +50,24 @@
       {% endif %}
     </div>
 
+    {% comment %} Bundle Variant Selector {% endcomment %}
+    <div class="variant-selector-rc">
+      <div class="variant-options-rc">
+        {% for variant in product.variants %}
+          <label class="variant-option-rc {% if forloop.first %}active{% endif %}" data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price }}">
+            <input type="radio" name="variant-select" value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
+            <div class="variant-content">
+              <span class="variant-title">{{ variant.title }}</span>
+              <span class="variant-price">{{ variant.price | money }}</span>
+              {% if variant.compare_at_price > variant.price %}
+                <span class="variant-save">Save ₹{{ variant.compare_at_price | minus: variant.price | divided_by: 100 }}</span>
+              {% endif %}
+            </div>
+          </label>
+        {% endfor %}
+      </div>
+    </div>
+
     {% comment %} Buy Buttons {% endcomment %}
     <div class="buy-section-rc">
       <button class="btn-buy-prepaid-rc" onclick="buyNowPrepaid()">
@@ -195,6 +213,70 @@
   </div>
 
   <style>
+    
+    /* Variant Selector Styles */
+    .variant-selector-rc {
+      margin: 20px 0;
+    }
+    
+    .variant-options-rc {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    .variant-option-rc {
+      position: relative;
+      display: block;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: white;
+    }
+    
+    .variant-option-rc input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+    
+    .variant-option-rc:hover {
+      border-color: #FF6F00;
+      box-shadow: 0 2px 10px rgba(255,111,0,0.2);
+    }
+    
+    .variant-option-rc.active {
+      border-color: #FF6F00;
+      background: linear-gradient(135deg, #fff5e6 0%, #ffe0cc 100%);
+      box-shadow: 0 4px 15px rgba(255,111,0,0.3);
+    }
+    
+    .variant-content {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: center;
+    }
+    
+    .variant-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #333;
+    }
+    
+    .variant-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #00C853;
+    }
+    
+    .variant-save {
+      font-size: 0.85rem;
+      color: #e74c3c;
+      font-weight: 600;
+    }
+    
     @keyframes shake {
       0%, 20%, 100% { transform: rotate(0deg); }
       4% { transform: rotate(-5deg); }
@@ -213,6 +295,68 @@
   </style>
 
   <script>
+    // Variant Selector Logic
+    let selectedVariantId = document.querySelector('input[name="variant-select"]:checked')?.value;
+    
+    document.querySelectorAll('.variant-option-rc').forEach(option => {
+      option.addEventListener('click', function() {
+        // Remove active class from all options
+        document.querySelectorAll('.variant-option-rc').forEach(opt => opt.classList.remove('active'));
+        
+        // Add active class to clicked option
+        this.classList.add('active');
+        
+        // Check the radio button
+        const radio = this.querySelector('input[type="radio"]');
+        radio.checked = true;
+        selectedVariantId = radio.value;
+        
+        // Update COD form if it exists
+        updateCODForm();
+      });
+    });
+    
+    // Update COD form with selected variant
+    function updateCODForm() {
+      // Update the RSI COD form if it exists
+      if (window.rsi_btn_hook) {
+        const selectedOption = document.querySelector('.variant-option-rc.active');
+        const variantQuantity = selectedOption?.querySelector('.variant-title')?.textContent.includes('2') ? 2 : 1;
+        
+        // Store variant info for COD form
+        window.selectedBundleQuantity = variantQuantity;
+        window.selectedVariantId = selectedVariantId;
+      }
+    }
+    
+    // Buy Now Prepaid function
+    function buyNowPrepaid() {
+      if (!selectedVariantId) {
+        selectedVariantId = document.querySelector('input[name="variant-select"]:checked')?.value;
+      }
+      
+      const formData = {
+        id: selectedVariantId,
+        quantity: 1
+      };
+      
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        window.location.href = '/cart';
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Failed to add to cart. Please try again.');
+      });
+    }
+    
     function scrollToTop() {
       // Scroll to buy buttons section
       const buySection = document.querySelector('.buy-section-rc');
