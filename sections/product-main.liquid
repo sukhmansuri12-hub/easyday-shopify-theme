@@ -68,6 +68,11 @@
       </div>
     </div>
 
+    {% comment %} Hidden Product Form for ReleaseIt {% endcomment %}
+    <form id="product-form-rc" style="display:none;">
+      <input type="hidden" name="id" id="product-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+    </form>
+
     {% comment %} Buy Buttons {% endcomment %}
     <div class="buy-section-rc">
       <button class="btn-buy-prepaid-rc" onclick="buyNowPrepaid()">
@@ -310,6 +315,12 @@
         const radio = this.querySelector('input[type="radio"]');
         radio.checked = true;
         selectedVariantId = radio.value;
+        
+        // Update hidden form for ReleaseIt
+        const hiddenInput = document.getElementById('product-variant-id');
+        if (hiddenInput) {
+          hiddenInput.value = selectedVariantId;
+        }
         
         // Update COD form if it exists
         updateCODForm();
