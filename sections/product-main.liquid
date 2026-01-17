@@ -68,25 +68,23 @@
       </div>
     </div>
 
-    {% comment %} Hidden Product Form for ReleaseIt {% endcomment %}
-    <form id="product-form-rc" style="display:none;">
-      <input type="hidden" name="id" id="product-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-    </form>
-
-    {% comment %} Buy Buttons {% endcomment %}
-    <div class="buy-section-rc">
-      <button class="btn-buy-prepaid-rc" onclick="buyNowPrepaid()">
-        <span class="main-text-prepaid">Add to cart</span>
-        <span class="sub-text-prepaid">PAY ONLINE & SAVE ₹130 (10% OFF)</span>
-      </button>
+    {% comment %} Shopify Product Form - Required for ReleaseIt {% endcomment %}
+    {% form 'product', product, id: 'product-form-installment' %}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="variant-id-input">
       
-      <a href="/rsi-btn-hook" id="cod-btn-link" class="btn-buy-cod-simple" onclick="handleCODClick(event)">
-        <span class="main-text-cod">Order Now - Cash on Delivery</span>
-        <span class="sub-text-cod">Pay when you receive | Free Shipping</span>
-      </a>
-
-
-    </div>
+      {% comment %} Buy Buttons {% endcomment %}
+      <div class="buy-section-rc">
+        <button class="btn-buy-prepaid-rc" type="button" onclick="buyNowPrepaid()">
+          <span class="main-text-prepaid">Add to cart</span>
+          <span class="sub-text-prepaid">PAY ONLINE & SAVE ₹130 (10% OFF)</span>
+        </button>
+        
+        <a href="/rsi-btn-hook" class="btn-buy-cod-simple">
+          <span class="main-text-cod">Order Now - Cash on Delivery</span>
+          <span class="sub-text-cod">Pay when you receive | Free Shipping</span>
+        </a>
+      </div>
+    {% endform %}
 
   </div>
 
@@ -316,10 +314,10 @@
         radio.checked = true;
         selectedVariantId = radio.value;
         
-        // Update hidden form for ReleaseIt
-        const hiddenInput = document.getElementById('product-variant-id');
-        if (hiddenInput) {
-          hiddenInput.value = selectedVariantId;
+        // Update Shopify form variant input for ReleaseIt
+        const variantInput = document.getElementById('variant-id-input');
+        if (variantInput) {
+          variantInput.value = selectedVariantId;
         }
         
         // Update COD form if it exists
