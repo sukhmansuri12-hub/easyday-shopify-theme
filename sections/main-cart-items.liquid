@@ -58,6 +58,47 @@
            <a href="/" class="btn" style="text-decoration: underline;">Continue Shopping</a>
        </div>
     {% endif %}
+    
+    {% comment %} You May Also Like Section {% endcomment %}
+    <div class="cart-ymal-section" style="margin-top:40px;">
+      <h2 style="text-align:center; font-size:1.8rem; margin-bottom:25px; color:#333;">You May Also Like</h2>
+      <div class="cart-ymal-grid">
+        {% assign products_shown = 0 %}
+        {% for product in collections.all.products limit: 10 %}
+          {% if products_shown < 4 %}
+            <div class="cart-ymal-card">
+              <a href="{{ product.url }}" style="text-decoration:none;">
+                {% if product.compare_at_price > product.price %}
+                  {% assign discount = product.compare_at_price | minus: product.price %}
+                  {% assign discount_percent = discount | times: 100 | divided_by: product.compare_at_price %}
+                  <div class="cart-ymal-badge">SAVE {{ discount_percent }}%</div>
+                {% endif %}
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | img_url: '300x' }}" alt="{{ product.title }}" class="cart-ymal-img">
+                {% endif %}
+                <h3 class="cart-ymal-title">{{ product.title }}</h3>
+                <div class="cart-ymal-price">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="price-sale">{{ product.price | money }}</span>
+                    <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                  {% else %}
+                    <span class="price-sale">{{ product.price | money }}</span>
+                  {% endif %}
+                </div>
+              </a>
+            </div>
+            {% assign products_shown = products_shown | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    
+    {% comment %} Motivational Banner {% endcomment %}
+    <div class="cart-motivational-banner">
+      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Your order awaits" style="width:150px; height:150px; object-fit:contain; border-radius:12px; margin-bottom:15px;">
+      <h3 style="font-size:1.5rem; color:#FF6F00; margin-bottom:10px;">🎁 Your Perfect Order Is Waiting!</h3>
+      <p style="color:#666; font-size:1rem; max-width:500px; margin:0 auto;">Complete your purchase now and enjoy fast, free shipping across India. Your satisfaction is our priority!</p>
+    </div>
   </div>
 </div>
 
@@ -127,3 +168,108 @@
 {% schema %}
 { "name": "Cart Items", "presets": [{"name": "Cart Items"}] }
 {% endschema %}
+
+<style>
+.cart-ymal-section {
+  padding: 30px 0;
+}
+
+.cart-ymal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cart-ymal-card {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cart-ymal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.cart-ymal-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.cart-ymal-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.cart-ymal-title {
+  font-size: 1rem;
+  color: #333;
+  margin: 15px 15px 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cart-ymal-price {
+  padding: 0 15px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-ymal-price .price-sale {
+  color: #00C853;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.cart-ymal-price .price-compare {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 0.9rem;
+}
+
+.cart-motivational-banner {
+  text-align: center;
+  padding: 40px 20px;
+  margin: 30px 0;
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe0cc 100%);
+  border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+  .cart-ymal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .cart-ymal-img {
+    height: 150px;
+  }
+  
+  .cart-ymal-title {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-ymal-grid {
+    gap: 10px;
+  }
+}
+</style>

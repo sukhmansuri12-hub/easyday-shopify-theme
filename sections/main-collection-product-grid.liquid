@@ -74,21 +74,34 @@
     <!-- Main Content -->
     <div class="catalog-content">
       
-      <!-- Toolbar: Results Count & Sort -->
+      <!-- Toolbar: Results Count & Filters -->
       <div class="catalog-toolbar">
         <div class="results-count">
           <strong>{{ collection.products.size }}</strong> products
         </div>
         
-        <div class="sort-dropdown-container">
-          <label for="sortBy">Sort by:</label>
-          <select id="sortBy" class="sort-dropdown" onchange="applySorting(this.value)">
-            <option value="">Featured</option>
-            <option value="price-ascending">Price: Low to High</option>
-            <option value="price-descending">Price: High to Low</option>
-            <option value="created-descending">Newest First</option>
-            <option value="best-selling">Best Selling</option>
-          </select>
+        <div class="toolbar-filters">
+          <div class="category-filter">
+            <label for="categorySelect">Category:</label>
+            <select id="categorySelect" class="category-dropdown" onchange="navigateToCategory(this.value)">
+              <option value="/collections/all" {% if collection.handle == 'all' %}selected{% endif %}>All Products</option>
+              <option value="/collections/kitchen-essentials" {% if collection.handle == 'kitchen-essentials' %}selected{% endif %}>Kitchen Essentials</option>
+              <option value="/collections/health-management" {% if collection.handle == 'health-management' %}selected{% endif %}>Health & Wellness</option>
+              <option value="/collections/home-essentials" {% if collection.handle == 'home-essentials' %}selected{% endif %}>Home Essentials</option>
+              <option value="/collections/bathroom-essentials" {% if collection.handle == 'bathroom-essentials' %}selected{% endif %}>Bathroom Essentials</option>
+            </select>
+          </div>
+          
+          <div class="sort-dropdown-container">
+            <label for="sortBy">Sort by:</label>
+            <select id="sortBy" class="sort-dropdown" onchange="applySorting(this.value)">
+              <option value="">Featured</option>
+              <option value="price-ascending">Price: Low to High</option>
+              <option value="price-descending">Price: High to Low</option>
+              <option value="created-descending">Newest First</option>
+              <option value="best-selling">Best Selling</option>
+            </select>
+          </div>
         </div>
       </div>
       
@@ -395,6 +408,45 @@
     font-size: 1.1rem;
   }
   
+  .toolbar-filters {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .category-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .category-filter label {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  
+  .category-dropdown {
+    padding: 8px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 180px;
+  }
+  
+  .category-dropdown:hover,
+  .category-dropdown:focus {
+    border-color: #FF6F00;
+  }
+  
+  .category-dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
+  }
+  
   .sort-dropdown-container {
     display: flex;
     align-items: center;
@@ -679,6 +731,13 @@
     const url = new URL(window.location);
     url.searchParams.set('sort_by', sortValue);
     window.location.href = url.toString();
+  }
+  
+  // Category navigation
+  function navigateToCategory(categoryUrl) {
+    if (categoryUrl) {
+      window.location.href = categoryUrl;
+    }
   }
   
   // Initialize from URL
