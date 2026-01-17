@@ -71,15 +71,12 @@
     <!-- Filter Backdrop (Mobile) -->
     <div class="filter-backdrop" id="filterBackdrop" onclick="toggleFilterDrawer()"></div>
     
+    
     <!-- Main Content -->
-    <div class="catalog-content" style="padding:0 15px;">
+    <div class="catalog-content">
       
-      <!-- Clean Header Like Attrangi -->
-      <h1 style="font-size:1.8rem; font-weight:700; color:#333; margin:20px 0 5px 0; text-align:center;">Products</h1>
-      <p style="font-size:0.95rem; color:#888; margin:0 0 20px 0; text-align:center;">{{ collection.products.size }} products available</p>
-      
-      <!-- Filter Dropdown Only -->
-      <div style="margin-bottom:25px;">
+      <!-- Filter Dropdown -->
+      <div style="margin-bottom:20px;">
         <select id="mainFilter" class="main-filter-dropdown" onchange="handleMainFilter(this.value)" style="width:100%; padding:12px 15px; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; background:white;">
           <optgroup label="CATEGORIES">
             <option value="/collections/all" {% if collection.handle == 'all' %}selected{% endif %}>All Products</option>
