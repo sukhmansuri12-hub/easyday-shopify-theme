@@ -378,6 +378,29 @@
       window.location.href = codLink;
     }
     
+    // Quick Add to Cart for You May Also Like products
+    function quickAddToCart(variantId) {
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: 1
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Show success message
+        alert('✅ Added to cart!');
+        // Optionally update cart count in header
+        if (window.updateCartCount) window.updateCartCount();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to add to cart. Please try again.');
+      });
+    }
+    
     function scrollToTop() {
       // Scroll to buy buttons section
       const buySection = document.querySelector('.buy-section-rc');
@@ -420,6 +443,7 @@
                 {% endif %}
               </div>
             </a>
+            <button class="ymal-quick-add" onclick="quickAddToCart({{ p.selected_or_first_available_variant.id }})" style="position:absolute;bottom:10px;right:10px;width:36px;height:36px;border-radius:50%;background:#00C853;color:white;border:none;font-size:1.5rem;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,200,83,0.3);z-index:3;">+</button>
           </div>
           {% assign products_shown = products_shown | plus: 1 %}
         {% endif %}
@@ -428,7 +452,40 @@
   </div>
 </section>
 
-
+<!-- Carousel Dots JavaScript -->
+<script>
+  // Update carousel dots on scroll
+  const galleryContainer = document.getElementById('gallery-container');
+  const dots = document.querySelectorAll('.gallery-dots .dot');
+  
+  if (galleryContainer && dots.length > 0) {
+    galleryContainer.addEventListener('scroll', function() {
+      const scrollLeft = this.scrollLeft;
+      const slideWidth = this.offsetWidth;
+      const currentSlide = Math.round(scrollLeft / slideWidth);
+      
+      // Update active dot
+      dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    });
+    
+    // Dot click navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', function() {
+        const slideWidth = galleryContainer.offsetWidth;
+        galleryContainer.scrollTo({
+          left: slideWidth * index,
+          behavior: 'smooth'
+        });
+      });
+    });
+  }
+</script>
 
 <style>
   .product-page-rc-car { background:#fff; padding-bottom:0; }
