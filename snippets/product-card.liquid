@@ -33,33 +33,40 @@
     
     {%- if product.compare_at_price > product.price -%}
       {%- assign savings_percent = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
-      <div class="product-discount-badge">SAVE {{ savings_percent }}%</div>
+      <div class="homepage-style-badge">SALE {{ savings_percent }}%</div>
     {%- endif -%}
+    
+    <button class="homepage-style-add-btn" onclick="quickAddProductCatalog(event, {{ product.selected_or_first_available_variant.id }})">+</button>
   </div>
 
   <div class="product-card-content">
     <h3 class="product-title">{{ product.title }}</h3>
     
     <div class="product-price">
+      <span class="price-sale">Rs. {{ product.price | money_without_currency }}</span>
       {%- if product.compare_at_price > product.price -%}
-        <span class="price-sale">₹{{ product.price | money_without_currency }}</span>
-        <span class="price-regular">₹{{ product.compare_at_price | money_without_currency }}</span>
-      {%- else -%}
-        <span class="price-sale">₹{{ product.price | money_without_currency }}</span>
+        <span class="price-regular">Rs. {{ product.compare_at_price | money_without_currency }}</span>
+        <div class="save-text">Save {{ savings_percent }}%</div>
       {%- endif -%}
     </div>
   </div>
 </a>
-<button class="quick-add-btn-catalog" onclick="quickAddProductCatalog(event, {{ product.selected_or_first_available_variant.id }})">+</button>
 
 
 <style>
+  .product-card {
+    display: block;
+    text-decoration: none;
+    position: relative;
+  }
+
   .product-card-image {
     position: relative;
     overflow: hidden;
     aspect-ratio: 1 / 1;
     background: #f5f5f5;
     border-radius: 12px;
+    margin-bottom: 10px;
   }
   
   .product-carousel-image {
@@ -78,43 +85,89 @@
     position: relative;
   }
   
-  /* Discount Badge */
-  .product-discount-badge {
+  /* LEFT BADGE LIKE HOMEPAGE */
+  .homepage-style-badge {
     position: absolute;
     top: 10px;
-    right: 10px;
-    background: #e74c3c;
+    left: 0;
+    background: #d32f2f;
     color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
+    padding: 4px 8px;
+    font-size: 0.7rem;
     font-weight: 700;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
     z-index: 2;
   }
   
-  /* Quick Add Button */
-  .quick-add-btn-catalog {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #00C853;
-    color: white;
-    border: none;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,200,83,0.3);
-    z-index: 3;
-    transition: transform 0.2s;
+  /* ORANGE BUTTON TOP-RIGHT LIKE HOMEPAGE */
+  .homepage-style-add-btn {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    background: #ff6f00 !important;
+    color: white !important;
+    border: none !important;
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50% !important;
+    font-size: 1.3rem !important;
+    line-height: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    z-index: 9999 !important;
+    box-shadow: 0 3px 8px rgba(255, 111, 0, 0.6) !important;
+    pointer-events: auto !important;
   }
   
-  .quick-add-btn-catalog:hover {
+  .homepage-style-add-btn:hover {
     transform: scale(1.1);
+  }
+  
+  /* Content Styling */
+  .product-card-content {
+    text-align: left;
+    padding: 0 5px;
+  }
+  
+  .product-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.6em;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .product-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .price-sale {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .price-regular {
+    font-size: 0.8rem;
+    color: #888;
+    text-decoration: line-through;
+  }
+  
+  .save-text {
+    color: #d32f2f;
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 </style>
 

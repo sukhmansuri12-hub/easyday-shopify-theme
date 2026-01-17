@@ -72,39 +72,37 @@
     <div class="filter-backdrop" id="filterBackdrop" onclick="toggleFilterDrawer()"></div>
     
     <!-- Main Content -->
-    <div class="catalog-content">
+    <div class="catalog-content" style="padding:0 15px;">
       
-      <!-- Toolbar: Results Count & Unified Filter -->
-      <div class="catalog-toolbar">
-        <div class="results-count">
-          <span style="font-size:0.9rem; color:#666;">Showing</span> <strong style="font-size:1.1rem; color:#333;">{{ collection.products.size }}</strong> <span style="font-size:0.9rem; color:#666;">Products</span>
-        </div>
-        
-        <div class="main-filter-container">
-          <select id="mainFilter" class="main-filter-dropdown" onchange="handleMainFilter(this.value)">
-            <optgroup label="CATEGORIES">
-              <option value="/collections/all" {% if collection.handle == 'all' %}selected{% endif %}>All Products</option>
-              <option value="/collections/kitchen-essentials" {% if collection.handle == 'kitchen-essentials' %}selected{% endif %}>Kitchen Essentials</option>
-              <option value="/collections/health-management" {% if collection.handle == 'health-management' %}selected{% endif %}>Health & Wellness</option>
-              <option value="/collections/home-essentials" {% if collection.handle == 'home-essentials' %}selected{% endif %}>Home Essentials</option>
-              <option value="/collections/bathroom-essentials" {% if collection.handle == 'bathroom-essentials' %}selected{% endif %}>Bathroom Essentials</option>
-            </optgroup>
-            <optgroup label="SORT BY">
-              <option value="?sort_by=">Featured</option>
-              <option value="?sort_by=price-ascending">Price: Low to High</option>
-              <option value="?sort_by=price-descending">Price: High to Low</option>
-              <option value="?sort_by=created-descending">Newest First</option>
-              <option value="?sort_by=best-selling">Best Selling</option>
-            </optgroup>
-          </select>
-        </div>
+      <!-- Clean Header Like Attrangi -->
+      <h1 style="font-size:1.8rem; font-weight:700; color:#333; margin:20px 0 5px 0; text-align:center;">Products</h1>
+      <p style="font-size:0.95rem; color:#888; margin:0 0 20px 0; text-align:center;">{{ collection.products.size }} products available</p>
+      
+      <!-- Filter Dropdown Only -->
+      <div style="margin-bottom:25px;">
+        <select id="mainFilter" class="main-filter-dropdown" onchange="handleMainFilter(this.value)" style="width:100%; padding:12px 15px; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; background:white;">
+          <optgroup label="CATEGORIES">
+            <option value="/collections/all" {% if collection.handle == 'all' %}selected{% endif %}>All Products</option>
+            <option value="/collections/kitchen-essentials" {% if collection.handle == 'kitchen-essentials' %}selected{% endif %}>Kitchen Essentials</option>
+            <option value="/collections/health-management" {% if collection.handle == 'health-management' %}selected{% endif %}>Health & Wellness</option>
+            <option value="/collections/home-essentials" {% if collection.handle == 'home-essentials' %}selected{% endif %}>Home Essentials</option>
+            <option value="/collections/bathroom-essentials" {% if collection.handle == 'bathroom-essentials' %}selected{% endif %}>Bathroom Essentials</option>
+          </optgroup>
+          <optgroup label="SORT BY">
+            <option value="?sort_by=">Featured</option>
+            <option value="?sort_by=price-ascending">Price: Low to High</option>
+            <option value="?sort_by=price-descending">Price: High to Low</option>
+            <option value="?sort_by=created-descending">Newest First</option>
+            <option value="?sort_by=best-selling">Best Selling</option>
+          </optgroup>
+        </select>
       </div>
       
       <!-- Products Grid -->
       {%- if collection.products.size > 0 -%}
-        <div class="product-grid-catalog" id="productGrid">
+        <div class="product-grid-catalog" id="productGrid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px;">
           {%- for product in collection.products -%}
-            <div class="product-item animate-on-scroll" data-animation="scale-in" data-price="{{ product.price }}">
+            <div class="product-item" data-price="{{ product.price }}" style="position:relative;">
               {% render 'product-card', product: product %}
             </div>
           {%- endfor -%}
