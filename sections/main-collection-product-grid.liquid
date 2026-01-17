@@ -74,34 +74,29 @@
     <!-- Main Content -->
     <div class="catalog-content">
       
-      <!-- Toolbar: Results Count & Filters -->
+      <!-- Toolbar: Results Count & Unified Filter -->
       <div class="catalog-toolbar">
         <div class="results-count">
           <strong>{{ collection.products.size }}</strong> products
         </div>
         
-        <div class="toolbar-filters">
-          <div class="category-filter">
-            <label for="categorySelect">Category:</label>
-            <select id="categorySelect" class="category-dropdown" onchange="navigateToCategory(this.value)">
+        <div class="main-filter-container">
+          <select id="mainFilter" class="main-filter-dropdown" onchange="handleMainFilter(this.value)">
+            <optgroup label="CATEGORIES">
               <option value="/collections/all" {% if collection.handle == 'all' %}selected{% endif %}>All Products</option>
               <option value="/collections/kitchen-essentials" {% if collection.handle == 'kitchen-essentials' %}selected{% endif %}>Kitchen Essentials</option>
               <option value="/collections/health-management" {% if collection.handle == 'health-management' %}selected{% endif %}>Health & Wellness</option>
               <option value="/collections/home-essentials" {% if collection.handle == 'home-essentials' %}selected{% endif %}>Home Essentials</option>
               <option value="/collections/bathroom-essentials" {% if collection.handle == 'bathroom-essentials' %}selected{% endif %}>Bathroom Essentials</option>
-            </select>
-          </div>
-          
-          <div class="sort-dropdown-container">
-            <label for="sortBy">Sort by:</label>
-            <select id="sortBy" class="sort-dropdown" onchange="applySorting(this.value)">
-              <option value="">Featured</option>
-              <option value="price-ascending">Price: Low to High</option>
-              <option value="price-descending">Price: High to Low</option>
-              <option value="created-descending">Newest First</option>
-              <option value="best-selling">Best Selling</option>
-            </select>
-          </div>
+            </optgroup>
+            <optgroup label="SORT BY">
+              <option value="?sort_by=">Featured</option>
+              <option value="?sort_by=price-ascending">Price: Low to High</option>
+              <option value="?sort_by=price-descending">Price: High to Low</option>
+              <option value="?sort_by=created-descending">Newest First</option>
+              <option value="?sort_by=best-selling">Best Selling</option>
+            </optgroup>
+          </select>
         </div>
       </div>
       
@@ -408,75 +403,147 @@
     font-size: 1.1rem;
   }
   
-  .toolbar-filters {
+  .main-filter-container {
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .main-filter-dropdown {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .main-filter-dropdown optgroup {
+    font-weight: 700;
+    color: #FF6F00;
+    font-size: 0.85rem;
+  }
+  
+  .main-filter-dropdown option {
+    padding: 8px;
+    font-weight: 400;
+    color: #333;
+  }
+  
+  .main-filter-dropdown:hover,
+  .main-filter-dropdown:focus {
+    border-color: #FF6F00;
+  }
+  
+  .main-filter-dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
+  }
+  
+  /* Product Grid */
+  .product-grid-catalog {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  /* Pagination */
+  .pagination-container {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 20px;
+    margin-top: 40px;
+    padding: 20px;
   }
   
-  .category-filter {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .category-filter label {
-    font-weight: 600;
-    color: #555;
-    font-size: 0.95rem;
-  }
-  
-  .category-dropdown {
-    padding: 8px 15px;
-    border: 2px solid #e0e0e0;
+  .btn-pagination {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
+    color: white;
+    text-decoration: none;
     border-radius: 8px;
-    font-size: 0.95rem;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s;
-    min-width: 180px;
-  }
-  
-  .category-dropdown:hover,
-  .category-dropdown:focus {
-    border-color: #FF6F00;
-  }
-  
-  .category-dropdown:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
-  }
-  
-  .sort-dropdown-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .sort-dropdown-container label {
     font-weight: 600;
-    color: #555;
-    font-size: 0.95rem;
+    transition: transform 0.3s;
   }
   
-  .sort-dropdown {
-    padding: 8px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s;
+  .btn-pagination:hover {
+    transform: translateY(-2px);
   }
   
-  .sort-dropdown:hover {
-    border-color: #FF6F00;
+  .page-info {
+    font-weight: 600;
+    color: #666;
   }
   
-  .sort-dropdown:focus {
-    outline: none;
-    border-color: #FF6F00;
-    box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
+  /* Filter Backdrop */
+  .filter-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%:
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 968px) {
+    .collection-page {
+      padding: 15px;
+    }
+    
+    .mobile-filter-toggle {
+      display: flex;
+    }
+    
+    .mobile-only {
+      display: block !important;
+    }
+    
+    .filter-sidebar {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 85%;
+      max-width: 350px;
+      height: 100vh;
+      z-index: 999;
+      overflow-y: auto;
+      transition: left 0.3s ease;
+      border-radius: 0;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+    }
+    
+    .filter-sidebar.open {
+      left: 0;
+    }
+    
+    .filter-backdrop.open {
+      display: block;
+    }
+    
+    .close-filters {
+      display: block;
+    }
+    
+    .product-grid-catalog {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    
+    .catalog-toolbar {
+      flex-direction: column;
+      gap: 15px;
+      align-items: stretch;
+    }
+    
+    .main-filter-container {
+      max-width: 100%;
+    }
   }
   
   /* Product Grid */
@@ -724,19 +791,17 @@
     });
   }
   
-  // Sorting
-  function applySorting(sortValue) {
-    if (!sortValue) return;
+  // Unified main filter handler
+  function handleMainFilter(value) {
+    if (!value) return;
     
-    const url = new URL(window.location);
-    url.searchParams.set('sort_by', sortValue);
-    window.location.href = url.toString();
-  }
-  
-  // Category navigation
-  function navigateToCategory(categoryUrl) {
-    if (categoryUrl) {
-      window.location.href = categoryUrl;
+    // Check if it's a category (starts with /) or a sort option (starts with ?)
+    if (value.startsWith('/')) {
+      // Navigate to category
+      window.location.href = value;
+    } else if (value.startsWith('?')) {
+      // Apply sorting to current page
+      window.location.href = window.location.pathname + value;
     }
   }
   
