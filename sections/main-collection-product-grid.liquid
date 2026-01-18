@@ -61,6 +61,33 @@
         </div>
       </div>
       
+      <!-- Sort By Options -->
+      <div class="filter-group">
+        <h4 class="filter-title">Sort By</h4>
+        <div class="filter-options">
+          <label class="filter-checkbox">
+            <input type="radio" name="sortOption" value="?sort_by=" onchange="applySortFilter(this)" checked>
+            <span>Featured</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="radio" name="sortOption" value="?sort_by=price-ascending" onchange="applySortFilter(this)">
+            <span>Price: Low to High</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="radio" name="sortOption" value="?sort_by=price-descending" onchange="applySortFilter(this)">
+            <span>Price: High to Low</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="radio" name="sortOption" value="?sort_by=best-selling" onchange="applySortFilter(this)">
+            <span>Best Selling</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="radio" name="sortOption" value="?sort_by=created-descending" onchange="applySortFilter(this)">
+            <span>Newest First</span>
+          </label>
+        </div>
+      </div>
+      
       <!-- Filter Actions -->
       <div class="filter-actions">
         <button class="btn-clear-filters" onclick="clearAllFilters()">Clear All</button>
@@ -76,41 +103,34 @@
     <!-- Main Content -->
     <div class="catalog-content">
       
-      <!-- COLLECTION Header -->
+      <!-- COLLECTION Header - Cooler Design -->
       <div style="text-align:center; margin-bottom:25px;">
-        <h1 style="font-family:'Playfair Display', Georgia, serif; font-size:2.2rem; font-weight:700; color:#222; margin:0 0 8px 0; letter-spacing:0.5px;">COLLECTION</h1>
-        <p style="font-size:1rem; color:#666; margin:0;">
-          <span style="display:inline-flex; align-items:center; gap:8px; background:#f5f5f5; padding:6px 16px; border-radius:20px;">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="2" width="5" height="5" rx="1" fill="#ff6f00"/>
-              <rect x="9" y="2" width="5" height="5" rx="1" fill="#ff6f00"/>
-              <rect x="2" y="9" width="5" height="5" rx="1" fill="#ff6f00"/>
-              <rect x="9" y="9" width="5" height="5" rx="1" fill="#ff6f00"/>
-            </svg>
-            <strong style="color:#333;">{{ collection.products.size }}</strong> 
-            <span style="color:#888;">{{ collection.products.size | pluralize: 'Product', 'Products' }}</span>
-          </span>
-        </p>
+        <h1 style="font-family:'Impact', 'Arial Black', sans-serif; font-size:2.5rem; font-weight:900; background:linear-gradient(135deg, #FF6F00 0%, #FF8F00 50%, #00C853 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin:0 0 15px 0; letter-spacing:2px; text-transform:uppercase;">COLLECTION</h1>
+        
+        <!-- Product Count - LEFT ALIGNED -->
+        <div style="display:flex; align-items:center; gap:8px; justify-content:flex-start; max-width:400px; margin:0 auto;">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="5" height="5" rx="1" fill="#ff6f00"/>
+            <rect x="9" y="2" width="5" height="5" rx="1" fill="#ff6f00"/>
+            <rect x="2" y="9" width="5" height="5" rx="1" fill="#ff6f00"/>
+            <rect x="9" y="9" width="5" height="5" rx="1" fill="#ff6f00"/>
+          </svg>
+          <strong style="color:#333; font-size:1.1rem;">{{ collection.products.size }}</strong> 
+          <span style="color:#888; font-size:0.95rem;">Products</span>
+        </div>
       </div>
       
-      <!-- Filter Dropdown -->
-      <div style="margin-bottom:20px;">
-        <select id="mainFilter" class="main-filter-dropdown" onchange="handleMainFilter(this.value)" style="width:100%; padding:12px 15px; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; background:white;">
-          <optgroup label="CATEGORIES">
-            <option value="/collections/all" {% if collection.handle == 'all' %}selected{% endif %}>All Products</option>
-            <option value="/collections/kitchen-essentials" {% if collection.handle == 'kitchen-essentials' %}selected{% endif %}>Kitchen Essentials</option>
-            <option value="/collections/health-management" {% if collection.handle == 'health-management' %}selected{% endif %}>Health & Wellness</option>
-            <option value="/collections/home-essentials" {% if collection.handle == 'home-essentials' %}selected{% endif %}>Home Essentials</option>
-            <option value="/collections/bathroom-essentials" {% if collection.handle == 'bathroom-essentials' %}selected{% endif %}>Bathroom Essentials</option>
-          </optgroup>
-          <optgroup label="SORT BY">
-            <option value="?sort_by=">Featured</option>
-            <option value="?sort_by=price-ascending">Price: Low to High</option>
-            <option value="?sort_by=price-descending">Price: High to Low</option>
-            <option value="?sort_by=created-descending">Newest First</option>
-            <option value="?sort_by=best-selling">Best Selling</option>
-          </optgroup>
-        </select>
+      <!-- Filters Button - Opens Popup -->
+      <div style="margin-bottom:20px; display:flex; justify-content:center;">
+        <button onclick="toggleFilterDrawer()" style="background:#FF6F00; color:white; border:none; padding:14px 32px; border-radius:30px; font-size:1rem; font-weight:700; cursor:pointer; box-shadow:0 4px 12px rgba(255,111,0,0.3); display:flex; align-items:center; gap:10px; transition:all 0.3s;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+            <path d="M2 4h16M6 10h8M9 16h2"/>
+            <line x1="2" y1="4" x2="18" y2="4" stroke="white" stroke-width="2"/>
+            <line x1="6" y1="10" x2="14" y2="10" stroke="white" stroke-width="2"/>
+            <line x1="9" y1="16" x2="11" y2="16" stroke="white" stroke-width="2"/>
+          </svg>
+          Filters
+        </button>
       </div>
       
       <!-- Products Grid -->
@@ -778,8 +798,6 @@
   
   // Clear all filters
   function clearAllFilters() {
-    activeCategories = [];
-    document.querySelectorAll('.filter-checkbox input').forEach(cb => cb.checked = false);
     resetPriceFilter();
     updateActiveFilters();
     applyFilters();

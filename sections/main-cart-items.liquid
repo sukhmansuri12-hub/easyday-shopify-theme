@@ -7,13 +7,17 @@
       <div class="cart-items">
          {% for item in cart.items %}
            <div class="cart-item" style="background:white; padding:15px; margin-bottom:10px; border-radius:8px; display:flex; gap:15px; align-items:center;" data-line-item="{{ forloop.index }}">
-              {% if item.image %}
-                <img src="{{ item.image | image_url: width: 80 }}" style="border-radius:8px; width: 80px; height: 80px; object-fit: cover;">
-              {% else %}
-                <div style="border-radius:8px; width: 80px; height: 80px; background: #f0f0f0;"></div>
-              {% endif %}
+              <a href="{{ item.url }}" style="display:block;">
+                {% if item.image %}
+                  <img src="{{ item.image | image_url: width: 80 }}" style="border-radius:8px; width: 80px; height: 80px; object-fit: cover;">
+                {% else %}
+                  <div style="border-radius:8px; width: 80px; height: 80px; background: #f0f0f0;"></div>
+                {% endif %}
+              </a>
               <div style="flex: 1;">
-                  <h3 style="margin:0 0 8px 0; font-size:1rem;">{{ item.title }}</h3>
+                  <a href="{{ item.url }}" style="text-decoration:none; color:inherit;">
+                    <h3 style="margin:0 0 8px 0; font-size:1rem;">{{ item.title }}</h3>
+                  </a>
                   <div style="display:flex; flex-direction:column; gap:4px;">
                     <p style="margin:0; font-size:1.2rem; font-weight:700; color:#00C853;">{{ item.price | money }}</p>
                     {% if item.variant.compare_at_price > item.price %}
@@ -33,10 +37,10 @@
                   </div>
               </div>
               
-              {% comment %} Remove Button {% endcomment %}
-              <button onclick="removeFromCart({{ forloop.index }})" style="background:transparent; border:none; color:#999; font-size:20px; cursor:pointer; padding:8px; transition: color 0.2s;" onmouseover="this.style.color='#FF0000'" onmouseout="this.style.color='#999'" title="Remove item">
-                🗑️
-              </button>
+               {% comment %} Professional Remove Button {% endcomment %}
+               <button onclick="removeFromCart({{ forloop.index }})" style="background:#ff4444; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; font-size:0.85rem; font-weight:600; transition: all 0.2s; white-space:nowrap;" onmouseover="this.style.background='#cc0000'" onmouseout="this.style.background='#ff4444'">
+                 Remove
+               </button>
            </div>
          {% endfor %}
       </div>
@@ -68,33 +72,15 @@
        </div>
     {% endif %}
     
-    {% comment %} You May Also Like Section {% endcomment %}
+    {% comment %} You May Also Like Section - Using Product Cards {% endcomment %}
     <div class="cart-ymal-section" style="margin-top:40px;">
       <h2 style="text-align:center; font-size:1.8rem; margin-bottom:25px; color:#333;">You May Also Like</h2>
-      <div class="cart-ymal-grid">
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px;">
         {% assign products_shown = 0 %}
         {% for product in collections.all.products limit: 10 %}
           {% if products_shown < 4 %}
-            <div class="cart-ymal-card">
-              <a href="{{ product.url }}" style="text-decoration:none;">
-                {% if product.compare_at_price > product.price %}
-                  {% assign discount = product.compare_at_price | minus: product.price %}
-                  {% assign discount_percent = discount | times: 100 | divided_by: product.compare_at_price %}
-                  <div class="cart-ymal-badge">SAVE {{ discount_percent }}%</div>
-                {% endif %}
-                {% if product.featured_image %}
-                  <img src="{{ product.featured_image | img_url: '300x' }}" alt="{{ product.title }}" class="cart-ymal-img">
-                {% endif %}
-                <h3 class="cart-ymal-title">{{ product.title }}</h3>
-                <div class="cart-ymal-price">
-                  {% if product.compare_at_price > product.price %}
-                    <span class="price-sale">{{ product.price | money }}</span>
-                    <span class="price-compare">{{ product.compare_at_price | money }}</span>
-                  {% else %}
-                    <span class="price-sale">{{ product.price | money }}</span>
-                  {% endif %}
-                </div>
-              </a>
+            <div style="position:relative;">
+              {% render 'product-card', product: product %}
             </div>
             {% assign products_shown = products_shown | plus: 1 %}
           {% endif %}
