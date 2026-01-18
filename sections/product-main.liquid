@@ -25,7 +25,7 @@
     <h1 class="product-title-rc">{{ product.title }}</h1>
     
     <div class="product-rating-rc">
-      <span class="stars">⭐⭐⭐⭐<span style="display:inline-block;width:12px;overflow:hidden;vertical-align:middle;">⭐</span></span>
+      <span class="stars">⭐⭐⭐⭐<span style="display:inline-block;width:12px;overflow:hidden;">⭐</span></span>
       <span class="rating-count">4.6 (437 Reviews)</span>
     </div>
 
@@ -146,7 +146,7 @@
   <div class="reviews-section-rc">
     <h2 class="reviews-title">Customer Reviews</h2>
     <div style="display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:20px;">
-      <span class="stars" style="font-size:1.5rem;">⭐⭐⭐⭐<span style="display:inline-block;width:12px;overflow:hidden;vertical-align:middle;">⭐</span></span>
+      <span class="stars" style="font-size:1.5rem; line-height:1;">⭐⭐⭐⭐<span style="display:inline-block;width:12px;overflow:hidden;">⭐</span></span>
       <span style="font-size:1.1rem;color:#666;font-weight:600;">4.6 (437 Reviews)</span>
     </div>
     
@@ -413,37 +413,16 @@
   </script>
 
 
-  {% comment %} You May Also Like Section {% endcomment %}
+  {% comment %} You May Also Like Section - Using Product Cards {% endcomment %}
   <div class="you-may-also-like-section">
     <h2 class="ymal-title">You may also like</h2>
-    <div class="ymal-products-grid">
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; max-width:1200px; margin:0 auto; padding:0 15px;">
       {% assign current_product_id = product.id %}
       {% assign products_shown = 0 %}
       {% for p in collections.all.products limit: 20 %}
         {% if p.id != current_product_id and products_shown < 4 %}
-          <div class="ymal-product-card" style="position:relative;">
-            <a href="{{ p.url }}" style="text-decoration:none;">
-              {% if p.compare_at_price > p.price %}
-                {% assign discount = p.compare_at_price | minus: p.price %}
-                {% assign discount_percent = discount | times: 100 | divided_by: p.compare_at_price %}
-                <div style="position:absolute;top:10px;right:10px;background:#e74c3c;color:white;padding:5px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;z-index:2;">
-                  SAVE {{ discount_percent }}%
-                </div>
-              {% endif %}
-              {% if p.featured_image %}
-                <img src="{{ p.featured_image | img_url: '400x' }}" alt="{{ p.title }}" class="ymal-product-img">
-              {% endif %}
-              <h3 class="ymal-product-name">{{ p.title }}</h3>
-              <div class="ymal-product-price">
-                {% if p.compare_at_price > p.price %}
-                  <span class="ymal-price-sale">{{ p.price | money }}</span>
-                  <span class="ymal-price-compare">{{ p.compare_at_price | money }}</span>
-                {% else %}
-                  <span class="ymal-price-sale">{{ p.price | money }}</span>
-                {% endif %}
-              </div>
-            </a>
-            <button class="ymal-quick-add" onclick="quickAddToCart({{ p.selected_or_first_available_variant.id }})" style="position:absolute;bottom:10px;right:10px;width:36px;height:36px;border-radius:50%;background:#00C853;color:white;border:none;font-size:1.5rem;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,200,83,0.3);z-index:3;">+</button>
+          <div style="position:relative;">
+            {% render 'product-card', product: p %}
           </div>
           {% assign products_shown = products_shown | plus: 1 %}
         {% endif %}
