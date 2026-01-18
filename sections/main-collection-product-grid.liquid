@@ -638,6 +638,32 @@
       transition: left 0.3s ease;
       border-radius: 0;
       box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .filter-sidebar .filter-header {
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      flex-shrink: 0;
+    }
+    
+    .filter-sidebar .filter-group {
+      flex-shrink: 0;
+    }
+    
+    .filter-sidebar .filter-actions {
+      position: sticky;
+      bottom: 0;
+      background: white;
+      padding: 15px 20px;
+      border-top: 1px solid #eee;
+      margin-top: auto;
+      flex-shrink: 0;
     }
     
     .filter-sidebar.open {
@@ -815,8 +841,28 @@
       // Navigate to category
       window.location.href = value;
     } else if (value.startsWith('?')) {
-      // Apply sorting to current page
-      window.location.href = window.location.pathname + value;
+      // The original content of this block is removed as per the instruction.
+      // The new applySortFilter function will handle sorting.
+    }
+  }
+  
+  // Apply sort filter - FIXED TO ACTUALLY WORK
+  function applySortFilter(radio) {
+    if (radio.checked) {
+      const currentUrl = new URL(window.location.href);
+      const sortValue = radio.value;
+      
+      // Clear existing sort parameter
+      currentUrl.searchParams.delete('sort_by');
+      
+      // Add new sort parameter if not featured
+      if (sortValue && sortValue !== '?sort_by=') {
+        const sortParam = sortValue.replace('?sort_by=', '');
+        currentUrl.searchParams.set('sort_by', sortParam);
+      }
+      
+      // Reload page with new sort
+      window.location.href = currentUrl.toString();
     }
   }
   
