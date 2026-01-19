@@ -100,7 +100,7 @@
     z-index: 2;
   }
   
-  /* ORANGE BUTTON - EXACT TOP-RIGHT CORNER */
+  /* ORANGE BUTTON - PERFECTLY ROUND AT EXACT TOP-RIGHT CORNER */
   .homepage-style-add-btn {
     position: absolute !important;
     top: 0 !important;
@@ -108,40 +108,44 @@
     background: #ff6f00 !important;
     color: white !important;
     border: none !important;
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 0 12px 0 12px !important;
-    font-size: 1.3rem !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    font-size: 1.4rem !important;
     line-height: 1 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     cursor: pointer !important;
     z-index: 9999 !important;
-    box-shadow: 0 3px 8px rgba(255, 111, 0, 0.6) !important;
+    box-shadow: 0 3px 10px rgba(255, 111, 0, 0.5) !important;
     pointer-events: auto !important;
+    transition: transform 0.2s ease !important;
   }
   
   .homepage-style-add-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.15) !important;
   }
   
-  /* Content Styling */
+  /* Content Styling - FIXED HEIGHT FOR ALIGNMENT */
   .product-card-content {
     text-align: left;
     padding: 0 5px;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
   }
   
   .product-title {
     font-size: 0.9rem;
     font-weight: 500;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 2.6em;
+    height: 2.6em;
     color: #333;
     text-decoration: none;
   }
