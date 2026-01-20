@@ -1,22 +1,23 @@
 {% comment %}
-  SIMPLIFIED Collection Page - Like Attrangi  
-  Simple dropdown sort, clean layout, no complex filters
+  Collection Page - EXACTLY LIKE ATTRANGI
+  Left-aligned title, sort dropdown, view toggle buttons
 {% endcomment %}
 
 {%- paginate collection.products by 12 -%}
-  <div class="simple-catalog-page">
+  <div class="attrangi-catalog">
     
-    {%- comment -%} Header {% endcomment %}\r
-    <div class="catalog-header scroll-reveal">
-      <h1 class="catalog-title">{{ collection.title | upcase }}</h1>
-      <p class="product-count">{{ collection.products_count }} products</p>
+    {%- comment -%} Collection Title - LEFT ALIGNED {% endcomment %}\r
+    <div class="catalog-header-attrangi">
+      <h1 class="collection-title-left">{{ collection.title | upcase }}</h1>
+      <p class="product-count-left">{{ collection.products_count }} products</p>
     </div>
     
-    {%- comment -%} Simple Sort Dropdown - Attrangi Style {% endcomment %}\r
-    <div class="catalog-toolbar scroll-reveal">
-      <div class="sort-wrapper">
+    {%- comment -%} Toolbar: Sort + View Toggles {% endcomment %}\r
+    <div class="catalog-toolbar-attrangi">
+      {%- comment -%} Sort Dropdown - LEFT {% endcomment %}\r
+      <div class="sort-wrapper-attrangi">
         <label for="sortSelect">Sort</label>
-        <select id="sortSelect" class="sort-select" onchange="window.location.href=this.value">
+        <select id="sortSelect" class="sort-select-attrangi" onchange="window.location.href=this.value">
           <option value="{{ collection.url }}" {% unless request.url contains 'sort_by=' %}selected{% endunless %}>Featured</option>
           <option value="{{ collection.url }}?sort_by=best-selling" {% if request.url contains 'sort_by=best-selling' %}selected{% endif %}>Best selling</option>
           <option value="{{ collection.url }}?sort_by=title-ascending" {% if request.url contains 'sort_by=title-ascending' %}selected{% endif %}>Alphabetically, A-Z</option>
@@ -25,13 +26,42 @@
           <option value="{{ collection.url }}?sort_by=price-descending" {% if request.url contains 'sort_by=price-descending' %}selected{% endif %}>Price, high to low</option>
         </select>
       </div>
+      
+      {%- comment -%} View Toggle Buttons - RIGHT {% endcomment %}\r
+      <div class="view-toggles">
+        <button class="view-btn" data-view="grid-1" onclick="changeView('grid-1')" title="Single Column">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <rect x="2" y="2" width="16" height="4" rx="1"/>
+            <rect x="2" y="8" width="16" height="4" rx="1"/>
+            <rect x="2" y="14" width="16" height="4" rx="1"/>
+          </svg>
+        </button>
+        <button class="view-btn active" data-view="grid-2" onclick="changeView('grid-2')" title="Two Columns">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <rect x="2" y="2" width="7" height="7" rx="1"/>
+            <rect x="11" y="2" width="7" height="7" rx="1"/>
+            <rect x="2" y="11" width="7" height="7" rx="1"/>
+            <rect x="11" y="11" width="7" height="7" rx="1"/>
+          </svg>
+        </button>
+        <button class="view-btn" data-view="list" onclick="changeView('list')" title="List View">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <rect x="2" y="3" width="4" height="4" rx="1"/>
+            <rect x="8" y="3" width="10" height="4" rx="1"/>
+            <rect x="2" y="9" width="4" height="4" rx="1"/>
+            <rect x="8" y="9" width="10" height="4" rx="1"/>
+            <rect x="2" y="15" width="4" height="4" rx="1"/>
+            <rect x="8" y="15" width="10" height="4" rx="1"/>
+          </svg>
+        </button>
+      </div>
     </div>
     
     {%- comment -%} Products Grid {% endcomment %}\r
     {%- if collection.products.size > 0 -%}
-      <div class="product-grid-simple">
+      <div class="product-grid-attrangi" id="productGrid" data-view="grid-2">
         {%- for product in collection.products -%}
-          <div class="product-wrapper scroll-reveal">
+          <div class="product-wrapper-attrangi scroll-reveal">
             {% render 'product-card', product: product %}
           </div>
         {%- endfor -%}
@@ -39,20 +69,20 @@
 
       {%- comment -%} Pagination {% endcomment %}\r
       {%- if paginate.pages > 1 -%}
-        <div class="pagination">
+        <div class="pagination-attrangi">
           {%- if paginate.previous -%}
-            <a href="{{ paginate.previous.url }}" class="pagination-btn">← Previous</a>
+            <a href="{{ paginate.previous.url }}" class="pagination-btn-attrangi">← Previous</a>
           {%- endif -%}
           
-          <span class="page-numbers">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          <span class="page-numbers-attrangi">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
           
           {%- if paginate.next -%}
-            <a href="{{ paginate.next.url }}" class="pagination-btn">Next →</a>
+            <a href="{{ paginate.next.url }}" class="pagination-btn-attrangi">Next →</a>
           {%- endif -%}
         </div>
       {%- endif -%}
     {%- else -%}
-      <div class="no-products">
+      <div class="no-products-attrangi">
         <p>No products found in this collection.</p>
       </div>
     {%- endif -%}
@@ -61,105 +91,152 @@
 {%- endpaginate -%}
 
 <style>
-  /* SIMPLIFIED CATALOG PAGE */
-  .simple-catalog-page {
+  /* ATTRANGI-STYLE CATALOG PAGE */
+  .attrangi-catalog {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
   }
   
-  /* Header */
-  .catalog-header {
-    text-align: center;
-    margin-bottom: 30px;
+  /* Header - LEFT ALIGNED like Attrangi */
+  .catalog-header-attrangi {
+    text-align: left;
+    margin-bottom: 15px;
   }
   
-  .catalog-title {
-    font-size: 2rem;
+  .collection-title-left {
+    font-size: 1.8rem;
     font-weight: 800;
     color: #222;
-    margin: 0 0 10px 0;
-    letter-spacing: 1px;
+    margin: 0 0 5px 0;
+    letter-spacing: 0.5px;
   }
   
-  .product-count {
-    font-size: 1rem;
+  .product-count-left {
+    font-size: 0.9rem;
     color: #666;
     margin: 0;
   }
   
-  /* Toolbar with Sort */
-  .catalog-toolbar {
+  /* Toolbar - Sort LEFT, View Toggles RIGHT */
+  .catalog-toolbar-attrangi {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     padding: 15px 0;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 1px solid #e0e0e0;
   }
   
-  .sort-wrapper {
+  .sort-wrapper-attrangi {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
   
-  .sort-wrapper label {
+  .sort-wrapper-attrangi label {
     font-weight: 600;
     color: #333;
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
   
-  .sort-select {
-    padding: 10px 35px 10px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 0.95rem;
+  .sort-select-attrangi {
+    padding: 8px 30px 8px 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
     color: #333;
     background: white;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease;
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23333' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 12px center;
+    background-position: right 10px center;
   }
   
-  .sort-select:hover {
+  .sort-select-attrangi:hover,
+  .sort-select-attrangi:focus {
     border-color: #ff6f00;
-  }
-  
-  .sort-select:focus {
     outline: none;
-    border-color: #ff6f00;
-    box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
   }
   
-  /* Product Grid */
-  .product-grid-simple {
+  /* View Toggle Buttons */
+  .view-toggles {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .view-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ddd;
+    background: white;
+    color: #666;
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  
+  .view-btn:hover {
+    border-color: #ff6f00;
+    color: #ff6f00;
+  }
+  
+  .view-btn.active {
+    border-color: #ff6f00;
+    background: #ff6f00;
+    color: white;
+  }
+  
+  /* Product Grid - Default 2 columns */
+  .product-grid-attrangi {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin-bottom: 40px;
   }
   
+  /* Grid View 1 - Single Column */
+  .product-grid-attrangi[data-view="grid-1"] {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Grid View 2 - Two Columns (default) */
+  .product-grid-attrangi[data-view="grid-2"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* List View */
+  .product-grid-attrangi[data-view="list"] {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .product-grid-attrangi[data-view="list"] .product-wrapper-attrangi {
+    display: flex;
+  }
+  
+  /* Desktop responsive */
   @media (min-width: 768px) {
-    .product-grid-simple {
+    .product-grid-attrangi[data-view="grid-2"] {
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
   }
   
   @media (min-width: 1024px) {
-    .product-grid-simple {
+    .product-grid-attrangi[data-view="grid-2"] {
       grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
     }
   }
   
   /* Pagination */
-  .pagination {
-   display: flex;
+  .pagination-attrangi {
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
@@ -167,29 +244,29 @@
     padding: 20px;
   }
   
-  .pagination-btn {
+  .pagination-btn-attrangi {
     padding: 12px 24px;
     background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
     color: white;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 2px 8px rgba(255, 111, 0, 0.2);
   }
   
-  .pagination-btn:hover {
+  .pagination-btn-attrangi:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
   }
   
-  .page-numbers {
+  .page-numbers-attrangi {
     font-weight: 600;
     color: #666;
   }
   
   /* No Products */
-  .no-products {
+  .no-products-attrangi {
     text-align: center;
     padding: 60px 20px;
     color: #888;
@@ -198,30 +275,56 @@
   
   /* Mobile Adjustments */
   @media (max-width: 767px) {
-    .catalog-title {
+    .collection-title-left {
       font-size: 1.5rem;
     }
     
-    .catalog-toolbar {
+    .catalog-toolbar-attrangi {
       flex-direction: column;
       align-items: flex-start;
       gap: 15px;
     }
     
-    .sort-wrapper {
-      width: 100%;
-    }
-    
-    .sort-select {
-      flex: 1;
-      min-width: 200px;
+    .view-toggles {
+      align-self: flex-end;
     }
   }
 </style>
 
+<script>
+  // View Toggle Functionality
+  function changeView(viewType) {
+    const grid = document.getElementById('productGrid');
+    const buttons = document.querySelectorAll('.view-btn');
+    
+    // Update grid view
+    grid.setAttribute('data-view', viewType);
+    
+    // Update active button
+    buttons.forEach(btn => {
+      if (btn.getAttribute('data-view') === viewType) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+    
+    // Save preference
+    localStorage.setItem('preferredView', viewType);
+  }
+  
+  // Load saved view preference
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedView = localStorage.getItem('preferredView');
+    if (savedView) {
+      changeView(savedView);
+    }
+  });
+</script>
+
 {% schema %}
 {
-  "name": "Collection Product Grid - Simple",
+  "name": "Collection Product Grid - Attrangi Style",
   "settings": []
 }
 {% endschema %}
