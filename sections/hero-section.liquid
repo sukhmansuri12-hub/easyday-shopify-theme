@@ -5,7 +5,7 @@
 <section class="hero-section scroll-reveal" style="background-image: url({% if section.settings.bg_image %}{{ section.settings.bg_image | image_url }}{% else %}{{ 'easyday-hero-bg.jpg' | asset_url }}{% endif %});">
   <div class="hero-overlay"></div>
   <div class="container">
-    <div class="hero-content animate-on-scroll scroll-reveal" data-animation="fade-in-up">
+    <div class="hero-content scroll-reveal">
       {%- if section.settings.heading != blank -%}
         <h1 class="hero-title">{{ section.settings.heading }}</h1>
       {%- endif -%}
