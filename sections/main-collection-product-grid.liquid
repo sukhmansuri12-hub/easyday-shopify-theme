@@ -45,13 +45,13 @@
         </div>
       </div>
       
-      <!-- Sort By Options -->
+      {%- comment -%} Sort By - REORDERED {%endcomment -%}
       <div class="filter-group">
         <h4 class="filter-title">Sort By</h4>
         <div class="filter-options">
           <label class="filter-checkbox">
-            <input type="radio" name="sortOption" value="?sort_by=" onchange="applySortFilter(this)" checked>
-            <span>Featured</span>
+            <input type="radio" name="sortOption" value="?sort_by=best-selling" onchange="applySortFilter(this)">
+            <span>Best Selling</span>
           </label>
           <label class="filter-checkbox">
             <input type="radio" name="sortOption" value="?sort_by=price-ascending" onchange="applySortFilter(this)">
@@ -62,12 +62,8 @@
             <span>Price: High to Low</span>
           </label>
           <label class="filter-checkbox">
-            <input type="radio" name="sortOption" value="?sort_by=best-selling" onchange="applySortFilter(this)">
-            <span>Best Selling</span>
-          </label>
-          <label class="filter-checkbox">
-            <input type="radio" name="sortOption" value="?sort_by=created-descending" onchange="applySortFilter(this)">
-            <span>Newest First</span>
+            <input type="radio" name="sortOption" value="?sort_by=" onchange="applySortFilter(this)" checked>
+            <span>Featured</span>
           </label>
         </div>
       </div>
@@ -683,12 +679,12 @@
       height: 100vh;
       height: 100dvh;
       z-index: 999;
-      overflow-y: auto; /* ENABLE SCROLLING */
-      -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       transition: left 0.3s ease;
       border-radius: 0;
       box-shadow: 2px 0 15px rgba(0,0,0,0.2);
-      padding: 0 20px 140px 20px; /* Bottom padding for fixed buttons */
+      padding: 80px 20px 140px 20px; /* TOP PADDING FOR STICKY HEADER! */
       background: white;
     }
     
