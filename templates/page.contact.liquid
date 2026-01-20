@@ -1,0 +1,147 @@
+<div class="contact-page-container" style="max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px 20px;">
+  
+  {%- comment -%} Page Title {%- endcomment -%}
+  <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 15px; color: #333; text-align: center;">{{ page.title }}</h1>
+  
+  {%- comment -%} Existing Page Content from Shopify {%- endcomment -%}
+  <div class="contact-intro" style="text-align: center; max-width: 700px; margin: 0 auto 50px auto; color: #666; font-size: 1rem; line-height: 1.7;">
+    {{ page.content }}
+  </div>
+
+  {%- comment -%} Two Column Layout {%- endcomment -%}
+  <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px;">
+    
+    {%- comment -%} LEFT: Contact Information {%- endcomment -%}
+    <div class="contact-info-section" style="background: #f9f9f9; padding: 30px; border-radius: 12px;">
+      
+      <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 25px; color: #333;">Get In Touch</h2>
+      
+      {%- comment -%} Email {%- endcomment -%}
+      <div style="margin-bottom: 25px;">
+        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: #ff6f00; text-transform: uppercase; letter-spacing: 0.5px;">📧 Email</h3>
+        <a href="mailto:help.easyday@gmail.com" style="color: #333; text-decoration: none; font-size: 1.1rem;">help.easyday@gmail.com</a>
+      </div>
+
+      {%- comment -%} Support Hours {%- endcomment -%}
+      <div style="margin-bottom: 25px;">
+        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: #ff6f00; text-transform: uppercase; letter-spacing: 0.5px;">🕒 Support Hours</h3>
+        <p style="color: #555; margin: 0; line-height: 1.6;">
+          <strong>Monday – Friday:</strong> 10:00 AM – 6:00 PM<br>
+          <span style="font-size: 0.9rem; color: #888;">(Excluding public holidays)</span>
+        </p>
+      </div>
+
+      {%- comment -%} Response Note {%- endcomment -%}
+      <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #ff6f00;">
+        <p style="color: #666; margin: 0; font-size: 0.9rem; line-height: 1.6;">
+          💡 <strong>Note:</strong> During public holidays or high order volume, response times may be slightly longer. We aim to respond within 24-48 hours.
+        </p>
+      </div>
+    </div>
+
+    {%- comment -%} RIGHT: Contact Form {%- endcomment -%}
+    <div class="contact-form-section" style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e0e0e0;">
+      
+      <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 20px; color: #333;">Send Us A Message</h2>
+      
+      {%- form 'contact' -%}
+        
+        {%- if form.posted_successfully? -%}
+          <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+            <strong>✅ Thank you!</strong> Your message has been sent. We'll get back to you soon!
+          </div>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+            <strong>⚠️ Oops!</strong> Please check the form and try again.
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Name Field {%- endcomment -%}
+        <div style="margin-bottom: 20px;">
+          <label for="contact-name" style="display: block; font-weight: 600; margin-bottom: 8px; color: #333; font-size: 0.9rem;">Your Name *</label>
+          <input 
+            type="text" 
+            id="contact-name" 
+            name="contact[name]" 
+            required
+            placeholder="Enter your full name"
+            style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;"
+          >
+        </div>
+
+        {%- comment -%} Email Field {%- endcomment -%}
+        <div style="margin-bottom: 20px;">
+          <label for="contact-email" style="display: block; font-weight: 600; margin-bottom: 8px; color: #333; font-size: 0.9rem;">Your Email *</label>
+          <input 
+            type="email" 
+            id="contact-email" 
+            name="contact[email]" 
+            required
+            placeholder="your@email.com"
+            style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;"
+          >
+        </div>
+
+        {%- comment -%} Order Number (Optional) {%- endcomment -%}
+        <div style="margin-bottom: 20px;">
+          <label for="contact-order" style="display: block; font-weight: 600; margin-bottom: 8px; color: #333; font-size: 0.9rem;">Order Number (Optional)</label>
+          <input 
+            type="text" 
+            id="contact-order" 
+            name="contact[order-number]" 
+            placeholder="e.g., #1001"
+            style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;"
+          >
+        </div>
+
+        {%- comment -%} Message Field {%- endcomment -%}
+        <div style="margin-bottom: 20px;">
+          <label for="contact-message" style="display: block; font-weight: 600; margin-bottom: 8px; color: #333; font-size: 0.9rem;">Your Message *</label>
+          <textarea 
+            id="contact-message" 
+            name="contact[body]" 
+            rows="6" 
+            required
+            placeholder="Tell us about your question or issue..."
+            style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; resize: vertical; box-sizing: border-box; font-family: inherit;"
+          ></textarea>
+        </div>
+
+        {%- comment -%} Submit Button {%- endcomment -%}
+        <button 
+          type="submit"
+          style="width: 100%; background: linear-gradient(135deg, #ff6f00, #ff8c33); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 111, 0, 0.3); transition: transform 0.2s ease;"
+          onmouseover="this.style.transform='scale(1.02)'"
+          onmouseout="this.style.transform='scale(1)'"
+        >
+          📩 Send Message
+        </button>
+
+      {%- endform -%}
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr !important;
+      gap: 25px !important;
+    }
+    
+    .contact-page-container h1 {
+      font-size: 2rem !important;
+    }
+  }
+
+  /* Input Focus States */
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #ff6f00 !important;
+    box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
+  }
+</style>
