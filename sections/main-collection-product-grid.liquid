@@ -21,56 +21,56 @@
       <!-- Active Filters -->
       <div class="active-filters" id="activeFilters"></div>
       
-      <!-- Category/Tag Filters -->
+      {%- comment -%} Category/Tag Filters - NO AUTO-APPLY {%endcomment -%}
       <div class="filter-group">
         <h4 class="filter-title">Categories</h4>
         <div class="filter-options">
           <label class="filter-checkbox">
-            <input type="checkbox" value="kitchen" onchange="toggleCategoryFilter(this)">
+            <input type="checkbox" value="kitchen">
             <span>Kitchen ({{ collection.all_tags | where: 'kitchen' | size }})</span>
           </label>
           <label class="filter-checkbox">
-            <input type="checkbox" value="health" onchange="toggleCategoryFilter(this)">
+            <input type="checkbox" value="health">
             <span>Health & Wellness</span>
           </label>
           <label class="filter-checkbox">
-            <input type="checkbox" value="home" onchange="toggleCategoryFilter(this)">
+            <input type="checkbox" value="home">
             <span>Home Essentials</span>
           </label>
           <label class="filter-checkbox">
-            <input type="checkbox" value="toys" onchange="toggleCategoryFilter(this)">
+            <input type="checkbox" value="toys">
             <span>Toys & Games</span>
           </label>
         </div>
       </div>
       
-      {%- comment -%} Sort By - REORDERED {%endcomment -%}
+      {%- comment -%} Sort By - NO AUTO-APPLY {%endcomment -%}
       <div class="filter-group">
         <h4 class="filter-title">Sort By</h4>
         <div class="filter-options">
           <label class="filter-checkbox">
-            <input type="radio" name="sortOption" value="?sort_by=best-selling" onchange="applySortFilter(this)">
+            <input type="radio" name="sortOption" value="?sort_by=best-selling">
             <span>Best Selling</span>
           </label>
           <label class="filter-checkbox">
-            <input type="radio" name="sortOption" value="?sort_by=price-ascending" onchange="applySortFilter(this)">
+            <input type="radio" name="sortOption" value="?sort_by=price-ascending">
             <span>Price: Low to High</span>
           </label>
           <label class="filter-checkbox">
-            <input type="radio" name="sortOption" value="?sort_by=price-descending" onchange="applySortFilter(this)">
+            <input type="radio" name="sortOption" value="?sort_by=price-descending">
             <span>Price: High to Low</span>
           </label>
           <label class="filter-checkbox">
-            <input type="radio" name="sortOption" value="?sort_by=" onchange="applySortFilter(this)" checked>
+            <input type="radio" name="sortOption" value="?sort_by=" checked>
             <span>Featured</span>
           </label>
         </div>
       </div>
       
-      <!-- Filter Actions -->
+      {%- comment -%} Filter Actions - APPLY MANUALLY {%endcomment -%}
       <div class="filter-actions">
         <button class="btn-clear-filters" onclick="clearAllFilters()">Clear All</button>
-        <button class="btn-apply-filters mobile-only" onclick="toggleFilterDrawer()">Apply Filters</button>
+        <button class="btn-apply-filters mobile-only" onclick="applyAllFilters()">Apply Filters</button>
       </div>
     </aside>
     
@@ -809,7 +809,7 @@
     });
   }
   
-  // Category filters
+  // Category filters - NO AUTO APPLY
   let activeCategories = [];
   
   function toggleCategoryFilter(checkbox) {
@@ -820,7 +820,7 @@
       activeCategories = activeCategories.filter(c => c !== value);
     }
     updateActiveFilters();
-    applyFilters();
+    // REMOVED: applyFilters(); - Now only applies when button clicked
   }
   
   // Update active filters display
@@ -873,61 +873,54 @@
   
   // Clear all filters
   function clearAllFilters() {
-    resetPriceFilter();
-    updateActiveFilters();
-    applyFilters();
-  }
-  
-  // Apply filters to products
-  function applyFilters() {
-    const products = document.querySelectorAll('.product-item');
-    const minPrice = parseInt(priceMin?.value || 0);
-    const maxPrice = parseInt(priceMax?.value || 999999);
+    // Clear checkboxes
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    activeCategories = [];
     
-    products.forEach(product => {
-      const price = parseInt(product.dataset.price);
-      const inPriceRange = price >= minPrice && price <= maxPrice;
-      
-      // For now, just show all products (category filtering would need product tags)
-      if (inPriceRange) {
-        product.style.display = 'block';
-      } else {
-        product.style.display = 'none';
-      }
-    });
-  }
-  
-  // Unified main filter handler
-  function handleMainFilter(value) {
-    if (!value) return;
+    // Reset to Featured sort
+    document.querySelector('input[value="?sort_by="]').checked = true;
     
-    // Check if it's a category (starts with /) or a sort option (starts with ?)
-    if (value.startsWith('/')) {
-      // Navigate to category
-      window.location.href = value;
-    } else if (value.startsWith('?')) {
-      // The original content of this block is removed as per the instruction.
-      // The new applySortFilter function will handle sorting.
+    // Reset price if exists
+    if (priceMin && priceMax) {
+      priceMin.value = 0;
+      priceMax.value = 5000;
+      if (priceMinDisplay) priceMinDisplay.textContent = '₹0';
+      if (priceMaxDisplay) priceMaxDisplay.textContent = '₹5000';
     }
+    
+    updateActiveFilters();
   }
   
-  // Apply sort filter - FIXED TO ACTUALLY WORK
-  function applySortFilter(radio) {
-    if (radio.checked) {
+  // APPLY ALL FILTERS - Called when Apply Filters button is clicked
+  function applyAllFilters() {
+    // Get selected sort option
+    const selectedSort = document.querySelector('input[name="sortOption"]:checked');
+    
+    if (selectedSort && selectedSort.value) {
       const currentUrl = new URL(window.location.href);
-      const sortValue = radio.value;
+      const sortValue = selectedSort.value;
       
       // Clear existing sort parameter
       currentUrl.searchParams.delete('sort_by');
       
-      // Add new sort parameter if not featured
+      // Add new sort parameter if not featured (default)
       if (sortValue && sortValue !== '?sort_by=') {
         const sortParam = sortValue.replace('?sort_by=', '');
         currentUrl.searchParams.set('sort_by', sortParam);
       }
       
-      // Reload page with new sort
+      // Also collect category filters for future use
+      const selectedCategories = [];
+      document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+        selectedCategories.push(cb.value);
+      });
+      
+      // Close drawer and redirect with filters
+      toggleFilterDrawer();
       window.location.href = currentUrl.toString();
+    } else {
+      // No sort change, just close drawer
+      toggleFilterDrawer();
     }
   }
   

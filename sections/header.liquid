@@ -41,23 +41,32 @@
 </header>
 
 {% comment %} Backdrop Overlay {% endcomment %}
-<div id="menu-backdrop" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;"></div>
+<div id="menu-backdrop" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.6); z-index: 999998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;"></div>
 
-{% comment %} Mobile Menu Drawer {% endcomment %}
-<div id="mobile-drawer" style="position: fixed; top: 0; left: -100%; width: auto; max-width: 85%; height: 100vh; background: white; z-index: 999999; box-shadow: 2px 0 10px rgba(0,0,0,0.1); transition: left 0.3s ease;">
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #eee;">
-        <h3 style="margin: 0; font-size: 1.2rem; font-weight: 600;">Menu</h3>
-        <span id="close-drawer" style="font-size: 2rem; cursor: pointer; line-height: 1; color: #333;">&times;</span>
+{% comment %} Mobile Menu Drawer - SLIDE FROM RIGHT {% endcomment %}
+<div id="mobile-drawer" style="position: fixed; top: 0; right: -100%; width: 300px; max-width: 85%; height: 100vh; background: white; z-index: 999999; box-shadow: -2px 0 20px rgba(0,0,0,0.15); transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto;">
+    {% comment %} Header with Close Button {% endcomment %}
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 25px 20px; border-bottom: 1px solid #f0f0f0;">
+        <h3 style="margin: 0; font-size: 1.3rem; font-weight: 700; color: #222;">Menu</h3>
+        <button id="close-drawer" style="background: none; border: none; font-size: 2.5rem; cursor: pointer; line-height: 1; color: #666; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s ease;" onmouseover="this.style.background='#f5f5f5'; this.style.color='#ff6f00';" onmouseout="this.style.background='none'; this.style.color='#666';">&times;</button>
     </div>
-    <div style="padding: 10px 0;">
-      <a href="{{ routes.root_url }}" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">HOME PAGE</a>
-      <a href="/#featured-products" id="featured-link" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">FEATURED PRODUCTS</a>
-      <a href="/pages/toys-gifts" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">TOYS & GIFTS</a>
-      <a href="/pages/home-kitchen" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">HOME & KITCHEN</a>
-      <a href="/pages/clothing-accessories" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">CLOTHING & ACCESSORIES</a>
-      <a href="/pages/personal-care-wellness" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid #f5f5f5; white-space: nowrap;">PERSONAL CARE & WELLNESS</a>
-      <a href="/collections/all" style="display: block; padding: 15px 20px; text-decoration: none; color: #333; font-size: 0.95rem; font-weight: 500; white-space: nowrap;">CATALOG</a>
-    </div>
+    
+    {% comment %} Menu Links {% endcomment %}
+    <nav style="padding: 10px 0;">
+      <a href="{{ routes.root_url }}" style="display: block; padding: 16px 24px; text-decoration: none; color: #333; font-size: 1rem; font-weight: 500; border-bottom: 1px solid #f8f8f8; transition: all 0.2s ease;" onmouseover="this.style.background='#fff5ec'; this.style.color='#ff6f00'; this.style.paddingLeft='32px';" onmouseout="this.style.background='white'; this.style.color='#333'; this.style.paddingLeft='24px';">🏠 Home</a>
+      
+      <a href="/#featured-products" id="featured-link" style="display: block; padding: 16px 24px; text-decoration: none; color: #333; font-size: 1rem; font-weight: 500; border-bottom: 1px solid #f8f8f8; transition: all 0.2s ease;" onmouseover="this.style.background='#fff5ec'; this.style.color='#ff6f00'; this.style.paddingLeft='32px';" onmouseout="this.style.background='white'; this.style.color='#333'; this.style.paddingLeft='24px';">⭐ Featured Products</a>
+      
+      <a href="/pages/toys-gifts" style="display: block; padding: 16px 24px; text-decoration: none; color: #333; font-size: 1rem; font-weight: 500; border-bottom: 1px solid #f8f8f8; transition: all 0.2s ease;" onmouseover="this.style.background='#fff5ec'; this.style.color='#ff6f00'; this.style.paddingLeft='32px';" onmouseout="this.style.background='white'; this.style.color='#333'; this.style.paddingLeft='24px';">🎁 Toys & Gifts</a>
+      
+      <a href="/pages/home-kitchen" style="display: block; padding: 16px 24px; text-decoration: none; color: #333; font-size: 1rem; font-weight: 500; border-bottom: 1px solid #f8f8f8; transition: all 0.2s ease;" onmouseover="this.style.background='#fff5ec'; this.style.color='#ff6f00'; this.style.paddingLeft='32px';" onmouseout="this.style.background='white'; this.style.color='#333'; this.style.paddingLeft='24px';">🏡 Home & Kitchen</a>
+      
+      <a href="/pages/clothing-accessories" style="display: block; padding: 16px 24px; text-decoration: none; color: #333; font-size: 1rem; font-weight: 500; border-bottom: 1px solid #f8f8f8; transition: all 0.2s ease;" onmouseover="this.style.background='#fff5ec'; this.style.color='#ff6f00'; this.style.paddingLeft='32px';" onmouseout="this.style.background='white'; this.style.color='#333'; this.style.paddingLeft='24px';">👕 Clothing & Accessories</a>
+      
+      <a href="/pages/personal-care-wellness" style="display: block; padding: 16px 24px; text-decoration: none; color: #333; font-size: 1rem; font-weight: 500; border-bottom: 1px solid #f8f8f8; transition: all 0.2s ease;" onmouseover="this.style.background='#fff5ec'; this.style.color='#ff6f00'; this.style.paddingLeft='32px';" onmouseout="this.style.background='white'; this.style.color='#333'; this.style.paddingLeft='24px';">💆 Personal Care & Wellness</a>
+      
+      <a href="/collections/all" style="display: block; padding: 16px 24px; text-decoration: none; color: #333; font-size: 1rem; font-weight: 600; background: linear-gradient(135deg, #fff5ec 0%, #ffe8d6 100%); color: #ff6f00; border-bottom: none;">📦 View All Products</a>
+    </nav>
 </div>
 
 <script>
@@ -84,7 +93,7 @@
     
     function openDrawer() {
       if (drawer && backdrop) {
-        drawer.style.left = '0';
+        drawer.style.right = '0';
         backdrop.style.opacity = '1';
         backdrop.style.pointerEvents = 'auto';
       }
@@ -92,7 +101,7 @@
     
     function closeDrawer() {
       if (drawer && backdrop) {
-        drawer.style.left = '-100%';
+        drawer.style.right = '-100%';
         backdrop.style.opacity = '0';
         backdrop.style.pointerEvents = 'none';
       }
