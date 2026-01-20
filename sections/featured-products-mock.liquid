@@ -168,16 +168,21 @@
       border: none !important;
       width: 40px !important;
       height: 40px !important;
-      border-radius: 0 12px 0 12px !important;
-      font-size: 1.3rem !important;
+      border-radius: 50% !important;
+      font-size: 1.4rem !important;
       line-height: 1 !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       cursor: pointer !important;
       z-index: 9999 !important;
-      box-shadow: 0 3px 8px rgba(255, 111, 0, 0.6) !important;
+      box-shadow: 0 3px 10px rgba(255, 111, 0, 0.5) !important;
       pointer-events: auto !important;
+      transition: transform 0.2s ease !important;
+  }
+  
+  .add-btn:hover {
+      transform: scale(1.15) !important;
   }
 
   /* Content */
