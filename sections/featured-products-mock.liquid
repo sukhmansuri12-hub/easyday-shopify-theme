@@ -6,14 +6,14 @@
 }
 {% endschema %}
 
-<section class="featured-products-mock section-padding" style="position: relative; overflow: hidden;">
+<section class="featured-products-mock section-padding scroll-reveal" style="position: relative; overflow: hidden;">
   <div class="container">
     
-    <div class="section-header text-center" style="position: relative; z-index: 1;">
+    <div class="section-header text-center scroll-reveal" style="position: relative; z-index: 1;">
       <h2>Featured Products</h2>
     </div>
 
-    <div class="mock-product-grid" id="featured-products">
+    <div class="mock-product-grid scroll-reveal" id="featured-products">
         
         {%- assign featured_collection = collections.all -%}
         {%- if featured_collection.products.size > 0 -%}
