@@ -1,3 +1,42 @@
-{{ content_for_header }}
+<div class="page-container" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px 20px;">
+  <div class="page-content">
+    <h1 class="page-title" style="font-size: 2rem; font-weight: 700; margin-bottom: 20px; color: #333;">{{ page.title }}</h1>
+    
+    <div class="page-body" style="line-height: 1.8; color: #666; font-size: 1rem;">
+      {{ page.content }}
+    </div>
+  </div>
+</div>
 
-{{ content_for_layout }}
+<style>
+  .page-body h2, .page-body h3, .page-body h4 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .page-body h2 { font-size: 1.5rem; }
+  .page-body h3 { font-size: 1.3rem; }
+  
+  .page-body p {
+    margin-bottom: 15px;
+  }
+  
+  .page-body ul, .page-body ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .page-body li {
+    margin-bottom: 8px;
+  }
+  
+  .page-body a {
+    color: #ff6f00;
+    text-decoration: underline;
+  }
+  
+  .page-body a:hover {
+    color: #e65c00;
+  }
+</style>
