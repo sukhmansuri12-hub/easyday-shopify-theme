@@ -222,14 +222,54 @@
     max-width: 600px;
   }
   
-  /* List View - Horizontal cards */
+  /* List View - Horizontal cards like screenshot */
   .product-grid.list-view {
     grid-template-columns: 1fr;
     gap: 15px;
   }
   
   .product-grid.list-view .product-item {
-    display: flex;
+    width: 100%;
+  }
+  
+  /* Make product cards horizontal in list view */
+  .product-grid.list-view .product-card,
+  .product-grid.list-view .product-item > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 15px !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 8px !important;
+    padding: 15px !important;
+    background: white !important;
+  }
+  
+  .product-grid.list-view .product-card img,
+  .product-grid.list-view .product-item img {
+    width: 180px !important;
+    max-width: 180px !important;
+    height: 180px !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+    border-radius: 6px !important;
+  }
+  
+  .product-grid.list-view .product-card .product-info,
+  .product-grid.list-view .product-item .product-info {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  
+  @media (max-width: 767px) {
+    .product-grid.list-view .product-card img,
+    .product-grid.list-view .product-item img {
+      width: 120px !important;
+      max-width: 120px !important;
+      height: 120px !important;
+    }
   }
   
   /* Pagination */
