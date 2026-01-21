@@ -139,23 +139,21 @@
     font-size: 1rem;
     font-weight: 500;
     color: #000;
-    padding: 10px 35px 10px 15px;
-    border: 2px solid #007bff;
-    border-radius: 6px;
-    background: white;
+    padding: 10px 30px 10px 0;
+    border: none;
+    background: transparent;
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
-    min-width: 180px;
     outline: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23000' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 12px center;
+    background-position: right center;
   }
   
   .sort-dropdown:hover,
   .sort-dropdown:focus {
-    border-color: #0056b3;
+    outline: none;
   }
   
   /* View Icons - 3 SHAPES */
@@ -224,8 +222,8 @@
   
   /* List View - Horizontal cards like screenshot */
   .product-grid.list-view {
-    grid-template-columns: 1fr;
-    gap: 15px;
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
   }
   
   .product-grid.list-view .product-item {
