@@ -17,8 +17,7 @@
     {%- comment -%} Sort Dropdown - WITH BORDER {% endcomment %}
     <div class="sort-container">
       <select id="SortBy" class="sort-dropdown" onchange="window.location.href=this.value">
-        <option value="{{ collection.url }}" {% unless request.url contains 'sort_by=' %}selected{% endunless %}>Sort</option>
-        <option value="{{ collection.url }}?sort_by=" {% if request.url contains 'sort_by=' and request.url contains '?sort_by=' %}selected{% endif %}>Featured</option>
+        <option value="{{ collection.url }}?sort_by=manual" {% unless request.url contains 'sort_by=' or request.url contains 'sort_by=manual' %}selected{% endunless %}>Featured</option>
         <option value="{{ collection.url }}?sort_by=best-selling" {% if request.url contains 'sort_by=best-selling' %}selected{% endif %}>Best selling</option>
         <option value="{{ collection.url }}?sort_by=title-ascending" {% if request.url contains 'sort_by=title-ascending' %}selected{% endif %}>Alphabetically, A-Z</option>
         <option value="{{ collection.url }}?sort_by=title-descending" {% if request.url contains 'sort_by=title-descending' %}selected{% endif %}>Alphabetically, Z-A</option>
