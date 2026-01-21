@@ -1,23 +1,22 @@
 {% comment %}
-  Collection Page - EXACTLY LIKE ATTRANGI
-  Left-aligned title, sort dropdown, view toggle buttons
+  Collection Page - EXACT ATTRANGI REPLICA
+  Based on live examination of attrangigadgets.com/collections/all
 {% endcomment %}
 
 {%- paginate collection.products by 12 -%}
-  <div class="attrangi-catalog">
+  <div class="attrangi-exact-catalog">
     
-    {%- comment -%} Collection Title - LEFT ALIGNED {% endcomment %}\r
-    <div class="catalog-header-attrangi">
-      <h1 class="collection-title-left">{{ collection.title | upcase }}</h1>
-      <p class="product-count-left">{{ collection.products_count }} products</p>
+    {%- comment -%} Title + Count - LEFT ALIGNED {% endcomment %}\r
+    <div class="catalog-header-exact">
+      <h1 class="title-exact">{{ collection.title | upcase }}</h1>
+      <p class="count-exact">{{ collection.products_count }} products</p>
     </div>
     
-    {%- comment -%} Toolbar: Sort + View Toggles {% endcomment %}\r
-    <div class="catalog-toolbar-attrangi">
-      {%- comment -%} Sort Dropdown - LEFT {% endcomment %}\r
-      <div class="sort-wrapper-attrangi">
-        <label for="sortSelect">Sort</label>
-        <select id="sortSelect" class="sort-select-attrangi" onchange="window.location.href=this.value">
+    {%- comment -%} Toolbar: Sort (LEFT) + View Toggles (RIGHT) {% endcomment %}\r
+    <div class="toolbar-exact">
+      {%- comment -%} Sort Dropdown - NO BORDERS {% endcomment %}\r
+      <div class="sort-exact-wrapper">
+        <select id="SortBy" class="sort-exact" onchange="window.location.href=this.value">
           <option value="{{ collection.url }}" {% unless request.url contains 'sort_by=' %}selected{% endunless %}>Featured</option>
           <option value="{{ collection.url }}?sort_by=best-selling" {% if request.url contains 'sort_by=best-selling' %}selected{% endif %}>Best selling</option>
           <option value="{{ collection.url }}?sort_by=title-ascending" {% if request.url contains 'sort_by=title-ascending' %}selected{% endif %}>Alphabetically, A-Z</option>
@@ -27,31 +26,29 @@
         </select>
       </div>
       
-      {%- comment -%} View Toggle Buttons - RIGHT {% endcomment %}\r
-      <div class="view-toggles">
-        <button class="view-btn" data-view="grid-1" onclick="changeView('grid-1')" title="Single Column">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <rect x="2" y="2" width="16" height="4" rx="1"/>
-            <rect x="2" y="8" width="16" height="4" rx="1"/>
-            <rect x="2" y="14" width="16" height="4" rx="1"/>
+      {%- comment -%} View Toggle Buttons - FADED WHEN INACTIVE {% endcomment %}\r
+      <div class="view-toggles-exact">
+        <button class="grid-view-btn" data-view="large" onclick="changeGridView('large')" aria-label="Large view">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
           </svg>
         </button>
-        <button class="view-btn active" data-view="grid-2" onclick="changeView('grid-2')" title="Two Columns">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <rect x="2" y="2" width="7" height="7" rx="1"/>
-            <rect x="11" y="2" width="7" height="7" rx="1"/>
-            <rect x="2" y="11" width="7" height="7" rx="1"/>
-            <rect x="11" y="11" width="7" height="7" rx="1"/>
+        <button class="grid-view-btn is-active" data-view="small" onclick="changeGridView('small')" aria-label="Grid view">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+            <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+            <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+            <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
           </svg>
         </button>
-        <button class="view-btn" data-view="list" onclick="changeView('list')" title="List View">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <rect x="2" y="3" width="4" height="4" rx="1"/>
-            <rect x="8" y="3" width="10" height="4" rx="1"/>
-            <rect x="2" y="9" width="4" height="4" rx="1"/>
-            <rect x="8" y="9" width="10" height="4" rx="1"/>
-            <rect x="2" y="15" width="4" height="4" rx="1"/>
-            <rect x="8" y="15" width="10" height="4" rx="1"/>
+        <button class="grid-view-btn" data-view="list" onclick="changeGridView('list')" aria-label="List view">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="5" height="5" rx="1" stroke="currentColor" stroke-width="2"/>
+            <rect x="10" y="4" width="11" height="5" rx="1" stroke="currentColor" stroke-width="2"/>
+            <rect x="3" y="11" width="5" height="5" rx="1" stroke="currentColor" stroke-width="2"/>
+            <rect x="10" y="11" width="11" height="5" rx="1" stroke="currentColor" stroke-width="2"/>
+            <rect x="3" y="18" width="5" height="3" rx="1" stroke="currentColor" stroke-width="2"/>
+            <rect x="10" y="18" width="11" height="3" rx="1" stroke="currentColor" stroke-width="2"/>
           </svg>
         </button>
       </div>
@@ -59,9 +56,9 @@
     
     {%- comment -%} Products Grid {% endcomment %}\r
     {%- if collection.products.size > 0 -%}
-      <div class="product-grid-attrangi" id="productGrid" data-view="grid-2">
+      <div class="product-grid-exact small-grid" id="productGridExact">
         {%- for product in collection.products -%}
-          <div class="product-wrapper-attrangi scroll-reveal">
+          <div class="product-wrapper-exact scroll-reveal">
             {% render 'product-card', product: product %}
           </div>
         {%- endfor -%}
@@ -69,20 +66,20 @@
 
       {%- comment -%} Pagination {% endcomment %}\r
       {%- if paginate.pages > 1 -%}
-        <div class="pagination-attrangi">
+        <div class="pagination-exact">
           {%- if paginate.previous -%}
-            <a href="{{ paginate.previous.url }}" class="pagination-btn-attrangi">← Previous</a>
+            <a href="{{ paginate.previous.url }}" class="pagination-btn-exact">← Previous</a>
           {%- endif -%}
           
-          <span class="page-numbers-attrangi">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          <span class="page-numbers-exact">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
           
           {%- if paginate.next -%}
-            <a href="{{ paginate.next.url }}" class="pagination-btn-attrangi">Next →</a>
+            <a href="{{ paginate.next.url }}" class="pagination-btn-exact">Next →</a>
           {%- endif -%}
         </div>
       {%- endif -%}
     {%- else -%}
-      <div class="no-products-attrangi">
+      <div class="no-products-exact">
         <p>No products found in this collection.</p>
       </div>
     {%- endif -%}
@@ -91,151 +88,143 @@
 {%- endpaginate -%}
 
 <style>
-  /* ATTRANGI-STYLE CATALOG PAGE */
-  .attrangi-catalog {
+  /* EXACT ATTRANGI CATALOG REPLICA */
+  .attrangi-exact-catalog {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
   }
   
-  /* Header - LEFT ALIGNED like Attrangi */
-  .catalog-header-attrangi {
+  /* Header - EXACTLY like Attrangi */
+  .catalog-header-exact {
     text-align: left;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
   
-  .collection-title-left {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #222;
-    margin: 0 0 5px 0;
+  .title-exact {
+    font-size: 2.0625rem; /* 33px */
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
     letter-spacing: 0.5px;
+    line-height: 1.2;
   }
   
-  .product-count-left {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 0;
+  .count-exact {
+    font-size: 0.9375rem; /* 15px */
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 20px 0;
   }
   
-  /* Toolbar - Sort LEFT, View Toggles RIGHT */
-  .catalog-toolbar-attrangi {
+  /* Toolbar - Sort LEFT, Toggles RIGHT */
+  .toolbar-exact {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    padding: 15px 0;
-    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 30px;
   }
   
-  .sort-wrapper-attrangi {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  /* Sort Dropdown - NO BORDERS! */
+  .sort-exact-wrapper {
+    position: relative;
   }
   
-  .sort-wrapper-attrangi label {
+  .sort-exact {
+    font-size: 0.9375rem; /* 15px */
     font-weight: 600;
-    color: #333;
-    font-size: 0.95rem;
-  }
-  
-  .sort-select-attrangi {
-    padding: 8px 30px 8px 12px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    color: #333;
-    background: white;
+    color: #000;
+    padding: 8px 30px 8px 0;
+    border: none;
+    background: transparent;
     cursor: pointer;
-    transition: border-color 0.2s ease;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23333' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23000' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 10px center;
+    background-position: right center;
   }
   
-  .sort-select-attrangi:hover,
-  .sort-select-attrangi:focus {
-    border-color: #ff6f00;
+  .sort-exact:focus {
     outline: none;
   }
   
-  /* View Toggle Buttons */
-  .view-toggles {
+  /* View Toggle Buttons - Faded when inactive */
+  .view-toggles-exact {
     display: flex;
-    gap: 5px;
-  }
-  
-  .view-btn {
-    width: 40px;
-    height: 40px;
-    border: 2px solid #ddd;
-    background: white;
-    color: #666;
-    cursor: pointer;
-    border-radius: 6px;
-    display: flex;
+    gap: 12px;
     align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
   }
   
-  .view-btn:hover {
-    border-color: #ff6f00;
-    color: #ff6f00;
+  .grid-view-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #000;
+    opacity: 0.15; /* FADED when inactive */
+    transition: opacity 0.2s ease;
   }
   
-  .view-btn.active {
-    border-color: #ff6f00;
-    background: #ff6f00;
-    color: white;
+  .grid-view-btn.is-active {
+    opacity: 1; /* FULL opacity when active */
   }
   
-  /* Product Grid - Default 2 columns */
-  .product-grid-attrangi {
+  .grid-view-btn:hover {
+    opacity: 0.5;
+  }
+  
+  .grid-view-btn.is-active:hover {
+    opacity: 1;
+  }
+  
+  /* Product Grid - Different Views */
+  .product-grid-exact {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin-bottom: 40px;
   }
   
-  /* Grid View 1 - Single Column */
-  .product-grid-attrangi[data-view="grid-1"] {
-    grid-template-columns: 1fr;
-  }
-  
-  /* Grid View 2 - Two Columns (default) */
-  .product-grid-attrangi[data-view="grid-2"] {
+  /* Small Grid (default) - 2 columns mobile, 3-4 desktop */
+  .product-grid-exact.small-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  /* List View */
-  .product-grid-attrangi[data-view="list"] {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  
-  .product-grid-attrangi[data-view="list"] .product-wrapper-attrangi {
-    display: flex;
-  }
-  
-  /* Desktop responsive */
   @media (min-width: 768px) {
-    .product-grid-attrangi[data-view="grid-2"] {
+    .product-grid-exact.small-grid {
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
   }
   
   @media (min-width: 1024px) {
-    .product-grid-attrangi[data-view="grid-2"] {
+    .product-grid-exact.small-grid {
       grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
   }
   
+  /* Large Grid - 1 column */
+  .product-grid-exact.large-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+  
+  /* List View */
+  .product-grid-exact.list-view {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .product-grid-exact.list-view .product-wrapper-exact {
+    display: flex;
+  }
+  
   /* Pagination */
-  .pagination-attrangi {
+  .pagination-exact {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -244,7 +233,7 @@
     padding: 20px;
   }
   
-  .pagination-btn-attrangi {
+  .pagination-btn-exact {
     padding: 12px 24px;
     background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
     color: white;
@@ -255,18 +244,18 @@
     box-shadow: 0 2px 8px rgba(255, 111, 0, 0.2);
   }
   
-  .pagination-btn-attrangi:hover {
+  .pagination-btn-exact:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
   }
   
-  .page-numbers-attrangi {
+  .page-numbers-exact {
     font-weight: 600;
     color: #666;
   }
   
   /* No Products */
-  .no-products-attrangi {
+  .no-products-exact {
     text-align: center;
     padding: 60px 20px;
     color: #888;
@@ -275,56 +264,64 @@
   
   /* Mobile Adjustments */
   @media (max-width: 767px) {
-    .collection-title-left {
-      font-size: 1.5rem;
+    .title-exact {
+      font-size: 1.75rem; /* Slightly smaller on mobile */
     }
     
-    .catalog-toolbar-attrangi {
-      flex-direction: column;
-      align-items: flex-start;
+    .toolbar-exact {
+      flex-wrap: wrap;
       gap: 15px;
     }
     
-    .view-toggles {
-      align-self: flex-end;
+    .view-toggles-exact {
+      margin-left: auto;
     }
   }
 </style>
 
 <script>
-  // View Toggle Functionality
-  function changeView(viewType) {
-    const grid = document.getElementById('productGrid');
-    const buttons = document.querySelectorAll('.view-btn');
+  // View Toggle Functionality - EXACTLY like Attrangi
+  function changeGridView(viewType) {
+    const grid = document.getElementById('productGridExact');
+    const buttons = document.querySelectorAll('.grid-view-btn');
     
-    // Update grid view
-    grid.setAttribute('data-view', viewType);
+    // Remove all view classes
+    grid.classList.remove('small-grid', 'large-grid', 'list-view');
+    
+    // Add appropriate class
+    if (viewType === 'large') {
+      grid.classList.add('large-grid');
+    } else if (viewType === 'list') {
+      grid.classList.add('list-view');
+    } else {
+      grid.classList.add('small-grid'); // default
+    }
     
     // Update active button
     buttons.forEach(btn => {
       if (btn.getAttribute('data-view') === viewType) {
-        btn.classList.add('active');
+        btn.classList.add('is-active');
       } else {
-        btn.classList.remove('active');
+        btn.classList.remove('is-active');
       }
     });
     
     // Save preference
-    localStorage.setItem('preferredView', viewType);
+    localStorage.setItem('catalogView', viewType);
   }
   
   // Load saved view preference
   document.addEventListener('DOMContentLoaded', function() {
-    const savedView = localStorage.getItem('preferredView');
+    const savedView = localStorage.getItem('catalogView');
     if (savedView) {
-      changeView(savedView);
+      changeGridView(savedView);
     }
   });
 </script>
 
 {% schema %}
 {
-  "name": "Collection Product Grid - Attrangi Style",
+  "name": "Collection Grid - Exact Attrangi",
   "settings": []
 }
 {% endschema %}
