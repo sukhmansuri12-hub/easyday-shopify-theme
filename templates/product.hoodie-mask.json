@@ -1,0 +1,12 @@
+{
+    "name": "Hoodie Mask",
+    "sections": {
+        "main": {
+            "type": "product-hoodie-mask",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

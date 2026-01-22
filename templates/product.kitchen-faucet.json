@@ -1,0 +1,12 @@
+{
+    "name": "Kitchen Faucet",
+    "sections": {
+        "main": {
+            "type": "product-kitchen-faucet",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

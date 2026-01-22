@@ -1,0 +1,12 @@
+{
+    "name": "Back Stretcher",
+    "sections": {
+        "main": {
+            "type": "product-back-stretcher",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "Lemon Tablets",
+    "sections": {
+        "main": {
+            "type": "product-lemon-tablets",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

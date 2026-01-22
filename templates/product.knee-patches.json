@@ -1,0 +1,12 @@
+{
+    "name": "Knee Patches",
+    "sections": {
+        "main": {
+            "type": "product-knee-patches",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

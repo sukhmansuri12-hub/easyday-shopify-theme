@@ -1,0 +1,12 @@
+{
+    "name": "Splash Guard",
+    "sections": {
+        "main": {
+            "type": "product-splash-guard",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

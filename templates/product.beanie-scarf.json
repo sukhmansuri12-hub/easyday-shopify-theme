@@ -1,0 +1,12 @@
+{
+    "name": "Beanie Scarf",
+    "sections": {
+        "main": {
+            "type": "product-beanie-scarf",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

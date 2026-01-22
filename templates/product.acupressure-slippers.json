@@ -1,0 +1,12 @@
+{
+    "name": "Acupressure Slippers",
+    "sections": {
+        "main": {
+            "type": "product-acupressure-slippers",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

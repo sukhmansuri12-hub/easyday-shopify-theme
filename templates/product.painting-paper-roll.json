@@ -1,0 +1,12 @@
+{
+    "name": "Painting Paper Roll",
+    "sections": {
+        "main": {
+            "type": "product-painting-paper-roll",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

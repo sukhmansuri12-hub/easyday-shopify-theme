@@ -1,0 +1,12 @@
+{
+    "name": "Posture Belt",
+    "sections": {
+        "main": {
+            "type": "product-posture-belt",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

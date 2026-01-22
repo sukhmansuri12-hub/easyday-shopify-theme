@@ -1,0 +1,12 @@
+{
+    "name": "Rat Repellent",
+    "sections": {
+        "main": {
+            "type": "product-rat-repellent",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}

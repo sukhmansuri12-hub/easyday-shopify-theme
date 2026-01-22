@@ -1,0 +1,12 @@
+{
+    "name": "Hair Straightener",
+    "sections": {
+        "main": {
+            "type": "product-hair-straightener",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}
