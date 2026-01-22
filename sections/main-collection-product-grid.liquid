@@ -336,6 +336,8 @@
     const grid = document.getElementById('productGrid');
     const buttons = document.querySelectorAll('.view-icon');
     
+    if (!grid) return;
+    
     // Remove all view classes
     grid.classList.remove('grid-view', 'large-view', 'list-view');
     
@@ -361,13 +363,21 @@
     localStorage.setItem('preferredView', viewType);
   }
   
-  // Load saved view on page load
-  document.addEventListener('DOMContentLoaded', function() {
+  // Load saved view on page load - MUST RUN IMMEDIATELY
+  (function() {
     const savedView = localStorage.getItem('preferredView');
     if (savedView) {
-      switchView(savedView);
+      // Wait for DOM to be ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          switchView(savedView);
+        });
+      } else {
+        // DOM already loaded
+        switchView(savedView);
+      }
     }
-  });
+  })();
 </script>
 
 {% schema %}
