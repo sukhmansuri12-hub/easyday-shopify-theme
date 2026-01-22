@@ -29,7 +29,7 @@
       <span>Total:</span>
       <span id="cart-total">₹0</span>
     </div>
-    <a href="/checkout" class="btn-checkout">PROCEED TO CHECKOUT</a>
+    <a href="/checkout" class="btn-checkout"><span style="font-size:1.3rem;letter-spacing:0.5px;">PROCEED TO CHECKOUT</span></a>
   </div>
 </div>
 
@@ -188,14 +188,21 @@
   .btn-checkout {
     display: block;
     width: 100%;
-    background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
+    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
     color: white;
     text-align: center;
-    padding: 15px;
-    border-radius: 8px;
-    font-weight: 700;
+    padding: 18px;
+    border-radius: 50px;
+    font-weight: 800;
     text-decoration: none;
     margin-top: 15px;
+    box-shadow: 0 6px 20px rgba(255,111,0,0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-checkout:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,111,0,0.5);
   }
 </style>
 
