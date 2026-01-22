@@ -1,0 +1,180 @@
+<div class="desc-block-rc">
+    <h3>🐾 STOP BRUSHING. START PETTING.</h3>
+    <p>
+        Forget scary old brushes that you and your pet hate! Turn grooming into bonding. Just stroke them, and watch the
+        loose fur vanish from your home. Your pet won't run away because it feels just like your hand.
+    </p>
+    <video id="grooming-video" autoplay loop muted playsinline style="width:100%; border-radius:12px; margin:15px 0;">
+        <source src="https://cdn.shopify.com/videos/c/o/v/a63e0d3500b74cc5a900351f688a7471.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <script>
+        // ULTRA-AGGRESSIVE VIDEO AUTOPLAY - NEVER STOPS
+        (function () {
+            const video = document.getElementById('grooming-video');
+            if (video) {
+                const forcePlay = () => {
+                    if (video.paused) video.play().catch(() => { });
+                };
+
+                video.play().catch(() => video.play());
+                setInterval(forcePlay, 100);
+                video.addEventListener('pause', forcePlay);
+                document.addEventListener('visibilitychange', forcePlay);
+                window.addEventListener('focus', forcePlay);
+                document.addEventListener('click', forcePlay);
+                window.addEventListener('scroll', forcePlay);
+            }
+        })();
+    </script>
+</div>
+
+<div class="desc-block-rc">
+    <h3>⚡ Meet the 2-in-1 Grooming Glove</h3>
+    <ul class="feature-list-rc">
+        <li>✅ <strong>Enhanced Silicone Tips</strong> - 255 soft silicone tips grab hair and dirt like a magnet.</li>
+        <li>✅ <strong>Gentle Massage Action</strong> - Your pet thinks it's play. You get a fur-free home.</li>
+        <li>✅ <strong>Easy to Clean</strong> - Hair peels off in one clean sheet. Washable & Reusable.</li>
+    </ul>
+    <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/gif_2.webp?v=1768475487"
+        alt="Product features demonstration" style="width:100%; border-radius:12px; margin:15px 0;">
+</div>
+
+<div class="desc-block-rc">
+    <h3>🐶🏠 Make them happy. Keep your home clean.</h3>
+    <p>
+        Made with food-grade silicone that's 100% safe for your pets and family. Unlike cheap brushes that hurt your pet
+        or fall apart, these gloves are built to last for years!Perfect for all coat types - short hair, long hair,
+        thick undercoats - works on everything!
+    </p>
+
+    <h4 style="text-align: center; font-size: 1.2rem; color: #FF6F00; margin: 25px 0 15px;">Slide to see the
+        difference!!</h4>
+
+    <!-- BEFORE/AFTER IMAGE COMPARISON SLIDER -->
+    <div class="before-after-container"
+        style="position: relative; width: 100%; max-width: 700px; margin: 20px auto; overflow: hidden; border-radius: 16px; box-shadow: 0 6px 25px rgba(0,0,0,0.2); aspect-ratio: 4/3;">
+
+        <!-- AFTER Image (clean sofa with glove + fur pile) -->
+        <img src="https://cdn.shopify.com/s/files/1/0665/0386/8500/files/Screenshot_2026-01-14_154702.png?v=1768385840"
+            alt="After - Clean Sofa with Removed Fur"
+            style="width: 100%; height: 100%; display: block; object-fit: cover;">
+
+        <!-- BEFORE Image (sofa covered in pet hair with cat) -->
+        <div class="before-image-wrapper"
+            style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden;">
+            <img src="https://cdn.shopify.com/s/files/1/0665/0386/8500/files/Screenshot_2026-01-14_154504.png?v=1768385737"
+                alt="Before - Sofa Covered in Pet Hair"
+                style="width: 700px; max-width: none; height: 100%; object-fit: cover;">
+        </div>
+
+        <!-- Draggable Slider Handle -->
+        <div class="slider-handle"
+            style="position: absolute; top: 0; left: 50%; width: 3px; height: 100%; background: #d32f2f; cursor: ew-resize; transform: translateX(-50%); z-index: 10;">
+            <div
+                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; background: #d32f2f; border: 4px solid #fff; border-radius: 50%; box-shadow: 0 3px 12px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
+                <span style="color: white; font-size: 18px; font-weight: bold;">⇄</span>
+            </div>
+        </div>
+
+        <!-- Labels -->
+        <div
+            style="position: absolute; top: 15px; left: 15px; background: rgba(255,111,0,0.95); color: #fff; padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px;">
+            BEFORE</div>
+        <div
+            style="position: absolute; top: 15px; right: 15px; background: rgba(255,111,0,0.95); color: #fff; padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px;">
+            AFTER</div>
+    </div>
+
+    <script>
+        (function () {
+            const containers = document.querySelectorAll('.before-after-container');
+            containers.forEach(container => {
+                const beforeWrapper = container.querySelector('.before-image-wrapper');
+                const slider = container.querySelector('.slider-handle');
+                const beforeImage = beforeWrapper.querySelector('img');
+
+                let isDragging = false;
+
+                function updateSlider(x) {
+                    const rect = container.getBoundingClientRect();
+                    const offsetX = x - rect.left;
+                    const percentage = Math.max(0, Math.min(100, (offsetX / rect.width) * 100));
+
+                    beforeWrapper.style.width = percentage + '%';
+                    slider.style.left = percentage + '%';
+                    beforeImage.style.width = rect.width + 'px';
+                }
+
+                slider.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    e.preventDefault();
+                });
+                document.addEventListener('mouseup', () => isDragging = false);
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging) updateSlider(e.clientX);
+                });
+
+                slider.addEventListener('touchstart', (e) => {
+                    isDragging = true;
+                    e.preventDefault();
+                });
+                document.addEventListener('touchend', () => isDragging = false);
+                document.addEventListener('touchmove', (e) => {
+                    if (isDragging && e.touches[0]) updateSlider(e.touches[0].clientX);
+                });
+
+                container.addEventListener('click', (e) => {
+                    if (!slider.contains(e.target)) {
+                        updateSlider(e.clientX);
+                    }
+                });
+            });
+        })();
+    </script>
+</div>
+
+<div style="text-align:center; margin-top:20px;">
+    <button onclick="document.querySelector('.buy-section-rc').scrollIntoView({behavior:'smooth',block:'center'})"
+        class="cta-green-button"
+        style="background:linear-gradient(135deg, #00C853, #00E676); color:white; border:none; padding:16px 40px; border-radius:50px; font-weight:700; font-size:1.1rem; text-decoration:none; box-shadow:0 4px 15px rgba(0,200,83,0.3); cursor:pointer; display:inline-block; text-align:center;">
+        <span style="display:block; font-size:1.1rem; text-align:center; width:100%;">🧤✨ PEEL THE FUR AWAY</span>
+        <span style="display:block; font-size:0.85rem; margin-top:4px; text-align:center; width:100%;">LIMITED
+            STOCK!</span>
+    </button>
+</div>
+
+<style>
+    @keyframes shake {
+
+        0%,
+        20%,
+        100% {
+            transform: rotate(0deg);
+        }
+
+        4% {
+            transform: rotate(-5deg);
+        }
+
+        8% {
+            transform: rotate(5deg);
+        }
+
+        12% {
+            transform: rotate(-5deg);
+        }
+
+        16% {
+            transform: rotate(3deg);
+        }
+    }
+
+    .cta-green-button {
+        animation: shake 2s ease-in-out infinite;
+    }
+
+    .cta-green-button:hover {
+        transform: scale(1.05);
+    }
+</style>
