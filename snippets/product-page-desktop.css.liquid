@@ -7,135 +7,125 @@
 <style>
 @media (min-width: 1024px) {
 
-  /* 1. Main Container: Center and limit width */
+  /* 1. Main Container: GRID LAYOUT */
   .product-page-rc-car {
     max-width: 1200px;
     margin: 40px auto;
     padding: 0 40px;
-    display: flex;
-    gap: 60px;
-    align-items: flex-start; /* Align top for sticky sidebar */
+    display: grid !important;
+    grid-template-columns: 58% 38%; /* Left Image, Right Content */
+    gap: 4%;
+    align-items: start;
   }
 
-  /* 2. Left Column: Image Gallery */
+  /* 2. Left Column: Image Gallery ONLY */
   .product-image-gallery {
-    flex: 1.2; /* Takes up about 55% of width */
-    position: sticky; /* Sticky feature */
-    top: 40px; 
+    grid-column: 1;
+    grid-row: 1 / 100; /* Span way down to cover height of right side */
+    position: sticky;
+    top: 20px;
     height: auto;
-    background: transparent !important; /* Override mobile background */
+    background: transparent !important;
+    width: 100%;
+    margin: 0 !important;
   }
 
-  /* Desktop Grid for Images instead of Slider */
+  /* 3. Right Column: Force EVERYTHING ELSE to the right */
+  /* This selector grabs all direct children of the container that are NOT the gallery */
+  .product-page-rc-car > *:not(.product-image-gallery) {
+    grid-column: 2;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* Gallery Internals - Grid of images */
   .gallery-container {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 20px !important;
+    gap: 15px !important;
     overflow: visible !important;
-    scroll-snap-type: none !important;
   }
 
-  /* Make the first image huge (Feature Image) */
+  /* First image spans full width */
   .slide:first-child {
     grid-column: span 2;
   }
 
   .slide {
-    min-width: auto !important;
     width: 100% !important;
-    scroll-snap-align: none !important;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid #eee;
   }
-  
+
   .slide img {
-    max-height: none !important; /* Allow full height */
-    height: auto !important;
     width: 100% !important;
+    height: auto !important;
     object-fit: cover !important;
-    transition: transform 0.5s ease;
+    display: block;
   }
+  
+  .gallery-dots { display: none !important; }
 
-  .slide:hover img {
-    transform: scale(1.05); /* Subtle zoom on hover */
-  }
-
-  /* Hide mobile dots on desktop */
-  .gallery-dots {
-    display: none !important;
-  }
-
-  /* 3. Right Column: Product Info */
+  /* Right Column Styling */
   .product-info-section {
-    flex: 0.8; /* Takes up about 45% of width */
     padding: 0 !important;
-    position: sticky;
-    top: 40px;
-    max-height: 90vh;
-    overflow-y: auto;
-    /* Custom Scrollbar for info section */
-    scrollbar-width: thin;
-    padding-right: 10px !important; /* Space for scrollbar */
-  }
-  
-  /* Typography Upgrades for Desktop */
-  .product-title-rc {
-    font-size: 2.2rem !important; /* Larger title */
-    margin-bottom: 15px !important;
-    line-height: 1.2;
-  }
-
-  .product-rating-rc {
-    margin-bottom: 25px !important;
-  }
-  
-  .price-section-rc {
+    background: transparent !important;
     margin-bottom: 30px !important;
-    padding-bottom: 25px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .current-price-rc {
-    font-size: 2.4rem !important; /* Larger price */
   }
 
-  /* Better Bundle Selector Layout */
+  /* Typography */
+  .product-title-rc {
+    font-size: 2.2rem !important;
+    line-height: 1.2;
+    margin-bottom: 15px !important;
+  }
+
+  .current-price-rc { font-size: 2.0rem !important; }
+  
+  /* Variant Selector */
   .variant-options-rc {
-    display: flex;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
   
-  .variant-option-rc {
-    flex: 1;
-    margin-bottom: 0 !important;
-  }
+  .variant-option-rc { margin: 0 !important; }
 
-  /* Buy Button Enhancements */
-  .btn-buy-prepaid-rc {
-    padding: 18px !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .btn-buy-prepaid-rc:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 200, 83, 0.4);
-  }
-
-  /* Description & Trust Badges */
+  /* Description & Reviews on the Right */
   .product-description-rc {
-    margin-top: 30px;
+    margin-top: 20px;
+    padding: 20px 0 !important;
+    border-top: 1px solid #eee;
   }
   
-  .desc-block-rc h3 {
-    font-size: 1.4rem !important;
-    margin-top: 30px !important;
+  .reviews-section-rc {
+    padding: 20px 0 !important;
+    background: transparent !important;
+    border-top: 1px solid #eee;
+  }
+
+  /* Fix the sticky bottom bar - hide on desktop */
+  .sticky-bottom-bar-rc { display: none !important; }
+
+  /* Make sure the "You May Also Like" section breaks out of the grid or sits at bottom */
+  .you-may-also-like-section {
+    grid-column: 1 / -1 !important; /* Span full width */
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 2px solid #eee;
   }
   
-  /* Hide the bottom sticky bar on desktop as we have the side sticky info */
-  .sticky-bottom-bar-rc {
-    display: none !important;
+  /* Fix CTA button container */
+  .product-page-rc-car > div[style*="text-align:center"] {
+    background: transparent !important;
+    text-align: left !important;
+    padding: 10px 0 !important;
   }
   
+  .cta-shake-button {
+    width: 100%;
+    margin: 0 !important;
+  }
 }
 </style>
