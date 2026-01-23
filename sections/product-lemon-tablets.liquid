@@ -9,7 +9,7 @@
   <div class="product-image-gallery">
     <div class="gallery-container" id="gallery-container">
       {% for image in product.images %}
-        <div class="slide"><img src="{{ image | img_url: 'large' }}" alt="{{ product.title }}"></div>
+        <div class="slide"><img src="{{ image | img_url: 'master' }}" alt="{{ product.title }}"></div>
       {% endfor %}
     </div>
     <div class="gallery-dots">
