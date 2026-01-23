@@ -9,11 +9,11 @@
 
   /* 1. Main Container: GRID LAYOUT */
   .product-page-rc-car {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 40px auto;
     padding: 0 40px;
     display: grid !important;
-    grid-template-columns: 58% 38%; /* Left Image, Right Content */
+    grid-template-columns: 60% 36%; /* Left Image, Right Content */
     gap: 4%;
     align-items: start;
   }
@@ -21,21 +21,28 @@
   /* 2. Left Column: Image Gallery ONLY */
   .product-image-gallery {
     grid-column: 1;
-    grid-row: 1 / 100; /* Span way down to cover height of right side */
-    position: sticky;
-    top: 20px;
+    grid-row: 1 / 2; /* Span only the first row (content height) */
+    position: relative; /* Remove sticky to allow natural flow */
     height: auto;
     background: transparent !important;
     width: 100%;
     margin: 0 !important;
   }
 
-  /* 3. Right Column: Force EVERYTHING ELSE to the right */
-  /* This selector grabs all direct children of the container that are NOT the gallery */
-  .product-page-rc-car > *:not(.product-image-gallery) {
+  /* 3. Right Column: Info & Description */
+  /* Target specific classes to go to the right */
+  .product-info-section,
+  .product-description-rc {
     grid-column: 2;
     width: 100%;
     margin-bottom: 20px;
+  }
+
+  /* Sticky Info - Keeps buy button visible while scrolling images */
+  .product-info-section {
+    position: sticky;
+    top: 20px;
+    z-index: 10;
   }
 
   /* Gallery Internals - Grid of images */
@@ -46,7 +53,6 @@
     overflow: visible !important;
   }
 
-  /* First image spans full width */
   .slide:first-child {
     grid-column: span 2;
   }
@@ -69,9 +75,11 @@
 
   /* Right Column Styling */
   .product-info-section {
-    padding: 0 !important;
-    background: transparent !important;
-    margin-bottom: 30px !important;
+    padding: 25px !important;
+    background: #fff !important;
+    border: 1px solid #f0f0f0;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05); /* Subtle premium shadow */
   }
 
   /* Typography */
@@ -89,43 +97,102 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
-  
   .variant-option-rc { margin: 0 !important; }
 
-  /* Description & Reviews on the Right */
+  /* Description on Right, below Info */
   .product-description-rc {
-    margin-top: 20px;
     padding: 20px 0 !important;
     border-top: 1px solid #eee;
+    margin-top: 20px;
+  }
+
+  /* =========================================
+     4. CUSTOMER REVIEWS - BOTTOM FULL WIDTH 
+     ========================================= */
+  .reviews-section-rc {
+    grid-column: 1 / -1 !important; /* Forces full width */
+    margin-top: 60px !important;
+    padding: 60px 0 !important;
+    border-top: 2px solid #f5f5f5;
+    background: white !important;
+  }
+
+  /* Review Title */
+  .reviews-title {
+    text-align: center;
+    font-size: 2rem !important;
+    margin-bottom: 40px !important;
   }
   
-  .reviews-section-rc {
-    padding: 20px 0 !important;
-    background: transparent !important;
-    border-top: 1px solid #eee;
+  /* Hide the summary stars/count in the big section (redundant) */
+  .reviews-section-rc > div[style*="display:flex"] {
+    justify-content: center;
+    margin-bottom: 50px !important;
+    transform: scale(1.2);
   }
 
-  /* Fix the sticky bottom bar - hide on desktop */
-  .sticky-bottom-bar-rc { display: none !important; }
+  /* TRANSFORM REVIEW CARDS INTO GRID */
+  /* We use a flex container logic applied to the parent div of cards */
+  /* Since cards are direct children of .reviews-section-rc, we target the container and enable grid */
+  .reviews-section-rc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  /* Force Title and Summary to take full width of the flex container */
+  .reviews-title,
+  .reviews-section-rc > div[style*="display:flex"] {
+    width: 100%;
+  }
 
-  /* Make sure the "You May Also Like" section breaks out of the grid or sits at bottom */
+  .review-card {
+    width: calc(33.333% - 20px) !important; /* 3 Columns */
+    min-width: 300px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 25px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    margin-bottom: 0 !important;
+    transition: transform 0.2s ease;
+  }
+
+  .review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  }
+
+  /* User Info styling inside card */
+  .reviewer-info strong {
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  /* =========================================
+     5. BOTTOM SECTIONS
+     ========================================= */
+
+  /* You May Also Like */
   .you-may-also-like-section {
-    grid-column: 1 / -1 !important; /* Span full width */
-    margin-top: 60px;
+    grid-column: 1 / -1 !important;
+    margin-top: 20px;
     padding-top: 40px;
-    border-top: 2px solid #eee;
+    border-top: none;
   }
   
   /* Fix CTA button container */
   .product-page-rc-car > div[style*="text-align:center"] {
-    background: transparent !important;
-    text-align: left !important;
-    padding: 10px 0 !important;
+    grid-column: 2; /* Keep CTA with sticky info or move to bottom? */
+    /* Let's keep it near info for conversion, or we can hide it. */
+    /* The user's ref shows sticky info. We have sticky info. */
+    /* Let's hide the extra floating CTA at bottom of desktop since we have sticky buy buttons */
+    display: none !important; 
   }
+
+  /* Hide sticky bottom bar on desktop */
+  .sticky-bottom-bar-rc { display: none !important; }
   
-  .cta-shake-button {
-    width: 100%;
-    margin: 0 !important;
-  }
 }
 </style>
