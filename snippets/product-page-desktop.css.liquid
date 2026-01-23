@@ -1,0 +1,141 @@
+{% comment %}
+  OFFICIAL DESKTOP OPTIMIZATION - EASYDAY THEME
+  Apply ONLY to screens wider than 1024px (Laptop/Desktop).
+  Mobile view (under 768px) is strictly UNTOUCHED.
+{% endcomment %}
+
+<style>
+@media (min-width: 1024px) {
+
+  /* 1. Main Container: Center and limit width */
+  .product-page-rc-car {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 40px;
+    display: flex;
+    gap: 60px;
+    align-items: flex-start; /* Align top for sticky sidebar */
+  }
+
+  /* 2. Left Column: Image Gallery */
+  .product-image-gallery {
+    flex: 1.2; /* Takes up about 55% of width */
+    position: sticky; /* Sticky feature */
+    top: 40px; 
+    height: auto;
+    background: transparent !important; /* Override mobile background */
+  }
+
+  /* Desktop Grid for Images instead of Slider */
+  .gallery-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  /* Make the first image huge (Feature Image) */
+  .slide:first-child {
+    grid-column: span 2;
+  }
+
+  .slide {
+    min-width: auto !important;
+    width: 100% !important;
+    scroll-snap-align: none !important;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee;
+  }
+  
+  .slide img {
+    max-height: none !important; /* Allow full height */
+    height: auto !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.5s ease;
+  }
+
+  .slide:hover img {
+    transform: scale(1.05); /* Subtle zoom on hover */
+  }
+
+  /* Hide mobile dots on desktop */
+  .gallery-dots {
+    display: none !important;
+  }
+
+  /* 3. Right Column: Product Info */
+  .product-info-section {
+    flex: 0.8; /* Takes up about 45% of width */
+    padding: 0 !important;
+    position: sticky;
+    top: 40px;
+    max-height: 90vh;
+    overflow-y: auto;
+    /* Custom Scrollbar for info section */
+    scrollbar-width: thin;
+    padding-right: 10px !important; /* Space for scrollbar */
+  }
+  
+  /* Typography Upgrades for Desktop */
+  .product-title-rc {
+    font-size: 2.2rem !important; /* Larger title */
+    margin-bottom: 15px !important;
+    line-height: 1.2;
+  }
+
+  .product-rating-rc {
+    margin-bottom: 25px !important;
+  }
+  
+  .price-section-rc {
+    margin-bottom: 30px !important;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .current-price-rc {
+    font-size: 2.4rem !important; /* Larger price */
+  }
+
+  /* Better Bundle Selector Layout */
+  .variant-options-rc {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .variant-option-rc {
+    flex: 1;
+    margin-bottom: 0 !important;
+  }
+
+  /* Buy Button Enhancements */
+  .btn-buy-prepaid-rc {
+    padding: 18px !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .btn-buy-prepaid-rc:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 200, 83, 0.4);
+  }
+
+  /* Description & Trust Badges */
+  .product-description-rc {
+    margin-top: 30px;
+  }
+  
+  .desc-block-rc h3 {
+    font-size: 1.4rem !important;
+    margin-top: 30px !important;
+  }
+  
+  /* Hide the bottom sticky bar on desktop as we have the side sticky info */
+  .sticky-bottom-bar-rc {
+    display: none !important;
+  }
+  
+}
+</style>
