@@ -14,15 +14,17 @@
     padding: 0 40px;
     display: grid !important;
     grid-template-columns: 60% 36%; /* Left Image, Right Content */
-    gap: 40px;
+    /* Use column-gap for horizontal, row-gap for vertical stacking */
+    column-gap: 50px;
+    row-gap: 0;
     align-items: start;
   }
 
   /* 2. Left Column: Image Gallery ONLY */
   .product-image-gallery {
     grid-column: 1;
-    grid-row: 1 / 2; /* Span only the first row (content height) */
-    position: relative; /* Remove sticky to allow natural flow */
+    grid-row: 1 / 10; /* Span down */
+    position: relative;
     height: auto;
     background: transparent !important;
     width: 100%;
@@ -35,14 +37,22 @@
   .product-description-rc {
     grid-column: 2;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 0 !important; /* Remove bottom margin */
   }
 
   /* Sticky Info - Keeps buy button visible while scrolling images */
   /* Sticky Info Removed as per user request */
   .product-info-section {
-    position: relative; /* Changed from sticky */
+    position: relative;
     z-index: 10;
+    border-bottom: none !important; /* improved flow */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 0 !important;
+    box-shadow: none !important; /* cleaner look */
+    border: none !important;
+    padding: 0 !important; /* Remove padding to align with edge */
+    padding-bottom: 10px !important;
   }
 
   /* Gallery Internals - Grid of images */
@@ -74,22 +84,16 @@
   .gallery-dots { display: none !important; }
 
   /* Right Column Styling */
-  .product-info-section {
-    padding: 25px !important;
-    background: #fff !important;
-    border: 1px solid #f0f0f0;
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05); /* Subtle premium shadow */
-  }
-
+  /* We removed the box style from .product-info-section above to make it cleaner */
+  
   /* Typography */
   .product-title-rc {
-    font-size: 2.2rem !important;
-    line-height: 1.2;
-    margin-bottom: 15px !important;
+    font-size: 2.6rem !important; /* Bigger Title */
+    line-height: 1.1;
+    margin-bottom: 10px !important;
   }
 
-  .current-price-rc { font-size: 2.0rem !important; }
+  .current-price-rc { font-size: 2.2rem !important; }
   
   /* Variant Selector */
   .variant-options-rc {
@@ -101,9 +105,14 @@
 
   /* Description on Right, below Info */
   .product-description-rc {
-    padding: 20px 0 !important;
+    padding: 20px 0 0 0 !important; /* Reduced padding */
     border-top: 1px solid #eee;
-    margin-top: 20px;
+    margin-top: 0 !important; /* No top margin */
+  }
+
+  /* Trust Badges - Fix spacing */
+  .product-description-rc > div[style*="text-align: center"] {
+    margin-bottom: 15px !important; /* Reduced from 30px */
   }
 
   /* =========================================
@@ -111,7 +120,7 @@
      ========================================= */
   .reviews-section-rc {
     grid-column: 1 / -1 !important; /* Forces full width */
-    margin-top: 60px !important;
+    margin-top: 40px !important;
     padding: 60px 0 !important;
     border-top: 2px solid #f5f5f5;
     background: white !important;
