@@ -2,9 +2,7 @@
     "sections": {
         "main": {
             "type": "product-main",
-            "settings": {
-                "cod_sub_text": "DELIVERY IN 5-7 DAYS | Free Shipping"
-            }
+            "settings": {}
         }
     },
     "order": [
