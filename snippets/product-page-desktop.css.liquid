@@ -7,15 +7,14 @@
 <style>
 @media (min-width: 1024px) {
 
-  /* 1. Main Container: GRID LAYOUT */
+  /* 1. Main Container: GRID LAYOUT - Enhanced */
   .product-page-rc-car {
-    max-width: 1280px;
-    margin: 40px auto;
-    padding: 0 40px;
+    max-width: 1400px;
+    margin: 50px auto;
+    padding: 0 50px;
     display: grid !important;
-    grid-template-columns: 60% 36%; /* Left Image, Right Content */
-    /* Use column-gap for horizontal, row-gap for vertical stacking */
-    column-gap: 50px;
+    grid-template-columns: 55% 40%; /* Better balanced layout */
+    column-gap: 60px;
     row-gap: 0;
     align-items: start;
   }
@@ -55,11 +54,11 @@
     padding-bottom: 10px !important;
   }
 
-  /* Gallery Internals - Grid of images */
+  /* Gallery Internals - Grid of images - Enhanced */
   .gallery-container {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 15px !important;
+    gap: 20px !important;
     overflow: visible !important;
   }
 
@@ -69,9 +68,16 @@
 
   .slide {
     width: 100% !important;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    border: 1px solid #eee;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+  }
+  
+  .slide:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
   }
 
   .slide img {
@@ -79,6 +85,11 @@
     height: auto !important;
     object-fit: cover !important;
     display: block;
+    transition: transform 0.4s ease;
+  }
+  
+  .slide:hover img {
+    transform: scale(1.03);
   }
   
   .gallery-dots { display: none !important; }
@@ -86,14 +97,19 @@
   /* Right Column Styling */
   /* We removed the box style from .product-info-section above to make it cleaner */
   
-  /* Typography */
+  /* Typography - Enhanced */
   .product-title-rc {
-    font-size: 2.6rem !important; /* Bigger Title */
+    font-size: 3rem !important;
     line-height: 1.1;
-    margin-bottom: 10px !important;
+    margin-bottom: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em;
   }
 
-  .current-price-rc { font-size: 2.2rem !important; }
+  .current-price-rc { 
+    font-size: 2.4rem !important;
+    font-weight: 800 !important;
+  }
   
   /* Variant Selector */
   .variant-options-rc {
@@ -157,20 +173,27 @@
   }
 
   .review-card {
-    width: calc(33.333% - 20px) !important; /* 3 Columns */
+    width: calc(33.333% - 20px) !important;
     min-width: 300px;
     background: #fff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    padding: 25px !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    padding: 30px !important;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.05);
     margin-bottom: 0 !important;
-    transition: transform 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+  
+  /* Ultra-wide screens: 4 columns */
+  @media (min-width: 1600px) {
+    .review-card {
+      width: calc(25% - 20px) !important;
+    }
   }
 
   /* User Info styling inside card */

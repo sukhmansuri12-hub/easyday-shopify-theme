@@ -2,6 +2,8 @@
   Hero Section - Premium Background Image & New Text
 {% endcomment %}
 
+{% render 'homepage-desktop.css' %}
+
 <section class="hero-section scroll-reveal" style="background-image: url({% if section.settings.bg_image %}{{ section.settings.bg_image | image_url }}{% else %}{{ 'easyday-hero-bg.jpg' | asset_url }}{% endif %});">
   <div class="hero-overlay"></div>
   <div class="container">

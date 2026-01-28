@@ -1,0 +1,260 @@
+{% comment %}
+  HOMEPAGE DESKTOP OPTIMIZATION
+  Applies ONLY to screens 1024px and wider
+  Mobile design remains completely unchanged
+{% endcomment %}
+
+<style>
+@media (min-width: 1024px) {
+  
+  /* ===================================
+     HERO SECTION - More Spacious & Inviting
+     =================================== */
+  .hero-section {
+    min-height: 700px !important;
+    padding-top: 120px !important;
+  }
+  
+  .hero-content {
+    max-width: 900px !important;
+    padding: 3rem !important;
+  }
+  
+  .hero-title {
+    font-size: 4.5rem !important;
+    margin-bottom: 1.5rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.4rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .hero-desc {
+    font-size: 1.15rem !important;
+    max-width: 85% !important;
+    line-height: 1.7 !important;
+  }
+  
+  .hero-buttons {
+    margin-top: 2.5rem !important;
+    gap: 1.5rem !important;
+  }
+  
+  .btn-sale {
+    padding: 1rem 2.5rem !important;
+    font-size: 1.1rem !important;
+    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .btn-sale:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 30px rgba(211, 47, 47, 0.5) !important;
+  }
+  
+  /* ===================================
+     CATEGORY GRID - Larger & More Engaging
+     =================================== */
+  .category-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 3rem !important;
+    padding: 2rem 3rem !important;
+    margin-top: 3rem !important;
+  }
+  
+  .category-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  
+  .category-card:hover {
+    transform: translateY(-10px) !important;
+  }
+  
+  .category-image-wrapper {
+    width: 140px !important;
+    height: 140px !important;
+    margin-bottom: 1.5rem !important;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12) !important;
+    transition: all 0.4s ease !important;
+  }
+  
+  .category-card:hover .category-image-wrapper {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18) !important;
+    transform: scale(1.05) !important;
+  }
+  
+  .category-image-wrapper img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  
+  .category-title {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    transition: color 0.3s ease !important;
+  }
+  
+  .category-card:hover .category-title {
+    color: var(--color-primary-cta) !important;
+  }
+  
+  /* ===================================
+     FEATURED PRODUCTS - 4 Column Grid
+     =================================== */
+  .featured-products-section {
+    padding: 5rem 0 !important;
+  }
+  
+  .featured-products-section h2 {
+    font-size: 3rem !important;
+    margin-bottom: 3rem !important;
+    text-align: center;
+  }
+  
+  .product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2rem !important;
+    padding: 0 2rem !important;
+  }
+  
+  .product-card {
+    background: white !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  .product-card img {
+    transition: transform 0.4s ease !important;
+  }
+  
+  .product-card:hover img {
+    transform: scale(1.05) !important;
+  }
+  
+  .product-card-content {
+    padding: 1.5rem !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .product-title {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.75rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  .product-price {
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    color: var(--color-primary-cta) !important;
+    margin-top: auto !important;
+  }
+  
+  /* ===================================
+     REVIEWS SECTION - Card Grid Layout
+     =================================== */
+  .reviews-section {
+    padding: 5rem 0 !important;
+    background: #f8f9fa !important;
+  }
+  
+  .reviews-section h2 {
+    font-size: 3rem !important;
+    margin-bottom: 3rem !important;
+    text-align: center;
+  }
+  
+  .reviews-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem !important;
+    padding: 0 3rem !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+  }
+  
+  .review-card {
+    background: white !important;
+    padding: 2rem !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.3s ease !important;
+    height: 100% !important;
+  }
+  
+  .review-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+  }
+  
+  .review-card p {
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+    color: #555 !important;
+  }
+  
+  /* ===================================
+     TRUST SIGNALS - Better Spacing
+     =================================== */
+  .trust-signals {
+    padding: 4rem 0 !important;
+  }
+  
+  .trust-signals img {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+  }
+  
+  /* ===================================
+     SECTION SPACING - More Breathing Room
+     =================================== */
+  .section-padding {
+    padding: 5rem 0 !important;
+  }
+  
+  .container {
+    max-width: 1400px !important;
+    padding: 0 2rem !important;
+  }
+  
+  /* ===================================
+     EXPLORE ALL BUTTON - Enhanced
+     =================================== */
+  .explore-all-btn {
+    display: inline-block !important;
+    margin: 3rem auto !important;
+    padding: 1.2rem 3rem !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    background: var(--color-primary-nav) !important;
+    color: white !important;
+    border-radius: 50px !important;
+    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.3) !important;
+    transition: all 0.3s ease !important;
+    text-align: center !important;
+  }
+  
+  .explore-all-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 30px rgba(30, 136, 229, 0.4) !important;
+    background: #1565C0 !important;
+  }
+  
+}
+</style>
