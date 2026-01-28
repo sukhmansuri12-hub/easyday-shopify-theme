@@ -1019,76 +1019,82 @@ body {
    Applied to screens 1024px and wider
    =================================== */
 @media (min-width: 1024px) {
-  
+
   /* Enhanced Typography Scale */
   h1 {
     font-size: 3.5rem !important;
     letter-spacing: -0.02em;
   }
-  
+
   h2 {
     font-size: 2.8rem !important;
     letter-spacing: -0.01em;
   }
-  
+
   h3 {
     font-size: 2.2rem !important;
   }
-  
+
   /* Better Container Spacing */
   .container {
     max-width: 1400px !important;
-    padding: 0 2rem !important;
+    padding: 0 1.5rem !important;
   }
-  
+
   /* Enhanced Header for Desktop */
   .site-header {
     height: 80px !important;
   }
-  
+
   .header-logo img {
     max-height: 70px !important;
     min-width: 160px !important;
   }
-  
+
   .header-icon svg {
     width: 24px !important;
     height: 24px !important;
   }
-  
+
   /* Better Button Hover Effects */
-  button, .btn, [class*="btn-"] {
+  button,
+  .btn,
+  [class*="btn-"] {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
-  
-  button:hover, .btn:hover, [class*="btn-"]:hover {
+
+  button:hover,
+  .btn:hover,
+  [class*="btn-"]:hover {
     transform: translateY(-2px) !important;
   }
-  
+
   /* Enhanced Footer Layout */
   .footer-content {
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 3rem !important;
+    gap: 2rem !important;
   }
-  
+
   .site-footer {
-    padding: 5rem 0 2rem !important;
+    padding: 3rem 0 1.5rem !important;
   }
-  
+
   /* Smooth Scrolling */
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Better Focus States */
-  a:focus, button:focus, input:focus {
+  a:focus,
+  button:focus,
+  input:focus {
     outline: 2px solid var(--color-primary-nav);
     outline-offset: 2px;
   }
-  
+
   /* Enhanced Section Spacing */
   section {
-    margin: 4rem 0;
+    margin: 2rem 0;
   }
-  
+
 }
