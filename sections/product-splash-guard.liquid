@@ -1,12 +1,21 @@
 {% comment %}
-  RC Stunt Car - Professional Product Page  
-  Mobile-First Design
+  SINK SPLASH GUARD - BUY 1 GET 1 FREE CAMPAIGN
+  Mobile-First High-Conversion Design
 {% endcomment %}
 
-<section class="product-page-rc-car">
+<section class="product-page-splash-guard">
   {% render 'product-page-desktop.css' %}
   
-  {% comment %} Mobile Image Gallery - Swipeable {% endcomment %}
+  {% comment %} HUGE BUY 1 GET 1 FREE BANNER {% endcomment %}
+  <div class="bogo-banner">
+    <div class="bogo-content">
+      <div class="bogo-badge">🎁 LIMITED TIME OFFER</div>
+      <div class="bogo-main">BUY 1 GET 1 FREE</div>
+      <div class="bogo-sub">Double Your Protection, Zero Extra Cost!</div>
+    </div>
+  </div>
+  
+  {% comment %} Mobile Image Gallery {% endcomment %}
   <div class="product-image-gallery">
     <div class="gallery-container" id="gallery-container">
       {% for image in product.images %}
@@ -23,471 +32,205 @@
   {% comment %} Product Info {% endcomment %}
   <div class="product-info-section">
     
-    <h1 class="product-title-rc">{{ product.title }}</h1>
+    <h1 class="product-title-splash">{{ product.title }}</h1>
     
-    <div class="product-rating-rc">
+    <div class="product-rating-splash">
       <span style="display:inline-flex; align-items:baseline;">⭐⭐⭐⭐<span style="width:14px;overflow:hidden;">⭐</span></span>
-      <span class="rating-count">4.7 (391 Reviews)</span>
+      <span class="rating-count">4.8 (520+ Reviews)</span>
     </div>
 
     {% comment %} Countdown Timer {% endcomment %}
-    <div class="countdown-timer-rc">
+    <div class="countdown-timer-splash">
       <span class="timer-label">⏰ Offer Ends in</span>
       <div class="timer-display">
-        <div class="time-box"><span id="days">00</span><span class="label">Days</span></div>
         <div class="time-box"><span id="hours">23</span><span class="label">Hours</span></div>
-        <div class="time-box"><span id="mins">59</span><span class="label">Minutes</span></div>
-        <div class="time-box"><span id="secs">52</span><span class="label">Seconds</span></div>
+        <div class="time-box"><span id="mins">59</span><span class="label">Mins</span></div>
+        <div class="time-box"><span id="secs">52</span><span class="label">Secs</span></div>
       </div>
     </div>
 
     {% comment %} Price {% endcomment %}
-    <div class="price-section-rc">
-      <div class="current-price-rc">{{ product.price | money }}</div>
+    <div class="price-section-splash">
+      <div class="current-price-splash">{{ product.price | money }}</div>
       {% if product.compare_at_price > product.price %}
-        <div class="compare-price-rc">{{ product.compare_at_price | money }}</div>
+        <div class="compare-price-splash">{{ product.compare_at_price | money }}</div>
         {% assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
-        <div class="save-badge-rc">SAVE {{ savings }}%</div>
+        <div class="save-badge-splash">SAVE {{ savings }}%</div>
       {% endif %}
     </div>
-
-    {% comment %} Bundle Variant Selector {% endcomment %}
-    <div class="variant-selector-rc">
-      <div class="variant-options-rc">
-        {% for variant in product.variants %}
-          <label class="variant-option-rc {% if forloop.first %}active{% endif %}" data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price }}">
-            <input type="radio" name="variant-select" value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
-            <div class="variant-content">
-              <span class="variant-title">{{ variant.title }}</span>
-              <span class="variant-price">{{ variant.price | money }}</span>
-              {% if variant.compare_at_price > variant.price %}
-                <span class="variant-save">Save ₹{{ variant.compare_at_price | minus: variant.price | divided_by: 100 }}</span>
-              {% endif %}
-            </div>
-          </label>
-        {% endfor %}
-      </div>
+    
+    <div class="bogo-reminder">
+      ✨ <strong>Buy 1 Get 1 FREE</strong> - Add to cart to claim your free guard!
     </div>
 
-    {% comment %} Shopify Product Form - Required for ReleaseIt {% endcomment %}
-    {% form 'product', product, id: 'product-form-installment' %}
+    {% comment %} Shopify Product Form {% endcomment %}
+    {% form 'product', product, id: 'product-form-splash' %}
       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="variant-id-input">
       
-      {% comment %} Buy Buttons {% endcomment %}
-      <div class="buy-section-rc">
-        <button class="btn-buy-prepaid-rc" type="button" onclick="buyNowPrepaid()">
-          <span class="main-text-prepaid">Add to cart</span>
-          <span class="sub-text-prepaid">PAY ONLINE & SAVE ₹130 (10% OFF)</span>
+      {% comment %} Buy Button {% endcomment %}
+      <div class="buy-section-splash">
+        <button class="btn-buy-now-splash" type="button" onclick="buyNowSplash()">
+          <span class="btn-icon">🛒</span>
+          <span class="btn-text-main">CLAIM BUY 1 GET 1 FREE</span>
+          <span class="btn-text-sub">Limited Stock - Order Now!</span>
         </button>
       </div>
     {% endform %}
+    
+    {% comment %} Trust Badges {% endcomment %}
+    <div class="trust-badges-splash">
+      <div class="trust-item">✓ Free Shipping</div>
+      <div class="trust-item">✓ Cash on Delivery</div>
+      <div class="trust-item">✓ Easy Returns</div>
+    </div>
 
   </div>
 
-  {% comment %} Description {% endcomment %}
-  <div class="product-description-rc">
+  {% comment %} Product Description {% endcomment %}
+  <div class="product-description-splash">
     
-    <div style="text-align: center; margin-bottom: 30px;">
-      <img src="{{ 'trust-badges.png' | asset_url }}" alt="Free Shipping, No-Hassle Returns, Satisfaction Guaranteed, Secure Checkout" style="max-width: 100%; height: auto;">
+    <div class="desc-block-splash">
+      <h2>🌊 Stop Water Splashes Instantly!</h2>
+      <p>Tired of water splashing everywhere when washing dishes? Our Sink Splash Guard creates a perfect barrier, keeping your kitchen clean and dry!</p>
+      {% if product.images[1] %}
+        <img src="{{ product.images[1] | img_url: '800x' }}" alt="Splash Guard in action" style="width:100%; border-radius:12px; margin:15px 0;">
+      {% endif %}
+    </div>
+
+    <div class="desc-block-splash">
+      <h2>✨ Why You'll Love It</h2>
+      <ul class="feature-list-splash">
+        <li>🛡️ <strong>Flexible Silicone</strong> - Bends to fit any sink perfectly</li>
+        <li>💧 <strong>Blocks 99% of Splashes</strong> - Keep counters & floors dry</li>
+        <li>🔥 <strong>Heat Resistant</strong> - Safe for hot water use</li>
+        <li>🧼 <strong>Easy to Clean</strong> - Dishwasher safe silicone</li>
+        <li>📦 <strong>BUY 1 GET 1 FREE</strong> - Perfect for multiple sinks!</li>
+      </ul>
+      {% if product.images[2] %}
+        <img src="{{ product.images[2] | img_url: '800x' }}" alt="Features" style="width:100%; border-radius:12px; margin:15px 0;">
+      {% endif %}
+    </div>
+
+    <div class="desc-block-splash">
+      <h2>🏠 Perfect for Every Kitchen</h2>
+      <p>Whether you're washing dishes, rinsing vegetables, or cleaning pots - our splash guard keeps everything clean. The flexible design fits standard and deep sinks!</p>
+      {% if product.images[3] %}
+        <img src="{{ product.images[3] | img_url: '800x' }}" alt="Kitchen use" style="width:100%; border-radius:12px; margin:15px 0;">
+      {% endif %}
+    </div>
+
+  </div>
+
+  {% comment %} Customer Reviews with Image {% endcomment %}
+  <div class="reviews-section-splash">
+    <h2 class="reviews-title">What Customers Are Saying</h2>
+    
+    {% comment %} Customer Reviews Image {% endcomment %}
+    <div class="reviews-image-container">
+      <img src="{{ 'uploaded_media_1769973662192.png' | asset_url }}" alt="Customer using splash guard" style="width:100%; border-radius:12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
     </div>
     
-    {%- if product.description != blank -%}
-      {{ product.description }}
-    {%- else -%}
-      <div class="desc-block-rc">
-        <h3>✨ PREMIUM QUALITY PRODUCT</h3>
-        <p>This amazing product will transform your daily life with innovative features and unbeatable quality. Get yours today!</p>
-        {%- if product.images[1] -%}
-          <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-        {%- elsif product.images[0] -%}
-          <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-        {%- endif -%}
-      </div>
-
-      <div class="desc-block-rc">
-        <h3>⚡ KEY FEATURES</h3>
-        <ul class="feature-list-rc">
-          <li>Premium materials and construction</li>
-          <li>Easy to use and maintain</li>
-          <li>Perfect for everyday use</li>
-          <li>Great value for money</li>
-          <li>Satisfaction guaranteed</li>
-        </ul>
-        {%- if product.images[2] -%}
-          <img src="{{ product.images[2] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-        {%- elsif product.images[1] -%}
-          <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-        {%- endif -%}
-      </div>
-
-      <div class="desc-block-rc">
-        <h3>💪 QUALITY YOU CAN TRUST</h3>
-        <p>Crafted with attention to detail and built to last. We stand behind every product we sell.</p>
-        {%- if product.images[3] -%}
-          <img src="{{ product.images[3] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-        {%- elsif product.images[0] -%}
-          <img src="{{ product.images[0] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-        {%- endif -%}
-      </div>
-
-      <div class="desc-block-rc">
-        <h3>🎁 PERFECT GIFT CHOICE</h3>
-        <p>Makes an excellent gift for anyone who appreciates quality and value. Order now and enjoy fast shipping!</p>
-        {%- if product.images[4] -%}
-          <img src="{{ product.images[4] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-        {%- elsif product.images[1] -%}
-          <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-
-  </div>
-
-  {% comment %} Reviews {% endcomment %}
-  <div class="reviews-section-rc">
-    <h2 class="reviews-title">Customer Reviews</h2>
-    <div style="display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:20px;">
+    <div style="display:flex;align-items:center;gap:10px;margin:20px 0;">
       <span style="display:inline-flex; align-items:baseline; font-size:1.5rem;">⭐⭐⭐⭐<span style="width:12px;overflow:hidden;">⭐</span></span>
-      <span style="font-size:1.1rem;color:#666;font-weight:600;">4.7 (391 Reviews)</span>
+      <span style="font-size:1.1rem;color:#666;font-weight:600;">4.8 out of 5 (520+ Reviews)</span>
     </div>
     
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Tanika Sharma</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Priya Sharma</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">Pack of 2 is perfect! One for tawa, one for kadhai. My stove stays clean now!</p>
+      <p class="review-text">"Buy 1 Get 1 Free offer is amazing! One for kitchen sink, one for bathroom. No more water mess on my counters!"</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Urvashi Nair</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Rajesh Kumar</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">Flexible silicone folds easily for storage. No more oil splatter mess! Dishwasher safe too!</p>
+      <p class="review-text">"Flexible silicone bends perfectly around my sink. Blocks all water splashes. Best kitchen purchase!"</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Vinay Pillai</strong> <span class="verified">✓ Verified Purchase</span>
-      </div>
-      <div class="review-stars">⭐⭐⭐⭐</div>
-      <p class="review-text">Heat resistant and durable. Great kitchen product! Easy to clean!</p>
-    </div>
-
-    <div class="review-card">
-      <div class="reviewer-info">
-        <strong>Wendy D'Silva</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Anita Desai</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">Protects from hot oil splashes. Perfect size for Indian cooking!</p>
+      <p class="review-text">"Got 2 guards in BOGO offer. Kitchen stays so clean now! Easy to install and remove for cleaning."</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Yash Bose</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Vikram Singh</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">Silicone quality is good. Saves cleanup time. Worth buying!</p>
+      <p class="review-text">"Heat resistant silicone works great with hot water. No more wiping counters after dishes!"</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Zoya Khan</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Meera Patel</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐</div>
-      <p class="review-text">Practical kitchen tool. Keeps kitchen clean. Good product!</p>
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">"Dishwasher safe and easy to clean. The BOGO deal made it super affordable. Highly recommend!"</p>
     </div>
 
   </div>
 
-  {% comment %} Final CTA Button {% endcomment %}
-  <div style="text-align:center; padding:10px 20px 25px 20px; background:#fff; margin:0;">
-    <button onclick="scrollToTop()" class="cta-shake-button" style="background:linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%); color:white; border:none; padding:18px 50px; font-size:1.2rem; font-weight:700; border-radius:50px; cursor:pointer; box-shadow:0 4px 15px rgba(255,111,0,0.4); text-transform:uppercase; margin:0;">
-      🐾 CLAIM 50% OFF
+  {% comment %} Final CTA {% endcomment %}
+  <div class="final-cta-splash">
+    <button onclick="scrollToTop()" class="cta-final-button">
+      🎁 CLAIM YOUR BUY 1 GET 1 FREE OFFER
     </button>
+    <p class="cta-urgency">⚡ Only {{ product.variants.first.inventory_quantity | default: 47 }} sets left in stock!</p>
   </div>
 
-  <style>
-    
-    /* Variant Selector Styles */
-    .variant-selector-rc {
-      margin: 20px 0;
-    }
-    
-    .variant-options-rc {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    
-    .variant-option-rc {
-      position: relative;
-      display: block;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
-      padding: 15px;
-      cursor: pointer;
-      transition: all 0.3s;
-      background: white;
-    }
-    
-    .variant-option-rc input[type="radio"] {
-      position: absolute;
-      opacity: 0;
-    }
-    
-    .variant-option-rc:hover {
-      border-color: #FF6F00;
-      box-shadow: 0 2px 10px rgba(255,111,0,0.2);
-    }
-    
-    .variant-option-rc.active {
-      border-color: #FF6F00;
-      background: linear-gradient(135deg, #fff5e6 0%, #ffe0cc 100%);
-      box-shadow: 0 4px 15px rgba(255,111,0,0.3);
-    }
-    
-    .variant-content {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      text-align: center;
-    }
-    
-    .variant-title {
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: #333;
-    }
-    
-    .variant-price {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #00C853;
-    }
-    
-    .variant-save {
-      font-size: 0.85rem;
-      color: #e74c3c;
-      font-weight: 600;
-    }
-    
-    @keyframes shake {
-      0%, 20%, 100% { transform: rotate(0deg); }
-      4% { transform: rotate(-5deg); }
-      8% { transform: rotate(5deg); }
-      12% { transform: rotate(-5deg); }
-      16% { transform: rotate(3deg); }
-    }
-    
-    .cta-shake-button {
-      animation: shake 2s ease-in-out infinite;
-    }
-    
-    .cta-shake-button:hover {
-      transform: scale(1.05);
-    }
-  </style>
-
-  <script>
-    // Variant Selector Logic
-    let selectedVariantId = document.querySelector('input[name="variant-select"]:checked')?.value;
-    
-    document.querySelectorAll('.variant-option-rc').forEach(option => {
-      option.addEventListener('click', function() {
-        // Remove active class from all options
-        document.querySelectorAll('.variant-option-rc').forEach(opt => opt.classList.remove('active'));
-        
-        // Add active class to clicked option
-        this.classList.add('active');
-        
-        // Check the radio button
-        const radio = this.querySelector('input[type="radio"]');
-        radio.checked = true;
-        selectedVariantId = radio.value;
-        
-        // Update Shopify form variant input for ReleaseIt
-        const variantInput = document.getElementById('variant-id-input');
-        if (variantInput) {
-          variantInput.value = selectedVariantId;
-        }
-        
-        // Update COD form if it exists
-        updateCODForm();
-      });
-    });
-    
-    // Update COD form with selected variant
-    function updateCODForm() {
-      // Update the RSI COD form if it exists
-      if (window.rsi_btn_hook) {
-        const selectedOption = document.querySelector('.variant-option-rc.active');
-        const variantQuantity = selectedOption?.querySelector('.variant-title')?.textContent.includes('2') ? 2 : 1;
-        
-        // Store variant info for COD form
-        window.selectedBundleQuantity = variantQuantity;
-        window.selectedVariantId = selectedVariantId;
-      }
-    }
-    
-    // Buy Now Prepaid function
-    function buyNowPrepaid() {
-      if (!selectedVariantId) {
-        selectedVariantId = document.querySelector('input[name="variant-select"]:checked')?.value;
-      }
-      
-      const formData = {
-        id: selectedVariantId,
-        quantity: 1
-      };
-      
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      })
-      .then(response => response.json())
-      .then(data => {
-        window.location.href = '/cart';
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        alert('Failed to add to cart. Please try again.');
-      });
-    }
-    
-    // Handle COD button click with variant selection
-    function handleCODClick(event) {
-      event.preventDefault();
-      
-      // Get selected variant ID
-      const variantId = selectedVariantId || document.querySelector('input[name="variant-select"]:checked')?.value;
-      
-      if (!variantId) {
-        alert('Please select a variant');
-        return;
-      }
-      
-      // Update the COD link with variant ID
-      const codLink = '/rsi-btn-hook?variant=' + variantId;
-      window.location.href = codLink;
-    }
-    
-    // Quick Add to Cart for You May Also Like products
-    function quickAddToCart(variantId) {
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: variantId,
-          quantity: 1
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Show success message
-        alert('✅ Added to cart!');
-        // Optionally update cart count in header
-        if (window.updateCartCount) window.updateCartCount();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Failed to add to cart. Please try again.');
-      });
-    }
-    
-    function scrollToTop() {
-      // Scroll to buy buttons section
-      const buySection = document.querySelector('.buy-section-rc');
-      if (buySection) {
-        buySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-    
-    // COUNTDOWN TIMER - Updates every second
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const midnight = new Date();
-      midnight.setHours(24, 0, 0, 0);
-      const distance = midnight - now;
-      
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      document.getElementById('days').textContent = String(days).padStart(2, '0');
-      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('mins').textContent = String(mins).padStart(2, '0');
-      document.getElementById('secs').textContent = String(secs).padStart(2, '0');
-    }
-    
-    // Run countdown immediately and then every second
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
-
-
-  {% comment %} You May Also Like Section - Using Product Cards {% endcomment %}
-  <div class="you-may-also-like-section">
-    <h2 class="ymal-title">You may also like</h2>
-    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; max-width:1200px; margin:0 auto; padding:0 15px;">
-      {% assign current_product_id = product.id %}
-      {% assign products_shown = 0 %}
-      {% for p in collections.all.products limit: 20 %}
-        {% if p.id != current_product_id and products_shown < 4 %}
-          <div style="position:relative;">
-            {% render 'product-card', product: p %}
-          </div>
-          {% assign products_shown = products_shown | plus: 1 %}
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
 </section>
 
-<!-- Carousel Dots JavaScript -->
-<script>
-  // Update carousel dots on scroll
-  const galleryContainer = document.getElementById('gallery-container');
-  const dots = document.querySelectorAll('.gallery-dots .dot');
-  
-  if (galleryContainer && dots.length > 0) {
-    galleryContainer.addEventListener('scroll', function() {
-      const scrollLeft = this.scrollLeft;
-      const slideWidth = this.offsetWidth;
-      const currentSlide = Math.round(scrollLeft / slideWidth);
-      
-      // Update active dot
-      dots.forEach((dot, index) => {
-        if (index === currentSlide) {
-          dot.classList.add('active');
-        } else {
-          dot.classList.remove('active');
-        }
-      });
-    });
-    
-    // Dot click navigation
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', function() {
-        const slideWidth = galleryContainer.offsetWidth;
-        galleryContainer.scrollTo({
-          left: slideWidth * index,
-          behavior: 'smooth'
-        });
-      });
-    });
-  }
-</script>
-
 <style>
-  .product-page-rc-car { background:#fff; padding-bottom:0; }
+  /* BOGO Banner */
+  .bogo-banner {
+    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
+    padding: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255,111,0,0.3);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  
+  .bogo-badge {
+    background: rgba(255,255,255,0.3);
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .bogo-main {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 5px;
+  }
+  
+  .bogo-sub {
+    font-size: 1rem;
+    opacity: 0.95;
+  }
+  
+  /* Product Page */
+  .product-page-splash-guard { 
+    background:#fff; 
+    padding-bottom:0; 
+  }
   
   .product-image-gallery { 
     width:100%; 
@@ -510,15 +253,14 @@
   }
   .slide img { 
     width:100%; 
-    max-height:380px;
+    max-height:400px;
     object-fit:contain;
-    object-position:center;
     display:block; 
   }
   
   .gallery-dots {
     text-align:center;
-    padding:10px 0;
+    padding:12px 0;
   }
   .dot {
     height:8px;
@@ -535,80 +277,31 @@
     border-radius:4px;
   }
   
-  .product-info-section { padding:20px 15px; }
-  
-  .product-title-rc {
-    font-size:1.4rem;
-    font-weight:700;
-    margin-bottom:12px;
+  .product-info-section { 
+    padding:20px 15px; 
   }
   
-  .product-rating-rc {
+  .product-title-splash {
+    font-size:1.6rem;
+    font-weight:700;
+    margin-bottom:12px;
+    line-height: 1.3;
+  }
+  
+  .product-rating-splash {
     display:flex;
     gap:10px;
     margin-bottom:15px;
-  }
-  .stars { color:#FFB800; }
-  .rating-count { color:#666; font-size:0.95rem; }
-  
-  .bundle-selector-rc {
-    margin-bottom: 20px;
-  }
-  .bundle-label {
-    display: block;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-    color: #333;
-  }
-  .bundle-options {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .bundle-option {
-    flex: 1;
-    min-width: 140px;
-    padding: 14px 18px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 4px;
   }
-  .bundle-option:hover {
-    border-color: #FF6F00;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255,111,0,0.15);
-  }
-  .bundle-option.active {
-    border-color: #FF6F00;
-    background: #FFF5E6;
-    border-width: 3px;
-  }
-  .bundle-name {
-    font-weight: 700;
-    font-size: 1rem;
-    color: #333;
-  }
-  .bundle-price {
-    font-size: 1.1rem;
-    color: #FF6F00;
-    font-weight: 700;
-  }
-  .bundle-savings {
-    font-size: 0.85rem;
-    color: #28a745;
-    font-weight: 600;
+  .rating-count { 
+    color:#666; 
+    font-size:0.95rem; 
   }
   
-  .countdown-timer-rc {
+  .countdown-timer-splash {
     background:white;
-    border:2px solid #FF6F00;
+    border:3px solid #FF6F00;
     padding:15px;
     border-radius:12px;
     margin-bottom:20px;
@@ -617,24 +310,25 @@
     display:block;
     text-align:center;
     color:#FF6F00;
-    font-weight:600;
+    font-weight:700;
     margin-bottom:10px;
+    font-size: 1.05rem;
   }
   .timer-display {
     display:flex;
     justify-content:center;
-    gap:8px;
+    gap:10px;
   }
   .time-box {
     background:#000;
     color:white;
-    padding:10px;
+    padding:12px 8px;
     border-radius:8px;
     text-align:center;
-    min-width:70px;
+    min-width:75px;
   }
   .time-box span:first-child {
-    font-size:1.8rem;
+    font-size:2rem;
     font-weight:700;
     display:block;
   }
@@ -643,805 +337,299 @@
     margin-top:2px;
   }
   
-  .price-section-rc {
+  .price-section-splash {
     display:flex;
-    gap:8px;
-    margin-bottom:20px;
-    align-items:center;
-    flex-wrap:nowrap;
-  }
-  .current-price-rc {
-    font-size:1.8rem;
-    font-weight:700;
-    color:#00C853;
-    white-space:nowrap;
-  }
-  .compare-price-rc {
-    text-decoration:line-through;
-    color:#999;
-    font-size:0.95rem;
-    white-space:nowrap;
-  }
-  .save-badge-rc {
-    background:#d32f2f;
-    color:white;
-    padding:5px 10px;
-    border-radius:6px;
-    font-weight:700;
-    font-size:0.85rem;
-    white-space:nowrap;
-  }
-  
-  .buy-section-rc button,
-  .buy-section-rc a {
-    display: block;
-    width:100%;
-    padding:14px 16px;
-    border:none;
-    border-radius:10px;
-    font-weight:700;
-    margin-bottom:12px;
-    cursor:pointer;
-    line-height:1.3;
-    text-decoration: none;
-    text-align: center;
-  }
-  .btn-buy-prepaid-rc {
-    background:linear-gradient(135deg,#00C853,#00E676);
-    color:white;
-  }
-  .btn-buy-cod-rc {
-    background:linear-gradient(135deg,#FF6F00,#FF8F00) !important;
-    color:white !important;
-  }
-  .btn-quick-order-rc {
-    background:white;
-    border:2px solid #FF6F00 !important;
-    color:#FF6F00;
-  }
-  .final-price, .sub-text {
-    font-size:0.85rem;
-    font-weight:400;
-    display:block;
-  }
-  
-  /* Green button text sizing to match orange button */
-  .main-text-prepaid {
-    font-size: 1rem;
-    font-weight: 600;
-    display: block;
-    line-height: 1.2;
-    margin-bottom: 2px;
-  }
-  .sub-text-prepaid {
-    font-size: 0.8rem;
-    font-weight: 400;
-    display: block;
-    opacity: 0.95;
-    line-height: 1.3;
-  }
-  
-  /* Orange COD button - independent of Releasit */
-  .btn-buy-cod-simple {
-    background: linear-gradient(135deg, #FF6F00, #FF8F00);
-    color: white;
-    display: block;
-    text-decoration: none;
-  }
-  
-  .main-text-cod {
-    font-size: 1rem;
-    font-weight: 600;
-    display: block;
-    line-height: 1.2;
-    margin-bottom: 2px;
-  }
-  
-  .sub-text-cod {
-    font-size: 0.8rem;
-    font-weight: 400;
-    display: block;
-    opacity: 0.95;
-    line-height: 1.3;
-  }
-  
-  .product-description-rc {
-    padding:0 15px 30px;
-    }
-  .desc-section-title {
-    font-size:1.5rem;
-    font-weight:700;
-    margin-bottom:20px;
-    padding-bottom:10px;
-    border-bottom:2px solid #FF6F00;
-  }
-  .desc-block-rc {
-    margin-bottom:30px;
-  }
-  .desc-block-rc h3 {
-    font-weight:700;
-    margin-bottom:12px;
-  }
-  .desc-block-rc p {
-    line-height:1.7;
-    color:#555;
-  }
-  .feature-list-rc {
-    list-style:none;
-    padding:0;
-  }
-  .feature-list-rc li {
-    padding:12px 0;
-    border-bottom:1px solid #f0f0f0;
-  }
-  
-  .specs-table-rc {
-    background:#f9f9f9;
-    padding:20px;
-    border-radius:12px;
-    margin-top:30px;
-  }
-  .specs-table-rc h3 {
-    font-weight:700;
+    gap:10px;
     margin-bottom:15px;
-  }
-  .specs-table-rc table {
-    width:100%;
-  }
-  .specs-table-rc td {
-    padding:14px 10px;
-    border-bottom:1px solid #eee;
-  }
-  
-  .reviews-section-rc {
-    padding:30px 15px 0 15px;
-    background:#f9f9f9;
-  }
-  .reviews-title {
-    font-size:1.5rem;
-    font-weight:700;
-    margin-bottom:20px;
-  }
-  .review-card {
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:15px;
-  }
-  .verified { color:#00C853; font-size:0.85rem; }
-  .review-stars { color:#FFB800; margin:8px 0; }
-  .review-text { color:#555; line-height:1.6; }
-  
-  /* You May Also Like Section */
-  .you-may-also-like-section {
-    padding:30px 15px 40px;
-    background:#fff;
-  }
-  .ymal-title {
-    font-size:1.5rem;
-    font-weight:700;
-    margin-bottom:20px;
-    color:#333;
-  }
-  .ymal-products-grid {
-    display:flex;
-    gap:15px;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    padding-bottom:10px;
-  }
-  .ymal-products-grid::-webkit-scrollbar { display:none; }
-  .ymal-product-card {
-    min-width:45%;
-    max-width:48%;
-    flex-shrink:0;
-    scroll-snap-align:start;
-    background:#f5f5f5;
-    border-radius:12px;
-    overflow:hidden;
-    transition:transform 0.2s;
-  }
-  .ymal-product-card:hover {
-    transform:translateY(-4px);
-  }
-  .ymal-product-img {
-    width:100%;
-    height:180px;
-    object-fit:contain;
-    display:block;
-  }
-  .ymal-product-name {
-    font-size:0.95rem;
-    font-weight:600;
-    padding:10px 12px 5px;
-    margin:0;
-    color:#333;
-    line-height:1.3;
-    min-height:42px;
-  }
-  .ymal-product-price {
-    font-size:1.1rem;
-    font-weight:700;
-    color:#00C853;
-    padding:0 12px 12px;
-    display:flex;
     align-items:center;
-    gap:8px;
     flex-wrap:wrap;
   }
-  .ymal-price-sale {
+  .current-price-splash {
+    font-size:2.2rem;
+    font-weight:800;
     color:#00C853;
-    font-size:1.1rem;
-    font-weight:700;
   }
-  .ymal-price-compare {
-    color:#999;
-    font-size:0.9rem;
-    font-weight:400;
+  .compare-price-splash {
     text-decoration:line-through;
+    color:#999;
+    font-size:1.1rem;
   }
-
+  .save-badge-splash {
+    background:#d32f2f;
+    color:white;
+    padding:6px 12px;
+    border-radius:6px;
+    font-weight:700;
+    font-size:0.9rem;
+  }
+  
+  .bogo-reminder {
+    background: linear-gradient(135deg, #FFF5E6 0%, #FFE0CC 100%);
+    border: 2px dashed #FF6F00;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    color: #333;
+  }
+  
+  .buy-section-splash {
+    margin-bottom: 20px;
+  }
+  
+  .btn-buy-now-splash {
+    width: 100%;
+    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
+    color: white;
+    border: none;
+    padding: 18px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255,111,0,0.4);
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+  
+  .btn-buy-now-splash:active {
+    transform: scale(0.98);
+  }
+  
+  .btn-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .btn-text-main {
+    display: block;
+    font-size: 1.15rem;
+    margin-bottom: 3px;
+  }
+  
+  .btn-text-sub {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.95;
+  }
+  
+  .trust-badges-splash {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .trust-item {
+    background: #f0f0f0;
+    padding: 10px 5px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #00C853;
+  }
+  
+  .product-description-splash {
+    padding:20px 15px;
+    background: #f9f9f9;
+  }
+  
+  .desc-block-splash {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  
+  .desc-block-splash h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #333;
+  }
+  
+  .desc-block-splash p {
+    line-height: 1.7;
+    color: #555;
+    font-size: 1rem;
+  }
+  
+  .feature-list-splash {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .feature-list-splash li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .feature-list-splash li:last-child {
+    border-bottom: none;
+  }
+  
+  .reviews-section-splash {
+    padding: 30px 15px;
+    background: white;
+  }
+  
+  .reviews-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .reviews-image-container {
+    margin: 20px 0 30px 0;
+  }
+  
+  .review-card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 4px solid #FF6F00;
+  }
+  
+  .reviewer-info {
+    margin-bottom: 8px;
+  }
+  
+  .reviewer-info strong {
+    font-size: 1.05rem;
+    color: #333;
+  }
+  
+  .verified {
+    color: #00C853;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  
+  .review-stars {
+    color: #FFB800;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .review-text {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+  
+  .final-cta-splash {
+    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
+    padding: 25px 20px;
+    text-align: center;
+  }
+  
+  .cta-final-button {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    color: #FF6F00;
+    border: none;
+    padding: 18px 25px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    animation: shake 2s ease-in-out infinite;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+  }
+  
+  .cta-urgency {
+    color: white;
+    margin-top: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
 </style>
 
 <script>
-  // Gallery swipe
-  const container = document.getElementById('gallery-container');
-  const dots = document.querySelectorAll('.dot');
-  let currentSlide = 0;
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      currentSlide = i;
-      updateGallery();
-    });
-  });
-
-  let touchStartX = 0;
-  container.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
-  container.addEventListener('touchend', e => {
-    const touchEndX = e.changedTouches[0].screenX;
-    const maxSlide = dots.length - 1;
-    if (touchEndX < touchStartX - 50 && currentSlide < maxSlide) {
-      currentSlide++;
-      updateGallery();
-    }
-    if (touchEndX > touchStartX + 50 && currentSlide > 0) {
-      currentSlide--;
-      updateGallery();
-    }
-  });
-
-  function updateGallery() {
-    container.scrollTo({
-      left: container.offsetWidth * currentSlide,
-      behavior: 'smooth'
-    });
-    dots.forEach((d, i) => {
-      d.classList.toggle('active', i === currentSlide);
-    });
-  }
-
-  // Countdown
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const midnight = new Date();
-    midnight.setHours(24,0,0,0);
-    const distance = midnight - now;
+  // Buy Now Function
+  function buyNowSplash() {
+    const variantId = document.getElementById('variant-id-input').value;
     
-    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    document.getElementById('days').textContent = String(d).padStart(2, '0');
-    document.getElementById('hours').textContent = String(h).padStart(2, '0');
-    document.getElementById('mins').textContent = String(m).padStart(2, '0');
-    document.getElementById('secs').textContent = String(s).padStart(2, '0');
-  }
-
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-
-  // Review Form Popup
-  function openReviewForm() {
-    const formHTML = `
-      <div id="review-modal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
-        <div style="background:white;border-radius:16px;padding:30px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 10px 40px rgba(0,0,0,0.3);">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-            <h3 style="margin:0;font-size:1.5rem;color:#333;">Write a Review</h3>
-            <button onclick="closeReviewForm()" style="background:none;border:none;font-size:2rem;cursor:pointer;color:#999;">&times;</button>
-          </div>
-          <form id="review-form-submit" style="display:flex;flex-direction:column;gap:15px;">
-            <div>
-              <label style="display:block;margin-bottom:5px;font-weight:600;color:#555;">Your Name</label>
-              <input type="text" name="name" required style="width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;font-size:1rem;">
-            </div>
-            <div>
-              <label style="display:block;margin-bottom:5px;font-weight:600;color:#555;">Rating</label>
-              <div class="star-rating" style="font-size:2rem;cursor:pointer;">
-                <span data-rating="1">☆</span>
-                <span data-rating="2">☆</span>
-                <span data-rating="3">☆</span>
-                <span data-rating="4">☆</span>
-                <span data-rating="5">☆</span>
-              </div>
-              <input type="hidden" name="rating" id="rating-value" required>
-            </div>
-            <div>
-              <label style="display:block;margin-bottom:5px;font-weight:600;color:#555;">Your Review</label>
-              <textarea name="review" required rows="4" style="width:100%;padding:12px;border:2px solid #ddd;border-radius:8px;font-size:1rem;resize:vertical;"></textarea>
-            </div>
-            <button type="submit" style="background:linear-gradient(135deg,#FF6F00,#FF8F00);color:white;border:none;padding:14px;border-radius:50px;font-size:1.1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(255,111,0,0.3);">
-              Submit Review
-            </button>
-          </form>
-        </div>
-      </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', formHTML);
-    
-    // Star rating functionality
-    const stars = document.querySelectorAll('.star-rating span');
-    stars.forEach(star => {
-      star.addEventListener('click', function() {
-        const rating = this.dataset.rating;
-        document.getElementById('rating-value').value = rating;
-        stars.forEach((s, i) => {
-          s.textContent = i < rating ? '★' : '☆';
-        });
-      });
-    });
-    
-    // Form submission
-    document.getElementById('review-form-submit').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      
-      // Send to Shopify backend (metafields or customer note)
-      fetch('/apps/reviews/submit', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          product_id: '{{ product.id }}',
-          name: formData.get('name'),
-          rating: formData.get('rating'),
-          review: formData.get('review'),
-          timestamp: new Date().toISOString()
-        })
-      }).then(() => {
-        alert('Thank you for your review! We appreciate your feedback.');
-        closeReviewForm();
-      }).catch(() => {
-        alert('Thank you for your review! We appreciate your feedback.');
-        closeReviewForm();
-      });
-    });
-  }
-  
-  function closeReviewForm() {
-    const modal = document.getElementById('review-modal');
-    if (modal) modal.remove();
-  }
-
-  // Sticky Buy Bar - Show on scroll
-  const stickyBar = document.querySelector('.sticky-buy-bar-rc');
-  if (stickyBar) {
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 300) {
-        stickyBar.classList.add('visible');
-      } else {
-        stickyBar.classList.remove('visible');
-      }
-    });
-  }
-
-  // Bundle Selector
-  let selectedVariantId = {{ product.selected_or_first_available_variant.id }};
-  
-  function selectBundle(button, variantId, price) {
-    // Update selected variant
-    selectedVariantId = variantId;
-    
-    // Update active state
-    document.querySelectorAll('.bundle-option').forEach(opt => opt.classList.remove('active'));
-    button.classList.add('active');
-    
-    // Update URL without reload
-    const url = new URL(window.location);
-    url.searchParams.set('variant', variantId);
-    window.history.replaceState({}, '', url);
-  }
-
-  // Prepaid Checkout - Add to cart and redirect to Shopify checkout with Razorpay
-  function buyNowPrepaid() {
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: selectedVariantId,
-        quantity: 1,
-        properties: {
-          '_payment_method': 'Prepaid - Razorpay',
-          '_discount': '10% OFF'
-        }
-      })
+      body: JSON.stringify({ id: variantId, quantity: 1 })
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Added to cart:', data);
-      
-      // Update cart count using global function
-      if (window.updateCartCount) {
-        window.updateCartCount();
-      }
-      
-      // Redirect to cart
-      setTimeout(() => {
-        window.location.href = '/cart';
-      }, 200);
-    })
-    .catch(error => {
-      console.error('Error adding to cart:', error);
-      alert('Error processing order. Please try again.');
-    });
-  }
-  
-  // COD Checkout
-  function orderCOD() {
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: {{ product.selected_or_first_available_variant.id }},
-        quantity: 1,
-        properties: {
-          '_payment_method': 'COD'
-        }
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      window.location.href = '/checkout';
+      window.location.href = '/cart';
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('Error processing order. Please try again.');
+      alert('Failed to add to cart. Please try again.');
     });
   }
-
-  // Releasit COD Form will automatically handle clicks on links to /rs-bin-hook
+  
+  // Scroll to Top
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  
+  // Countdown Timer
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0);
+    const distance = midnight - now;
+    
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('mins').textContent = String(mins).padStart(2, '0');
+    document.getElementById('secs').textContent = String(secs).padStart(2, '0');
+  }
+  
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  
+  // Gallery Dots
+  const galleryContainer = document.getElementById('gallery-container');
+  const dots = document.querySelectorAll('.gallery-dots .dot');
+  
+  if (galleryContainer && dots.length > 0) {
+    galleryContainer.addEventListener('scroll', function() {
+      const scrollLeft = this.scrollLeft;
+      const slideWidth = this.offsetWidth;
+      const currentSlide = Math.round(scrollLeft / slideWidth);
+      
+      dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    });
+    
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', function() {
+        const slideWidth = galleryContainer.offsetWidth;
+        galleryContainer.scrollTo({
+          left: slideWidth * index,
+          behavior: 'smooth'
+        });
+      });
+    });
+  }
 </script>
-
-{% schema %}
-{
-  "name": "Product Page",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Product Images (Swipeable Gallery)"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_1",
-      "label": "Product Image 1"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_2",
-      "label": "Product Image 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_3",
-      "label": "Product Image 3"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_4",
-      "label": "Product Image 4"
-    },
-    {
-      "type": "header",
-      "content": "Product Information"
-    },
-    {
-      "type": "text",
-      "id": "product_title",
-      "label": "Product Title",
-      "default": "RC Stunt Car 360° Drift"
-    },
-    {
-      "type": "text",
-      "id": "rating_text",
-      "label": "Rating Display",
-      "default": "4.8/5 (2,450 Reviews)"
-    },
-    {
-      "type": "header",
-      "content": "Countdown Timer"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_countdown",
-      "label": "Show Countdown Timer",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "countdown_label",
-      "label": "Timer Label",
-      "default": "⏰ Offer Ends in"
-    },
-    {
-      "type": "header",
-      "content": "Pricing"
-    },
-    {
-      "type": "text",
-      "id": "current_price",
-      "label": "Current Price",
-      "default": "₹1,499"
-    },
-    {
-      "type": "text",
-      "id": "compare_price",
-      "label": "Compare At Price",
-      "default": "₹3,499"
-    },
-    {
-      "type": "text",
-      "id": "save_percentage",
-      "label": "Save Percentage",
-      "default": "57%"
-    },
-    {
-      "type": "header",
-      "content": "Buy Buttons"
-    },
-    {
-      "type": "text",
-      "id": "prepaid_button_text",
-      "label": "Prepaid Button Main Text",
-      "default": "💳 PAY ONLINE & SAVE ₹130 (10% OFF)"
-    },
-    {
-      "type": "text",
-      "id": "prepaid_price_text",
-      "label": "Prepaid Final Price",
-      "default": "Final Price: ₹1,169"
-    },
-    {
-      "type": "text",
-      "id": "cod_button_text",
-      "label": "COD Button Main Text",
-      "default": "📦 ORDER NOW - CASH ON DELIVERY"
-    },
-    {
-      "type": "text",
-      "id": "cod_sub_text",
-      "label": "COD Button Sub Text",
-      "default": "Pay when you receive | Free Shipping"
-    },
-    {
-      "type": "text",
-      "id": "quick_order_text",
-      "label": "Quick Order Button Text",
-      "default": "🚀 Quick Order (No Cart Required)"
-    },
-    {
-      "type": "header",
-      "content": "Description Section"
-    },
-    {
-      "type": "text",
-      "id": "block1_title",
-      "label": "Block 1 Title",
-      "default": "🎯 ULTIMATE FUN FOR KIDS!"
-    },
-    {
-      "type": "html",
-      "id": "block1_text",
-      "label": "Block 1 Text (HTML Supported - Add GIFs here)",
-      "default": "Watch your kids' faces light up as this powerful RC stunt car performs incredible 360° flips, spins, and drifts! Perfect for indoor and outdoor play."
-    },
-    {
-      "type": "text",
-      "id": "block2_title",
-      "label": "Block 2 Title",
-      "default": "⚡ POWERFUL FEATURES"
-    },
-    {
-      "type": "html",
-      "id": "feature1",
-      "label": "Feature 1 (HTML Supported)",
-      "default": "360° Rotation & Drift: Amazing stunts with one-button control"
-    },
-    {
-      "type": "html",
-      "id": "feature2",
-      "label": "Feature 2 (HTML Supported)",
-      "default": "High Speed: Up to 15 km/h"
-    },
-    {
-      "type": "html",
-      "id": "feature3",
-      "label": "Feature 3 (HTML Supported)",
-      "default": "Long Range: 50+ meters"
-    },
-    {
-      "type": "html",
-      "id": "feature4",
-      "label": "Feature 4 (HTML Supported)",
-      "default": "Rechargeable: 40 minutes playtime"
-    },
-    {
-      "type": "html",
-      "id": "feature5",
-      "label": "Feature 5 (HTML Supported)",
-      "default": "LED Lights: Cool night play"
-    },
-    {
-      "type": "text",
-      "id": "block3_title",
-      "label": "Block 3 Title",
-      "default": "💪 BUILT TO LAST"
-    },
-    {
-      "type": "textarea",
-      "id": "block3_text",
-      "label": "Block 3 Text",
-      "default": "Premium ABS plastic with shock-resistant design. Works on concrete, grass, carpet - anywhere!"
-    },
-    {
-      "type": "text",
-      "id": "block4_title",
-      "label": "Block 4 Title",
-      "default": "🎁 PERFECT GIFT"
-    },
-    {
-      "type": "textarea",
-      "id": "block4_text",
-      "label": "Block 4 Text",
-      "default": "Amazing birthday or festival gift for kids aged 6-12 years. Encourages outdoor play!"
-    },
-    {
-      "type": "header",
-      "content": "Specifications"
-    },
-    {
-      "type": "text",
-      "id": "specs_title",
-      "label": "Specifications Heading",
-      "default": "📋 Specifications"
-    },
-    {
-      "type": "text",
-      "id": "spec_age",
-      "label": "Age Range",
-      "default": "6-12 Years"
-    },
-    {
-      "type": "text",
-      "id": "spec_material",
-      "label": "Material",
-      "default": "ABS Plastic"
-    },
-    {
-      "type": "text",
-      "id": "spec_battery",
-      "label": "Battery",
-      "default": "Rechargeable 3.7V"
-    },
-    {
-      "type": "text",
-      "id": "spec_remote",
-      "label": "Remote Control",
-      "default": "2.4GHz Wireless"
-    },
-    {
-      "type": "text",
-      "id": "spec_contents",
-      "label": "Box Contents",
-      "default": "Car, Remote, Charger"
-    },
-    {
-      "type": "header",
-      "content": "Customer Reviews"
-    },
-    {
-      "type": "text",
-      "id": "reviews_title",
-      "label": "Reviews Section Title",
-      "default": "Customer Reviews (500+)"
-    },
-    {
-      "type": "text",
-      "id": "review1_name",
-      "label": "Review 1 - Customer Name",
-      "default": "Rahul Sharma"
-    },
-    {
-      "type": "textarea",
-      "id": "review1_text",
-      "label": "Review 1 - Text",
-      "default": "My son loves this car! Very sturdy."
-    },
-    {
-      "type": "text",
-      "id": "review2_name",
-      "label": "Review 2 - Customer Name",
-      "default": "Priya Patel"
-    },
-    {
-      "type": "textarea",
-      "id": "review2_text",
-      "label": "Review 2 - Text",
-      "default": "Best birthday gift ever. Battery life is good."
-    },
-    {
-      "type": "text",
-      "id": "review3_name",
-      "label": "Review 3 - Customer Name",
-      "default": "Amit Kumar"
-    },
-    {
-      "type": "textarea",
-      "id": "review3_text",
-      "label": "Review 3 - Text",
-      "default": "Excellent! The 360° flip is amazing!"
-    },
-    {
-      "type": "header",
-      "content": "Sticky Bottom Bar"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_sticky_bar",
-      "label": "Show Sticky Buy Bar",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "sticky_button_text",
-      "label": "Sticky Button Text",
-      "default": "Order Now"
-    },
-    {
-      "type": "header",
-      "content": "Colors & Styling"
-    },
-    {
-      "type": "color",
-      "id": "primary_color",
-      "label": "Primary Color (Orange)",
-      "default": "#FF6F00"
-    },
-    {
-      "type": "color",
-      "id": "success_color",
-      "label": "Success Color (Green)",
-      "default": "#00C853"
-    },
-    {
-      "type": "color",
-      "id": "sale_color",
-      "label": "Sale Badge Color (Red)",
-      "default": "#d32f2f"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Product Page"
-    }
-  ]
-}
-{% endschema %}
-
-
-
-
