@@ -1,21 +1,12 @@
 {% comment %}
-  SINK SPLASH GUARD - BUY 1 GET 1 FREE CAMPAIGN
-  Mobile-First High-Conversion Design
+  Splash Guard - Product Page  
+  Mobile-First Design
 {% endcomment %}
 
-<section class="product-page-splash-guard">
+<section class="product-page-rc-car">
   {% render 'product-page-desktop.css' %}
   
-  {% comment %} HUGE BUY 1 GET 1 FREE BANNER {% endcomment %}
-  <div class="bogo-banner">
-    <div class="bogo-content">
-      <div class="bogo-badge">🎁 LIMITED TIME OFFER</div>
-      <div class="bogo-main">BUY 1 GET 1 FREE</div>
-      <div class="bogo-sub">Double Your Protection, Zero Extra Cost!</div>
-    </div>
-  </div>
-  
-  {% comment %} Mobile Image Gallery {% endcomment %}
+  {% comment %} Mobile Image Gallery - Swipeable {% endcomment %}
   <div class="product-image-gallery">
     <div class="gallery-container" id="gallery-container">
       {% for image in product.images %}
@@ -32,107 +23,101 @@
   {% comment %} Product Info {% endcomment %}
   <div class="product-info-section">
     
-    <h1 class="product-title-splash">{{ product.title }}</h1>
+    <h1 class="product-title-rc">{{ product.title }}</h1>
     
-    <div class="product-rating-splash">
+    <div class="product-rating-rc">
       <span style="display:inline-flex; align-items:baseline;">⭐⭐⭐⭐<span style="width:14px;overflow:hidden;">⭐</span></span>
       <span class="rating-count">4.8 (520+ Reviews)</span>
     </div>
 
     {% comment %} Countdown Timer {% endcomment %}
-    <div class="countdown-timer-splash">
+    <div class="countdown-timer-rc">
       <span class="timer-label">⏰ Offer Ends in</span>
       <div class="timer-display">
+        <div class="time-box"><span id="days">00</span><span class="label">Days</span></div>
         <div class="time-box"><span id="hours">23</span><span class="label">Hours</span></div>
-        <div class="time-box"><span id="mins">59</span><span class="label">Mins</span></div>
-        <div class="time-box"><span id="secs">52</span><span class="label">Secs</span></div>
+        <div class="time-box"><span id="mins">59</span><span class="label">Minutes</span></div>
+        <div class="time-box"><span id="secs">52</span><span class="label">Seconds</span></div>
       </div>
     </div>
 
     {% comment %} Price {% endcomment %}
-    <div class="price-section-splash">
-      <div class="current-price-splash">{{ product.price | money }}</div>
+    <div class="price-section-rc">
+      <div class="current-price-rc">{{ product.price | money }}</div>
       {% if product.compare_at_price > product.price %}
-        <div class="compare-price-splash">{{ product.compare_at_price | money }}</div>
+        <div class="compare-price-rc">{{ product.compare_at_price | money }}</div>
         {% assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
-        <div class="save-badge-splash">SAVE {{ savings }}%</div>
+        <div class="save-badge-rc">SAVE {{ savings }}%</div>
       {% endif %}
     </div>
-    
-    <div class="bogo-reminder">
-      ✨ <strong>Buy 1 Get 1 FREE</strong> - Add to cart to claim your free guard!
+
+    {% comment %} Variant Selector {% endcomment %}
+    <div class="variant-selector-rc">
+      <div class="variant-options-rc">
+        {% for variant in product.variants %}
+          <label class="variant-option-rc {% if forloop.first %}active{% endif %}" data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price }}">
+            <input type="radio" name="variant-select" value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
+            <div class="variant-content">
+              <span class="variant-title">{{ variant.title }}</span>
+              <span class="variant-price">{{ variant.price | money }}</span>
+              {% if variant.compare_at_price > variant.price %}
+                <span class="variant-save">Save ₹{{ variant.compare_at_price | minus: variant.price | divided_by: 100 }}</span>
+              {% endif %}
+            </div>
+          </label>
+        {% endfor %}
+      </div>
     </div>
 
     {% comment %} Shopify Product Form {% endcomment %}
-    {% form 'product', product, id: 'product-form-splash' %}
+    {% form 'product', product, id: 'product-form-installment' %}
       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="variant-id-input">
       
-      {% comment %} Buy Button {% endcomment %}
-      <div class="buy-section-splash">
-        <button class="btn-buy-now-splash" type="button" onclick="buyNowSplash()">
-          <span class="btn-icon">🛒</span>
-          <span class="btn-text-main">CLAIM BUY 1 GET 1 FREE</span>
-          <span class="btn-text-sub">Limited Stock - Order Now!</span>
+      {% comment %} Buy Buttons {% endcomment %}
+      <div class="buy-section-rc">
+        <button class="btn-buy-prepaid-rc" type="button" onclick="buyNowPrepaid()">
+          <span class="main-text-prepaid">Add to cart</span>
+          <span class="sub-text-prepaid">PAY ONLINE & SAVE ₹130 (10% OFF)</span>
         </button>
       </div>
     {% endform %}
-    
-    {% comment %} Trust Badges {% endcomment %}
-    <div class="trust-badges-splash">
-      <div class="trust-item">✓ Free Shipping</div>
-      <div class="trust-item">✓ Cash on Delivery</div>
-      <div class="trust-item">✓ Easy Returns</div>
-    </div>
 
   </div>
 
-  {% comment %} Product Description {% endcomment %}
-  <div class="product-description-splash">
+  {% comment %} Description {% endcomment %}
+  <div class="product-description-rc">
     
-    <div class="desc-block-splash">
-      <h2>🌊 Stop Water Splashes Instantly!</h2>
-      <p>Tired of water splashing everywhere when washing dishes? Our Sink Splash Guard creates a perfect barrier, keeping your kitchen clean and dry!</p>
-      {% if product.images[1] %}
-        <img src="{{ product.images[1] | img_url: '800x' }}" alt="Splash Guard in action" style="width:100%; border-radius:12px; margin:15px 0;">
-      {% endif %}
+    <div style="text-align: center; margin-bottom: 30px;">
+      <img src="{{ 'trust-badges.png' | asset_url }}" alt="Free Shipping, No-Hassle Returns, Satisfaction Guaranteed, Secure Checkout" style="max-width: 100%; height: auto;">
     </div>
+    
+    {%- if product.description != blank -%}
+      {{ product.description }}
+    {%- else -%}
+      <div class="desc-block-rc">
+        <h3>💦 STOP THE SPLASH. STAY DRY.</h3>
+        <p>Tired of wet shirts and messy countertops? This splash guard blocks water right at the sink edge, keeping splashes contained so you can wash dishes, fruit, or your hands without the mess.</p>
+      </div>
 
-    <div class="desc-block-splash">
-      <h2>✨ Why You'll Love It</h2>
-      <ul class="feature-list-splash">
-        <li>🛡️ <strong>Flexible Silicone</strong> - Bends to fit any sink perfectly</li>
-        <li>💧 <strong>Blocks 99% of Splashes</strong> - Keep counters & floors dry</li>
-        <li>🔥 <strong>Heat Resistant</strong> - Safe for hot water use</li>
-        <li>🧼 <strong>Easy to Clean</strong> - Dishwasher safe silicone</li>
-        <li>📦 <strong>BUY 1 GET 1 FREE</strong> - Perfect for multiple sinks!</li>
-      </ul>
-      {% if product.images[2] %}
-        <img src="{{ product.images[2] | img_url: '800x' }}" alt="Features" style="width:100%; border-radius:12px; margin:15px 0;">
-      {% endif %}
-    </div>
+      <div class="desc-block-rc">
+        <h3>⚡ Smart Design, Secure Fit</h3>
+        <p>Made from flexible, durable silicone, this splash guard locks into place with strong suction cups and removes just as easily—no tools, no residue, no hassle.</p>
+      </div>
 
-    <div class="desc-block-splash">
-      <h2>🏠 Perfect for Every Kitchen</h2>
-      <p>Whether you're washing dishes, rinsing vegetables, or cleaning pots - our splash guard keeps everything clean. The flexible design fits standard and deep sinks!</p>
-      {% if product.images[3] %}
-        <img src="{{ product.images[3] | img_url: '800x' }}" alt="Kitchen use" style="width:100%; border-radius:12px; margin:15px 0;">
-      {% endif %}
-    </div>
+      <div class="desc-block-rc">
+        <h3>✨ A Cleaner Kitchen, Washroom Every Time</h3>
+        <p>A universal fit makes it perfect for kitchen and bathroom sinks, keeping counters dry and splash-free for everyday use or guests.</p>
+      </div>
+    {%- endif -%}
 
   </div>
 
-  {% comment %} Customer Reviews with Image {% endcomment %}
-  <div class="reviews-section-splash">
-    <h2 class="reviews-title">What Customers Are Saying</h2>
-    
-    {% comment %} Customer Reviews Image {% endcomment %}
-    <div class="reviews-image-container">
-      <img src="{{ 'uploaded_media_1769973662192.png' | asset_url }}" alt="Customer using splash guard" style="width:100%; border-radius:12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-    </div>
-    
-    <div style="display:flex;align-items:center;gap:10px;margin:20px 0;">
+  {% comment %} Reviews {% endcomment %}
+  <div class="reviews-section-rc">
+    <h2 class="reviews-title">Customer Reviews</h2>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:20px;">
       <span style="display:inline-flex; align-items:baseline; font-size:1.5rem;">⭐⭐⭐⭐<span style="width:12px;overflow:hidden;">⭐</span></span>
-      <span style="font-size:1.1rem;color:#666;font-weight:600;">4.8 out of 5 (520+ Reviews)</span>
+      <span style="font-size:1.1rem;color:#666;font-weight:600;">4.8 (520+ Reviews)</span>
     </div>
     
     <div class="review-card">
@@ -140,7 +125,7 @@
         <strong>Priya Sharma</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">"Buy 1 Get 1 Free offer is amazing! One for kitchen sink, one for bathroom. No more water mess on my counters!"</p>
+      <p class="review-text">This splash guard is amazing! No more water all over my counter. Easy to install and stays in place perfectly!</p>
     </div>
 
     <div class="review-card">
@@ -148,488 +133,428 @@
         <strong>Rajesh Kumar</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">"Flexible silicone bends perfectly around my sink. Blocks all water splashes. Best kitchen purchase!"</p>
+      <p class="review-text">Very practical! Keeps my kitchen dry. The suction cups are strong and it's easy to clean.</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Anita Desai</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Anjali Desai</strong> <span class="verified">✓ Verified Purchase</span>
       </div>
       <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">"Got 2 guards in BOGO offer. Kitchen stays so clean now! Easy to install and remove for cleaning."</p>
-    </div>
-
-    <div class="review-card">
-      <div class="reviewer-info">
-        <strong>Vikram Singh</strong> <span class="verified">✓ Verified Purchase</span>
-      </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">"Heat resistant silicone works great with hot water. No more wiping counters after dishes!"</p>
-    </div>
-
-    <div class="review-card">
-      <div class="reviewer-info">
-        <strong>Meera Patel</strong> <span class="verified">✓ Verified Purchase</span>
-      </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <p class="review-text">"Dishwasher safe and easy to clean. The BOGO deal made it super affordable. Highly recommend!"</p>
+      <p class="review-text">Love it! Perfect for washing vegetables. No more wet clothes!</p>
     </div>
 
   </div>
 
-  {% comment %} Final CTA {% endcomment %}
-  <div class="final-cta-splash">
-    <button onclick="scrollToTop()" class="cta-final-button">
-      🎁 CLAIM YOUR BUY 1 GET 1 FREE OFFER
+  {% comment %} Final CTA Button {% endcomment %}
+  <div style="text-align:center; padding:10px 20px 25px 20px; background:#fff; margin:0;">
+    <button onclick="scrollToTop()" class="cta-shake-button" style="background:linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%); color:white; border:none; padding:18px 50px; font-size:1.2rem; font-weight:700; border-radius:50px; cursor:pointer; box-shadow:0 4px 15px rgba(255,111,0,0.4); text-transform:uppercase; margin:0;">
+      💦 GET YOURS NOW
     </button>
-    <p class="cta-urgency">⚡ Only {{ product.variants.first.inventory_quantity | default: 47 }} sets left in stock!</p>
   </div>
 
-</section>
+  <style>
+    
+    /* Variant Selector Styles */
+    .variant-selector-rc {
+      margin: 20px 0;
+    }
+    
+    .variant-options-rc {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    .variant-option-rc {
+      position: relative;
+      display: block;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: white;
+    }
+    
+    .variant-option-rc input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+    
+    .variant-option-rc:hover {
+      border-color: #FF6F00;
+      box-shadow: 0 2px 10px rgba(255,111,0,0.2);
+    }
+    
+    .variant-option-rc.active {
+      border-color: #FF6F00;
+      background: linear-gradient(135deg, #fff5e6 0%, #ffe0cc 100%);
+      box-shadow: 0 4px 15px rgba(255,111,0,0.3);
+    }
+    
+    .variant-content {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: center;
+    }
+    
+    .variant-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #333;
+    }
+    
+    .variant-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #00C853;
+    }
+    
+    .variant-save {
+      font-size: 0.85rem;
+      color: #e74c3c;
+      font-weight: 600;
+    }
+    
+    @keyframes shake {
+      0%, 20%, 100% { transform: rotate(0deg); }
+      4% { transform: rotate(-5deg); }
+      8% { transform: rotate(5deg); }
+      12% { transform: rotate(-5deg); }
+      16% { transform: rotate(3deg); }
+    }
+    
+    .cta-shake-button {
+      animation: shake 2s ease-in-out infinite;
+    }
+    
+    .cta-shake-button:hover {
+      transform: scale(1.05);
+    }
+  </style>
 
-<style>
-  /* BOGO Banner */
-  .bogo-banner {
-    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
-    padding: 20px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 4px 15px rgba(255,111,0,0.3);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-  }
-  
-  .bogo-badge {
-    background: rgba(255,255,255,0.3);
-    display: inline-block;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  
-  .bogo-main {
-    font-size: 2.2rem;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    margin-bottom: 5px;
-  }
-  
-  .bogo-sub {
-    font-size: 1rem;
-    opacity: 0.95;
-  }
-  
-  /* Product Page */
-  .product-page-splash-guard { 
-    background:#fff; 
-    padding-bottom:0; 
-  }
-  
-  .product-image-gallery { 
-    width:100%; 
-    background:#f9f9f9; 
-    margin-bottom:0;
-  }
-  
-  .gallery-container {
-    display:flex;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-  }
-  .gallery-container::-webkit-scrollbar { display:none; }
-  
-  .slide {
-    min-width:100%;
-    scroll-snap-align:start;
-  }
-  .slide img { 
-    width:100%; 
-    max-height:400px;
-    object-fit:contain;
-    display:block; 
-  }
-  
-  .gallery-dots {
-    text-align:center;
-    padding:12px 0;
-  }
-  .dot {
-    height:8px;
-    width:8px;
-    margin:0 5px;
-    background:#bbb;
-    border-radius:50%;
-    display:inline-block;
-    cursor:pointer;
-  }
-  .dot.active {
-    background:#FF6F00;
-    width:24px;
-    border-radius:4px;
-  }
-  
-  .product-info-section { 
-    padding:20px 15px; 
-  }
-  
-  .product-title-splash {
-    font-size:1.6rem;
-    font-weight:700;
-    margin-bottom:12px;
-    line-height: 1.3;
-  }
-  
-  .product-rating-splash {
-    display:flex;
-    gap:10px;
-    margin-bottom:15px;
-    align-items: center;
-  }
-  .rating-count { 
-    color:#666; 
-    font-size:0.95rem; 
-  }
-  
-  .countdown-timer-splash {
-    background:white;
-    border:3px solid #FF6F00;
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:20px;
-  }
-  .timer-label {
-    display:block;
-    text-align:center;
-    color:#FF6F00;
-    font-weight:700;
-    margin-bottom:10px;
-    font-size: 1.05rem;
-  }
-  .timer-display {
-    display:flex;
-    justify-content:center;
-    gap:10px;
-  }
-  .time-box {
-    background:#000;
-    color:white;
-    padding:12px 8px;
-    border-radius:8px;
-    text-align:center;
-    min-width:75px;
-  }
-  .time-box span:first-child {
-    font-size:2rem;
-    font-weight:700;
-    display:block;
-  }
-  .time-box .label {
-    font-size:0.7rem;
-    margin-top:2px;
-  }
-  
-  .price-section-splash {
-    display:flex;
-    gap:10px;
-    margin-bottom:15px;
-    align-items:center;
-    flex-wrap:wrap;
-  }
-  .current-price-splash {
-    font-size:2.2rem;
-    font-weight:800;
-    color:#00C853;
-  }
-  .compare-price-splash {
-    text-decoration:line-through;
-    color:#999;
-    font-size:1.1rem;
-  }
-  .save-badge-splash {
-    background:#d32f2f;
-    color:white;
-    padding:6px 12px;
-    border-radius:6px;
-    font-weight:700;
-    font-size:0.9rem;
-  }
-  
-  .bogo-reminder {
-    background: linear-gradient(135deg, #FFF5E6 0%, #FFE0CC 100%);
-    border: 2px dashed #FF6F00;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.05rem;
-    color: #333;
-  }
-  
-  .buy-section-splash {
-    margin-bottom: 20px;
-  }
-  
-  .btn-buy-now-splash {
-    width: 100%;
-    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
-    color: white;
-    border: none;
-    padding: 18px 20px;
-    border-radius: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(255,111,0,0.4);
-    transition: all 0.3s ease;
-    text-align: center;
-  }
-  
-  .btn-buy-now-splash:active {
-    transform: scale(0.98);
-  }
-  
-  .btn-icon {
-    font-size: 1.5rem;
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .btn-text-main {
-    display: block;
-    font-size: 1.15rem;
-    margin-bottom: 3px;
-  }
-  
-  .btn-text-sub {
-    display: block;
-    font-size: 0.85rem;
-    opacity: 0.95;
-  }
-  
-  .trust-badges-splash {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 15px;
-  }
-  
-  .trust-item {
-    background: #f0f0f0;
-    padding: 10px 5px;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #00C853;
-  }
-  
-  .product-description-splash {
-    padding:20px 15px;
-    background: #f9f9f9;
-  }
-  
-  .desc-block-splash {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  }
-  
-  .desc-block-splash h2 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: #333;
-  }
-  
-  .desc-block-splash p {
-    line-height: 1.7;
-    color: #555;
-    font-size: 1rem;
-  }
-  
-  .feature-list-splash {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .feature-list-splash li {
-    padding: 12px 0;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-  
-  .feature-list-splash li:last-child {
-    border-bottom: none;
-  }
-  
-  .reviews-section-splash {
-    padding: 30px 15px;
-    background: white;
-  }
-  
-  .reviews-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .reviews-image-container {
-    margin: 20px 0 30px 0;
-  }
-  
-  .review-card {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    border-left: 4px solid #FF6F00;
-  }
-  
-  .reviewer-info {
-    margin-bottom: 8px;
-  }
-  
-  .reviewer-info strong {
-    font-size: 1.05rem;
-    color: #333;
-  }
-  
-  .verified {
-    color: #00C853;
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-  
-  .review-stars {
-    color: #FFB800;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-  }
-  
-  .review-text {
-    color: #555;
-    line-height: 1.6;
-    font-size: 0.95rem;
-  }
-  
-  .final-cta-splash {
-    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
-    padding: 25px 20px;
-    text-align: center;
-  }
-  
-  .cta-final-button {
-    width: 100%;
-    max-width: 400px;
-    background: white;
-    color: #FF6F00;
-    border: none;
-    padding: 18px 25px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    animation: shake 2s ease-in-out infinite;
-  }
-  
-  @keyframes shake {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-2deg); }
-    75% { transform: rotate(2deg); }
-  }
-  
-  .cta-urgency {
-    color: white;
-    margin-top: 12px;
-    font-size: 0.95rem;
-    font-weight: 600;
-  }
-</style>
-
-<script>
-  // Buy Now Function
-  function buyNowSplash() {
-    const variantId = document.getElementById('variant-id-input').value;
+  <script>
+    // Variant Selector Logic
+    let selectedVariantId = document.querySelector('input[name="variant-select"]:checked')?.value;
     
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: variantId, quantity: 1 })
-    })
-    .then(response => response.json())
-    .then(data => {
-      window.location.href = '/cart';
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('Failed to add to cart. Please try again.');
-    });
-  }
-  
-  // Scroll to Top
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-  
-  // Countdown Timer
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const midnight = new Date();
-    midnight.setHours(24, 0, 0, 0);
-    const distance = midnight - now;
-    
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('mins').textContent = String(mins).padStart(2, '0');
-    document.getElementById('secs').textContent = String(secs).padStart(2, '0');
-  }
-  
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-  
-  // Gallery Dots
-  const galleryContainer = document.getElementById('gallery-container');
-  const dots = document.querySelectorAll('.gallery-dots .dot');
-  
-  if (galleryContainer && dots.length > 0) {
-    galleryContainer.addEventListener('scroll', function() {
-      const scrollLeft = this.scrollLeft;
-      const slideWidth = this.offsetWidth;
-      const currentSlide = Math.round(scrollLeft / slideWidth);
-      
-      dots.forEach((dot, index) => {
-        if (index === currentSlide) {
-          dot.classList.add('active');
-        } else {
-          dot.classList.remove('active');
+    document.querySelectorAll('.variant-option-rc').forEach(option => {
+      option.addEventListener('click', function() {
+        document.querySelectorAll('.variant-option-rc').forEach(opt => opt.classList.remove('active'));
+        this.classList.add('active');
+        const radio = this.querySelector('input[type="radio"]');
+        radio.checked = true;
+        selectedVariantId = radio.value;
+        const variantInput = document.getElementById('variant-id-input');
+        if (variantInput) {
+          variantInput.value = selectedVariantId;
         }
       });
     });
     
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', function() {
-        const slideWidth = galleryContainer.offsetWidth;
-        galleryContainer.scrollTo({
-          left: slideWidth * index,
-          behavior: 'smooth'
+    // Buy Now Prepaid function
+    function buyNowPrepaid() {
+      if (!selectedVariantId) {
+        selectedVariantId = document.querySelector('input[name="variant-select"]:checked')?.value;
+      }
+      
+      const formData = {
+        id: selectedVariantId,
+        quantity: 1
+      };
+      
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        window.location.href = '/cart';
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Failed to add to cart. Please try again.');
+      });
+    }
+    
+    function scrollToTop() {
+      const buySection = document.querySelector('.buy-section-rc');
+      if (buySection) {
+        buySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+    
+    // COUNTDOWN TIMER
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const midnight = new Date();
+      midnight.setHours(24, 0, 0, 0);
+      const distance = midnight - now;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('mins').textContent = String(mins).padStart(2, '0');
+      document.getElementById('secs').textContent = String(secs).padStart(2, '0');
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+  <!-- Carousel Dots JavaScript -->
+  <script>
+    const galleryContainer = document.getElementById('gallery-container');
+    const dots = document.querySelectorAll('.gallery-dots .dot');
+    
+    if (galleryContainer && dots.length > 0) {
+      galleryContainer.addEventListener('scroll', function() {
+        const scrollLeft = this.scrollLeft;
+        const slideWidth = this.offsetWidth;
+        const currentSlide = Math.round(scrollLeft / slideWidth);
+        
+        dots.forEach((dot, index) => {
+          if (index === currentSlide) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
         });
       });
-    });
-  }
-</script>
+      
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+          const slideWidth = galleryContainer.offsetWidth;
+          galleryContainer.scrollTo({
+            left: slideWidth * index,
+            behavior: 'smooth'
+          });
+        });
+      });
+    }
+  </script>
+
+  <style>
+    .product-page-rc-car { background:#fff; padding-bottom:0; }
+    
+    .product-image-gallery { 
+      width:100%; 
+      background:#f9f9f9; 
+      margin-bottom:0;
+    }
+    
+    .gallery-container {
+      display:flex;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .gallery-container::-webkit-scrollbar { display:none; }
+    
+    .slide {
+      min-width:100%;
+      scroll-snap-align:start;
+    }
+    .slide img { 
+      width:100%; 
+      max-height:380px;
+      object-fit:contain;
+      object-position:center;
+      display:block; 
+    }
+    
+    .gallery-dots {
+      text-align:center;
+      padding:10px 0;
+    }
+    .dot {
+      height:8px;
+      width:8px;
+      margin:0 5px;
+      background:#bbb;
+      border-radius:50%;
+      display:inline-block;
+      cursor:pointer;
+    }
+    .dot.active {
+      background:#FF6F00;
+      width:24px;
+      border-radius:4px;
+    }
+    
+    .product-info-section { padding:20px 15px; }
+    
+    .product-title-rc {
+      font-size:1.4rem;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+    
+    .product-rating-rc {
+      display:flex;
+      gap:10px;
+      margin-bottom:15px;
+    }
+    .stars { color:#FFB800; }
+    .rating-count { color:#666; font-size:0.95rem; }
+    
+    .countdown-timer-rc {
+      background:white;
+      border:2px solid #FF6F00;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:20px;
+    }
+    .timer-label {
+      display:block;
+      text-align:center;
+      color:#FF6F00;
+      font-weight:600;
+      margin-bottom:10px;
+    }
+    .timer-display {
+      display:flex;
+      justify-content:center;
+      gap:8px;
+    }
+    .time-box {
+      background:#000;
+      color:white;
+      padding:10px;
+      border-radius:8px;
+      text-align:center;
+      min-width:70px;
+    }
+    .time-box span:first-child {
+      font-size:1.8rem;
+      font-weight:700;
+      display:block;
+    }
+    .time-box .label {
+      font-size:0.7rem;
+      margin-top:2px;
+    }
+    
+    .price-section-rc {
+      display:flex;
+      gap:8px;
+      margin-bottom:20px;
+      align-items:center;
+      flex-wrap:nowrap;
+    }
+    .current-price-rc {
+      font-size:1.8rem;
+      font-weight:700;
+      color:#00C853;
+      white-space:nowrap;
+    }
+    .compare-price-rc {
+      text-decoration:line-through;
+      color:#999;
+      font-size:0.95rem;
+      white-space:nowrap;
+    }
+    .save-badge-rc {
+      background:#d32f2f;
+      color:white;
+      padding:5px 10px;
+      border-radius:6px;
+      font-weight:700;
+      font-size:0.85rem;
+      white-space:nowrap;
+    }
+    
+    .buy-section-rc button,
+    .buy-section-rc a {
+      display: block;
+      width:100%;
+      padding:14px 16px;
+      border:none;
+      border-radius:10px;
+      font-weight:700;
+      margin-bottom:12px;
+      cursor:pointer;
+      line-height:1.3;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn-buy-prepaid-rc {
+      background:linear-gradient(135deg,#00C853,#00E676);
+      color:white;
+    }
+    
+    .main-text-prepaid {
+      font-size: 1rem;
+      font-weight: 600;
+      display: block;
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .sub-text-prepaid {
+      font-size: 0.8rem;
+      font-weight: 400;
+      display: block;
+      opacity: 0.95;
+      line-height: 1.3;
+    }
+    
+    .product-description-rc {
+      padding:0 15px 30px;
+    }
+    .desc-block-rc {
+      margin-bottom:30px;
+    }
+    .desc-block-rc h3 {
+      font-weight:700;
+      margin-bottom:12px;
+    }
+    .desc-block-rc p {
+      line-height:1.7;
+      color:#555;
+    }
+    
+    .reviews-section-rc {
+      padding:30px 15px 0 15px;
+      background:#f9f9f9;
+    }
+    .reviews-title {
+      font-size:1.5rem;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+    .review-card {
+      background:white;
+      padding:18px;
+      border-radius:12px;
+      margin-bottom:15px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    }
+    .reviewer-info {
+      margin-bottom:8px;
+    }
+    .verified {
+      color:#00C853;
+      font-size:0.85rem;
+    }
+    .review-stars {
+      color:#FFB800;
+      margin-bottom:10px;
+    }
+    .review-text {
+      color:#555;
+      line-height:1.6;
+    }
+  </style>
+
+</section>
