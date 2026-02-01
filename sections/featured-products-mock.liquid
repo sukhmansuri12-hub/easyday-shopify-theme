@@ -44,7 +44,7 @@
                     <div class="mock-image carousel-image active" style="background: #f4f4f4;"></div>
                   {%- endif -%}
                 </a>
-                <button class="add-btn" onclick="quickAddToCart('{{ pet_hair_product.handle }}')">Add</button>
+                <button class="add-btn" onclick="quickAddToCart('{{ pet_hair_product.handle }}')">+</button>
               </div>
               <div class="product-content">
                 <h3 class="product-title"><a href="{{ pet_hair_product.url }}">{{ pet_hair_product.title }}</a></h3>
@@ -81,7 +81,7 @@
                       <div class="mock-image carousel-image active" style="background: #f4f4f4;"></div>
                     {%- endif -%}
                   </a>
-                  <button class="add-btn" onclick="quickAddToCart('{{ product.handle }}')">Add</button>
+                  <button class="add-btn" onclick="quickAddToCart('{{ product.handle }}')">+</button>
                 </div>
                 <div class="product-content">
                   <h3 class="product-title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
@@ -161,33 +161,28 @@
   
   .add-btn {
       position: absolute !important;
-      bottom: 8px !important;
-      right: 8px !important;
-      left: 8px !important;
-      background: #1E88E5 !important;
+      top: -4px !important;
+      right: -4px !important;
+      background: #ff6f00 !important;
       color: white !important;
       border: none !important;
-      width: auto !important;
-      height: auto !important;
-      padding: 8px 12px !important;
-      border-radius: 6px !important;
-      font-size: 0.85rem !important;
-      font-weight: 600 !important;
+      width: 36px !important;
+      height: 36px !important;
+      border-radius: 50% !important;
+      font-size: 1.3rem !important;
       line-height: 1 !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       cursor: pointer !important;
       z-index: 9999 !important;
-      box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3) !important;
+      box-shadow: 0 3px 10px rgba(255, 111, 0, 0.5) !important;
       pointer-events: auto !important;
-      transition: all 0.2s ease !important;
+      transition: transform 0.2s ease !important;
   }
   
   .add-btn:hover {
-      background: #1565C0 !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 4px 12px rgba(30, 136, 229, 0.4) !important;
+      transform: scale(1.15) !important;
   }
 
   /* Content */
