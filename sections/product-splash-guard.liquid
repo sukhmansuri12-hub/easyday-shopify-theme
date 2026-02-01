@@ -25,6 +25,12 @@
     
     <h1 class="product-title-rc">{{ product.title }}</h1>
     
+    {% comment %} BUY 1 GET 1 FREE Badge {% endcomment %}
+    <div style="background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%); color: white; padding: 12px 20px; border-radius: 12px; margin: 15px 0; text-align: center; box-shadow: 0 4px 15px rgba(255,111,0,0.3); animation: pulse 2s ease-in-out infinite;">
+      <span style="font-size: 1.4rem; font-weight: 700; display: block; line-height: 1.2;">🎁 BUY 1 GET 1 FREE</span>
+      <span style="font-size: 0.9rem; opacity: 0.95; display: block; margin-top: 4px;">Limited Time Offer!</span>
+    </div>
+    
     <div class="product-rating-rc">
       <span style="display:inline-flex; align-items:baseline;">⭐⭐⭐⭐<span style="width:14px;overflow:hidden;">⭐</span></span>
       <span class="rating-count">4.8 (520+ Reviews)</span>
@@ -216,6 +222,12 @@
       font-size: 0.85rem;
       color: #e74c3c;
       font-weight: 600;
+    }
+    
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
     }
     
     @keyframes shake {
