@@ -60,15 +60,9 @@
           {%- endif -%}
           
           {%- comment %} Second, show Splash Guard if it exists {%endcomment -%}
-          {%- assign splash_guard_product = null -%}
-          {%- for product in featured_collection.products -%}
-            {%- if product.handle == 'splash-guard' -%}
-              {%- assign splash_guard_product = product -%}
-              {%- break -%}
-            {%- endif -%}
-          {%- endfor -%}
+          {%- assign splash_guard_product = all_products['splash-guard'] -%}
           
-          {%- if splash_guard_product -%}
+          {%- if splash_guard_product and splash_guard_product.available -%}
             <div class="product-card animate-on-scroll delay-1" data-animation="scale-in" data-product-handle="{{ splash_guard_product.handle }}">
               <div class="product-image-wrapper homepage-carousel">
                 <span class="mock-sale-badge" style="background: #FF6F00;">🎁 BUY 1 GET 1 FREE</span>
