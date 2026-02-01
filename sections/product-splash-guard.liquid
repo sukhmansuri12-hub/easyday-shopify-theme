@@ -57,7 +57,9 @@
       {% endif %}
     </div>
 
-    {% comment %} Variant Selector {% endcomment %}
+
+    {% comment %} Variant Selector - Only show if multiple variants {% endcomment %}
+    {% if product.variants.size > 1 %}
     <div class="variant-selector-rc">
       <div class="variant-options-rc">
         {% for variant in product.variants %}
@@ -74,6 +76,7 @@
         {% endfor %}
       </div>
     </div>
+    {% endif %}
 
     {% comment %} Shopify Product Form {% endcomment %}
     {% form 'product', product, id: 'product-form-installment' %}
