@@ -62,7 +62,7 @@
           {%- comment %} Second, show Splash Guard if it exists {%endcomment -%}
           {%- assign splash_guard_product = null -%}
           {%- for product in featured_collection.products -%}
-            {%- if product.handle == 'silicone-splash-guard-pack-of-3' -%}
+            {%- if product.handle == 'splash-guard' -%}
               {%- assign splash_guard_product = product -%}
               {%- break -%}
             {%- endif -%}
@@ -104,7 +104,7 @@
           {%- if pet_hair_product -%}{%- assign shown_count = 1 -%}{%- endif -%}
           {%- if splash_guard_product -%}{%- assign shown_count = shown_count | plus: 1 -%}{%- endif -%}
           {%- for product in featured_collection.products limit: 20 -%}
-            {%- if product.handle != 'pet-hair-removal-gloves-pack-of-2' and product.handle != 'silicone-splash-guard-pack-of-3' and product.handle != '3-modes-kitchen-sink-faucet' and shown_count < 4 -%}
+            {%- if product.handle != 'pet-hair-removal-gloves-pack-of-2' and product.handle != 'splash-guard' and product.handle != '3-modes-kitchen-sink-faucet' and shown_count < 4 -%}
               <div class="product-card animate-on-scroll delay-{{ shown_count | modulo: 2 }}" data-animation="scale-in" data-product-handle="{{ product.handle }}">
                 <div class="product-image-wrapper homepage-carousel">
                   {%- if product.compare_at_price > product.price -%}
