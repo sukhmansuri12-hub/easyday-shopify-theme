@@ -76,6 +76,7 @@
 
     {{ 'theme.css' | asset_url | stylesheet_tag }}
     {{ 'overrides.css' | asset_url | stylesheet_tag }}
+    {{ 'visual-overhaul.css' | asset_url | stylesheet_tag }}
     
     <style>
       /* NUCLEAR & CRITICAL CSS INJECTION (V18) */
@@ -168,7 +169,7 @@
 
   <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
     <a class="skip-to-content-link visually-hidden" href="#MainContent">
-      {{ 'accessibility.skip_to_content' | t }}
+      Skip to content
     </a>
 
     {% sections 'header-group' %}

@@ -1,0 +1,302 @@
+/* ===================================
+   VISUAL OVERHAUL - EASYDAY THEME
+   Removes dated effects and modernizes design
+   =================================== */
+
+/* 1. REMOVE BLUE VIGNETTE / GLOW EFFECTS */
+body {
+    background: #ffffff !important;
+    background-image: none !important;
+}
+
+/* Remove any section backgrounds that create the blue glow */
+section,
+.hero-section,
+.category-section,
+.featured-products-section,
+.reviews-section,
+.trust-signals {
+    background-image: none !important;
+    position: relative;
+}
+
+/* Remove pseudo-element glows if they exist */
+section::before,
+section::after,
+.hero-section::before,
+.hero-section::after {
+    display: none !important;
+}
+
+/* 2. FIX PRODUCT CARD CONTRAST - Remove Washed Out Effect */
+.product-card {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+.product-card img {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+.product-title,
+.product-price,
+.product-card-content {
+    opacity: 1 !important;
+    color: #333 !important;
+}
+
+.product-title {
+    font-weight: 600 !important;
+    color: #1a1a1a !important;
+}
+
+.product-price {
+    font-weight: 700 !important;
+    color: #1E88E5 !important;
+    /* Use blue as primary brand color */
+}
+
+/* 3. STANDARDIZE BUTTON COLORS - Blue Primary */
+.btn-sale,
+.btn-primary,
+.cta-button,
+button[type="submit"],
+.add-to-cart-btn {
+    background: #1E88E5 !important;
+    color: white !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-sale:hover,
+.btn-primary:hover,
+.cta-button:hover,
+button[type="submit"]:hover,
+.add-to-cart-btn:hover {
+    background: #1565C0 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3) !important;
+}
+
+/* Explore All button */
+.explore-all-btn,
+[href*="collections/all"] button,
+.btn-explore {
+    background: #1E88E5 !important;
+    color: white !important;
+}
+
+.explore-all-btn:hover {
+    background: #1565C0 !important;
+}
+
+/* 4. CLEAN HERO SECTION */
+.hero-overlay {
+    background: rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(2px) !important;
+}
+
+.hero-section {
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+/* 5. REMOVE BACKGROUND BLOBS */
+.reviews-section::before,
+.reviews-section::after,
+.featured-products-section::before,
+.featured-products-section::after {
+    display: none !important;
+}
+
+/* Clean background for reviews */
+.reviews-section {
+    background: #f8f9fa !important;
+    background-image: none !important;
+}
+
+/* 6. IMPROVE CATEGORY IMAGES - Add Consistent Background */
+.category-image-wrapper {
+    background: white !important;
+    border: 2px solid #f0f0f0 !important;
+    transition: all 0.3s ease !important;
+}
+
+.category-card:hover .category-image-wrapper {
+    border-color: #1E88E5 !important;
+    box-shadow: 0 8px 20px rgba(30, 136, 229, 0.15) !important;
+}
+
+/* 7. IMPROVE REVIEW CARDS */
+.review-card {
+    background: white !important;
+    border: 1px solid #e5e5e5 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.3s ease !important;
+}
+
+.review-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+    border-color: #1E88E5 !important;
+}
+
+/* 8. FOOTER READABILITY */
+.footer-section p,
+.footer-about {
+    max-width: 600px !important;
+    line-height: 1.6 !important;
+}
+
+/* 9. REMOVE EMOJI FROM DESKTOP BUTTONS */
+@media (min-width: 768px) {
+
+    .explore-all-btn::before,
+    button::before {
+        content: none !important;
+    }
+}
+
+/* 10. IMPROVE OVERALL CONTRAST */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+p,
+span,
+div {
+    color: #333 !important;
+}
+
+/* 11. CLEAN SECTION BACKGROUNDS */
+.section-padding,
+.container {
+    background: transparent !important;
+    background-image: none !important;
+}
+
+/* 12. IMPROVE TRUST SIGNALS */
+.trust-signals {
+    background: #f8f9fa !important;
+    padding: 2rem 0 !important;
+}
+
+/* 13. BETTER HOVER STATES */
+a:hover {
+    color: #1E88E5 !important;
+}
+
+.product-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* 14. CLEAN ANNOUNCEMENT BAR */
+.announcement-bar {
+    background: #1E88E5 !important;
+    color: white !important;
+    font-weight: 500 !important;
+}
+
+/* 15. IMPROVE PRODUCT CARD ADD BUTTON */
+.quick-add-btn,
+.product-card button {
+    background: #1E88E5 !important;
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+}
+
+.quick-add-btn::after {
+    content: " to Cart" !important;
+}
+
+/* 16. REMOVE ANY GRADIENT OVERLAYS */
+.gradient-overlay,
+[class*="gradient"] {
+    background: none !important;
+    background-image: none !important;
+}
+
+/* 17. CLEAN WHITE BACKGROUND */
+main,
+#MainContent {
+    background: white !important;
+}
+
+/* 18. IMPROVE SPACING */
+section {
+    padding: 2rem 0 !important;
+}
+
+@media (min-width: 1024px) {
+    section {
+        padding: 3rem 0 !important;
+    }
+}
+
+/* 19. BETTER SHADOWS - Subtle and Modern */
+.card,
+.product-card,
+.review-card,
+.category-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.card:hover,
+.product-card:hover,
+.review-card:hover,
+.category-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 20. CLEAN TYPOGRAPHY */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    color: #333 !important;
+    line-height: 1.6 !important;
+}
+
+/* 21. REMOVE ANY BLUR EFFECTS */
+*:not(.hero-overlay) {
+    backdrop-filter: none !important;
+    filter: none !important;
+}
+
+/* 22. ENSURE CLEAN BACKGROUNDS */
+.page-width,
+.container,
+.wrapper {
+    background: transparent !important;
+}
+
+/* 23. IMPROVE FEATURED PRODUCTS SECTION */
+.featured-products-section {
+    background: white !important;
+    padding: 3rem 0 !important;
+}
+
+.featured-products-section h2 {
+    color: #1a1a1a !important;
+    margin-bottom: 2rem !important;
+}
+
+/* 24. CLEAN CATEGORY SECTION */
+.category-section {
+    background: white !important;
+    padding: 2rem 0 !important;
+}
+
+/* 25. PROFESSIONAL LOOK */
+* {
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}

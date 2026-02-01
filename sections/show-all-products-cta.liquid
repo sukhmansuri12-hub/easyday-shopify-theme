@@ -3,22 +3,14 @@
   Prominent call-to-action button linking to full catalog
 {% endcomment %}
 
-<section class="show-all-cta-section" style="padding: 40px 20px; background: linear-gradient(135deg, #fff5f0 0%, #f0fff4 100%);">
+<section class="show-all-cta-section" style="padding: 40px 20px; background: #f8f9fa;">
   <div class="container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
     <div class="cta-content" style="position: relative; z-index: 1;">
       <a href="/collections/all" class="btn-show-all">
-        <span class="btn-icon">🛍️</span>
         <span class="btn-text">EXPLORE ALL PRODUCTS</span>
         <span class="btn-arrow">→</span>
       </a>
     </div>
-    
-    <!-- Decorative elements -->
-    <svg class="cta-decoration" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.08; pointer-events: none;">
-      <circle cx="10%" cy="30%" r="40" fill="#FF6F00"/>
-      <circle cx="90%" cy="70%" r="60" fill="#00C853"/>
-      <circle cx="85%" cy="20%" r="30" fill="#2196F3"/>
-    </svg>
   </div>
 </section>
 
@@ -31,50 +23,29 @@
   .btn-show-all {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 18px 40px;
-    background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 50%, #00C853 100%);
-    background-size: 200% 100%;
+    gap: 8px;
+    padding: 16px 36px;
+    background: #1E88E5;
     color: white;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 8px;
     font-weight: 700;
-    font-size: 1.1rem;
-    transition: all 0.4s ease;
-    box-shadow: 0 6px 20px rgba(255, 111, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .btn-show-all::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s ease;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
   }
   
   .btn-show-all:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 30px rgba(255, 111, 0, 0.5);
-    background-position: 100% 0;
-  }
-  
-  .btn-show-all:hover::before {
-    left: 100%;
+    background: #1565C0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 136, 229, 0.4);
   }
   
   .btn-show-all:active {
     transform: translateY(-1px) scale(1.02);
   }
   
-  .btn-icon {
-    font-size: 1.5rem;
-    animation: bounce 2s infinite;
-  }
+
   
   .btn-arrow {
     font-size: 1.3rem;
@@ -85,14 +56,7 @@
     transform: translateX(5px);
   }
   
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
-  }
+
   
   /* Mobile optimization */
   @media (max-width: 640px) {
