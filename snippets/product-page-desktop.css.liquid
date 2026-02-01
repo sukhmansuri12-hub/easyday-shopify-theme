@@ -10,11 +10,11 @@
   /* 1. Main Container: GRID LAYOUT - Optimized Spacing */
   .product-page-rc-car {
     max-width: 1400px;
-    margin: 30px auto;
-    padding: 0 40px;
+    margin: 20px auto;
+    padding: 0 30px;
     display: grid !important;
     grid-template-columns: 55% 40%;
-    column-gap: 40px;
+    column-gap: 30px;
     row-gap: 0;
     align-items: start;
   }
@@ -164,6 +164,53 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+  }
+
+  .product-image-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  /* Countdown timer - shrink it */
+  .countdown-timer,
+  [class*="countdown"],
+  .timer-container {
+    max-width: 400px !important;
+    margin: 1rem 0 !important;
+    padding: 0.8rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .countdown-timer .timer-box,
+  [class*="countdown"] .timer-box {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.2rem !important;
+  }
+  
+  /* Add to Cart button - BRAND COLORS */
+  .product-form button[type="submit"],
+  .add-to-cart-btn,
+  button.btn-primary,
+  .product-form__submit {
+    background: #1e88e5 !important;
+    color: white !important;
+    border: none !important;
+    padding: 1rem 2rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .product-form button[type="submit"]:hover,
+  .add-to-cart-btn:hover,
+  button.btn-primary:hover,
+  .product-form__submit:hover {
+    background: #1565c0 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3) !important;
   }
   
   /* Force Title and Summary to take full width of the flex container */

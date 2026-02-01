@@ -11,13 +11,14 @@
      HERO SECTION - Optimized Spacing
      =================================== */
   .hero-section {
-    min-height: 550px !important;
-    padding-top: 100px !important;
+    min-height: 450px !important;
+    padding-top: 80px !important;
+    padding-bottom: 40px !important;
   }
   
   .hero-content {
     max-width: 900px !important;
-    padding: 2rem !important;
+    padding: 1.5rem !important;
   }
   
   .hero-title {
@@ -60,9 +61,9 @@
      =================================== */
   .category-grid {
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 1.5rem !important;
-    padding: 1rem 2rem !important;
-    margin-top: 1.5rem !important;
+    gap: 1.2rem !important;
+    padding: 0.5rem 1.5rem !important;
+    margin-top: 1rem !important;
   }
   
   .category-card {
@@ -74,9 +75,9 @@
   }
   
   .category-image-wrapper {
-    width: 140px !important;
-    height: 140px !important;
-    margin-bottom: 1.5rem !important;
+    width: 120px !important;
+    height: 120px !important;
+    margin-bottom: 1rem !important;
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12) !important;
     transition: all 0.4s ease !important;
   }
@@ -106,20 +107,27 @@
      FEATURED PRODUCTS - 4 Column Grid
      =================================== */
   .featured-products-section {
-    padding: 2.5rem 0 !important;
+    padding: 1.5rem 0 !important;
   }
   
   .featured-products-section h2 {
     font-size: 2.5rem !important;
-    margin-bottom: 2rem !important;
+    margin-bottom: 1.5rem !important;
     text-align: center;
   }
   
   .product-grid {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 1.5rem !important;
-    padding: 0 1.5rem !important;
+    gap: 1.2rem !important;
+    padding: 0 1.2rem !important;
+  }
+  
+  /* 5 columns on ultra-wide screens */
+  @media (min-width: 1600px) {
+    .product-grid {
+      grid-template-columns: repeat(5, 1fr) !important;
+    }
   }
   
   .product-card {
@@ -170,32 +178,35 @@
      REVIEWS SECTION - Card Grid Layout
      =================================== */
   .reviews-section {
-    padding: 2.5rem 0 !important;
+    padding: 1.5rem 0 !important;
     background: #f8f9fa !important;
   }
   
   .reviews-section h2 {
     font-size: 2.5rem !important;
-    margin-bottom: 2rem !important;
+    margin-bottom: 1.5rem !important;
     text-align: center;
   }
   
   .reviews-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 1.5rem !important;
-    padding: 0 1.5rem !important;
+    gap: 1.2rem !important;
+    padding: 0 1.2rem !important;
     max-width: 1400px !important;
     margin: 0 auto !important;
   }
   
   .review-card {
     background: white !important;
-    padding: 2rem !important;
+    padding: 1.5rem !important;
     border-radius: 12px !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
     transition: all 0.3s ease !important;
     height: 100% !important;
+    min-height: 200px !important;
+    max-height: 300px !important;
+    overflow: hidden !important;
   }
   
   .review-card:hover {
@@ -225,12 +236,19 @@
      SECTION SPACING - Optimized
      =================================== */
   .section-padding {
-    padding: 2.5rem 0 !important;
+    padding: 1.5rem 0 !important;
   }
   
   .container {
     max-width: 1400px !important;
-    padding: 0 1.5rem !important;
+    padding: 0 1.2rem !important;
+  }
+  
+  /* Explore button container - eliminate massive spacing */
+  .explore-all-container,
+  .cta-section {
+    padding: 1.5rem 0 !important;
+    margin: 1rem 0 !important;
   }
   
   /* ===================================
@@ -238,9 +256,9 @@
      =================================== */
   .explore-all-btn {
     display: inline-block !important;
-    margin: 3rem auto !important;
-    padding: 1.2rem 3rem !important;
-    font-size: 1.2rem !important;
+    margin: 0 auto !important;
+    padding: 0.9rem 2.5rem !important;
+    font-size: 1.1rem !important;
     font-weight: 700 !important;
     background: var(--color-primary-nav) !important;
     color: white !important;

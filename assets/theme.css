@@ -1038,7 +1038,7 @@ body {
   /* Better Container Spacing */
   .container {
     max-width: 1400px !important;
-    padding: 0 1.5rem !important;
+    padding: 0 1.2rem !important;
   }
 
   /* Enhanced Header for Desktop */
@@ -1075,8 +1075,18 @@ body {
     gap: 2rem !important;
   }
 
+  .site-header {
+    background: white !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  /* Footer styling and layout */
   .site-footer {
-    padding: 3rem 0 1.5rem !important;
+    background: #f8f9fa !important;
+    border-top: 1px solid #e0e0e0 !important;
+    padding: 2rem 0 1rem !important;
+    gap: 2rem;
   }
 
   /* Smooth Scrolling */
@@ -1094,7 +1104,7 @@ body {
 
   /* Enhanced Section Spacing */
   section {
-    margin: 2rem 0;
+    margin: 1.5rem auto;
   }
 
 }
