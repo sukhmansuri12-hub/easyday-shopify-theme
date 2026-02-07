@@ -17,41 +17,32 @@
         
         {%- assign featured_collection = collections.all -%}
         {%- if featured_collection.products.size > 0 -%}
-          {%- comment %} First, show Pet Hair Removal Gloves if it exists {%endcomment -%}
-          {%- assign pet_hair_product = null -%}
-          {%- for product in featured_collection.products -%}
-            {%- if product.handle == 'pet-hair-removal-gloves-pack-of-2' -%}
-              {%- assign pet_hair_product = product -%}
-              {%- break -%}
-            {%- endif -%}
-          {%- endfor -%}
+          {%- comment %} First, show Self Defence Stick if it exists {%endcomment -%}
+          {%- assign defence_stick_product = all_products['self-defence-tactical-rod-heavy-metal-and-extendable'] -%}
           
-          {%- if pet_hair_product -%}
-            <div class="product-card animate-on-scroll delay-0" data-animation="scale-in" data-product-handle="{{ pet_hair_product.handle }}">
+          {%- if defence_stick_product and defence_stick_product.available -%}
+            <div class="product-card animate-on-scroll delay-0" data-animation="scale-in" data-product-handle="{{ defence_stick_product.handle }}">
               <div class="product-image-wrapper homepage-carousel">
-                {%- if pet_hair_product.compare_at_price > pet_hair_product.price -%}
-                  {%- assign discount = pet_hair_product.compare_at_price | minus: pet_hair_product.price | times: 100 | divided_by: pet_hair_product.compare_at_price -%}
-                  <span class="mock-sale-badge">SALE {{ discount }}%</span>
-                {%- endif -%}
-                <a href="{{ pet_hair_product.url }}" class="product-link">
-                  {%- if pet_hair_product.images.size > 1 -%}
-                    {%- for image in pet_hair_product.images limit: 4 -%}
+                <a href="{{ defence_stick_product.url }}" class="product-link">
+                  {%- if defence_stick_product.images.size > 1 -%}
+                    {%- for image in defence_stick_product.images limit: 4 -%}
                       <div class="mock-image carousel-image {% if forloop.first %}active{% endif %}" style="background-image: url('{{ image | img_url: '600x' }}');" data-index="{{ forloop.index0 }}"></div>
                     {%- endfor -%}
-                  {%- elsif pet_hair_product.featured_image -%}
-                    <div class="mock-image carousel-image active" style="background-image: url('{{ pet_hair_product.featured_image | img_url: '600x' }}');"></div>
+                  {%- elsif defence_stick_product.featured_image -%}
+                    <div class="mock-image carousel-image active" style="background-image: url('{{ defence_stick_product.featured_image | img_url: '600x' }}');"></div>
                   {%- else -%}
                     <div class="mock-image carousel-image active" style="background: #f4f4f4;"></div>
                   {%- endif -%}
                 </a>
-                <button class="add-btn" onclick="quickAddToCart('{{ pet_hair_product.handle }}')">+</button>
+                <button class="add-btn" onclick="quickAddToCart('{{ defence_stick_product.handle }}')">+</button>
               </div>
               <div class="product-content">
-                <h3 class="product-title"><a href="{{ pet_hair_product.url }}">{{ pet_hair_product.title }}</a></h3>
+                <h3 class="product-title"><a href="{{ defence_stick_product.url }}">{{ defence_stick_product.title }}</a></h3>
                 <div class="product-price">
-                  <span class="sale-price">Rs. {{ pet_hair_product.price | money_without_currency }}</span>
-                  {%- if pet_hair_product.compare_at_price > pet_hair_product.price -%}
-                    <span class="compare-price">Rs. {{ pet_hair_product.compare_at_price | money_without_currency }}</span>
+                  <span class="sale-price">Rs. {{ defence_stick_product.price | money_without_currency }}</span>
+                  {%- if defence_stick_product.compare_at_price > defence_stick_product.price -%}
+                    {%- assign discount = defence_stick_product.compare_at_price | minus: defence_stick_product.price | times: 100 | divided_by: defence_stick_product.compare_at_price -%}
+                    <span class="compare-price">Rs. {{ defence_stick_product.compare_at_price | money_without_currency }}</span>
                     <div class="save-text">Save {{ discount }}%</div>
                   {%- endif -%}
                 </div>
@@ -93,12 +84,55 @@
             </div>
           {%- endif -%}
           
-          {%- comment %} Then show other products (excluding pet hair gloves, splash guard, and kitchen sink) {%endcomment -%}
+          {%- comment %} Third, show Pet Hair Removal Gloves if it exists {%endcomment -%}
+          {%- assign pet_hair_product = null -%}
+          {%- for product in featured_collection.products -%}
+            {%- if product.handle == 'pet-hair-removal-gloves-pack-of-2' -%}
+              {%- assign pet_hair_product = product -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+          
+          {%- if pet_hair_product -%}
+            <div class="product-card animate-on-scroll delay-0" data-animation="scale-in" data-product-handle="{{ pet_hair_product.handle }}">
+              <div class="product-image-wrapper homepage-carousel">
+                {%- if pet_hair_product.compare_at_price > pet_hair_product.price -%}
+                  {%- assign discount = pet_hair_product.compare_at_price | minus: pet_hair_product.price | times: 100 | divided_by: pet_hair_product.compare_at_price -%}
+                  <span class="mock-sale-badge">SALE {{ discount }}%</span>
+                {%- endif -%}
+                <a href="{{ pet_hair_product.url }}" class="product-link">
+                  {%- if pet_hair_product.images.size > 1 -%}
+                    {%- for image in pet_hair_product.images limit: 4 -%}
+                      <div class="mock-image carousel-image {% if forloop.first %}active{% endif %}" style="background-image: url('{{ image | img_url: '600x' }}');" data-index="{{ forloop.index0 }}"></div>
+                    {%- endfor -%}
+                  {%- elsif pet_hair_product.featured_image -%}
+                    <div class="mock-image carousel-image active" style="background-image: url('{{ pet_hair_product.featured_image | img_url: '600x' }}');"></div>
+                  {%- else -%}
+                    <div class="mock-image carousel-image active" style="background: #f4f4f4;"></div>
+                  {%- endif -%}
+                </a>
+                <button class="add-btn" onclick="quickAddToCart('{{ pet_hair_product.handle }}')">+</button>
+              </div>
+              <div class="product-content">
+                <h3 class="product-title"><a href="{{ pet_hair_product.url }}">{{ pet_hair_product.title }}</a></h3>
+                <div class="product-price">
+                  <span class="sale-price">Rs. {{ pet_hair_product.price | money_without_currency }}</span>
+                  {%- if pet_hair_product.compare_at_price > pet_hair_product.price -%}
+                    <span class="compare-price">Rs. {{ pet_hair_product.compare_at_price | money_without_currency }}</span>
+                    <div class="save-text">Save {{ discount }}%</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+          
+          {%- comment %} Then show other products (excluding the three above and kitchen sink) {%endcomment -%}
           {%- assign shown_count = 0 -%}
-          {%- if pet_hair_product -%}{%- assign shown_count = 1 -%}{%- endif -%}
+          {%- if defence_stick_product -%}{%- assign shown_count = 1 -%}{%- endif -%}
           {%- if splash_guard_product -%}{%- assign shown_count = shown_count | plus: 1 -%}{%- endif -%}
+          {%- if pet_hair_product -%}{%- assign shown_count = shown_count | plus: 1 -%}{%- endif -%}
           {%- for product in featured_collection.products limit: 20 -%}
-            {%- if product.handle != 'pet-hair-removal-gloves-pack-of-2' and product.handle != 'silicone-splash-guard-buy-1-get-1-free' and product.handle != '3-modes-kitchen-sink-faucet' and shown_count < 4 -%}
+            {%- if product.handle != 'pet-hair-removal-gloves-pack-of-2' and product.handle != 'silicone-splash-guard-buy-1-get-1-free' and product.handle != 'self-defence-tactical-rod-heavy-metal-and-extendable' and product.handle != '3-modes-kitchen-sink-faucet' and shown_count < 4 -%}
               <div class="product-card animate-on-scroll delay-{{ shown_count | modulo: 2 }}" data-animation="scale-in" data-product-handle="{{ product.handle }}">
                 <div class="product-image-wrapper homepage-carousel">
                   {%- if product.compare_at_price > product.price -%}
