@@ -215,8 +215,24 @@
   
   /* Large View - 1 column */
   .product-grid.large-view {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     max-width: 600px;
+  }
+  
+  /* MOBILE FIX: Larger product title in large view */
+  @media (max-width: 767px) {
+    .product-grid.large-view .product-title,
+    .product-grid.large-view .product-item .product-title {
+      font-size: 1.1rem !important;
+      font-weight: 700 !important;
+      margin-bottom: 6px !important;
+    }
+    
+    .product-grid.large-view .product-card-content,
+    .product-grid.large-view .product-info {
+      min-height: auto !important;
+      padding-top: 8px !important;
+    }
   }
   
   /* List View - Horizontal cards like screenshot */
@@ -226,7 +242,7 @@
   }
   
   .product-grid.list-view .product-item {
-    width: 100%;
+    width: 100% !important;
   }
   
   /* Make product cards horizontal in list view */
@@ -331,15 +347,23 @@
 </style>
 
 <script>
-  // View Switching Functionality
+  // View Switching Functionality - MOBILE FIX
   function switchView(viewType) {
     const grid = document.getElementById('productGrid');
     const buttons = document.querySelectorAll('.view-icon');
     
     if (!grid) return;
     
-    // Remove all view classes
+    // CRITICAL FIX: Remove ALL grid classes and inline styles that might conflict
     grid.classList.remove('grid-view', 'large-view', 'list-view');
+    grid.style.gridTemplateColumns = '';
+    grid.style.gap = '';
+    
+    // Remove any conflicting styles from product items
+    const items = grid.querySelectorAll('.product-item');
+    items.forEach(item => {
+      item.style.width = '';
+    });
     
     // Add new view class
     if (viewType === 'large') {
@@ -361,6 +385,9 @@
     
     // Save preference
     localStorage.setItem('preferredView', viewType);
+    
+    // Force reflow to apply changes immediately
+    void grid.offsetHeight;
   }
   
   // Load saved view on page load - MUST RUN IMMEDIATELY

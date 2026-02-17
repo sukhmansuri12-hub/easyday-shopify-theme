@@ -1,49 +1,37 @@
 <div class="desc-block-rc">
     <h3>🛡️ Strong Build. Instant Action.</h3>
     <p>
-        Fits easily in a handbag or pocket. With just one flick, it expands instantly with a loud, intimidating SNAP.
-        Always ready when you need it most.
+        The Expandable Tactical Defense Stick is designed for real-world situations — for late-night walks, solo travel,
+        emergencies, and everyday peace of mind. Feel safe. Move confidently.
     </p>
-    <video id="safety-video-1" autoplay loop muted playsinline style="width:100%; border-radius:12px; margin:15px 0;">
-        <source src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/For_girl_safety_gif.webp?v=1770326077"
-            type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-    <script>
-        // ULTRA-AGGRESSIVE VIDEO AUTOPLAY - NEVER STOPS
-        (function () {
-            const video = document.getElementById('safety-video-1');
-            if (video) {
-                const forcePlay = () => {
-                    if (video.paused) video.play().catch(() => { });
-                };
-
-                video.play().catch(() => video.play());
-                setInterval(forcePlay, 100);
-                video.addEventListener('pause', forcePlay);
-                document.addEventListener('visibilitychange', forcePlay);
-                window.addEventListener('focus', forcePlay);
-                document.addEventListener('click', forcePlay);
-                window.addEventListener('scroll', forcePlay);
-            }
-        })();
-    </script>
+    <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/unnamed-1-480x480.webp?v=1770893381"
+        alt="Strong Build Instant Action" style="width:100%; border-radius:12px; margin:15px 0;">
 </div>
 
 <div class="desc-block-rc">
-    <h3>🛡️ Breaks Bricks. Breaks Fear.</h3>
+    <h3>👜 Protection That Fits in Her Bag</h3>
+    <p>
+        Heavy-duty steel protection that fits in her purse/bag, plus a built-in tip to break glass if needed for
+        emergency escapes.
+    </p>
+    <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/For_girl_safety_gif.webp?v=1770326077"
+        alt="Protection That Fits in Her Bag" style="width:100%; border-radius:12px; margin:15px 0;">
+</div>
+
+<div class="desc-block-rc">
+    <h3>🔥 Breaks Bricks. Breaks Fear.</h3>
     <p>
         This isn't a toy. It's solid industrial steel. Use it for heavy-duty protection or use the built-in tip as an
         Emergency Glass Breaker to escape cars.
     </p>
-    <video id="safety-video-2" autoplay loop muted playsinline style="width:100%; border-radius:12px; margin:15px 0;">
-        <source src="https://cdn.shopify.com/videos/c/o/v/1790525d762140fc953088765ff9e1c9.mp4" type="video/mp4">
+    <video id="brick-video" autoplay loop muted playsinline style="width:100%; border-radius:12px; margin:15px 0;">
+        <source src="https://cdn.shopify.com/videos/c/o/v/49504beabb06449baf445164a17ddf5f.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <script>
         // ULTRA-AGGRESSIVE VIDEO AUTOPLAY - NEVER STOPS
         (function () {
-            const video = document.getElementById('safety-video-2');
+            const video = document.getElementById('brick-video');
             if (video) {
                 const forcePlay = () => {
                     if (video.paused) video.play().catch(() => { });
@@ -67,30 +55,8 @@
         No batteries. No plastic parts. It's built to survive anything. Drive a car over it—it still works perfectly.
         This is lifetime protection.
     </p>
-    <video id="safety-video-3" autoplay loop muted playsinline style="width:100%; border-radius:12px; margin:15px 0;">
-        <source src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/Car_running_over_gif.webp?v=1770326078"
-            type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-    <script>
-        // ULTRA-AGGRESSIVE VIDEO AUTOPLAY - NEVER STOPS
-        (function () {
-            const video = document.getElementById('safety-video-3');
-            if (video) {
-                const forcePlay = () => {
-                    if (video.paused) video.play().catch(() => { });
-                };
-
-                video.play().catch(() => video.play());
-                setInterval(forcePlay, 100);
-                video.addEventListener('pause', forcePlay);
-                document.addEventListener('visibilitychange', forcePlay);
-                window.addEventListener('focus', forcePlay);
-                document.addEventListener('click', forcePlay);
-                window.addEventListener('scroll', forcePlay);
-            }
-        })();
-    </script>
+    <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/Car_running_over_gif.webp?v=1770326078"
+        alt="Unbreakable Quality" style="width:100%; border-radius:12px; margin:15px 0;">
 </div>
 
 <!-- GREEN CTA BUTTON AT THE END -->
@@ -127,7 +93,6 @@
         }
     }
 
-
     .desc-block-rc {
         margin-bottom: 30px;
     }
@@ -145,7 +110,8 @@
         font-size: 1rem;
     }
 
-    .desc-block-rc video {
+    .desc-block-rc video,
+    .desc-block-rc img {
         display: block;
         max-width: 100%;
         height: auto;
