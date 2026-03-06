@@ -11,9 +11,9 @@
        PREPAID ANNOUNCEMENT BAR (sticky top)
   ═══════════════════════════════════════════ -->
   <div class="sds-prepaid-bar">
-    <span class="sds-prepaid-bar__text">
-      🎉 <strong>15% OFF on Prepaid Orders</strong> — Use GPay, PhonePe, UPI & more
-    </span>
+    <div class="sds-prepaid-bar__marquee">
+      <span>🎉 15% OFF on Prepaid Orders&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🎉 15% OFF on Prepaid Orders&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🎉 15% OFF on Prepaid Orders&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════
@@ -38,13 +38,6 @@
 
     <!-- Counter Badge -->
     <div class="sds-gallery__counter" id="sds-counter">1 / {{ product.images.size }}</div>
-
-    <!-- Dots -->
-    <div class="sds-gallery__dots" id="sds-dots">
-      {% for image in product.images %}
-        <span class="sds-dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}"></span>
-      {% endfor %}
-    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════
@@ -96,19 +89,50 @@
       </ul>
     </div>
 
-    <!-- Countdown Timer -->
-    <div class="sds-timer">
-      <span class="sds-timer__label">⏰ Limited Offer Ends In</span>
-      <div class="sds-timer__boxes">
-        <div class="sds-timer__box"><span id="sds-hours">00</span><small>Hours</small></div>
-        <div class="sds-timer__sep">:</div>
-        <div class="sds-timer__box"><span id="sds-mins">00</span><small>Mins</small></div>
-        <div class="sds-timer__sep">:</div>
-        <div class="sds-timer__box"><span id="sds-secs">00</span><small>Secs</small></div>
-      </div>
+    <!-- Bundle Pack Selector -->
+    <div class="sds-bundle">
+      <p class="sds-bundle__title">— BUNDLE OFFER —</p>
+      <label class="sds-bundle__option sds-bundle__option--selected" id="sds-bundle-1" onclick="sdsSelectBundle(1, this)">
+        <span class="sds-bundle__radio" id="sds-radio-1">●</span>
+        <span class="sds-bundle__details">
+          <span class="sds-bundle__pack">Pack of 1</span>
+          <span class="sds-bundle__sub">Perfect for yourself</span>
+        </span>
+        <span class="sds-bundle__price">Rs. 799 <span class="sds-bundle__compare">Rs. 1,599</span></span>
+      </label>
+      <label class="sds-bundle__option" id="sds-bundle-2" onclick="sdsSelectBundle(2, this)">
+        <span class="sds-bundle__radio" id="sds-radio-2">○</span>
+        <span class="sds-bundle__details">
+          <span class="sds-bundle__pack">Pack of 2</span>
+          <span class="sds-bundle__sub">Share with family</span>
+        </span>
+        <span class="sds-bundle__price">Rs. 1,499 <span class="sds-bundle__compare">Rs. 3,198</span></span>
+      </label>
     </div>
 
-    <!-- Delivery Estimator -->
+    <!-- Shopify Form (variant hidden input for checkout) -->
+    {% form 'product', product, id: 'sds-product-form' %}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="sds-variant-id">
+
+      <!-- CTAs: Add to Cart first, then Buy Now -->
+      <div class="sds-buy-section" id="sds-buy-section">
+        <!-- Add to Cart -->
+        <button class="sds-btn-addtocart" type="submit" name="add" id="sds-addtocart-btn">
+          <span class="sds-btn__main">🛒 Add to Cart</span>
+        </button>
+
+        <!-- Buy Now (Prepaid) -->
+        <div class="sds-prepaid-badge">🎉 EXTRA 15% OFF — Pay Online & Save More</div>
+        <button class="sds-btn-buynow" type="button" id="sds-buynow-btn" onclick="sdsBuyNow()">
+          <span class="sds-btn__main">⚡ BUY NOW — Pay Online</span>
+          <span class="sds-btn__sub">
+            GPay &bull; PhonePe &bull; UPI &bull; Cards
+          </span>
+        </button>
+      </div>
+    {% endform %}
+
+    <!-- Delivery Estimator (below CTAs) -->
     <div class="sds-delivery">
       <span class="sds-delivery__icon">📦</span>
       <div class="sds-delivery__text">
@@ -118,42 +142,18 @@
       <span class="sds-delivery__badge">FREE</span>
     </div>
 
-    <!-- Shopify Form (variant hidden input for checkout) -->
-    {% form 'product', product, id: 'sds-product-form' %}
-      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="sds-variant-id">
-
-      <!-- BUY NOW BUTTON (Prepaid → direct Shopify checkout) -->
-      <div class="sds-buy-section">
-        <div class="sds-prepaid-badge">🎉 EXTRA 15% OFF — Pay Online & Save More</div>
-        <button class="sds-btn-buynow" type="button" id="sds-buynow-btn" onclick="sdsBuyNow()">
-          <span class="sds-btn__main">⚡ BUY NOW — Pay Online</span>
-          <span class="sds-btn__sub">
-            <img src="{{ 'upi-icon.svg' | asset_url }}" alt="UPI" class="sds-upi-icon" onerror="this.style.display='none'">
-            <img src="{{ 'gpay-icon.png' | asset_url }}" alt="GPay" class="sds-upi-icon" onerror="this.style.display='none'">
-            <img src="{{ 'phonepe-icon.png' | asset_url }}" alt="PhonePe" class="sds-upi-icon" onerror="this.style.display='none'">
-            <img src="{{ 'paytm-icon.png' | asset_url }}" alt="Paytm" class="sds-upi-icon" onerror="this.style.display='none'">
-            GPay &bull; PhonePe &bull; UPI &bull; Cards
-          </span>
-        </button>
-        <a class="sds-btn-cod" href="/cart">
-          <span class="sds-btn__main">🚚 Cash on Delivery</span>
-          <span class="sds-btn__sub">Order now, pay when delivered</span>
-        </a>
-      </div>
-    {% endform %}
-
     <!-- Trust Strip -->
     <div class="sds-trust-strip">
       <div class="sds-trust-item">
-        <span class="sds-trust-icon">🚚</span>
+        <span class="sds-trust-icon">🚀</span>
         <span>Free Shipping</span>
       </div>
       <div class="sds-trust-item">
-        <span class="sds-trust-icon">↩️</span>
+        <span class="sds-trust-icon">🔄</span>
         <span>7 Day Easy Return</span>
       </div>
       <div class="sds-trust-item">
-        <span class="sds-trust-icon">🔒</span>
+        <span class="sds-trust-icon">🛡️</span>
         <span>Secure Checkout</span>
       </div>
     </div>
@@ -284,7 +284,7 @@
        FINAL SHAKE CTA (bottom of long scroll)
   ═══════════════════════════════════════════ -->
   <div class="sds-final-cta">
-    <button class="sds-final-cta__btn" type="button" onclick="sdsBuyNow()">
+    <button class="sds-final-cta__btn" type="button" onclick="sdsScrollToBuy()">
       🛡️ GET YOURS NOW — 15% OFF PREPAID
     </button>
   </div>
@@ -336,17 +336,23 @@
   .sds-prepaid-bar {
     background: var(--sds-blue);
     color: #fff;
-    text-align: center;
-    padding: 9px 12px;
+    padding: 8px 0;
     font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    position: sticky;
-    top: 0;
-    z-index: 200;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
     box-shadow: 0 2px 8px rgba(26,86,219,0.25);
+    /* NOT sticky — only the site header is sticky */
   }
-  .sds-prepaid-bar strong { font-weight: 700; }
+  .sds-prepaid-bar__marquee {
+    display: inline-block;
+    animation: sdsMarquee 14s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes sdsMarquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-33.33%); }
+  }
 
   /* ── GALLERY ── */
   .sds-gallery {
@@ -378,32 +384,32 @@
     display: block;
   }
 
-  /* Arrow buttons */
+  /* Arrow buttons — small, transparent */
   .sds-gallery__arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255,255,255,0.92);
+    background: rgba(255,255,255,0.25);
     border: none;
-    width: 38px;
-    height: 38px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    font-size: 1.6rem;
+    font-size: 1.1rem;
     line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-    color: var(--sds-blue);
+    color: rgba(255,255,255,0.85);
     font-weight: 700;
     z-index: 10;
     transition: background 0.2s;
     padding: 0;
+    backdrop-filter: blur(2px);
   }
-  .sds-gallery__arrow:hover { background: var(--sds-blue-light); }
-  .sds-gallery__arrow--prev { left: 10px; }
-  .sds-gallery__arrow--next { right: 10px; }
+  .sds-gallery__arrow:hover { background: rgba(255,255,255,0.45); }
+  .sds-gallery__arrow--prev { left: 8px; }
+  .sds-gallery__arrow--next { right: 8px; }
 
   /* Counter */
   .sds-gallery__counter {
@@ -417,27 +423,6 @@
     padding: 3px 9px;
     border-radius: 20px;
     z-index: 10;
-  }
-
-  /* Dots */
-  .sds-gallery__dots {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    padding: 10px 0 6px;
-  }
-  .sds-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #d1d5db;
-    cursor: pointer;
-    transition: all 0.25s;
-  }
-  .sds-dot.active {
-    background: var(--sds-blue);
-    width: 22px;
-    border-radius: 4px;
   }
 
   /* ── PRODUCT INFO ── */
@@ -475,26 +460,26 @@
   .sds-price-row {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .sds-price__current {
-    font-size: 1.7rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: var(--sds-blue);
   }
   .sds-price__compare {
     text-decoration: line-through;
     color: #9ca3af;
-    font-size: 0.95rem;
+    font-size: 0.82rem;
   }
   .sds-price__badge {
     background: var(--sds-blue);
     color: #fff;
-    font-size: 0.75rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    padding: 4px 10px;
+    padding: 3px 8px;
     border-radius: 6px;
     letter-spacing: 0.03em;
   }
@@ -535,54 +520,71 @@
     margin-top: 1px;
   }
 
-  /* Countdown Timer */
-  .sds-timer {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #fff7ed;
-    border: 1.5px solid #f97316;
-    border-radius: 10px;
-    padding: 10px 14px;
-    margin-bottom: 14px;
+  /* Bundle Pack Selector */
+  .sds-bundle {
+    margin-bottom: 16px;
   }
-  .sds-timer__label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #c2410c;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .sds-timer__boxes {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  }
-  .sds-timer__box {
-    background: #111827;
-    color: #fff;
-    border-radius: 6px;
-    padding: 6px 10px;
+  .sds-bundle__title {
     text-align: center;
-    min-width: 46px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--sds-text-muted);
+    letter-spacing: 0.08em;
+    margin: 0 0 10px;
   }
-  .sds-timer__box span {
+  .sds-bundle__option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid var(--sds-border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: #fff;
+  }
+  .sds-bundle__option--selected {
+    border-color: var(--sds-blue);
+    background: var(--sds-blue-light);
+  }
+  .sds-bundle__radio {
+    font-size: 1.1rem;
+    color: var(--sds-border);
+    flex-shrink: 0;
+    transition: color 0.2s;
+  }
+  .sds-bundle__option--selected .sds-bundle__radio {
+    color: var(--sds-blue);
+  }
+  .sds-bundle__details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .sds-bundle__pack {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--sds-text);
+  }
+  .sds-bundle__sub {
+    font-size: 0.75rem;
+    color: var(--sds-text-muted);
+  }
+  .sds-bundle__price {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--sds-blue);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .sds-bundle__compare {
     display: block;
-    font-size: 1.3rem;
-    font-weight: 800;
-    line-height: 1;
-  }
-  .sds-timer__box small {
-    font-size: 0.6rem;
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .sds-timer__sep {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #c2410c;
-    padding-bottom: 4px;
+    font-size: 0.72rem;
+    font-weight: 400;
+    text-decoration: line-through;
+    color: #9ca3af;
   }
 
   /* Delivery Estimator */
@@ -625,7 +627,30 @@
     letter-spacing: 0.04em;
   }
 
-  /* Prepaid Badge above button */
+  /* Add to Cart button */
+  .sds-btn-addtocart {
+    display: block;
+    width: 100%;
+    border: 2px solid var(--sds-blue);
+    background: #fff;
+    color: var(--sds-blue);
+    border-radius: 10px;
+    padding: 13px 16px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.2s, color 0.2s;
+  }
+  .sds-btn-addtocart:active { transform: scale(0.98); }
+  .sds-btn-addtocart .sds-btn__main {
+    font-size: 1.0rem;
+    font-weight: 700;
+    color: var(--sds-blue);
+  }
+
+  /* Prepaid Badge above Buy Now */
   .sds-prepaid-badge {
     background: linear-gradient(90deg, #1a56db 0%, #2563eb 100%);
     color: #fff;
@@ -639,7 +664,7 @@
 
   /* Buy Section */
   .sds-buy-section {
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
 
   /* BUY NOW button */
@@ -657,6 +682,7 @@
     transition: transform 0.15s, box-shadow 0.15s;
     box-shadow: 0 4px 18px rgba(26,86,219,0.35);
     animation: sdsPulse 2.5s ease-in-out infinite;
+    font-family: 'Poppins', sans-serif;
   }
   .sds-btn-buynow:active { transform: scale(0.98); }
 
@@ -682,29 +708,6 @@
     opacity: 0.9;
     flex-wrap: wrap;
   }
-  .sds-upi-icon {
-    height: 16px;
-    width: auto;
-    object-fit: contain;
-    vertical-align: middle;
-  }
-
-  /* COD Button */
-  .sds-btn-cod {
-    display: block;
-    width: 100%;
-    border: 2px solid #d1d5db;
-    background: #fff;
-    color: var(--sds-text);
-    border-radius: 10px;
-    padding: 12px 16px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    box-sizing: border-box;
-  }
-  .sds-btn-cod .sds-btn__main { color: var(--sds-text); font-size: 0.95rem; }
-  .sds-btn-cod .sds-btn__sub { color: var(--sds-text-muted); justify-content: center; }
 
   /* Trust Strip */
   .sds-trust-strip {
@@ -1011,6 +1014,9 @@
   document.getElementById('sds-prev')?.addEventListener('click', () => goToSlide(currentSlide - 1));
   document.getElementById('sds-next')?.addEventListener('click', () => goToSlide(currentSlide + 1));
 
+  // Remove dots sync (dots removed from HTML)
+  // dots array kept for backward compat but is empty
+
   // Sync dots on swipe
   if (track) {
     track.addEventListener('scroll', function() {
@@ -1040,24 +1046,22 @@
   }
   calcDelivery();
 
-  // ── COUNTDOWN TIMER ──
-  function updateTimer() {
-    const now = new Date();
-    const midnight = new Date(); midnight.setHours(24, 0, 0, 0);
-    const diff = midnight - now;
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    const pad = n => String(n).padStart(2, '0');
-    const hEl = document.getElementById('sds-hours');
-    const mEl = document.getElementById('sds-mins');
-    const sEl = document.getElementById('sds-secs');
-    if (hEl) hEl.textContent = pad(h);
-    if (mEl) mEl.textContent = pad(m);
-    if (sEl) sEl.textContent = pad(s);
-  }
-  updateTimer();
-  setInterval(updateTimer, 1000);
+  // ── BUNDLE SELECTOR ──
+  window.sdsSelectBundle = function(pack, el) {
+    document.querySelectorAll('.sds-bundle__option').forEach(o => {
+      o.classList.remove('sds-bundle__option--selected');
+    });
+    document.getElementById('sds-radio-1').textContent = '○';
+    document.getElementById('sds-radio-2').textContent = '○';
+    el.classList.add('sds-bundle__option--selected');
+    document.getElementById('sds-radio-' + pack).textContent = '●';
+  };
+
+  // ── SCROLL TO BUY SECTION ──
+  window.sdsScrollToBuy = function() {
+    const buySection = document.getElementById('sds-buy-section');
+    if (buySection) buySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   // ── BUY NOW (prepaid → direct Shopify checkout) ──
   window.sdsBuyNow = function() {
