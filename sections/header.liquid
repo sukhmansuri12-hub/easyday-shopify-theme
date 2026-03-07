@@ -19,23 +19,36 @@
       </a>
     </div>
 
-    {% comment %} Icons - RIGHT {% endcomment %}
+    {% comment %} Icons - RIGHT (account icon removed, logo perfectly centered) {% endcomment %}
     <div class="header-icons">
       <a href="{{ routes.search_url }}" class="header-icon search-icon" aria-label="Search">
         {% render 'icon-search' %}
       </a>
-      
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header-icon account-icon" aria-label="Account">
-          {% render 'icon-account' %}
-        </a>
-      {%- endif -%}
 
       <a href="{{ routes.cart_url }}" class="header-icon cart-icon" id="cart-icon-bubble" aria-label="Cart">
         {% render 'icon-cart' %}
         <span class="cart-count" style="display: {% if cart.item_count > 0 %}flex{% else %}none{% endif %};">{{ cart.item_count }}</span>
       </a>
     </div>
+
+    <style>
+      /* Center logo perfectly between hamburger and icons */
+      .header-container {
+        position: relative;
+      }
+      .header-logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        pointer-events: auto;
+      }
+      .mobile-menu-toggle,
+      .header-icons {
+        position: relative;
+        z-index: 2;
+      }
+    </style>
 
   </div>
 </header>
