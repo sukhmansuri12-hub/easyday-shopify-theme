@@ -39,15 +39,17 @@
   <div class="sds-info">
 
     <!-- Rating (immediately below gallery, like screenshot) -->
-    <div class="sds-rating">
-      <span class="sds-rating__stars">
-        <span class="sds-star-badge">★</span>
-        <span class="sds-star-badge">★</span>
-        <span class="sds-star-badge">★</span>
-        <span class="sds-star-badge">★</span>
-        <span class="sds-star-badge">★</span>
-      </span>
-      <span class="sds-rating__text">Rated 4.8/5 by <strong>329+ Customers</strong></span>
+    <div class="sds-reviews__header" style="padding:0;">
+      <div class="sds-rating" style="margin-bottom:0;">
+        <span class="sds-rating__stars">
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+        </span>
+        <span class="sds-rating__text" style="font-size: 0.85rem;">Rated 4.8/5 by <strong>329+ Customers</strong></span>
+      </div>
     </div>
 
     <!-- Title -->
@@ -69,15 +71,15 @@
       <ul class="sds-benefits__list">
         <li>
           <span class="sds-benefit-icon">🛡️</span>
-          Instant snap expansion — ready in less than a second
+          Instant snap expansion — ready in 1 second
         </li>
         <li>
           <span class="sds-benefit-icon">🔩</span>
-          Solid industrial steel — no batteries, no plastic parts
+          Solid industrial steel — no plastic parts
         </li>
         <li>
           <span class="sds-benefit-icon">🚗</span>
-          Built-in glass breaker tip for emergency car escapes
+          Built-in glass breaker for car escapes
         </li>
       </ul>
     </div>
@@ -214,7 +216,7 @@
         <span class="sds-accordion__plus">+</span>
       </button>
       <div class="sds-accordion__content">
-        <p>Not happy with your order? Get in touch with our support team and we'll make it right. Every order is tracked and insured during transit for your peace of mind.</p>
+        <p>Not happy with your order? Get in touch with our support team via email and we'll make it right. Every order is tracked and insured during transit for your peace of mind. You can also read our return policy for more details.</p>
       </div>
     </div>
     <div class="sds-accordion__item">
@@ -242,9 +244,15 @@
 
     <!-- Header: stars + count only (like Glimmi) -->
     <div class="sds-reviews__header">
-      <div class="sds-reviews__summary-row">
-        <span class="sds-reviews__stars-lg">⭐⭐⭐⭐⭐</span>
-        <span class="sds-reviews__count-lg">329+ Reviews</span>
+      <div class="sds-rating" style="margin-bottom: 0;">
+        <span class="sds-rating__stars">
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+        </span>
+        <span class="sds-rating__text" style="font-size: 0.85rem;">Rated 4.8/5 by <strong>329+ Customers</strong></span>
       </div>
     </div>
 
@@ -374,7 +382,7 @@
     font-family: 'Poppins', sans-serif;
     background: var(--sds-bg);
     color: var(--sds-text);
-    padding-bottom: 80px; /* space for sticky bar */
+    padding-bottom: 65px; /* space for sticky bar */
   }
 
   /* Prepaid bar removed per request */
@@ -544,12 +552,14 @@
     display: flex;
     align-items: flex-start;
     gap: 6px;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--sds-text);
     line-height: 1.35;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
   }
   .sds-benefit-icon {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     flex-shrink: 0;
   }
 
@@ -565,8 +575,8 @@
   }
   .sds-bundle__title-line {
     flex-grow: 1;
-    height: 1px;
-    background-color: #d1d5db;
+    height: 1.5px;
+    background-color: var(--sds-blue);
   }
   .sds-bundle__title-text {
     font-size: 0.8rem;
@@ -793,13 +803,13 @@
 
   /* Description */
   .sds-description {
-    padding: 0 16px 20px;
+    padding: 0 16px 5px;
     border-top: 8px solid var(--sds-bg-subtle);
   }
 
   /* ── ACCORDION ── */
   .sds-accordion {
-    padding: 0 16px 20px;
+    padding: 0 16px 10px;
   }
   .sds-accordion__item {
     border-bottom: 1px solid var(--sds-border);
@@ -1026,16 +1036,16 @@
   /* Final CTA */
   .sds-final-cta {
     text-align: center;
-    padding: 24px 16px;
+    padding: 16px 16px 10px;
     background: #fff;
   }
   .sds-final-cta__btn {
     background: linear-gradient(135deg, #1a56db 0%, #2563eb 100%);
     color: #fff;
     border: none;
-    padding: 16px 28px;
+    padding: 16px 14px;
     font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     border-radius: 50px;
     cursor: pointer;
