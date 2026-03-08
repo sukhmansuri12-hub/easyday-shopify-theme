@@ -7,14 +7,7 @@
 
 <section class="sds-page">
 
-  <!-- ═══════════════════════════════════════════
-       PREPAID ANNOUNCEMENT BAR (sticky top)
-  ═══════════════════════════════════════════ -->
-  <div class="sds-prepaid-bar">
-    <div class="sds-prepaid-bar__marquee">
-      <span>🎉 15% OFF on Prepaid Orders&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🎉 15% OFF on Prepaid Orders&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🎉 15% OFF on Prepaid Orders&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-    </div>
-  </div>
+  <!-- Removed prepaid bar per request -->
 
   <!-- ═══════════════════════════════════════════
        IMAGE GALLERY WITH ARROW NAVIGATION
@@ -48,11 +41,11 @@
     <!-- Rating (immediately below gallery, like screenshot) -->
     <div class="sds-rating">
       <span class="sds-rating__stars">
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="#1a56db" xmlns="http://www.w3.org/2000/svg"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.51.91-5.32-3.87-3.77 5.34-.78L10 1z"/></svg>
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="#1a56db" xmlns="http://www.w3.org/2000/svg"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.51.91-5.32-3.87-3.77 5.34-.78L10 1z"/></svg>
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="#1a56db" xmlns="http://www.w3.org/2000/svg"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.51.91-5.32-3.87-3.77 5.34-.78L10 1z"/></svg>
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="#1a56db" xmlns="http://www.w3.org/2000/svg"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.51.91-5.32-3.87-3.77 5.34-.78L10 1z"/></svg>
-        <svg width="16" height="16" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="hg"><stop offset="80%" stop-color="#1a56db"/><stop offset="80%" stop-color="#e0e0e0"/></linearGradient></defs><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.51.91-5.32-3.87-3.77 5.34-.78L10 1z" fill="url(#hg)"/></svg>
+        <span class="sds-star-badge">★</span>
+        <span class="sds-star-badge">★</span>
+        <span class="sds-star-badge">★</span>
+        <span class="sds-star-badge">★</span>
+        <span class="sds-star-badge">★</span>
       </span>
       <span class="sds-rating__text">Rated 4.8/5 by <strong>329+ Customers</strong></span>
     </div>
@@ -66,7 +59,7 @@
       {% if product.compare_at_price > product.price %}
         <span class="sds-price__compare">{{ product.compare_at_price | money }}</span>
         {% assign savings_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
-        <span class="sds-price__badge">🏷️ SAVE {{ savings_pct }}%</span>
+        <span class="sds-price__badge"><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14" style="flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg> SAVE {{ savings_pct }}%</span>
       {% endif %}
     </div>
 
@@ -91,7 +84,11 @@
 
     <!-- Bundle Pack Selector -->
     <div class="sds-bundle">
-      <p class="sds-bundle__title">— Limited Time Sale | Ending Soon —</p>
+      <div class="sds-bundle__title-wrapper">
+        <span class="sds-bundle__title-line"></span>
+        <span class="sds-bundle__title-text">BUNDLE OFFER</span>
+        <span class="sds-bundle__title-line"></span>
+      </div>
       <label class="sds-bundle__option sds-bundle__option--selected" id="sds-bundle-1" onclick="sdsSelectBundle(1, this)">
         <span class="sds-bundle__radio" id="sds-radio-1">●</span>
         <span class="sds-bundle__details">
@@ -123,7 +120,7 @@
         </button>
 
         <!-- Buy Now (Prepaid) -->
-        <div class="sds-prepaid-badge">EXTRA 15% OFF on Prepaid Orders</div>
+        <div class="sds-prepaid-badge">EXTRA Rs 100 OFF on PREPAID ORDERS</div>
         <button class="sds-btn-buynow" type="button" id="sds-buynow-btn" onclick="sdsBuyNow()">
           <span class="sds-buynow-text">BUY NOW</span>
           <span class="sds-payment-logos">
@@ -153,16 +150,22 @@
     <!-- Trust Strip -->
     <div class="sds-trust-strip">
       <div class="sds-trust-item">
-        <span class="sds-trust-icon">🚀</span>
+        <div class="sds-trust-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" class="sds-trust-svg"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle><path d="M-3 9h4M-2 13h3"></path></svg>
+        </div>
         <span>Free Shipping</span>
       </div>
       <div class="sds-trust-item">
-        <span class="sds-trust-icon">🔄</span>
-        <span>7 Day Easy Return</span>
+        <div class="sds-trust-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" class="sds-trust-svg"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v12m-2-9a2 2 0 114 0c0 1.5-4 2.5-4 4a2 2 0 104 0"></path></svg>
+        </div>
+        <span>Secure Checkout</span>
       </div>
       <div class="sds-trust-item">
-        <span class="sds-trust-icon">🛡️</span>
-        <span>Secure Checkout</span>
+        <div class="sds-trust-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" class="sds-trust-svg"><path d="M21 8l-9 5-9-5 9-5 9 5zM21 8v8l-9 5v-8m-9 5v-8"></path></svg>
+        </div>
+        <span>7-Day Easy<br>Returns</span>
       </div>
     </div>
 
@@ -188,6 +191,48 @@
         <p>No batteries. No plastic parts. Built to survive anything. Drive a car over it — it still works perfectly.</p>
       </div>
     {%- endif -%}
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       ACCORDION (Collapsible Rows)
+  ═══════════════════════════════════════════ -->
+  <div class="sds-accordion">
+    <div class="sds-accordion__item">
+      <button class="sds-accordion__btn" onclick="sdsToggleAccordion(this)">
+        <span class="sds-accordion__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <span class="sds-accordion__title">Quality Assurance</span>
+        <span class="sds-accordion__plus">+</span>
+      </button>
+      <div class="sds-accordion__content">
+        <p>Every order undergoes a rigorous quality and assurance check before being shipped out. We pride ourselves on delivering premium quality accessories that you will absolutely love.</p>
+      </div>
+    </div>
+    <div class="sds-accordion__item">
+      <button class="sds-accordion__btn" onclick="sdsToggleAccordion(this)">
+        <span class="sds-accordion__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-4a2 2 0 100 4h4a2 2 0 110 4h-4m-2-6v8"/></svg></span>
+        <span class="sds-accordion__title">Moneyback Guarantee</span>
+        <span class="sds-accordion__plus">+</span>
+      </button>
+      <div class="sds-accordion__content">
+        <p>Not happy with your order? Get in touch with our support team and we'll make it right. Every order is tracked and insured during transit for your peace of mind.</p>
+      </div>
+    </div>
+    <div class="sds-accordion__item">
+      <button class="sds-accordion__btn" onclick="sdsToggleAccordion(this)">
+        <span class="sds-accordion__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span>
+        <span class="sds-accordion__title">Product specifications</span>
+        <span class="sds-accordion__plus">+</span>
+      </button>
+      <div class="sds-accordion__content">
+        <ul style="padding-left: 20px; list-style-type: disc; margin: 0; line-height: 1.6;">
+          <li><strong>Material:</strong> Military-grade solid steel equipment</li>
+          <li><strong>Length:</strong> 2.2 feet fully expanded</li>
+          <li><strong>Weight:</strong> 500g</li>
+          <li><strong>Grip:</strong> Anti-slip rubber handle</li>
+          <li><strong>Color:</strong> Matte Black</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════
@@ -280,7 +325,7 @@
   ═══════════════════════════════════════════ -->
   <div class="sds-final-cta">
     <button class="sds-final-cta__btn" type="button" onclick="sdsScrollToBuy()">
-      🛡️ GET YOURS NOW — 15% OFF PREPAID
+      🛡️ GET YOURS NOW — FLAT Rs 100 OFF
     </button>
   </div>
 
@@ -332,27 +377,7 @@
     padding-bottom: 80px; /* space for sticky bar */
   }
 
-  /* ── PREPAID ANNOUNCEMENT BAR ── */
-  .sds-prepaid-bar {
-    background: var(--sds-blue);
-    color: #fff;
-    padding: 8px 0;
-    font-size: 0.82rem;
-    font-weight: 600;
-    overflow: hidden;
-    white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(26,86,219,0.25);
-    /* NOT sticky — only the site header is sticky */
-  }
-  .sds-prepaid-bar__marquee {
-    display: inline-block;
-    animation: sdsMarquee 14s linear infinite;
-    white-space: nowrap;
-  }
-  @keyframes sdsMarquee {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-33.33%); }
-  }
+  /* Prepaid bar removed per request */
 
   /* ── GALLERY ── */
   .sds-gallery {
@@ -438,7 +463,18 @@
   }
   .sds-rating__stars {
     display: flex;
-    gap: 2px;
+    gap: 3px;
+  }
+  .sds-star-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    background: var(--sds-blue);
+    color: #fff;
+    font-size: 0.7rem;
+    border-radius: 3px;
   }
   .sds-rating__text {
     font-size: 0.82rem;
@@ -474,6 +510,9 @@
     font-size: 0.82rem;
   }
   .sds-price__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     background: var(--sds-blue);
     color: #fff;
     font-size: 0.68rem;
@@ -485,17 +524,13 @@
 
   /* Benefits */
   .sds-benefits {
-    background: var(--sds-blue-light);
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin-bottom: 16px;
-    border-left: 3px solid var(--sds-blue);
+    margin: 10px 0 20px;
   }
   .sds-benefits__headline {
-    font-weight: 700;
+    font-weight: 800;
     font-size: 0.92rem;
     margin: 0 0 10px;
-    color: var(--sds-blue-dark);
+    color: var(--sds-text);
   }
   .sds-benefits__list {
     list-style: none;
@@ -508,28 +543,37 @@
   .sds-benefits__list li {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
-    font-size: 0.88rem;
+    gap: 6px;
+    font-size: 0.85rem;
     color: var(--sds-text);
-    line-height: 1.4;
+    line-height: 1.35;
   }
   .sds-benefit-icon {
-    font-size: 1rem;
+    font-size: 1.05rem;
     flex-shrink: 0;
-    margin-top: 1px;
   }
 
   /* Bundle Pack Selector */
   .sds-bundle {
     margin-bottom: 16px;
   }
-  .sds-bundle__title {
-    text-align: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--sds-text-muted);
-    letter-spacing: 0.08em;
-    margin: 0 0 10px;
+  .sds-bundle__title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .sds-bundle__title-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #d1d5db;
+  }
+  .sds-bundle__title-text {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--sds-text);
+    padding: 0 10px;
+    letter-spacing: 0.05em;
   }
   .sds-bundle__option {
     display: flex;
@@ -633,9 +677,9 @@
     justify-content: center;
     gap: 8px;
     width: 100%;
-    border: 1.5px solid #d1d5db;
+    border: 1.5px solid var(--sds-blue);
     background: #fff;
-    color: #374151;
+    color: var(--sds-blue);
     border-radius: 50px;
     padding: 12px 16px;
     text-align: center;
@@ -716,7 +760,7 @@
   .sds-trust-strip {
     display: flex;
     justify-content: space-around;
-    padding: 12px 0 18px;
+    padding: 16px 0 20px;
     border-top: 1px solid var(--sds-border);
     margin-top: 4px;
   }
@@ -724,18 +768,87 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     font-size: 0.7rem;
     font-weight: 600;
     color: var(--sds-text-muted);
     text-align: center;
   }
-  .sds-trust-icon { font-size: 1.3rem; }
+  .sds-trust-icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+  }
+  .sds-trust-svg {
+    stroke: #333;
+    stroke-width: 1.5;
+    width: 20px;
+    height: 20px;
+  }
 
   /* Description */
   .sds-description {
     padding: 0 16px 20px;
     border-top: 8px solid var(--sds-bg-subtle);
+  }
+
+  /* ── ACCORDION ── */
+  .sds-accordion {
+    padding: 0 16px 20px;
+  }
+  .sds-accordion__item {
+    border-bottom: 1px solid var(--sds-border);
+  }
+  .sds-accordion__btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 16px 0;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    color: var(--sds-text);
+    text-align: left;
+  }
+  .sds-accordion__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    color: var(--sds-blue);
+  }
+  .sds-accordion__title {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .sds-accordion__plus {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--sds-text-muted);
+    transition: transform 0.2s;
+    line-height: 1;
+  }
+  .sds-accordion__item.active .sds-accordion__plus {
+    transform: rotate(45deg);
+  }
+  .sds-accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    font-size: 0.85rem;
+    color: var(--sds-text-muted);
+    line-height: 1.5;
+  }
+  .sds-accordion__item.active .sds-accordion__content {
+    max-height: 500px;
+    padding-bottom: 16px;
   }
 
   /* ── REVIEWS \u2014 MASONRY GRID ── */
@@ -1043,7 +1156,7 @@
   // ── DELIVERY DATE ESTIMATOR ──
   function calcDelivery() {
     const today = new Date();
-    const minDays = 3, maxDays = 4;
+    const minDays = 2, maxDays = 4;
     const from = new Date(today); from.setDate(today.getDate() + minDays);
     const to = new Date(today); to.setDate(today.getDate() + maxDays);
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -1083,6 +1196,12 @@
       }))
       .then(() => { window.location.href = '/checkout'; })
       .catch(() => { window.location.href = '/cart'; });
+  };
+
+  // ── ACCORDION TOGGLE ──
+  window.sdsToggleAccordion = function(btn) {
+    const item = btn.closest('.sds-accordion__item');
+    item.classList.toggle('active');
   };
 
   // ── WRITE A REVIEW TOGGLE ──
