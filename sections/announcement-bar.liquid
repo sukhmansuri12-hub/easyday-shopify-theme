@@ -3,48 +3,87 @@
 {% endcomment %}
 <div class="announcement-bar">
   <div class="announcement-marquee">
-    <span class="announcement-marquee__inner">
-      Rs 100 off on prepaid orders
-      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      SALE 50% OFF
-      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      Free Shipping
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      Rs 100 off on prepaid orders
-      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      SALE 50% OFF
-      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      Free Shipping
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </span>
+    <div class="announcement-marquee__inner">
+      <span class="announcement-item">
+        <svg class="announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01"></path></svg>
+        EXTRA 100 OFF ON PREPAID ORDERS
+      </span>
+      <span class="announcement-item">
+        <svg class="announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 20A7 7 0 014.05 13.05 7 7 0 0111 20zm0 0c0-3 2-5 5-5m-5 5A7 7 0 0017.95 13.05 7 7 0 0011 20zm0 0V4"></path><path d="M11 4c4 0 7 3 7 7s-3 7-7 7-7-3-7-7 3-7 7-7z"></path></svg>
+        🌿 SPRING SALE UP TO 60% OFF
+      </span>
+      <!-- Duplicate for seamless loop -->
+      <span class="announcement-item">
+        <svg class="announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01"></path></svg>
+        EXTRA 100 OFF ON PREPAID ORDERS
+      </span>
+      <span class="announcement-item">
+        <svg class="announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 20A7 7 0 014.05 13.05 7 7 0 0111 20zm0 0c0-3 2-5 5-5m-5 5A7 7 0 0017.95 13.05 7 7 0 0011 20zm0 0V4"></path><path d="M11 4c4 0 7 3 7 7s-3 7-7 7-7-3-7-7 3-7 7-7z"></path></svg>
+        🌿 SPRING SALE UP TO 60% OFF
+      </span>
+    </div>
   </div>
 </div>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
   .announcement-bar {
-    background: #1a56db;
-    color: #fff;
-    height: 32px;
+    background: #E81F5E;
+    color: #ffffff;
+    height: 36px;
     overflow: hidden;
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
+
   .announcement-marquee {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
   }
+
   .announcement-marquee__inner {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     white-space: nowrap;
-    animation: announcementScroll 9s linear infinite;
-    font-size: 0.95rem;
-    font-weight: 800;
-    letter-spacing: 0.02em;
+    animation: announcementScroll 15s linear infinite;
   }
+
+  .announcement-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 60px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .announcement-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
   @keyframes announcementScroll {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+  }
+
+  /* Faster animation on smaller screens if needed */
+  @media (max-width: 480px) {
+    .announcement-marquee__inner {
+      animation-duration: 12s;
+    }
+    .announcement-item {
+      margin-right: 40px;
+    }
   }
 </style>
 

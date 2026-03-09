@@ -38,17 +38,57 @@
   ═══════════════════════════════════════════ -->
   <div class="sds-info">
 
-    <!-- Rating (immediately below gallery, like screenshot) -->
-    <div class="sds-reviews__header" style="padding:0;">
-      <div class="sds-rating" style="margin-bottom:0;">
-        <span class="sds-rating__stars">
-          <span class="sds-star-badge">★</span>
-          <span class="sds-star-badge">★</span>
-          <span class="sds-star-badge">★</span>
-          <span class="sds-star-badge">★</span>
-          <span class="sds-star-badge">★</span>
-        </span>
-        <span class="sds-rating__text" style="font-size: 0.85rem;">Rated 4.8/5 by <strong>329+ Customers</strong></span>
+    <!-- Rating (Glimmi-Style Dropdown) -->
+    <div class="sds-reviews__dropdown">
+      <div class="sds-reviews__summary" onclick="sdsToggleReviewDropdown()">
+        <div class="sds-rating">
+          <span class="sds-rating__stars">
+            <span class="sds-star-badge">★</span>
+            <span class="sds-star-badge">★</span>
+            <span class="sds-star-badge">★</span>
+            <span class="sds-star-badge">★</span>
+            <span class="sds-star-badge">★</span>
+          </span>
+          <span class="sds-rating__text" style="font-weight:600; color:var(--sds-text);">329 Reviews</span>
+          <svg class="sds-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px; margin-left:2px;"><path d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      
+      <div class="sds-reviews__details" id="sds-review-dropdown-content">
+        <div class="sds-reviews__stats">
+          <div class="sds-stats-main">
+            <span class="sds-stats-score">4.8</span>
+            <div class="sds-stats-stars">★★★★★</div>
+          </div>
+          <div class="sds-stats-bars">
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">5 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 95%;"></div></div>
+              <span class="sds-stats-count">(312)</span>
+            </div>
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">4 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 4%;"></div></div>
+              <span class="sds-stats-count">(12)</span>
+            </div>
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">3 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 1.5%;"></div></div>
+              <span class="sds-stats-count">(5)</span>
+            </div>
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">2 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 0%;"></div></div>
+              <span class="sds-stats-count">(0)</span>
+            </div>
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">1 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 0%;"></div></div>
+              <span class="sds-stats-count">(0)</span>
+            </div>
+          </div>
+          <button class="sds-btn-write-inline" type="button" onclick="sdsScrollToReviews()">Write a review</button>
+        </div>
       </div>
     </div>
 
@@ -176,29 +216,18 @@
   <!-- ═══════════════════════════════════════════
        PRODUCT DESCRIPTION (from Shopify product)
   ═══════════════════════════════════════════ -->
-  <div class="sds-description">
+  <div class="sds-description sds-section-spacing">
     {%- if product.description != blank -%}
       {{ product.description }}
     {%- else -%}
-      <div class="desc-block-rc">
-        <h3>🛡️ Strong Build. Instant Action.</h3>
-        <p>The Expandable Tactical Defense Stick is designed for real-world situations — for late-night walks, solo travel, emergencies, and everyday peace of mind. Feel safe. Move confidently.</p>
-      </div>
-      <div class="desc-block-rc">
-        <h3>👜 Protection That Fits in Her Bag</h3>
-        <p>Heavy-duty steel protection that fits in her purse/bag, plus a built-in tip to break glass if needed for emergency escapes.</p>
-      </div>
-      <div class="desc-block-rc">
-        <h3>💪 Unbreakable Quality.</h3>
-        <p>No batteries. No plastic parts. Built to survive anything. Drive a car over it — it still works perfectly.</p>
-      </div>
+      <p style="text-align:center; padding:20px; color:var(--sds-text-muted);">Please add a product description in Shopify Admin.</p>
     {%- endif -%}
   </div>
 
   <!-- ═══════════════════════════════════════════
        ACCORDION (Collapsible Rows)
   ═══════════════════════════════════════════ -->
-  <div class="sds-accordion">
+  <div class="sds-accordion sds-section-spacing">
     <div class="sds-accordion__item">
       <button class="sds-accordion__btn" onclick="sdsToggleAccordion(this)">
         <span class="sds-accordion__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
@@ -240,7 +269,7 @@
   <!-- ═══════════════════════════════════════════
        REVIEWS — MASONRY 2-COLUMN GRID
   ═══════════════════════════════════════════ -->
-  <div class="sds-reviews">
+  <div class="sds-reviews sds-section-spacing" id="sds-reviews-section">
 
     <!-- Header: stars + count only (like Glimmi) -->
     <div class="sds-reviews__header">
@@ -328,14 +357,6 @@
 
   </div><!-- /sds-reviews -->
 
-  <!-- ═══════════════════════════════════════════
-       FINAL SHAKE CTA (bottom of long scroll)
-  ═══════════════════════════════════════════ -->
-  <div class="sds-final-cta">
-    <button class="sds-final-cta__btn" type="button" onclick="sdsScrollToBuy()">
-      🛡️ GET YOURS NOW — FLAT Rs 100 OFF
-    </button>
-  </div>
 
   <!-- ═══════════════════════════════════════════
        STICKY BOTTOM BAR
@@ -363,7 +384,7 @@
      STYLES
 ═══════════════════════════════════════════ -->
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;600;700&display=swap');
 
   /* ── Brand Color Variables ── */
   :root {
@@ -382,7 +403,13 @@
     font-family: 'Poppins', sans-serif;
     background: var(--sds-bg);
     color: var(--sds-text);
-    padding-bottom: 65px; /* space for sticky bar */
+    padding-bottom: 70px; /* space for sticky bar */
+  }
+
+  /* Premium Section Spacing */
+  .sds-section-spacing {
+    margin-top: 48px !important;
+    margin-bottom: 48px !important;
   }
 
   /* Prepaid bar removed per request */
@@ -490,12 +517,97 @@
   }
   .sds-rating__text strong { color: var(--sds-text); }
 
+  /* Glimmi-Style Review Dropdown CSS */
+  .sds-reviews__dropdown {
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--sds-border);
+    padding-bottom: 8px;
+  }
+  .sds-reviews__summary {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  .sds-chevron-icon {
+    transition: transform 0.3s ease;
+  }
+  .sds-reviews__dropdown.is-open .sds-chevron-icon {
+    transform: rotate(180deg);
+  }
+  .sds-reviews__details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .sds-reviews__dropdown.is-open .sds-reviews__details {
+    max-height: 600px;
+    padding: 20px 0 10px;
+  }
+  .sds-reviews__stats {
+    background: var(--sds-bg-subtle);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .sds-stats-main {
+    margin-bottom: 20px;
+  }
+  .sds-stats-score {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--sds-text);
+  }
+  .sds-stats-stars {
+    color: var(--sds-blue);
+    font-size: 1.25rem;
+    margin-top: 5px;
+  }
+  .sds-stats-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .sds-stats-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+  }
+  .sds-stats-label { min-width: 30px; text-align: left; }
+  .sds-stats-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .sds-stats-bar-fill {
+    height: 100%;
+    background: var(--sds-blue);
+    border-radius: 4px;
+  }
+  .sds-stats-count { min-width: 35px; text-align: right; color: var(--sds-text-muted); }
+  .sds-btn-write-inline {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--sds-blue);
+    color: var(--sds-blue);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
   /* Title */
   .sds-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin: 0 0 12px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 14px;
     color: var(--sds-text);
     letter-spacing: -0.5px;
   }
@@ -536,11 +648,11 @@
     margin: 10px 0 20px;
   }
   .sds-benefits__headline {
-    font-weight: 700;
-    font-size: 0.95rem;
-    margin: 0 0 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 14px;
     color: var(--sds-text);
-    letter-spacing: -0.3px;
+    letter-spacing: -0.5px;
   }
   .sds-benefits__list {
     list-style: none;
@@ -548,26 +660,53 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
   .sds-benefits__list li {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
     font-weight: 400;
     color: var(--sds-text);
-    line-height: 1.4;
-    letter-spacing: 0;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
   }
   .sds-benefit-icon {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     flex-shrink: 0;
+    margin-top: -2px;
   }
 
   /* Bundle Pack Selector */
   .sds-bundle {
     margin-bottom: 16px;
+  }
+  
+  /* Product Description Block */
+  .desc-block-rc {
+    margin-bottom: 24px;
+    padding: 0 4px;
+  }
+  .desc-block-rc h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--sds-text);
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .desc-block-rc p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--sds-text-muted);
+    line-height: 1.6;
+    margin: 0;
+    letter-spacing: 0.3px;
   }
   .sds-bundle__title-wrapper {
     display: flex;
@@ -591,17 +730,19 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 16px 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px 18px;
     margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.2s ease;
     background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
   .sds-bundle__option--selected {
     border-color: var(--sds-blue);
     background: var(--sds-blue-light);
+    box-shadow: 0 4px 12px rgba(26,86,219,0.1);
   }
   .sds-bundle__custom-radio {
     width: 20px;
@@ -703,19 +844,21 @@
     justify-content: center;
     gap: 8px;
     width: 100%;
-    border: 1.5px solid var(--sds-blue);
+    border: 1px solid var(--sds-blue);
     background: #fff;
     color: var(--sds-blue);
-    border-radius: 50px;
-    padding: 12px 16px;
+    border-radius: 12px;
+    padding: 14px 16px;
     text-align: center;
     cursor: pointer;
     box-sizing: border-box;
     margin-bottom: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    transition: border-color 0.2s, background 0.2s;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
   }
   .sds-btn-addtocart:hover { border-color: var(--sds-blue); color: var(--sds-blue); }
   .sds-btn-addtocart:active { transform: scale(0.98); }
@@ -750,20 +893,21 @@
     cursor: pointer;
     background: var(--sds-blue);
     color: #fff;
-    border-radius: 0 0 8px 8px;
-    padding: 14px 16px;
+    border-radius: 0 0 12px 12px;
+    padding: 16px 16px;
     text-align: center;
     margin-bottom: 10px;
-    transition: transform 0.15s;
+    transition: all 0.2s ease;
     box-shadow: 0 4px 18px rgba(26,86,219,0.3);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
     box-sizing: border-box;
   }
   .sds-btn-buynow:active { transform: scale(0.98); }
   .sds-buynow-text {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.5px;
   }
   .sds-payment-logos {
     display: flex;
@@ -1199,6 +1343,26 @@
       o.classList.remove('sds-bundle__option--selected');
     });
     el.classList.add('sds-bundle__option--selected');
+  };
+
+  // ── REVIEWS DROPDOWN (Glimmi-Style) ──
+  window.sdsToggleReviewDropdown = function() {
+    const dropdown = document.querySelector('.sds-reviews__dropdown');
+    if (dropdown) dropdown.classList.toggle('is-open');
+  };
+
+  window.sdsScrollToReviews = function() {
+    const reviewSection = document.getElementById('sds-reviews-section');
+    if (reviewSection) {
+      reviewSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Open the review form if it's not visible
+      const reviewForm = document.getElementById('sds-review-form');
+      const writeBtn = document.getElementById('sds-write-review-btn');
+      if (reviewForm && reviewForm.style.display === 'none') {
+        reviewForm.style.display = 'block';
+        if (writeBtn) writeBtn.style.display = 'none';
+      }
+    }
   };
 
   // ── SCROLL TO BUY SECTION ──
