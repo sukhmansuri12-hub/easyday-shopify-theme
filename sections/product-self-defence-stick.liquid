@@ -92,7 +92,7 @@
         <span class="sds-bundle__title-line"></span>
       </div>
       <label class="sds-bundle__option sds-bundle__option--selected" id="sds-bundle-1" onclick="sdsSelectBundle(1, this)">
-        <span class="sds-bundle__radio" id="sds-radio-1">●</span>
+        <span class="sds-bundle__custom-radio" id="sds-radio-1"></span>
         <span class="sds-bundle__details">
           <span class="sds-bundle__pack">Pack of 1</span>
           <span class="sds-bundle__sub">Perfect for everyday use</span>
@@ -100,7 +100,7 @@
         <span class="sds-bundle__price">Rs. 799 <span class="sds-bundle__compare">Rs. 1,599</span></span>
       </label>
       <label class="sds-bundle__option" id="sds-bundle-2" onclick="sdsSelectBundle(2, this)">
-        <span class="sds-bundle__radio" id="sds-radio-2">○</span>
+        <span class="sds-bundle__custom-radio" id="sds-radio-2"></span>
         <span class="sds-bundle__details">
           <span class="sds-bundle__pack">Pack of 2</span>
           <span class="sds-bundle__sub">Perfect for family</span>
@@ -497,6 +497,7 @@
     line-height: 1.3;
     margin: 0 0 12px;
     color: var(--sds-text);
+    letter-spacing: -0.5px;
   }
 
   /* Price */
@@ -539,6 +540,7 @@
     font-size: 0.95rem;
     margin: 0 0 12px;
     color: var(--sds-text);
+    letter-spacing: -0.3px;
   }
   .sds-benefits__list {
     list-style: none;
@@ -588,27 +590,41 @@
   .sds-bundle__option {
     display: flex;
     align-items: center;
-    gap: 10px;
-    border: 1.5px solid var(--sds-border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
+    gap: 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
     cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
+    transition: all 0.2s ease;
     background: #fff;
   }
   .sds-bundle__option--selected {
     border-color: var(--sds-blue);
     background: var(--sds-blue-light);
   }
-  .sds-bundle__radio {
-    font-size: 1.1rem;
-    color: var(--sds-border);
+  .sds-bundle__custom-radio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #cbd5e1;
+    border-radius: 50%;
+    position: relative;
     flex-shrink: 0;
-    transition: color 0.2s;
+    transition: all 0.2s ease;
   }
-  .sds-bundle__option--selected .sds-bundle__radio {
-    color: var(--sds-blue);
+  .sds-bundle__option--selected .sds-bundle__custom-radio {
+    border-color: var(--sds-blue);
+  }
+  .sds-bundle__option--selected .sds-bundle__custom-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--sds-blue);
   }
   .sds-bundle__details {
     flex: 1;
@@ -734,8 +750,8 @@
     cursor: pointer;
     background: var(--sds-blue);
     color: #fff;
-    border-radius: 0 0 10px 10px;
-    padding: 13px 16px;
+    border-radius: 0 0 8px 8px;
+    padding: 14px 16px;
     text-align: center;
     margin-bottom: 10px;
     transition: transform 0.15s;
