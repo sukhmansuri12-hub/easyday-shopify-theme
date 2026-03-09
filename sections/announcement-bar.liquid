@@ -3,22 +3,23 @@
 {% endcomment %}
 <div class="announcement-bar">
   <div class="announcement-marquee">
+    <!-- First Block -->
     <div class="announcement-marquee__inner">
       <span class="announcement-item">
         <svg class="announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01"></path></svg>
         EXTRA 100 OFF ON PREPAID ORDERS
       </span>
       <span class="announcement-item">
-        <svg class="announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 20A7 7 0 014.05 13.05 7 7 0 0111 20zm0 0c0-3 2-5 5-5m-5 5A7 7 0 0017.95 13.05 7 7 0 0011 20zm0 0V4"></path><path d="M11 4c4 0 7 3 7 7s-3 7-7 7-7-3-7-7 3-7 7-7z"></path></svg>
         🌿 SPRING SALE UP TO 60% OFF
       </span>
-      <!-- Duplicate for seamless loop -->
+    </div>
+    <!-- Second Block (Duplicate for seamless loop) -->
+    <div class="announcement-marquee__inner" aria-hidden="true">
       <span class="announcement-item">
         <svg class="announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01"></path></svg>
         EXTRA 100 OFF ON PREPAID ORDERS
       </span>
       <span class="announcement-item">
-        <svg class="announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 20A7 7 0 014.05 13.05 7 7 0 0111 20zm0 0c0-3 2-5 5-5m-5 5A7 7 0 0017.95 13.05 7 7 0 0011 20zm0 0V4"></path><path d="M11 4c4 0 7 3 7 7s-3 7-7 7-7-3-7-7 3-7 7-7z"></path></svg>
         🌿 SPRING SALE UP TO 60% OFF
       </span>
     </div>
@@ -40,16 +41,19 @@
   }
 
   .announcement-marquee {
-    width: 100%;
+    display: flex;
     overflow: hidden;
-    white-space: nowrap;
+    user-select: none;
+    width: 100%;
   }
 
   .announcement-marquee__inner {
-    display: inline-flex;
+    flex-shrink: 0;
+    display: flex;
     align-items: center;
-    white-space: nowrap;
-    animation: announcementScroll 30s linear infinite;
+    justify-content: space-around;
+    min-width: 100%;
+    animation: announcementScroll 20s linear infinite;
   }
 
   .announcement-item {
@@ -62,27 +66,28 @@
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .announcement-icon {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     flex-shrink: 0;
     color: #fff;
   }
 
   @keyframes announcementScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
   }
 
   @media (max-width: 480px) {
     .announcement-item {
-      padding: 0 25px;
+      padding: 0 20px;
       font-size: 12px;
     }
     .announcement-marquee__inner {
-      animation-duration: 20s;
+      animation-duration: 15s;
     }
   }
 </style>
