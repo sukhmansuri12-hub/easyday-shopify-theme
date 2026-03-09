@@ -29,15 +29,14 @@
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
   .announcement-bar {
-    background: #E81F5E;
+    background: #1a56db;
     color: #ffffff;
-    height: 36px;
+    height: 38px;
     overflow: hidden;
     display: flex;
     align-items: center;
     position: relative;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
   .announcement-marquee {
@@ -50,14 +49,14 @@
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
-    animation: announcementScroll 15s linear infinite;
+    animation: announcementScroll 30s linear infinite;
   }
 
   .announcement-item {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-right: 60px;
+    gap: 10px;
+    padding: 0 40px;
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
     font-weight: 600;
@@ -69,20 +68,21 @@
     width: 16px;
     height: 16px;
     flex-shrink: 0;
+    color: #fff;
   }
 
   @keyframes announcementScroll {
-    0%   { transform: translateX(0); }
+    0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
 
-  /* Faster animation on smaller screens if needed */
   @media (max-width: 480px) {
-    .announcement-marquee__inner {
-      animation-duration: 12s;
-    }
     .announcement-item {
-      margin-right: 40px;
+      padding: 0 25px;
+      font-size: 12px;
+    }
+    .announcement-marquee__inner {
+      animation-duration: 20s;
     }
   }
 </style>

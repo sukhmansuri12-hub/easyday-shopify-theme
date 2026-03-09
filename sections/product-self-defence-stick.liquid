@@ -12,25 +12,40 @@
   <!-- ═══════════════════════════════════════════
        IMAGE GALLERY WITH ARROW NAVIGATION
   ═══════════════════════════════════════════ -->
-  <div class="sds-gallery" id="sds-gallery">
-    <div class="sds-gallery__track" id="sds-track">
-      {% for image in product.images %}
-        <div class="sds-gallery__slide">
-          <img
-            src="{{ image | img_url: 'master' }}"
-            alt="{{ product.title }} - Image {{ forloop.index }}"
-            loading="{{ forloop.first | default: 'eager' }}"
-          >
-        </div>
-      {% endfor %}
+  <div class="sds-gallery-container">
+    <div class="sds-gallery" id="sds-gallery">
+      <div class="sds-gallery__track" id="sds-track">
+        {% for image in product.images %}
+          <div class="sds-gallery__slide">
+            <img
+              src="{{ image | img_url: 'master' }}"
+              alt="{{ product.title }} - Image {{ forloop.index }}"
+              loading="{{ forloop.first | default: 'eager' }}"
+            >
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Main Gallery Arrows -->
+      <button class="sds-gallery__arrow sds-gallery__arrow--prev" id="sds-prev" aria-label="Previous image">&#8249;</button>
+      <button class="sds-gallery__arrow sds-gallery__arrow--next" id="sds-next" aria-label="Next image">&#8250;</button>
+
+      <!-- Counter Badge -->
+      <div class="sds-gallery__counter" id="sds-counter">1 / {{ product.images.size }}</div>
     </div>
 
-    <!-- Arrow Buttons -->
-    <button class="sds-gallery__arrow sds-gallery__arrow--prev" id="sds-prev" aria-label="Previous image">&#8249;</button>
-    <button class="sds-gallery__arrow sds-gallery__arrow--next" id="sds-next" aria-label="Next image">&#8250;</button>
-
-    <!-- Counter Badge -->
-    <div class="sds-gallery__counter" id="sds-counter">1 / {{ product.images.size }}</div>
+    <!-- ── THUMBNAIL TRACK ── -->
+    <div class="sds-thumbnails-wrapper">
+      <button class="sds-thumb-arrow sds-thumb-arrow--prev" id="sds-thumb-prev">‹</button>
+      <div class="sds-thumbnails" id="sds-thumbnails">
+        {% for image in product.images %}
+          <div class="sds-thumb-item {% if forloop.first %}is-active{% endif %}" onclick="sdsJumpToSlide({{ forloop.index0 }})">
+            <img src="{{ image | img_url: '100x100', crop: 'center' }}" alt="Thumb {{ forloop.index }}">
+          </div>
+        {% endfor %}
+      </div>
+      <button class="sds-thumb-arrow sds-thumb-arrow--next" id="sds-thumb-next">›</button>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════
@@ -38,57 +53,17 @@
   ═══════════════════════════════════════════ -->
   <div class="sds-info">
 
-    <!-- Rating (Glimmi-Style Dropdown) -->
-    <div class="sds-reviews__dropdown">
-      <div class="sds-reviews__summary" onclick="sdsToggleReviewDropdown()">
-        <div class="sds-rating">
-          <span class="sds-rating__stars">
-            <span class="sds-star-badge">★</span>
-            <span class="sds-star-badge">★</span>
-            <span class="sds-star-badge">★</span>
-            <span class="sds-star-badge">★</span>
-            <span class="sds-star-badge">★</span>
-          </span>
-          <span class="sds-rating__text" style="font-weight:600; color:var(--sds-text);">329 Reviews</span>
-          <svg class="sds-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px; margin-left:2px;"><path d="M19 9l-7 7-7-7"></path></svg>
-        </div>
-      </div>
-      
-      <div class="sds-reviews__details" id="sds-review-dropdown-content">
-        <div class="sds-reviews__stats">
-          <div class="sds-stats-main">
-            <span class="sds-stats-score">4.8</span>
-            <div class="sds-stats-stars">★★★★★</div>
-          </div>
-          <div class="sds-stats-bars">
-            <div class="sds-stats-row">
-              <span class="sds-stats-label">5 ★</span>
-              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 95%;"></div></div>
-              <span class="sds-stats-count">(312)</span>
-            </div>
-            <div class="sds-stats-row">
-              <span class="sds-stats-label">4 ★</span>
-              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 4%;"></div></div>
-              <span class="sds-stats-count">(12)</span>
-            </div>
-            <div class="sds-stats-row">
-              <span class="sds-stats-label">3 ★</span>
-              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 1.5%;"></div></div>
-              <span class="sds-stats-count">(5)</span>
-            </div>
-            <div class="sds-stats-row">
-              <span class="sds-stats-label">2 ★</span>
-              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 0%;"></div></div>
-              <span class="sds-stats-count">(0)</span>
-            </div>
-            <div class="sds-stats-row">
-              <span class="sds-stats-label">1 ★</span>
-              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 0%;"></div></div>
-              <span class="sds-stats-count">(0)</span>
-            </div>
-          </div>
-          <button class="sds-btn-write-inline" type="button" onclick="sdsScrollToReviews()">Write a review</button>
-        </div>
+    <!-- Rating (Static Summary) -->
+    <div class="sds-reviews__header" style="padding:0;">
+      <div class="sds-rating" style="margin-bottom:0;">
+        <span class="sds-rating__stars">
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge">★</span>
+        </span>
+        <span class="sds-rating__text" style="font-size: 0.85rem;">Rated 4.8/5 by <strong>329+ Customers</strong></span>
       </div>
     </div>
 
@@ -271,17 +246,57 @@
   ═══════════════════════════════════════════ -->
   <div class="sds-reviews sds-section-spacing" id="sds-reviews-section">
 
-    <!-- Header: stars + count only (like Glimmi) -->
-    <div class="sds-reviews__header">
-      <div class="sds-rating" style="margin-bottom: 0;">
-        <span class="sds-rating__stars">
-          <span class="sds-star-badge">★</span>
-          <span class="sds-star-badge">★</span>
-          <span class="sds-star-badge">★</span>
-          <span class="sds-star-badge">★</span>
-          <span class="sds-star-badge">★</span>
-        </span>
-        <span class="sds-rating__text" style="font-size: 0.85rem;">Rated 4.8/5 by <strong>329+ Customers</strong></span>
+    <!-- Header: Glimmi-Style Review Dropdown -->
+    <div class="sds-reviews__dropdown" style="padding: 0 16px 20px;">
+      <div class="sds-reviews__summary" onclick="sdsToggleReviewDropdown()">
+        <div class="sds-rating">
+          <span class="sds-rating__stars">
+            <span class="sds-star-badge">★</span>
+            <span class="sds-star-badge">★</span>
+            <span class="sds-star-badge">★</span>
+            <span class="sds-star-badge">★</span>
+            <span class="sds-star-badge">★</span>
+          </span>
+          <span class="sds-rating__text" style="font-weight:600; color:var(--sds-text);">329 Reviews</span>
+          <svg class="sds-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px; margin-left:2px;"><path d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      
+      <div class="sds-reviews__details" id="sds-review-dropdown-content">
+        <div class="sds-reviews__stats">
+          <div class="sds-stats-main">
+            <span class="sds-stats-score">4.8</span>
+            <div class="sds-stats-stars">★★★★★</div>
+          </div>
+          <div class="sds-stats-bars">
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">5 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 95%;"></div></div>
+              <span class="sds-stats-count">(312)</span>
+            </div>
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">4 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 4%;"></div></div>
+              <span class="sds-stats-count">(12)</span>
+            </div>
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">3 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 1.5%;"></div></div>
+              <span class="sds-stats-count">(5)</span>
+            </div>
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">2 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 0%;"></div></div>
+              <span class="sds-stats-count">(0)</span>
+            </div>
+            <div class="sds-stats-row">
+              <span class="sds-stats-label">1 ★</span>
+              <div class="sds-stats-bar-bg"><div class="sds-stats-bar-fill" style="width: 0%;"></div></div>
+              <span class="sds-stats-count">(0)</span>
+            </div>
+          </div>
+          <button class="sds-btn-write-inline" type="button" onclick="sdsScrollToReviews()">Write a review</button>
+        </div>
       </div>
     </div>
 
@@ -356,6 +371,13 @@
     </div>
 
   </div><!-- /sds-reviews -->
+
+  <!-- Final CTA (Restored) -->
+  <div class="sds-final-cta">
+    <button class="sds-final-cta__btn" type="button" onclick="sdsBuyNow()">
+      🛡️ SECURE YOUR SAFETY NOW
+    </button>
+  </div>
 
 
   <!-- ═══════════════════════════════════════════
@@ -438,11 +460,70 @@
   }
   .sds-gallery__slide img {
     width: 100%;
-    height: 360px;
+    height: 420px; /* Increased for more "pop" */
     object-fit: contain;
     object-position: center;
     display: block;
   }
+
+  /* ── THUMBNAILS ── */
+  .sds-thumbnails-wrapper {
+    position: relative;
+    padding: 12px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+  }
+  .sds-thumbnails {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 1;
+    padding: 2px;
+  }
+  .sds-thumbnails::-webkit-scrollbar { display: none; }
+  
+  .sds-thumb-item {
+    min-width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    background: #f1f5f9;
+  }
+  .sds-thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .sds-thumb-item.is-active {
+    border-color: var(--sds-blue);
+    box-shadow: 0 0 0 2px rgba(26,86,219,0.1);
+  }
+
+  .sds-thumb-arrow {
+    background: #fff;
+    border: 1.5px solid var(--sds-border);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--sds-text);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    z-index: 5;
+  }
+  .sds-thumb-arrow:active { transform: scale(0.9); }
 
   /* Arrow buttons — pure white text, fully transparent background */
   .sds-gallery__arrow {
@@ -1278,6 +1359,29 @@
     gap: 3px;
     opacity: 0.85;
   }
+  /* ── FINAL CTA ── */
+  .sds-final-cta {
+    padding: 20px 16px 40px;
+    background: var(--sds-bg-subtle);
+    text-align: center;
+  }
+  .sds-final-cta__btn {
+    width: 100%;
+    max-width: 400px;
+    background: var(--sds-blue);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 18px 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(26,86,219,0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: sdsPulse 2.5s infinite;
+  }
+  .sds-final-cta__btn:active { transform: scale(0.98); }
 </style>
 
 <!-- ═══════════════════════════════════════════
@@ -1285,43 +1389,66 @@
 ═══════════════════════════════════════════ -->
 <script>
 (function() {
-  // ── GALLERY ARROWS + DOTS ──
-  const track = document.getElementById('sds-track');
-  const dots = document.querySelectorAll('.sds-dot');
-  const counter = document.getElementById('sds-counter');
-  const totalSlides = {{ product.images.size }};
-  let currentSlide = 0;
+  // ── PREMIUM GALLERY LOGIC ──
+  const sdsTrack = document.getElementById('sds-track');
+  const sdsCounter = document.getElementById('sds-counter');
+  const sdsPrev = document.getElementById('sds-prev');
+  const sdsNext = document.getElementById('sds-next');
+  const sdsThumbs = document.querySelectorAll('.sds-thumb-item');
+  const sdsThumbScroll = document.getElementById('sds-thumbnails');
+  const sdsThumbPrev = document.getElementById('sds-thumb-prev');
+  const sdsThumbNext = document.getElementById('sds-thumb-next');
 
-  function goToSlide(index) {
-    if (index < 0) index = totalSlides - 1;
-    if (index >= totalSlides) index = 0;
-    currentSlide = index;
-    const slideWidth = track.parentElement.offsetWidth;
-    track.scrollTo({ left: slideWidth * currentSlide, behavior: 'smooth' });
-    dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-    if (counter) counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
-  }
+  let sdsCurrentIndex = 0;
+  const sdsSlideCount = {{ product.images.size }};
 
-  document.getElementById('sds-prev')?.addEventListener('click', () => goToSlide(currentSlide - 1));
-  document.getElementById('sds-next')?.addEventListener('click', () => goToSlide(currentSlide + 1));
+  function sdsUpdateGallery(index) {
+    if (index < 0) index = sdsSlideCount - 1;
+    if (index >= sdsSlideCount) index = 0;
+    
+    sdsCurrentIndex = index;
+    const slideWidth = sdsTrack.clientWidth || sdsTrack.parentElement.offsetWidth;
+    sdsTrack.scrollTo({ left: slideWidth * sdsCurrentIndex, behavior: 'smooth' });
+    
+    // Update Counter
+    if (sdsCounter) sdsCounter.textContent = `${sdsCurrentIndex + 1} / ${sdsSlideCount}`;
 
-  // Remove dots sync (dots removed from HTML)
-  // dots array kept for backward compat but is empty
-
-  // Sync dots on swipe
-  if (track) {
-    track.addEventListener('scroll', function() {
-      const slideWidth = track.parentElement.offsetWidth || 1;
-      const idx = Math.round(track.scrollLeft / slideWidth);
-      if (idx !== currentSlide) {
-        currentSlide = idx;
-        dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-        if (counter) counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+    // Update Thumbnails
+    sdsThumbs.forEach((t, i) => {
+      if (i === sdsCurrentIndex) {
+        t.classList.add('is-active');
+        t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        t.classList.remove('is-active');
       }
     });
   }
 
-  dots.forEach((dot, i) => dot.addEventListener('click', () => goToSlide(i)));
+  window.sdsJumpToSlide = function(index) {
+    sdsUpdateGallery(index);
+  };
+
+  if (sdsPrev) sdsPrev.onclick = () => sdsUpdateGallery(sdsCurrentIndex - 1);
+  if (sdsNext) sdsNext.onclick = () => sdsUpdateGallery(sdsCurrentIndex + 1);
+
+  // Thumbnail Arrows
+  if (sdsThumbPrev) sdsThumbPrev.onclick = () => sdsThumbScroll.scrollBy({ left: -200, behavior: 'smooth' });
+  if (sdsThumbNext) sdsThumbNext.onclick = () => sdsThumbScroll.scrollBy({ left: 200, behavior: 'smooth' });
+
+  // Sync scroll of track back to current index (for manual swipes)
+  let sdsScrollTimeout;
+  if (sdsTrack) {
+    sdsTrack.addEventListener('scroll', () => {
+      clearTimeout(sdsScrollTimeout);
+      sdsScrollTimeout = setTimeout(() => {
+        const slideWidth = sdsTrack.clientWidth || 1;
+        const index = Math.round(sdsTrack.scrollLeft / slideWidth);
+        if (index !== sdsCurrentIndex && index >= 0 && index < sdsSlideCount) {
+          sdsUpdateGallery(index);
+        }
+      }, 150);
+    });
+  }
 
   // ── DELIVERY DATE ESTIMATOR ──
   function calcDelivery() {
