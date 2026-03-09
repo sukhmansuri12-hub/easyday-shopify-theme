@@ -7,38 +7,38 @@
       <!-- We use 4 blocks for a perfectly seamless feel on all screen sizes -->
       <div class="sds-announcement-item">
         <svg class="sds-announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01"></path></svg>
-        EXTRA 100 OFF ON PREPAID ORDERS
+        Extra 100 Off On Prepaid Orders
       </div>
       <div class="sds-announcement-item">
-        🌿 SPRING SALE UP TO 60% OFF
+        🌿 Spring Sale Up To 60% Off
       </div>
       <div class="sds-announcement-item">
         <svg class="sds-announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01"></path></svg>
-        EXTRA 100 OFF ON PREPAID ORDERS
+        Extra 100 Off On Prepaid Orders
       </div>
       <div class="sds-announcement-item">
-        🌿 SPRING SALE UP TO 60% OFF
+        🌿 Spring Sale Up To 60% Off
       </div>
       <!-- Duplicate set for marquee -->
       <div class="sds-announcement-item">
         <svg class="sds-announcement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01"></path></svg>
-        EXTRA 100 OFF ON PREPAID ORDERS
+        Extra 100 Off On Prepaid Orders
       </div>
       <div class="sds-announcement-item">
-        🌿 SPRING SALE UP TO 60% OFF
+        🌿 Spring Sale Up To 60% Off
       </div>
     </div>
   </div>
 </div>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
   /* Container forced to fixed height to stop page jumping */
   .sds-announcement-container {
     background: #1a56db !important;
-    height: 38px !important;
-    max-height: 38px !important;
+    height: 42px !important; /* Increased for larger 15px text */
+    max-height: 42px !important;
     overflow: hidden !important;
     display: block !important;
     position: relative;
@@ -64,18 +64,19 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    padding: 0 50px; /* Generous spacing */
+    padding: 0 50px;
     font-family: 'Poppins', sans-serif;
     color: #ffffff !important;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    font-size: 15px; /* Matched to Glitterbabe */
+    font-weight: 700; /* Matched to Glitterbabe */
+    line-height: 21px; /* Matched to Glitterbabe */
+    letter-spacing: normal;
+    text-transform: none; /* Matched to Glitterbabe (no more forced uppercase) */
   }
 
   .sds-announcement-icon {
-    width: 14px;
-    height: 14px;
+    width: 18px; /* Slightly larger to match 15px font */
+    height: 18px;
     flex-shrink: 0;
     stroke: #ffffff;
     vertical-align: middle;
@@ -83,14 +84,14 @@
 
   @keyframes sdsMarqueeScroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Halfway because we duplicated the items */
+    100% { transform: translateX(-50%); } 
   }
 
   @media (max-width: 480px) {
-    .sds-announcement-container { height: 35px !important; }
+    .sds-announcement-container { height: 40px !important; }
     .sds-announcement-item {
       padding: 0 35px;
-      font-size: 11.5px;
+      font-size: 14px; /* Slightly scaled for small mobile but still prominent */
     }
   }
 </style>
