@@ -464,14 +464,18 @@
     scroll-snap-align: start;
     flex-shrink: 0;
     background: #fff;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .sds-gallery__slide img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    height: 100%;
     object-fit: contain;
     object-position: center;
     display: block;
-    background: #fff;
   }
 
   /* ── PREMIUM THUMBNAILS (Glitterbabe Style) ── */
