@@ -80,7 +80,7 @@ Slide(3)"></span>
       
       <div class="buy-section-rc">
         <style>
-          .btn-buy-now-main {
+          .btn-standard-buy-now {
             display: block;
             width: 100%;
             background: #ff4b2b;
@@ -90,7 +90,7 @@ Slide(3)"></span>
             border: none;
             border-radius: 12px;
             font-size: 1.6rem;
-            font-weight: 900;
+            font-weight: 950;
             cursor: pointer;
             text-align: center;
             box-shadow: 0 10px 25px rgba(255, 75, 43, 0.5);
@@ -110,27 +110,10 @@ Slide(3)"></span>
           }
         </style>
         
-        <button class="btn-buy-now-main" type="button" onclick="directCheckout()">
+        <button type="submit" name="add" class="btn-standard-buy-now">
            BUY NOW
            <span class="buy-now-sub">GPay | UPI | Paytm | Cards</span>
         </button>
-
-        <script>
-          function directCheckout() {
-            const variantIdInput = document.getElementById('variant-id-input') || document.querySelector('input[name="id"]');
-            const variantId = variantIdInput ? variantIdInput.value : null;
-            if (!variantId) { window.location.href = '/checkout'; return; }
-            
-            fetch('/cart/clear.js', { method: 'POST' })
-              .then(() => fetch('/cart/add.js', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: variantId, quantity: 1 })
-              }))
-              .then(() => { window.location.href = '/checkout'; })
-              .catch(() => { window.location.href = '/checkout'; });
-          }
-        </script>
       </div>
 
         <script>
