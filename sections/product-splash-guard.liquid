@@ -25,50 +25,46 @@
       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="variant-id-input">
       
       <div class="buy-section-rc">
-        <button class="btn-buy-prepaid-rc" type="button" onclick="buyNowPrepaid()">
-          <span class="main-text-prepaid">Add to cart</span>
-          <span class="sub-text-prepaid">PAY ONLINE — SAVE 10%</span>
-        </button>
-        
         <style>
-          .btn-buy-now-guaranteed {
+          .btn-buy-now-main {
             display: block;
             width: 100%;
             background: #ff4b2b;
             background: linear-gradient(to right, #ff416c, #ff4b2b);
             color: #ffffff !important;
-            padding: 20px 10px;
+            padding: 22px 10px;
             border: none;
             border-radius: 12px;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: 900;
-            margin-top: 20px;
             cursor: pointer;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(255, 75, 43, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 75, 43, 0.5);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-decoration: none !important;
-            z-index: 9999;
             position: relative;
+            margin-bottom: 20px;
           }
-          .buy-now-subtext {
+          .buy-now-sub {
             display: block;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 400;
-            margin-top: 4px;
-            opacity: 0.9;
+            margin-top: 5px;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
           }
         </style>
         
-        <button class="btn-buy-now-guaranteed" type="button" onclick="directCheckout()">
+        <button class="btn-buy-now-main" type="button" onclick="directCheckout()">
            BUY NOW
-           <span class="buy-now-subtext">GPay | UPI | Paytm | Cards</span>
+           <span class="buy-now-sub">GPay | UPI | Paytm | Cards</span>
         </button>
 
         <script>
           function directCheckout() {
-            const variantId = document.getElementById('variant-id-input').value;
+            const variantIdInput = document.getElementById('variant-id-input') || document.querySelector('input[name="id"]');
+            const variantId = variantIdInput ? variantIdInput.value : null;
             if (!variantId) { window.location.href = '/checkout'; return; }
             
             fetch('/cart/clear.js', { method: 'POST' })
@@ -77,23 +73,8 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: variantId, quantity: 1 })
               }))
-              .then(() => {
-                window.location.href = '/checkout';
-              })
-              .catch(() => {
-                window.location.href = '/checkout';
-              });
-          }
-          
-          function buyNowPrepaid() {
-            const variantId = document.getElementById('variant-id-input').value;
-             fetch('/cart/add.js', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: variantId, quantity: 1 })
-              }).then(() => {
-                window.location.href = '/cart';
-              });
+              .then(() => { window.location.href = '/checkout'; })
+              .catch(() => { window.location.href = '/checkout'; });
           }
         </script>
       </div>

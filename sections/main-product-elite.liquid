@@ -140,11 +140,26 @@
         💰 PAY NOW & SAVE 10%
       </button>
       
-      <button class="btn-cart" onclick="addToCart()">
-        <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/>
-        </svg>
-        🛒 ADD TO CART
+      <style>
+        .btn-buy-now-elite-main {
+          width: 100%;
+          background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+          color: white;
+          border: none;
+          border-radius: 10px;
+          padding: 18px 16px;
+          font-weight: 800;
+          font-size: 1.3rem;
+          margin-top: 12px;
+          cursor: pointer;
+          box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+          text-transform: uppercase;
+        }
+        .btn-buy-now-elite-main:active { transform: scale(0.98); }
+      </style>
+
+      <button class="btn-buy-now-elite-main" onclick="buyNow('prepaid')">
+        BUY NOW
       </button>
 
       {% comment %} Inline BUY NOW Button for guaranteed visibility {% endcomment %}
