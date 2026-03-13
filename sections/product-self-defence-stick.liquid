@@ -402,25 +402,7 @@
   </div>
 
 
-  <!-- ═══════════════════════════════════════════
-       STICKY BOTTOM BAR
-  ═══════════════════════════════════════════ -->
-  <div class="sds-sticky-bar" id="sds-sticky-bar">
-    <div class="sds-sticky-bar__price">
-      <span class="sds-sticky-bar__current">{{ product.price | money }}</span>
-      {% if product.compare_at_price > product.price %}
-        <span class="sds-sticky-bar__compare">{{ product.compare_at_price | money }}</span>
-      {% endif %}
-    </div>
-    <button class="sds-sticky-bar__btn" type="button" onclick="sdsBuyNow()">
-      BUY NOW
-      <span class="sds-sticky-pay-logos">
-        <svg viewBox="0 0 38 16" xmlns="http://www.w3.org/2000/svg" height="14"><text y="12" font-size="12" font-family="Arial" font-weight="700" fill="white">G Pay</text></svg>
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" height="16"><circle cx="12" cy="12" r="12" fill="#5f259f"/><path d="M16.5 7.5h-3.75L9 12l3.75 5.25h3.75L12.75 12z" fill="white"/></svg>
-        <svg viewBox="0 0 34 16" xmlns="http://www.w3.org/2000/svg" height="14"><text y="12" font-size="12" font-family="Arial" font-weight="700" fill="white">UPI</text></svg>
-      </span>
-    </button>
-  </div>
+
 
 </section><!-- /sds-page -->
 
@@ -1349,60 +1331,6 @@
     97% { transform: rotate(2deg); }
   }
 
-  /* ── STICKY BOTTOM BAR ── */
-  .sds-sticky-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 500;
-    background: #fff;
-    border-top: 2px solid var(--sds-blue-light);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 16px;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
-    gap: 14px;
-  }
-  .sds-sticky-bar__price {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-  .sds-sticky-bar__current {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--sds-blue);
-  }
-  .sds-sticky-bar__compare {
-    font-size: 0.78rem;
-    text-decoration: line-through;
-    color: #9ca3af;
-  }
-  .sds-sticky-bar__btn {
-    flex: 1;
-    background: var(--sds-blue);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 0.02em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-  .sds-sticky-pay-logos {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    opacity: 0.85;
-  }
   /* ── FINAL CTA ── */
   .sds-final-cta {
     padding: 20px 16px 40px;
