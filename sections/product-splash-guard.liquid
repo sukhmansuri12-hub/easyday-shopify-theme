@@ -1,5 +1,5 @@
 ﻿{% comment %}
-  Sink Splash Guard Product Section - MANUAL BUTTON INJECT
+  Sink Splash Guard Product Section - EMERGENCY FINAL FIX
 {% endcomment %}
 
 <section class="product-page-rc-car">
@@ -24,64 +24,76 @@
     {% form 'product', product, id: 'product-form-splash' %}
       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="variant-id-input">
       
-      <div class="buy-buttons-wrapper">
-        <button class="btn-buy-prepaid" type="button" onclick="buyNowPrepaid()">
-          ADD TO CART - PAY ONLINE 10% OFF
+      <div class="buy-section-rc">
+        <button class="btn-buy-prepaid-rc" type="button" onclick="buyNowPrepaid()">
+          <span class="main-text-prepaid">Add to cart</span>
+          <span class="sub-text-prepaid">PAY ONLINE — SAVE 10%</span>
         </button>
         
         <style>
-          .btn-buy-now-emergency {
+          .btn-buy-now-guaranteed {
             display: block;
             width: 100%;
+            background: #ff4b2b;
             background: linear-gradient(to right, #ff416c, #ff4b2b);
-            color: #fff;
-            padding: 20px;
+            color: #ffffff !important;
+            padding: 20px 10px;
             border: none;
             border-radius: 12px;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 900;
             margin-top: 20px;
             cursor: pointer;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(255, 75, 43, 0.3);
+            box-shadow: 0 10px 20px rgba(255, 75, 43, 0.4);
             text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none !important;
+            z-index: 9999;
+            position: relative;
           }
-          .payment-logos { margin-top: 8px; display: flex; justify-content: center; gap: 15px; }
+          .buy-now-subtext {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            margin-top: 4px;
+            opacity: 0.9;
+          }
         </style>
         
-        <button class="btn-buy-now-emergency" type="button" onclick="directBuyNow()">
-          BUY NOW
-          <div class="payment-logos">
-             <span style="font-size: 12px; opacity: 0.9;">GPay | UPI | Paytm | Net Banking</span>
-          </div>
+        <button class="btn-buy-now-guaranteed" type="button" onclick="directCheckout()">
+           BUY NOW
+           <span class="buy-now-subtext">GPay | UPI | Paytm | Cards</span>
         </button>
 
         <script>
-          function directBuyNow() {
-            const id = document.getElementById('variant-id-input').value;
-            if (!id) return alert('Please select a variant first');
+          function directCheckout() {
+            const variantId = document.getElementById('variant-id-input').value;
+            if (!variantId) { window.location.href = '/checkout'; return; }
             
-            // Clear cart and redirect to checkout
             fetch('/cart/clear.js', { method: 'POST' })
               .then(() => fetch('/cart/add.js', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: id, quantity: 1 })
+                body: JSON.stringify({ id: variantId, quantity: 1 })
               }))
               .then(() => {
                 window.location.href = '/checkout';
               })
-              .catch(err => {
+              .catch(() => {
                 window.location.href = '/checkout';
               });
           }
+          
           function buyNowPrepaid() {
-             const id = document.getElementById('variant-id-input').value;
+            const variantId = document.getElementById('variant-id-input').value;
              fetch('/cart/add.js', {
-               method: 'POST',
-               headers: { 'Content-Type': 'application/json' },
-               body: JSON.stringify({ id: id, quantity: 1 })
-             }).then(() => { window.location.href = '/cart'; });
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: variantId, quantity: 1 })
+              }).then(() => {
+                window.location.href = '/cart';
+              });
           }
         </script>
       </div>
@@ -89,11 +101,17 @@
   </div>
 
   <style>
-    .product-page-rc-car { padding: 20px; font-family: sans-serif; }
-    .product-title-rc { font-size: 1.5rem; margin-bottom: 10px; }
-    .price-section-rc { margin-bottom: 20px; display: flex; gap: 10px; font-size: 1.2rem; }
-    .current-price-rc { color: #d32f2f; font-weight: bold; }
-    .compare-price-rc { text-decoration: line-through; color: #777; }
-    .btn-buy-prepaid { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    .product-page-rc-car { padding: 15px; background: #fff; }
+    .gallery-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .gallery-container::-webkit-scrollbar { display: none; }
+    .slide { min-width: 100%; }
+    .slide img { width: 100%; height: auto; display: block; }
+    .product-title-rc { font-size: 1.4rem; font-weight: 800; margin: 15px 0; }
+    .price-section-rc { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+    .current-price-rc { font-size: 1.8rem; font-weight: 900; color: #d32f2f; }
+    .compare-price-rc { text-decoration: line-through; color: #888; }
+    .btn-buy-prepaid-rc { width: 100%; padding: 15px; background: #000; color: #fff; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; }
+    .main-text-prepaid { display: block; }
+    .sub-text-prepaid { font-size: 0.75rem; color: #4caf50; }
   </style>
 </section>
