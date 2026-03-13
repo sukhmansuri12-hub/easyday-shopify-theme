@@ -1,0 +1,67 @@
+<!-- Buy Now Button Snippet -->
+<style>
+  .btn-buy-now-rc {
+    width: 100%;
+    background: linear-gradient(135deg, #1a56db 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-weight: 700;
+    margin-top: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 4px 15px rgba(26, 86, 219, 0.3);
+    transition: transform 0.2s;
+    text-transform: uppercase;
+  }
+  .btn-buy-now-rc:active { transform: scale(0.98); }
+  .buy-now-text { font-size: 1.1rem; letter-spacing: 0.5px; font-weight: 800; }
+  .payment-logos-rc { display: flex; align-items: center; gap: 8px; justify-content: center; width: 100%; }
+  .pay-logo-rc { height: 16px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+</style>
+
+<button class="btn-buy-now-rc" type="button" onclick="buyNowDirect()">
+  <span class="buy-now-text">BUY NOW</span>
+  <span class="payment-logos-rc">
+    <!-- GPay -->
+    <svg class="pay-logo-rc" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="14" font-family="Arial" font-weight="700" fill="white">G Pay</text></svg>
+    <!-- PhonePe -->
+    <svg class="pay-logo-rc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="white" fill-opacity="0.2"/><path d="M16.5 7.5h-3.75L9 12l3.75 5.25h3.75L12.75 12z" fill="white"/></svg>
+    <!-- UPI -->
+    <svg class="pay-logo-rc" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="13" font-family="Arial" font-weight="700" fill="white">UPI</text></svg>
+    <!-- Paytm -->
+    <svg class="pay-logo-rc" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="11" font-family="Arial" font-weight="700" fill="white">Paytm</text></svg>
+  </span>
+</button>
+
+<script>
+  if (typeof buyNowDirect !== 'function') {
+    window.buyNowDirect = function() {
+      const variantIdInput = document.getElementById('variant-id-input') || document.querySelector('input[name="id"]');
+      const variantId = variantIdInput?.value;
+      
+      if (!variantId) { 
+        console.error('Variant ID not found');
+        window.location.href = '/cart'; 
+        return; 
+      }
+      
+      // Show loading state
+      const btn = document.querySelector('.btn-buy-now-rc');
+      if (btn) btn.style.opacity = '0.7';
+      
+      fetch('/cart/clear.js', { method: 'POST' })
+        .then(() => fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: variantId, quantity: 1 })
+        }))
+        .then(() => { window.location.href = '/checkout'; })
+        .catch(() => { window.location.href = '/cart'; });
+    };
+  }
+</script>
