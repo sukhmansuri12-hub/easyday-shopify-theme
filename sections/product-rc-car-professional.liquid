@@ -1,4 +1,4 @@
-{% comment %}
+﻿{% comment %}
   RC Stunt Car - Professional Product Page
   Mobile-First Design inspired by attrangigadgets.com
 {% endcomment %}
@@ -26,16 +26,16 @@ Slide(3)"></span>
   {% comment %} Product Info Section {% endcomment %}
   <div class="product-info-section">
     
-    <h1 class="product-title-rc">RC Stunt Car 360° Drift - Remote Control Car for Kids</h1>
+    <h1 class="product-title-rc">RC Stunt Car 360Â° Drift - Remote Control Car for Kids</h1>
     
     <div class="product-rating-rc">
-      <span class="stars">⭐⭐⭐⭐⭐</span>
+      <span class="stars">â­â­â­â­â­</span>
       <span class="rating-count">4.8/5 (2,450 Reviews)</span>
     </div>
 
     {% comment %} Countdown Timer - Urgency {% endcomment %}
     <div class="countdown-timer-rc">
-      <span class="timer-label">⏰ LIMITED TIME DEAL ENDS IN:</span>
+      <span class="timer-label">â° LIMITED TIME DEAL ENDS IN:</span>
       <div class="timer-display" id="countdown-timer">
         <div class="time-box"><span id="hours">12</span><span class="label">Hours</span></div>
         <div class="time-box"><span id="mins">34</span><span class="label">Mins</span></div>
@@ -45,27 +45,27 @@ Slide(3)"></span>
 
     {% comment %} Price Section {% endcomment %}
     <div class="price-section-rc">
-      <div class="current-price-rc">₹1,499.00</div>
-      <div class="compare-price-rc">₹3,499.00</div>
-      <div class="save-badge-rc">SAVE 57% 🔥</div>
+      <div class="current-price-rc">â‚¹1,499.00</div>
+      <div class="compare-price-rc">â‚¹3,499.00</div>
+      <div class="save-badge-rc">SAVE 57% ðŸ”¥</div>
     </div>
 
     {% comment %} Trust Badges Row {% endcomment %}
     <div class="trust-badges-rc">
       <div class="badge-rc">
-        <span class="badge-icon">🚚</span>
+        <span class="badge-icon">ðŸšš</span>
         <span class="badge-text">Free Shipping</span>
       </div>
       <div class="badge-rc">
-        <span class="badge-icon">🔄</span>
+        <span class="badge-icon">ðŸ”„</span>
         <span class="badge-text">Easy Returns</span>
       </div>
       <div class="badge-rc">
-        <span class="badge-icon">✓</span>
+        <span class="badge-icon">âœ“</span>
         <span class="badge-text">Guaranteed</span>
       </div>
       <div class="badge-rc">
-        <span class="badge-icon">🔒</span>
+        <span class="badge-icon">ðŸ”’</span>
         <span class="badge-text">Secure</span>
       </div>
     </div>
@@ -73,19 +73,76 @@ Slide(3)"></span>
     {% comment %} Quantity & Add to Cart {% endcomment %}
     <div class="buy-section-rc">
       <div class="quantity-selector-rc">
-        <button class="qty-btn" onclick="decrementQty()">−</button>
+        <button class="qty-btn" onclick="decrementQty()">âˆ’</button>
         <input type="number" id="qty-input" value="1" min="1" max="10" readonly>
         <button class="qty-btn" onclick="incrementQty()">+</button>
       </div>
       
       <button class="btn-buy-cod-rc" onclick="addToCartAndCheckout('prepaid')">
-        💳 Pay Online & Save 10% Extra
+        ðŸ’³ Pay Online & Save 10% Extra
       </button>
       
       <button class="btn-buy-prepaid-rc" onclick="showCODForm()">
-        📦 Order Now - Cash on Delivery
+        ðŸ“¦ Order Now - Cash on Delivery
       </button>
-      {% render 'buy-now-button' %}
+              {% comment %} Inline BUY NOW Button for guaranteed visibility {% endcomment %}
+        <style>
+          .btn-buy-now-direct {
+            width: 100%;
+            background: linear-gradient(135deg, #1a56db 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-weight: 700;
+            margin-top: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 4px 15px rgba(26, 86, 219, 0.3);
+            transition: transform 0.2s;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            font-family: inherit;
+          }
+          .btn-buy-now-direct:active { transform: scale(0.98); }
+          .buy-now-text-inline { font-size: 1.1rem; letter-spacing: 0.5px; font-weight: 800; display: block; }
+          .payment-logos-inline { display: flex; align-items: center; gap: 8px; justify-content: center; width: 100%; }
+          .pay-logo-inline { height: 16px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+        </style>
+        
+        <button class="btn-buy-now-direct" type="button" onclick="buyNowDirectInline()">
+          <span class="buy-now-text-inline">BUY NOW</span>
+          <span class="payment-logos-inline">
+            <svg class="pay-logo-inline" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="13" font-family="Arial" font-weight="700" fill="white">G Pay</text></svg>
+            <svg class="pay-logo-inline" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="white" fill-opacity="0.2"/><path d="M16.5 7.5h-3.75L9 12l3.75 5.25h3.75L12.75 12z" fill="white"/></svg>
+            <svg class="pay-logo-inline" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="12" font-family="Arial" font-weight="700" fill="white">UPI</text></svg>
+            <svg class="pay-logo-inline" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="11" font-family="Arial" font-weight="700" fill="white">Paytm</text></svg>
+          </span>
+        </button>
+
+        <script>
+          if (typeof buyNowDirectInline !== 'function') {
+            window.buyNowDirectInline = function() {
+              const variantIdInput = document.getElementById('variant-id-input') || document.querySelector('input[name="id"]');
+              const variantId = variantIdInput?.value;
+              if (!variantId) { window.location.href = '/cart'; return; }
+              const btn = document.querySelector('.btn-buy-now-direct');
+              if (btn) btn.style.opacity = '0.7';
+              fetch('/cart/clear.js', { method: 'POST' })
+                .then(() => fetch('/cart/add.js', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id: variantId, quantity: 1 })
+                }))
+                .then(() => { window.location.href = '/checkout'; })
+                .catch(() => { window.location.href = '/cart'; });
+            };
+          }
+        </script>
     </div>
 
   </div>
@@ -94,34 +151,34 @@ Slide(3)"></span>
   <div class="product-description-rc">
     
     <div class="desc-block-rc">
-      <h2 class="desc-title-rc">🎯 ULTIMATE FUN FOR KIDS!</h2>
-      <p class="desc-text-rc">Watch your kids' faces light up as this powerful RC stunt car performs incredible 360° flips, spins, and drifts! Built with durable materials to withstand crashes and rough play.</p>
+      <h2 class="desc-title-rc">ðŸŽ¯ ULTIMATE FUN FOR KIDS!</h2>
+      <p class="desc-text-rc">Watch your kids' faces light up as this powerful RC stunt car performs incredible 360Â° flips, spins, and drifts! Built with durable materials to withstand crashes and rough play.</p>
     </div>
 
     <div class="desc-block-rc">
-      <h2 class="desc-title-rc">⚡ POWERFUL PERFORMANCE</h2>
+      <h2 class="desc-title-rc">âš¡ POWERFUL PERFORMANCE</h2>
       <ul class="feature-list-rc">
-        <li>✓ 360° Rotation & Drift Capabilities</li>
-        <li>✓ Fast Speed - Up to 15 km/h</li>
-        <li>✓ Remote Control Range: 50+ meters</li>
-        <li>✓ Rechargeable Battery - 40 mins playtime</li>
-        <li>✓ LED Lights for Night Play</li>
+        <li>âœ“ 360Â° Rotation & Drift Capabilities</li>
+        <li>âœ“ Fast Speed - Up to 15 km/h</li>
+        <li>âœ“ Remote Control Range: 50+ meters</li>
+        <li>âœ“ Rechargeable Battery - 40 mins playtime</li>
+        <li>âœ“ LED Lights for Night Play</li>
       </ul>
     </div>
 
     <div class="desc-block-rc">
-      <h2 class="desc-title-rc">💪 BUILT TO LAST</h2>
+      <h2 class="desc-title-rc">ðŸ’ª BUILT TO LAST</h2>
       <p class="desc-text-rc">Premium ABS plastic body with shock-resistant design. Flexible tires for all terrains - indoor, outdoor, concrete, or grass!</p>
     </div>
 
     <div class="desc-block-rc">
-      <h2 class="desc-title-rc">🎁 PERFECT GIFT</h2>
+      <h2 class="desc-title-rc">ðŸŽ PERFECT GIFT</h2>
       <p class="desc-text-rc">Makes an amazing birthday or festival gift for kids aged 6-12 years. Encourages outdoor play and develops hand-eye coordination!</p>
     </div>
 
     {% comment %} Specifications Table {% endcomment %}
     <div class="specs-table-rc">
-      <h3 class="specs-title-rc">📋 Product Specifications</h3>
+      <h3 class="specs-title-rc">ðŸ“‹ Product Specifications</h3>
       <table>
         <tr><td>Age Range</td><td>6-12 Years</td></tr>
         <tr><td>Material</td><td>ABS Plastic</td></tr>
@@ -137,7 +194,7 @@ Slide(3)"></span>
 
 {% comment %} Sticky Bottom Buy Button {% endcomment %}
 <div class="sticky-buy-bar-rc" id="sticky-buy-bar">
-  <div class="sticky-price">₹1,499</div>
+  <div class="sticky-price">â‚¹1,499</div>
   <button class="sticky-btn-buy" onclick="showCODForm()">Order Now - COD</button>
 </div>
 
@@ -608,3 +665,4 @@ Slide(3)"></span>
     // Actual Shopify add-to-cart logic here
   }
 </script>
+

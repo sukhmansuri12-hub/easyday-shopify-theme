@@ -1,4 +1,4 @@
-{% comment %}
+﻿{% comment %}
   Splash Guard - Product Page  
   Mobile-First Design
 {% endcomment %}
@@ -26,13 +26,13 @@
     <h1 class="product-title-rc">{{ product.title }}</h1>
     
     <div class="product-rating-rc">
-      <span style="display:inline-flex; align-items:baseline;">⭐⭐⭐⭐<span style="width:14px;overflow:hidden;">⭐</span></span>
+      <span style="display:inline-flex; align-items:baseline;">â­â­â­â­<span style="width:14px;overflow:hidden;">â­</span></span>
       <span class="rating-count">4.8 (520+ Reviews)</span>
     </div>
 
     {% comment %} Countdown Timer {% endcomment %}
     <div class="countdown-timer-rc">
-      <span class="timer-label">⏰ Offer Ends in</span>
+      <span class="timer-label">â° Offer Ends in</span>
       <div class="timer-display">
         <div class="time-box"><span id="days">00</span><span class="label">Days</span></div>
         <div class="time-box"><span id="hours">23</span><span class="label">Hours</span></div>
@@ -43,7 +43,7 @@
 
     {% comment %} BUY 1 GET 1 FREE Badge {% endcomment %}
     <div style="background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%); color: white; padding: 12px 20px; border-radius: 12px; margin: 15px 0; text-align: center; box-shadow: 0 4px 15px rgba(255,111,0,0.3); animation: pulse 2s ease-in-out infinite;">
-      <span style="font-size: 1.4rem; font-weight: 700; display: block; line-height: 1.2;">🎁 BUY 1 GET 1 FREE</span>
+      <span style="font-size: 1.4rem; font-weight: 700; display: block; line-height: 1.2;">ðŸŽ BUY 1 GET 1 FREE</span>
       <span style="font-size: 0.9rem; opacity: 0.95; display: block; margin-top: 4px;">Limited Time Offer!</span>
     </div>
 
@@ -69,7 +69,7 @@
               <span class="variant-title">{{ variant.title }}</span>
               <span class="variant-price">{{ variant.price | money }}</span>
               {% if variant.compare_at_price > variant.price %}
-                <span class="variant-save">Save ₹{{ variant.compare_at_price | minus: variant.price | divided_by: 100 }}</span>
+                <span class="variant-save">Save â‚¹{{ variant.compare_at_price | minus: variant.price | divided_by: 100 }}</span>
               {% endif %}
             </div>
           </label>
@@ -86,9 +86,66 @@
       <div class="buy-section-rc">
         <button class="btn-buy-prepaid-rc" type="button" onclick="buyNowPrepaid()">
           <span class="main-text-prepaid">Add to cart</span>
-          <span class="sub-text-prepaid">PAY ONLINE — SAVE 10%</span>
+          <span class="sub-text-prepaid">PAY ONLINE â€” SAVE 10%</span>
         </button>
-        {% render 'buy-now-button' %}
+                {% comment %} Inline BUY NOW Button for guaranteed visibility {% endcomment %}
+        <style>
+          .btn-buy-now-direct {
+            width: 100%;
+            background: linear-gradient(135deg, #1a56db 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-weight: 700;
+            margin-top: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 4px 15px rgba(26, 86, 219, 0.3);
+            transition: transform 0.2s;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            font-family: inherit;
+          }
+          .btn-buy-now-direct:active { transform: scale(0.98); }
+          .buy-now-text-inline { font-size: 1.1rem; letter-spacing: 0.5px; font-weight: 800; display: block; }
+          .payment-logos-inline { display: flex; align-items: center; gap: 8px; justify-content: center; width: 100%; }
+          .pay-logo-inline { height: 16px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+        </style>
+        
+        <button class="btn-buy-now-direct" type="button" onclick="buyNowDirectInline()">
+          <span class="buy-now-text-inline">BUY NOW</span>
+          <span class="payment-logos-inline">
+            <svg class="pay-logo-inline" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="13" font-family="Arial" font-weight="700" fill="white">G Pay</text></svg>
+            <svg class="pay-logo-inline" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="white" fill-opacity="0.2"/><path d="M16.5 7.5h-3.75L9 12l3.75 5.25h3.75L12.75 12z" fill="white"/></svg>
+            <svg class="pay-logo-inline" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="12" font-family="Arial" font-weight="700" fill="white">UPI</text></svg>
+            <svg class="pay-logo-inline" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="11" font-family="Arial" font-weight="700" fill="white">Paytm</text></svg>
+          </span>
+        </button>
+
+        <script>
+          if (typeof buyNowDirectInline !== 'function') {
+            window.buyNowDirectInline = function() {
+              const variantIdInput = document.getElementById('variant-id-input') || document.querySelector('input[name="id"]');
+              const variantId = variantIdInput?.value;
+              if (!variantId) { window.location.href = '/cart'; return; }
+              const btn = document.querySelector('.btn-buy-now-direct');
+              if (btn) btn.style.opacity = '0.7';
+              fetch('/cart/clear.js', { method: 'POST' })
+                .then(() => fetch('/cart/add.js', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id: variantId, quantity: 1 })
+                }))
+                .then(() => { window.location.href = '/checkout'; })
+                .catch(() => { window.location.href = '/cart'; });
+            };
+          }
+        </script>
       </div>
     {% endform %}
 
@@ -105,17 +162,17 @@
       {{ product.description }}
     {%- else -%}
       <div class="desc-block-rc">
-        <h3>💦 STOP THE SPLASH. STAY DRY.</h3>
+        <h3>ðŸ’¦ STOP THE SPLASH. STAY DRY.</h3>
         <p>Tired of wet shirts and messy countertops? This splash guard blocks water right at the sink edge, keeping splashes contained so you can wash dishes, fruit, or your hands without the mess.</p>
       </div>
 
       <div class="desc-block-rc">
-        <h3>⚡ Smart Design, Secure Fit</h3>
-        <p>Made from flexible, durable silicone, this splash guard locks into place with strong suction cups and removes just as easily—no tools, no residue, no hassle.</p>
+        <h3>âš¡ Smart Design, Secure Fit</h3>
+        <p>Made from flexible, durable silicone, this splash guard locks into place with strong suction cups and removes just as easilyâ€”no tools, no residue, no hassle.</p>
       </div>
 
       <div class="desc-block-rc">
-        <h3>✨ A Cleaner Kitchen, Washroom Every Time</h3>
+        <h3>âœ¨ A Cleaner Kitchen, Washroom Every Time</h3>
         <p>A universal fit makes it perfect for kitchen and bathroom sinks, keeping counters dry and splash-free for everyday use or guests.</p>
       </div>
     {%- endif -%}
@@ -126,15 +183,15 @@
   <div class="reviews-section-rc">
     <h2 class="reviews-title">Customer Reviews</h2>
     <div style="display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:20px;">
-      <span style="display:inline-flex; align-items:baseline; font-size:1.5rem;">⭐⭐⭐⭐<span style="width:12px;overflow:hidden;">⭐</span></span>
+      <span style="display:inline-flex; align-items:baseline; font-size:1.5rem;">â­â­â­â­<span style="width:12px;overflow:hidden;">â­</span></span>
       <span style="font-size:1.1rem;color:#666;font-weight:600;">4.8 (520+ Reviews)</span>
     </div>
     
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Priya Sharma</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Priya Sharma</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">This splash guard is amazing! No more water all over my counter. Easy to install and stays in place perfectly!</p>
       <div class="review-images">
         <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/Customer_review2.jpg?v=1769981049" alt="Customer review photo" style="width: 100%; max-width: 300px; border-radius: 8px; margin-top: 10px;">
@@ -143,17 +200,17 @@
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Rajesh Kumar</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Rajesh Kumar</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">Very practical! Keeps my kitchen dry. The suction cups are strong and it's easy to clean.</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Anjali Desai</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Anjali Desai</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">Love it! Perfect for washing vegetables. No more wet clothes!</p>
       <div class="review-images">
         <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/cusotmer_review_5.jpg?v=1769981145" alt="Customer review photo" style="width: 100%; max-width: 300px; border-radius: 8px; margin-top: 10px;">
@@ -162,17 +219,17 @@
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Vikram Patel</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Vikram Patel</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">Perfect for a dry countertop, highly recommend! My wife loves it. No more mess around the sink.</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Neha Gupta</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Neha Gupta</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">Game changer! Fits perfectly on my sink. The water stays where it should. Worth every rupee!</p>
       <div class="review-images">
         <img src="https://cdn.shopify.com/s/files/1/0800/9229/9512/files/Customer_review.jpg?v=1769981048" alt="Customer review photo" style="width: 100%; max-width: 300px; border-radius: 8px; margin-top: 10px;">
@@ -181,9 +238,9 @@
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Arjun Singh</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Arjun Singh</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">Excellent product! Easy to remove and clean. Keeps the bathroom and kitchen counters completely dry. Highly satisfied!</p>
     </div>
 
@@ -192,7 +249,7 @@
   {% comment %} Final CTA Button {% endcomment %}
   <div style="text-align:center; padding:10px 20px 25px 20px; background:#fff; margin:0;">
     <button onclick="scrollToTop()" class="cta-shake-button" style="background:linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%); color:white; border:none; padding:18px 50px; font-size:1.2rem; font-weight:700; border-radius:50px; cursor:pointer; box-shadow:0 4px 15px rgba(255,111,0,0.4); text-transform:uppercase; margin:0;">
-      💦 GET YOURS NOW
+      ðŸ’¦ GET YOURS NOW
     </button>
   </div>
 
@@ -607,3 +664,4 @@
   </style>
 
 </section>
+
