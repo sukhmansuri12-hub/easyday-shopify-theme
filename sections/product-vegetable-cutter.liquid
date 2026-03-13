@@ -1,4 +1,4 @@
-{% comment %}
+﻿{% comment %}
   RC Stunt Car - Professional Product Page  
   Mobile-First Design
 {% endcomment %}
@@ -26,13 +26,13 @@
     <h1 class="product-title-rc">{{ product.title }}</h1>
     
     <div class="product-rating-rc">
-      <span style="display:inline-flex; align-items:baseline;">⭐⭐⭐⭐<span style="width:14px;overflow:hidden;">⭐</span></span>
+      <span style="display:inline-flex; align-items:baseline;">â­â­â­â­<span style="width:14px;overflow:hidden;">â­</span></span>
       <span class="rating-count">4.7 (425 Reviews)</span>
     </div>
 
     {% comment %} Countdown Timer {% endcomment %}
     <div class="countdown-timer-rc">
-      <span class="timer-label">⏰ Offer Ends in</span>
+      <span class="timer-label">â° Offer Ends in</span>
       <div class="timer-display">
         <div class="time-box"><span id="days">00</span><span class="label">Days</span></div>
         <div class="time-box"><span id="hours">23</span><span class="label">Hours</span></div>
@@ -61,7 +61,7 @@
               <span class="variant-title">{{ variant.title }}</span>
               <span class="variant-price">{{ variant.price | money }}</span>
               {% if variant.compare_at_price > variant.price %}
-                <span class="variant-save">Save ₹{{ variant.compare_at_price | minus: variant.price | divided_by: 100 }}</span>
+                <span class="variant-save">Save â‚¹{{ variant.compare_at_price | minus: variant.price | divided_by: 100 }}</span>
               {% endif %}
             </div>
           </label>
@@ -77,9 +77,66 @@
       <div class="buy-section-rc">
         <button class="btn-buy-prepaid-rc" type="button" onclick="buyNowPrepaid()">
           <span class="main-text-prepaid">Add to cart</span>
-          <span class="sub-text-prepaid">PAY ONLINE & SAVE ₹130 (10% OFF)</span>
+          <span class="sub-text-prepaid">PAY ONLINE & SAVE â‚¹130 (10% OFF)</span>
         </button>
-        {% render 'buy-now-button' %}
+                {% comment %} Inline BUY NOW Button for guaranteed visibility {% endcomment %}
+        <style>
+          .btn-buy-now-direct {
+            width: 100%;
+            background: linear-gradient(135deg, #1a56db 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-weight: 700;
+            margin-top: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 4px 15px rgba(26, 86, 219, 0.3);
+            transition: transform 0.2s;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            font-family: inherit;
+          }
+          .btn-buy-now-direct:active { transform: scale(0.98); }
+          .buy-now-text-inline { font-size: 1.1rem; letter-spacing: 0.5px; font-weight: 800; display: block; }
+          .payment-logos-inline { display: flex; align-items: center; gap: 8px; justify-content: center; width: 100%; }
+          .pay-logo-inline { height: 16px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+        </style>
+        
+        <button class="btn-buy-now-direct" type="button" onclick="buyNowDirectInline()">
+          <span class="buy-now-text-inline">BUY NOW</span>
+          <span class="payment-logos-inline">
+            <svg class="pay-logo-inline" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="13" font-family="Arial" font-weight="700" fill="white">G Pay</text></svg>
+            <svg class="pay-logo-inline" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="white" fill-opacity="0.2"/><path d="M16.5 7.5h-3.75L9 12l3.75 5.25h3.75L12.75 12z" fill="white"/></svg>
+            <svg class="pay-logo-inline" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="12" font-family="Arial" font-weight="700" fill="white">UPI</text></svg>
+            <svg class="pay-logo-inline" viewBox="0 0 48 20" xmlns="http://www.w3.org/2000/svg"><text y="15" font-size="11" font-family="Arial" font-weight="700" fill="white">Paytm</text></svg>
+          </span>
+        </button>
+
+        <script>
+          if (typeof buyNowDirectInline !== 'function') {
+            window.buyNowDirectInline = function() {
+              const variantIdInput = document.getElementById('variant-id-input') || document.querySelector('input[name="id"]');
+              const variantId = variantIdInput?.value;
+              if (!variantId) { window.location.href = '/cart'; return; }
+              const btn = document.querySelector('.btn-buy-now-direct');
+              if (btn) btn.style.opacity = '0.7';
+              fetch('/cart/clear.js', { method: 'POST' })
+                .then(() => fetch('/cart/add.js', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id: variantId, quantity: 1 })
+                }))
+                .then(() => { window.location.href = '/checkout'; })
+                .catch(() => { window.location.href = '/cart'; });
+            };
+          }
+        </script>
       </div>
     {% endform %}
 
@@ -96,7 +153,7 @@
       {{ product.description }}
     {%- else -%}
       <div class="desc-block-rc">
-        <h3>✨ PREMIUM QUALITY PRODUCT</h3>
+        <h3>âœ¨ PREMIUM QUALITY PRODUCT</h3>
         <p>This amazing product will transform your daily life with innovative features and unbeatable quality. Get yours today!</p>
         {%- if product.images[1] -%}
           <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
@@ -106,7 +163,7 @@
       </div>
 
       <div class="desc-block-rc">
-        <h3>⚡ KEY FEATURES</h3>
+        <h3>âš¡ KEY FEATURES</h3>
         <ul class="feature-list-rc">
           <li>Premium materials and construction</li>
           <li>Easy to use and maintain</li>
@@ -122,7 +179,7 @@
       </div>
 
       <div class="desc-block-rc">
-        <h3>💪 QUALITY YOU CAN TRUST</h3>
+        <h3>ðŸ’ª QUALITY YOU CAN TRUST</h3>
         <p>Crafted with attention to detail and built to last. We stand behind every product we sell.</p>
         {%- if product.images[3] -%}
           <img src="{{ product.images[3] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
@@ -132,7 +189,7 @@
       </div>
 
       <div class="desc-block-rc">
-        <h3>🎁 PERFECT GIFT CHOICE</h3>
+        <h3>ðŸŽ PERFECT GIFT CHOICE</h3>
         <p>Makes an excellent gift for anyone who appreciates quality and value. Order now and enjoy fast shipping!</p>
         {%- if product.images[4] -%}
           <img src="{{ product.images[4] | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius:12px; margin:15px 0;">
@@ -148,55 +205,55 @@
   <div class="reviews-section-rc">
     <h2 class="reviews-title">Customer Reviews</h2>
     <div style="display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:20px;">
-      <span style="display:inline-flex; align-items:baseline; font-size:1.5rem;">⭐⭐⭐⭐<span style="width:12px;overflow:hidden;">⭐</span></span>
+      <span style="display:inline-flex; align-items:baseline; font-size:1.5rem;">â­â­â­â­<span style="width:12px;overflow:hidden;">â­</span></span>
       <span style="font-size:1.1rem;color:#666;font-weight:600;">4.7 (425 Reviews)</span>
     </div>
     
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Sanjay Mehta</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Sanjay Mehta</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">This 4-in-1 cutter saves so much time! Perfect julienne cuts every time. Kitchen game changer!</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Geeta Nair</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Geeta Nair</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">My kids love eating veggies now because they look so neat! Sharp blades work perfectly.</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Deepak Shah</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Deepak Shah</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">Amazing quality! The spiralizer works perfectly for healthy zucchini noodles. Love it!</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Anjali Reddy</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Anjali Reddy</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">Sharp blades, easy to clean. Best kitchen gadget I bought this year!</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Karan Bose</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Karan Bose</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­</div>
       <p class="review-text">Good product. Makes vegetable prep so fast. Worth the money!</p>
     </div>
 
     <div class="review-card">
       <div class="reviewer-info">
-        <strong>Priti Singh</strong> <span class="verified">✓ Verified Purchase</span>
+        <strong>Priti Singh</strong> <span class="verified">âœ“ Verified Purchase</span>
       </div>
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-stars">â­â­â­â­â­</div>
       <p class="review-text">Compact design, multiple functions. My kitchen essential now!</p>
     </div>
 
@@ -205,7 +262,7 @@
   {% comment %} Final CTA Button {% endcomment %}
   <div style="text-align:center; padding:10px 20px 25px 20px; background:#fff; margin:0;">
     <button onclick="scrollToTop()" class="cta-shake-button" style="background:linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%); color:white; border:none; padding:18px 50px; font-size:1.2rem; font-weight:700; border-radius:50px; cursor:pointer; box-shadow:0 4px 15px rgba(255,111,0,0.4); text-transform:uppercase; margin:0;">
-      🐾 CLAIM 50% OFF
+      ðŸ¾ CLAIM 50% OFF
     </button>
   </div>
 
@@ -390,7 +447,7 @@
       .then(response => response.json())
       .then(data => {
         // Show success message
-        alert('✅ Added to cart!');
+        alert('âœ… Added to cart!');
         // Optionally update cart count in header
         if (window.updateCartCount) window.updateCartCount();
       })
@@ -965,11 +1022,11 @@
             <div>
               <label style="display:block;margin-bottom:5px;font-weight:600;color:#555;">Rating</label>
               <div class="star-rating" style="font-size:2rem;cursor:pointer;">
-                <span data-rating="1">☆</span>
-                <span data-rating="2">☆</span>
-                <span data-rating="3">☆</span>
-                <span data-rating="4">☆</span>
-                <span data-rating="5">☆</span>
+                <span data-rating="1">â˜†</span>
+                <span data-rating="2">â˜†</span>
+                <span data-rating="3">â˜†</span>
+                <span data-rating="4">â˜†</span>
+                <span data-rating="5">â˜†</span>
               </div>
               <input type="hidden" name="rating" id="rating-value" required>
             </div>
@@ -993,7 +1050,7 @@
         const rating = this.dataset.rating;
         document.getElementById('rating-value').value = rating;
         stars.forEach((s, i) => {
-          s.textContent = i < rating ? '★' : '☆';
+          s.textContent = i < rating ? 'â˜…' : 'â˜†';
         });
       });
     });
@@ -1154,7 +1211,7 @@
       "type": "text",
       "id": "product_title",
       "label": "Product Title",
-      "default": "RC Stunt Car 360° Drift"
+      "default": "RC Stunt Car 360Â° Drift"
     },
     {
       "type": "text",
@@ -1176,7 +1233,7 @@
       "type": "text",
       "id": "countdown_label",
       "label": "Timer Label",
-      "default": "⏰ Offer Ends in"
+      "default": "â° Offer Ends in"
     },
     {
       "type": "header",
@@ -1186,13 +1243,13 @@
       "type": "text",
       "id": "current_price",
       "label": "Current Price",
-      "default": "₹1,499"
+      "default": "â‚¹1,499"
     },
     {
       "type": "text",
       "id": "compare_price",
       "label": "Compare At Price",
-      "default": "₹3,499"
+      "default": "â‚¹3,499"
     },
     {
       "type": "text",
@@ -1208,19 +1265,19 @@
       "type": "text",
       "id": "prepaid_button_text",
       "label": "Prepaid Button Main Text",
-      "default": "💳 PAY ONLINE & SAVE ₹130 (10% OFF)"
+      "default": "ðŸ’³ PAY ONLINE & SAVE â‚¹130 (10% OFF)"
     },
     {
       "type": "text",
       "id": "prepaid_price_text",
       "label": "Prepaid Final Price",
-      "default": "Final Price: ₹1,169"
+      "default": "Final Price: â‚¹1,169"
     },
     {
       "type": "text",
       "id": "cod_button_text",
       "label": "COD Button Main Text",
-      "default": "📦 ORDER NOW - CASH ON DELIVERY"
+      "default": "ðŸ“¦ ORDER NOW - CASH ON DELIVERY"
     },
     {
       "type": "text",
@@ -1232,7 +1289,7 @@
       "type": "text",
       "id": "quick_order_text",
       "label": "Quick Order Button Text",
-      "default": "🚀 Quick Order (No Cart Required)"
+      "default": "ðŸš€ Quick Order (No Cart Required)"
     },
     {
       "type": "header",
@@ -1242,25 +1299,25 @@
       "type": "text",
       "id": "block1_title",
       "label": "Block 1 Title",
-      "default": "🎯 ULTIMATE FUN FOR KIDS!"
+      "default": "ðŸŽ¯ ULTIMATE FUN FOR KIDS!"
     },
     {
       "type": "html",
       "id": "block1_text",
       "label": "Block 1 Text (HTML Supported - Add GIFs here)",
-      "default": "Watch your kids' faces light up as this powerful RC stunt car performs incredible 360° flips, spins, and drifts! Perfect for indoor and outdoor play."
+      "default": "Watch your kids' faces light up as this powerful RC stunt car performs incredible 360Â° flips, spins, and drifts! Perfect for indoor and outdoor play."
     },
     {
       "type": "text",
       "id": "block2_title",
       "label": "Block 2 Title",
-      "default": "⚡ POWERFUL FEATURES"
+      "default": "âš¡ POWERFUL FEATURES"
     },
     {
       "type": "html",
       "id": "feature1",
       "label": "Feature 1 (HTML Supported)",
-      "default": "360° Rotation & Drift: Amazing stunts with one-button control"
+      "default": "360Â° Rotation & Drift: Amazing stunts with one-button control"
     },
     {
       "type": "html",
@@ -1290,7 +1347,7 @@
       "type": "text",
       "id": "block3_title",
       "label": "Block 3 Title",
-      "default": "💪 BUILT TO LAST"
+      "default": "ðŸ’ª BUILT TO LAST"
     },
     {
       "type": "textarea",
@@ -1302,7 +1359,7 @@
       "type": "text",
       "id": "block4_title",
       "label": "Block 4 Title",
-      "default": "🎁 PERFECT GIFT"
+      "default": "ðŸŽ PERFECT GIFT"
     },
     {
       "type": "textarea",
@@ -1318,7 +1375,7 @@
       "type": "text",
       "id": "specs_title",
       "label": "Specifications Heading",
-      "default": "📋 Specifications"
+      "default": "ðŸ“‹ Specifications"
     },
     {
       "type": "text",
@@ -1394,7 +1451,7 @@
       "type": "textarea",
       "id": "review3_text",
       "label": "Review 3 - Text",
-      "default": "Excellent! The 360° flip is amazing!"
+      "default": "Excellent! The 360Â° flip is amazing!"
     },
     {
       "type": "header",
@@ -1442,6 +1499,7 @@
   ]
 }
 {% endschema %}
+
 
 
 
