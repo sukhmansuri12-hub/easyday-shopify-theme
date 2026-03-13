@@ -70,9 +70,9 @@
            <span class="buy-now-sub">PAY ONLINE — SAVE 10%</span>
         </button>
 
-        {% if section.settings.show_native_buy_now %}
+        <div style="margin-top: {{ section.settings.button_spacing | default: 20 }}px;">
           {{ form | payment_button }}
-        {% endif %}
+        </div>
       </div>
     {% endform %}
   </div>
