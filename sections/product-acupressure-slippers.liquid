@@ -77,30 +77,36 @@
       <div class="buy-section-rc">
         <style>
           .btn-standard-buy-now {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            background: #ff4b2b;
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
             color: #ffffff !important;
-            padding: 22px 10px;
+            padding: 18px 10px;
             border: none;
             border-radius: 12px;
-            font-size: 1.6rem;
-            font-weight: 950;
             cursor: pointer;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(255, 75, 43, 0.5);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);
             text-decoration: none !important;
-            position: relative;
             margin-bottom: {{ section.settings.button_spacing | default: 20 }}px;
+            transition: transform 0.2s;
+          }
+          .btn-standard-buy-now:active { transform: scale(0.98); }
+          
+          .buy-now-main {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
           }
           .buy-now-sub {
             display: block;
-            font-size: 11px;
+            font-size: 0.9rem;
             font-weight: 400;
-            margin-top: 5px;
+            margin-top: 4px;
             opacity: 0.95;
             letter-spacing: 0.5px;
           }
@@ -114,9 +120,9 @@
         </style>
         
         <button type="submit" name="add" class="btn-standard-buy-now">
-           BUY NOW
-           <span class="buy-now-sub">GPay | UPI | Paytm | Cards</span>
-        </button>
+           <span class="buy-now-main">Add to cart</span>
+           <span class="buy-now-sub">PAY ONLINE — SAVE 10%</span>
+</button>
 
         {% if section.settings.show_native_buy_now %}
           {{ form | payment_button }}
