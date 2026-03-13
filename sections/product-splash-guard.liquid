@@ -30,41 +30,50 @@
         </button>
         
         <style>
-          .btn-buy-now-final {
+          .btn-buy-now-emergency {
             display: block;
             width: 100%;
-            background: #1a56db;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
             color: #fff;
-            padding: 16px;
+            padding: 20px;
             border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-top: 15px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-top: 20px;
             cursor: pointer;
             text-align: center;
+            box-shadow: 0 10px 20px rgba(255, 75, 43, 0.3);
+            text-transform: uppercase;
           }
-          .payment-logos { margin-top: 5px; display: flex; justify-content: center; gap: 10px; }
-          .pay-logo { height: 18px; filter: brightness(0) invert(1); }
+          .payment-logos { margin-top: 8px; display: flex; justify-content: center; gap: 15px; }
         </style>
         
-        <button class="btn-buy-now-final" type="button" onclick="buyNowDirect()">
+        <button class="btn-buy-now-emergency" type="button" onclick="directBuyNow()">
           BUY NOW
           <div class="payment-logos">
-             <span style="font-size: 10px;">GPay | UPI | Paytm</span>
+             <span style="font-size: 12px; opacity: 0.9;">GPay | UPI | Paytm | Net Banking</span>
           </div>
         </button>
 
         <script>
-          function buyNowDirect() {
+          function directBuyNow() {
             const id = document.getElementById('variant-id-input').value;
+            if (!id) return alert('Please select a variant first');
+            
+            // Clear cart and redirect to checkout
             fetch('/cart/clear.js', { method: 'POST' })
               .then(() => fetch('/cart/add.js', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: id, quantity: 1 })
               }))
-              .then(() => { window.location.href = '/checkout'; });
+              .then(() => {
+                window.location.href = '/checkout';
+              })
+              .catch(err => {
+                window.location.href = '/checkout';
+              });
           }
           function buyNowPrepaid() {
              const id = document.getElementById('variant-id-input').value;
