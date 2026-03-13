@@ -73,38 +73,6 @@
     {% form 'product', product, id: 'product-form-installment' %}
       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="variant-id-input">
       
-      {% comment %} Buy Buttons {% endcomment %}
-      <div class="buy-section-rc">
-        <style>
-          .btn-buy-now-main {
-            display: block;
-            width: 100%;
-            background: #ff4b2b;
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
-            color: #ffffff !important;
-            padding: 22px 10px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.6rem;
-            font-weight: 900;
-            cursor: pointer;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(255, 75, 43, 0.5);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            text-decoration: none !important;
-            position: relative;
-            margin-bottom: 20px;
-          }
-          .buy-now-sub {
-            display: block;
-            font-size: 11px;
-            font-weight: 400;
-            margin-top: 5px;
-            opacity: 0.95;
-            letter-spacing: 0.5px;
-          }
-        </style>
       <div class="buy-section-rc">
         <style>
           .btn-standard-buy-now {
@@ -125,7 +93,7 @@
             letter-spacing: 1.5px;
             text-decoration: none !important;
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: {{ section.settings.button_spacing | default: 20 }}px;
           }
           .buy-now-sub {
             display: block;
@@ -135,15 +103,25 @@
             opacity: 0.95;
             letter-spacing: 0.5px;
           }
+          /* Native Dynamic Checkout Button Styling Override */
+          .shopify-payment-button__button--unbranded {
+            border-radius: 12px !important;
+            padding: 18px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+          }
         </style>
         
         <button type="submit" name="add" class="btn-standard-buy-now">
            BUY NOW
            <span class="buy-now-sub">GPay | UPI | Paytm | Cards</span>
         </button>
+
+        {% if section.settings.show_native_buy_now %}
+          {{ form | payment_button }}
+        {% endif %}
       </div>
     {% endform %}
-
   </div>
 
   {% comment %} Description {% endcomment %}
@@ -1497,6 +1475,22 @@
       "id": "sale_color",
       "label": "Sale Badge Color (Red)",
       "default": "#d32f2f"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_native_buy_now",
+      "label": "Show Native Dynamic Buy Now Button",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Space below Add To Cart",
+      "default": 30
     }
   ],
   "presets": [

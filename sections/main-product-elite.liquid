@@ -149,7 +149,7 @@
           box-shadow: 0 10px 30px rgba(255, 75, 43, 0.5);
           text-transform: uppercase;
           letter-spacing: 1.5px;
-          margin-bottom: 20px;
+          margin-bottom: {{ section.settings.button_spacing | default: 20 }}px;
         }
         .btn-standard-buy-now .sub-text {
           display: block;
@@ -159,11 +159,24 @@
           opacity: 0.95;
           letter-spacing: 0.5px;
         }
+        /* Native Dynamic Checkout Button Styling */
+        .shopify-payment-button__button--unbranded {
+          border-radius: 12px !important;
+          padding: 18px !important;
+          font-weight: 700 !important;
+        }
       </style>
-      <button type="submit" name="add" class="btn-standard-buy-now">
-        BUY NOW
-        <span class="sub-text">GPay | UPI | Paytm | Cards</span>
-      </button>
+      {% form 'product', product %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" name="add" class="btn-standard-buy-now">
+          BUY NOW
+          <span class="sub-text">GPay | UPI | Paytm | Cards</span>
+        </button>
+
+        {% if section.settings.show_native_buy_now %}
+          {{ form | payment_button }}
+        {% endif %}
+      {% endform %}
     </div>
       
       <style>
@@ -1141,6 +1154,22 @@ function addToCart() {
       "id": "enable_savings_calculator",
       "label": "Enable Savings Calculator",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_native_buy_now",
+      "label": "Show Native Dynamic Buy Now Button",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Space below Add To Cart",
+      "default": 30
     }
   ]
 }

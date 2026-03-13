@@ -40,7 +40,7 @@
             letter-spacing: 1.5px;
             text-decoration: none !important;
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: {{ section.settings.button_spacing | default: 20 }}px;
           }
           .buy-now-sub {
             display: block;
@@ -50,12 +50,23 @@
             opacity: 0.95;
             letter-spacing: 0.5px;
           }
+          /* Native Dynamic Checkout Button Styling Override */
+          .shopify-payment-button__button--unbranded {
+            border-radius: 12px !important;
+            padding: 18px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+          }
         </style>
         
         <button type="submit" name="add" class="btn-standard-buy-now">
            BUY NOW
            <span class="buy-now-sub">GPay | UPI | Paytm | Cards</span>
         </button>
+
+        {% if section.settings.show_native_buy_now %}
+          {{ form | payment_button }}
+        {% endif %}
       </div>
     {% endform %}
   </div>
@@ -75,3 +86,27 @@
     .sub-text-prepaid { font-size: 0.75rem; color: #4caf50; }
   </style>
 </section>
+
+{% schema %}
+{
+  "name": "Product Splash Guard",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_native_buy_now",
+      "label": "Show Native Dynamic Buy Now Button",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Space below Add To Cart",
+      "default": 30
+    }
+  ]
+}
+{% endschema %}
