@@ -144,10 +144,11 @@
         }
 
         var screenCenter = window.innerWidth / 2;
+        var targetLeft = window.innerWidth * 0.25; // 25% from the left to match screenshot
         var itemLeft = prepaidItem.getBoundingClientRect().left;
 
-        // Offset so the main prepaid text starts from the middle of the screen
-        var startX = -(itemLeft - screenCenter);
+        // Offset so the main prepaid text starts from 25% of the screen
+        var startX = -(itemLeft - targetLeft);
 
         // We have 3 copies of the pair now (Left Buffer, Main, Right Buffer)
         // This ensures moving left or right won't expose empty edges.
