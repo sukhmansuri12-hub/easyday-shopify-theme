@@ -224,8 +224,6 @@
         <span>Secure<br>checkout</span>
       </div>
     </div>
-    </div>
-
   </div><!-- /sds-info -->
 
   <!-- ═══════════════════════════════════════════
@@ -474,6 +472,17 @@
     .sds-announcement-item, .sds-prepaid-item {
       font-size: 18px !important;
     }
+  }
+  .sds-gallery__track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    transition: transform 0.3s ease;
+    width: 100% !important;
+    height: auto !important;
+    align-items: flex-start !important;
   }
   .sds-gallery__track::-webkit-scrollbar { display: none; }
   .sds-gallery__slide {
@@ -1069,9 +1078,9 @@
   .sds-trust-strip {
     display: flex;
     justify-content: space-around;
-    padding: 24px 10px;
+    padding: 10px 10px;
     border-top: 1px solid #e5e7eb;
-    margin-top: 10px;
+    margin-top: 5px;
   }
   .sds-trust-item {
     flex: 1;
@@ -1099,7 +1108,6 @@
   /* Description */
   .sds-description {
     padding: 0 16px 5px;
-    border-top: 8px solid var(--sds-bg-subtle);
   }
 
   /* ── ACCORDION ── */
