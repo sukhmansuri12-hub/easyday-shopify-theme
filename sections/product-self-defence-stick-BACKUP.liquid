@@ -6,19 +6,6 @@
 <section class="product-page-rc-car">
   {% render 'product-page-desktop.css' %}
   
-  {% comment %} Mobile Image Gallery - Swipeable {% endcomment %}
-  <div class="product-image-gallery">
-    <div class="gallery-container" id="gallery-container">
-      {% for image in product.images %}
-        <div class="slide"><img src="{{ image | img_url: 'master' }}" alt="{{ product.title }}"></div>
-      {% endfor %}
-    </div>
-    <div class="gallery-dots">
-      {% for image in product.images %}
-        <span class="dot {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></span>
-      {% endfor %}
-    </div>
-  </div>
 
   {% comment %} Product Info {% endcomment %}
   <div class="product-info-section">

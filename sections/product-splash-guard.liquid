@@ -1,13 +1,4 @@
 ﻿<section class="product-page-rc-car">
-  <div class="product-image-gallery">
-    <div class="gallery-container">
-      {% for image in product.images %}
-        <div class="slide">
-          <img src="{{ image | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }}" loading="lazy">
-        </div>
-      {% endfor %}
-    </div>
-  </div>
 
   <div class="product-info-section">
     <h1 class="product-title-rc">{{ product.title }}</h1>
