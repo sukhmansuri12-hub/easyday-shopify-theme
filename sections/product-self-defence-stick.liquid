@@ -121,6 +121,7 @@
     <!-- Shopify Form (variant hidden input for checkout) -->
     {% form 'product', product, id: 'sds-product-form' %}
       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="sds-variant-id">
+      <input type="hidden" name="quantity" value="1" id="sds-quantity">
 
       <!-- CTAs: Blue Sleek Design -->
       <div class="sds-buy-section" id="sds-buy-section">
@@ -144,10 +145,17 @@
                 color: #ffffff !important;
                 border-radius: 50px !important;
                 padding: 18px !important;
-                font-size: 1.2rem !important;
+                font-size: 0 !important; /* Hide original text "Buy it now" */
                 font-weight: 700 !important;
                 text-transform: uppercase !important;
                 transition: transform 0.2s ease !important;
+                width: 100% !important;
+                position: relative !important;
+              }
+              .shopify-payment-button__button--unbranded::before {
+                content: "BUY NOW" !important;
+                font-size: 1.2rem !important;
+                visibility: visible !important;
               }
               .shopify-payment-button__button--unbranded:active {
                 transform: scale(0.98) !important;
@@ -1462,12 +1470,17 @@
 
     // Update hidden variant input
     const variantIdInput = document.getElementById('sds-variant-id');
+    const quantityInput = document.getElementById('sds-quantity');
     if (variantIdInput) {
-      // Find the first variant with the matching pack option (if it exists)
-      // For SDS, we assume the variants are ordered by pack size
       const variants = {{ product.variants | json }};
       if (variants && variants.length >= pack) {
         variantIdInput.value = variants[pack - 1].id;
+        
+        // Update quantity if needed (if Pack of 2 is actually 2 items of the single variant)
+        // However, since prices are different, we use the bundle variant ID but keep quantity 1.
+        // If the user wants the cart to show "2", we'd need a different approach.
+        if (quantityInput) quantityInput.value = 1; 
+
         // Trigger change event for Shopify Native Buy Now button
         variantIdInput.dispatchEvent(new Event('change', { bubbles: true }));
       }

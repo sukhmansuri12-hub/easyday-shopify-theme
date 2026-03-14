@@ -161,11 +161,17 @@
                 color: #ffffff !important;
                 border-radius: 50px !important;
                 padding: 18px !important;
-                font-size: 1.2rem !important;
+                font-size: 0 !important; /* Hide original text "Buy it now" */
                 font-weight: 700 !important;
                 text-transform: uppercase !important;
                 transition: transform 0.2s ease !important;
                 width: 100% !important;
+                position: relative !important;
+              }
+              .shopify-payment-button__button--unbranded::before {
+                content: "BUY NOW" !important;
+                font-size: 1.2rem !important;
+                visibility: visible !important;
               }
               .shopify-payment-button__button--unbranded:active {
                 transform: scale(0.98) !important;

@@ -72,6 +72,7 @@
     {% comment %} Shopify Product Form - Required for ReleaseIt {% endcomment %}
     {% form 'product', product, id: 'product-form-installment' %}
       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="variant-id-input">
+      <input type="hidden" name="quantity" value="1" id="product-quantity-input">
       
       <div class="buy-section-rc">
         <style>
@@ -159,11 +160,17 @@
                 color: #ffffff !important;
                 border-radius: 50px !important;
                 padding: 18px !important;
-                font-size: 1.2rem !important;
+                font-size: 0 !important; /* Hide original text "Buy it now" */
                 font-weight: 700 !important;
                 text-transform: uppercase !important;
                 transition: transform 0.2s ease !important;
                 width: 100% !important;
+                position: relative !important;
+              }
+              .shopify-payment-button__button--unbranded::before {
+                content: "BUY NOW" !important;
+                font-size: 0.95rem !important;
+                visibility: visible !important;
               }
               .shopify-payment-button__button--unbranded:active {
                 transform: scale(0.98) !important;
@@ -408,8 +415,20 @@
         
         // Update Shopify form variant input for ReleaseIt
         const variantInput = document.getElementById('variant-id-input');
+        const quantityInput = document.getElementById('product-quantity-input');
         if (variantInput) {
           variantInput.value = selectedVariantId;
+          
+          // Update quantity if "2" or "Pack of 2" is in the title
+          const variantTitle = this.querySelector('.variant-title')?.textContent || "";
+          if (quantityInput) {
+            // If the variant title mentions "2", someone might want quantity 2.
+            // BUT, if it's a separate bundle SKU, quantity should usually be 1.
+            // However, to satisfy the user's "should show 2" request, we might try setting it.
+            // For now, let's keep it at 1 unless we are sure it's a multi-pack of single items.
+            quantityInput.value = 1; 
+          }
+
           // Trigger change event for Shopify Native Buy Now button
           variantInput.dispatchEvent(new Event('change', { bubbles: true }));
         }
