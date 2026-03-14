@@ -129,9 +129,9 @@
           <span class="sds-buynow-subtext">PAY ONLINE — SAVE 10%</span>
         </button>
 
-        <div style="margin-top: {{ section.settings.button_spacing | default: 20 }}px;">
+        {% if section.settings.show_native_buy_now %}
           {{ form | payment_button }}
-        </div>
+        {% endif %}
       </div>
     {% endform %}
 
