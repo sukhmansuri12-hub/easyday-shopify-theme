@@ -136,16 +136,23 @@
           EXTRA RS 100 OFF ON PREPAID ORDERS
         </div>
 
-        <!-- 3. Solid Blue BUY NOW -->
-        <button class="sds-btn-buynow-custom" type="button" onclick="sdsBuyNow()">
-          <span class="sds-buynow-text-custom">BUY NOW</span>
-          <div class="sds-buynow-logos-custom">
-            <span>G Pay | UPI | Paytm</span>
-          </div>
-        </button>
-
         {% if section.settings.show_native_buy_now %}
-          <div style="margin-top: -10px;">
+          <div style="margin-top: 15px;">
+            <style>
+              .shopify-payment-button__button--unbranded {
+                background-color: #1a56db !important;
+                color: #ffffff !important;
+                border-radius: 50px !important;
+                padding: 18px !important;
+                font-size: 1.2rem !important;
+                font-weight: 700 !important;
+                text-transform: uppercase !important;
+                transition: transform 0.2s ease !important;
+              }
+              .shopify-payment-button__button--unbranded:active {
+                transform: scale(0.98) !important;
+              }
+            </style>
             {{ form | payment_button }}
           </div>
         {% endif %}

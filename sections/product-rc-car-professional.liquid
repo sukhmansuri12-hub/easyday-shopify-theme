@@ -164,31 +164,47 @@ Slide(3)"></span>
           EXTRA RS 100 OFF ON PREPAID ORDERS
         </div>
 
-        <button class="sds-btn-buynow-sleek" type="button" onclick="sdsBuyNowRCCar()">
-          <span class="sds-buynow-text-custom">BUY NOW</span>
-          <div style="font-size: 14px; margin-top: 2px; opacity: 0.9;">G Pay | UPI | Paytm</div>
-        </button>
-
         {% if section.settings.show_native_buy_now %}
-          <div style="margin-top: -10px;">
+          <div style="margin-top: 15px;">
+            <style>
+              .shopify-payment-button__button--unbranded {
+                background-color: #1a56db !important;
+                color: #ffffff !important;
+                border-radius: 50px !important;
+                padding: 18px !important;
+                font-size: 1.2rem !important;
+                font-weight: 700 !important;
+                text-transform: uppercase !important;
+                transition: transform 0.2s ease !important;
+                width: 100% !important;
+              }
+              .shopify-payment-button__button--unbranded:active {
+                transform: scale(0.98) !important;
+              }
+            </style>
             {{ form | payment_button }}
           </div>
         {% endif %}
       </div>
       
       <script>
-        window.sdsBuyNowRCCar = function() {
-          const variantId = document.getElementById('variant-id-input')?.value || document.querySelector('input[name="id"]')?.value;
-          if (!variantId) { window.location.href = '/cart'; return; }
-          fetch('/cart/clear.js', { method: 'POST' })
-            .then(() => fetch('/cart/add.js', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ id: variantId, quantity: 1 })
-            }))
-            .then(() => { window.location.href = '/checkout'; })
-            .catch(() => { window.location.href = '/cart'; });
-        };
+        // ── VARIANT SELECTOR LOGIC ──
+        document.querySelectorAll('.variant-option-rc').forEach(option => {
+          option.addEventListener('click', function() {
+            // Update UI
+            document.querySelectorAll('.variant-option-rc').forEach(o => o.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update hidden input
+            const variantId = this.getAttribute('data-variant-id');
+            const variantInput = document.getElementById('variant-id-input');
+            if (variantInput) {
+              variantInput.value = variantId;
+              // Trigger change event for Native Shopify button
+              variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          });
+        });
       </script>
 
         <script>
