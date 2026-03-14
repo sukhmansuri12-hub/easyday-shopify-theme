@@ -137,18 +137,6 @@
             border: none;
             box-shadow: 0 4px 15px rgba(26, 86, 219, 0.3);
             transition: all 0.2s ease;
-            text-decoration: none;
-          }
-          .sds-btn-buynow-sleek:active { transform: scale(0.98); }
-          .sds-buynow-text-custom { font-size: 1.6rem; font-weight: 950; line-height: 1.1; display: block; letter-spacing: 1px; }
-
-          /* Native Override */
-          .shopify-payment-button__button--unbranded {
-            border-radius: 12px !important;
-            padding: 18px !important;
-            font-weight: 700 !important;
-            text-transform: uppercase !important;
-          }
         </style>
         
         <button class="sds-btn-addtocart-pill" type="submit" name="add">
@@ -173,6 +161,24 @@
       </div>
       
       <script>
+        // ── VARIANT SELECTOR LOGIC ──
+        document.querySelectorAll('.variant-option-rc').forEach(option => {
+          option.addEventListener('click', function() {
+            // Update UI
+            document.querySelectorAll('.variant-option-rc').forEach(o => o.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update hidden input
+            const variantId = this.getAttribute('data-variant-id');
+            const variantInput = document.getElementById('variant-id-input');
+            if (variantInput) {
+              variantInput.value = variantId;
+              // Trigger change event for Native Shopify button
+              variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          });
+        });
+
         window.sdsBuyNowSlippers = function() {
           const variantId = document.getElementById('variant-id-input')?.value || document.querySelector('input[name="id"]')?.value;
           if (!variantId) { window.location.href = '/cart'; return; }
