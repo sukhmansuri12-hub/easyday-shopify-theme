@@ -122,18 +122,3 @@
     display: flex !important;
     flex-direction: column !important;
 }
-
-
-/* NUCLEAR CAROUSEL REMOVAL - TEST */
-.product-image-gallery,
-.gallery-container,
-.slide,
-.product-page-rc-car .gallery-container,
-#gallery-container,
-.gallery-dots {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-}
