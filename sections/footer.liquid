@@ -25,28 +25,31 @@
         </ul>
     </div>
 
-    {% comment %} 3. ROBUST PAYMENT LOGOS - CENTERED & SPREAD {% endcomment %}
+    {% comment %} 3. NATIVE SHOPIFY PAYMENT LOGOS - CENTERED {% endcomment %}
+    <style>
+        .payment-icon-wrapper svg { width: 100%; height: auto; display: block; }
+    </style>
     <div style="margin: 40px 0 30px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; align-items: center;">
-        <div style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/google_pay.svg" alt="Google Pay" style="width: 100%; height: auto; max-height: 14px;">
+        <div class="payment-icon-wrapper" style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            {{ 'google_pay' | payment_type_svg_tag }}
         </div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa.svg" alt="Visa" style="width: 100%; height: auto; max-height: 12px;">
+        <div class="payment-icon-wrapper" style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            {{ 'visa' | payment_type_svg_tag }}
         </div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/mastercard.svg" alt="Mastercard" style="width: 100%; height: auto; max-height: 18px;">
+        <div class="payment-icon-wrapper" style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            {{ 'master' | payment_type_svg_tag }}
         </div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/american_express.svg" alt="Amex" style="width: 100%; height: auto; max-height: 12px;">
+        <div class="payment-icon-wrapper" style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            {{ 'american_express' | payment_type_svg_tag }}
         </div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/paypal.svg" alt="PayPal" style="width: 100%; height: auto; max-height: 16px;">
+        <div class="payment-icon-wrapper" style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            {{ 'paypal' | payment_type_svg_tag }}
         </div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/discover.svg" alt="Discover" style="width: 100%; height: auto; max-height: 14px;">
+        <div class="payment-icon-wrapper" style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            {{ 'discover' | payment_type_svg_tag }}
         </div>
-        <div style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/maestro.svg" alt="Maestro" style="width: 100%; height: auto; max-height: 18px;">
+        <div class="payment-icon-wrapper" style="background: #ffffff; border-radius: 4px; padding: 4px 6px; height: 26px; width: 42px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            {{ 'maestro' | payment_type_svg_tag }}
         </div>
     </div>
 
