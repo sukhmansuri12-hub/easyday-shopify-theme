@@ -538,14 +538,18 @@
   }
   .sds-wave-overlay {
     position: absolute;
-    bottom: -2px;
+    bottom: -1px; /* Flush with bottom */
     left: 0;
     width: 100%;
     line-height: 0;
+    z-index: 2; /* Sit on top */
+    pointer-events: none;
   }
   .sds-wave-overlay svg {
     width: 100%;
     height: 40px;
+    display: block; /* Ensure no whitespace */
+    vertical-align: bottom;
   }
   #MainContent { padding-top: 0 !important; margin-top: 0 !important; }
   .shopify-section:first-child { margin-top: 0 !important; }
