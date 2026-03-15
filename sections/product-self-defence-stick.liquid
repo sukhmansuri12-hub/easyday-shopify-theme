@@ -141,9 +141,10 @@
           <span>Add to Cart</span>
         </button>
 
-        <!-- 2. Extra Savings Bar -->
-        <div class="sds-prepaid-bar-custom">
-          EXTRA RS 100 OFF ON PREPAID ORDERS
+        <!-- 2. Extra Savings Badge (Moved & Restyled) -->
+        <div class="sds-prepaid-badge">
+          <span class="sds-prepaid-badge__icon">⚡</span>
+          <span>Extra 10% Off on Prepaid Orders</span>
         </div>
 
         {% if section.settings.show_native_buy_now %}
@@ -1103,20 +1104,28 @@
   .sds-btn-addtocart:active { transform: scale(0.98); }
   .sds-btn-addtocart svg { width: 22px; height: 22px; stroke: var(--sds-blue); }
   
-  /* Prepaid Bar — Black with White text */
-  .sds-prepaid-bar-custom {
-    background: #000000;
-    color: #ffffff !important;
-    text-align: center;
-    padding: 10px 5px;
-    font-size: 0.82rem;
-    font-weight: 900;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    border-radius: 4px;
-    margin-bottom: 5px;
-    width: 100%;
-    box-sizing: border-box;
+  /* Prepaid Savings Badge — Sleek & Professional */
+  .sds-prepaid-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #ecfdf5;
+    color: #059669;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    border: 1px solid #10b981;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: 0.2px;
+  }
+  .sds-prepaid-badge__icon {
+    font-size: 1rem;
+    line-height: 1;
   }
 
   /* Solid Blue BUY NOW button */
