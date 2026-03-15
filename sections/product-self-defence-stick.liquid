@@ -455,6 +455,7 @@
 
     <!-- Write a Review Form (hidden by default) -->
     <div class="sds-review-form" id="sds-review-form" style="display:none;">
+      <button class="sds-review-form__close" type="button" onclick="sdsCloseWriteReview()">&times;</button>
       <h3 class="sds-review-form__title">Share Your Experience</h3>
       <div class="sds-review-form__stars" id="sds-star-picker">
         <span class="sds-star-pick" data-val="1">★</span>
@@ -1414,6 +1415,23 @@
     padding: 18px;
     border: 1.5px solid var(--sds-blue-light);
     box-shadow: 0 2px 12px rgba(26,86,219,0.08);
+    position: relative;
+  }
+  .sds-review-form__close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--sds-text-muted);
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+    transition: color 0.2s;
+  }
+  .sds-review-form__close:hover {
+    color: var(--sds-blue);
   }
   .sds-review-form__title {
     font-size: 1rem;
@@ -1688,6 +1706,15 @@
       requestAnimationFrame(() => {
         reviewForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
+    }
+  };
+
+  window.sdsCloseWriteReview = function() {
+    const reviewForm = document.getElementById('sds-review-form');
+    const writeBtn = document.getElementById('sds-write-review-btn');
+    if (reviewForm) {
+      reviewForm.style.display = 'none';
+      if (writeBtn) writeBtn.style.display = 'inline-block';
     }
   };
 
