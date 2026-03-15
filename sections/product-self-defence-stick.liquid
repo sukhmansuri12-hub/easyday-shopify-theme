@@ -1079,8 +1079,8 @@
   }
 
   @keyframes sdsPulse {
-    0%, 100% { box-shadow: 0 4px 18px rgba(26,86,219,0.35); }
-    50% { box-shadow: 0 6px 28px rgba(26,86,219,0.55); }
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 18px rgba(26,86,219,0.35); }
+    50% { transform: scale(1.02); box-shadow: 0 8px 32px rgba(26,86,219,0.55); }
   }
 
   /* Trust Strip — Exact Style matching screenshot 3 */
@@ -1379,7 +1379,7 @@
 
   /* ── FINAL CTA ── */
   .sds-final-cta {
-    padding: 20px 16px 40px;
+    padding: 20px 16px 5px;
     background: var(--sds-bg-subtle);
     text-align: center;
   }
