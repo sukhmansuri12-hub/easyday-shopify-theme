@@ -104,7 +104,7 @@
       {% assign v1 = product.variants[0] %}
       {% assign v2 = product.variants[1] %}
 
-      <label class="sds-bundle__option sds-bundle__option--selected" id="sds-bundle-1" onclick="sdsSelectBundle(1, this, {{ v1.id | default: 0 }}, '{{ v1.price | money_without_trailing_zeros | default: 'Rs. 799' }}', '{{ v1.compare_at_price | money_without_trailing_zeros | default: 'Rs. 1,599' }}')">
+      <label class="sds-bundle__option sds-bundle__option--selected" id="sds-bundle-1" onclick="sdsSelectBundle(1, this, {{ v1.id | default: 'null' }}, '{{ v1.price | money_without_trailing_zeros | default: 'Rs. 799' }}', '{{ v1.compare_at_price | money_without_trailing_zeros | default: 'Rs. 1,599' }}')">
         <span class="sds-bundle__custom-radio" id="sds-radio-1"></span>
         <span class="sds-bundle__details">
           <span class="sds-bundle__pack">Pack of 1</span>
@@ -116,7 +116,7 @@
         </span>
       </label>
 
-      <label class="sds-bundle__option" id="sds-bundle-2" onclick="sdsSelectBundle(2, this, {{ v2.id | default: v1.id }}, '{{ v2.price | money_without_trailing_zeros | default: 'Rs. 1,499' }}', '{{ v2.compare_at_price | money_without_trailing_zeros | default: 'Rs. 3,198' }}')">
+      <label class="sds-bundle__option" id="sds-bundle-2" onclick="sdsSelectBundle(2, this, {{ v2.id | default: 'null' }}, '{{ v2.price | money_without_trailing_zeros | default: 'Rs. 1,499' }}', '{{ v2.compare_at_price | money_without_trailing_zeros | default: 'Rs. 3,198' }}')">
         <span class="sds-bundle__custom-radio" id="sds-radio-2"></span>
         <span class="sds-bundle__details">
           <span class="sds-bundle__pack">Pack of 2</span>
@@ -146,17 +146,33 @@
           EXTRA RS 100 OFF ON PREPAID ORDERS
         </div>
 
-        <!-- 3. Reliable Custom Buy Now (Replaces buggy native button) -->
-        <button class="sds-btn-buynow-custom" type="button" onclick="sdsBuyNow()" style="background: linear-gradient(135deg, #1a56db 0%, #2563eb 100%); margin-top: 10px;">
-          <span class="sds-buynow-text-custom">BUY NOW</span>
-          <div class="sds-buynow-logos-custom">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/google_pay.svg" class="sds-pay-logo-custom" alt="Google Pay">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa.svg" class="sds-pay-logo-custom" alt="Visa">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/mastercard.svg" class="sds-pay-logo-custom" alt="Mastercard">
-            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/paytm.svg" class="sds-pay-logo-custom" alt="Paytm" onerror="this.src='https://cdn.shopify.com/s/files/1/0800/9229/9512/files/paytm-logo.png?v=1710500000';">
+        {% if section.settings.show_native_buy_now %}
+          <div style="margin-top: 15px;">
+            <style>
+              .shopify-payment-button__button--unbranded {
+                background-color: #1a56db !important;
+                color: #ffffff !important;
+                border-radius: 50px !important;
+                padding: 18px !important;
+                font-size: 0 !important; /* Hide original text "Buy it now" */
+                font-weight: 700 !important;
+                text-transform: uppercase !important;
+                transition: transform 0.2s ease !important;
+                width: 100% !important;
+                position: relative !important;
+              }
+              .shopify-payment-button__button--unbranded::before {
+                content: "BUY NOW" !important;
+                font-size: 1.2rem !important;
+                visibility: visible !important;
+              }
+              .shopify-payment-button__button--unbranded:active {
+                transform: scale(0.98) !important;
+              }
+            </style>
+            {{ form | payment_button }}
           </div>
-          <span class="sds-buynow-subtext">Cash on Delivery Available</span>
-        </button>
+        {% endif %}
       </div>
     {% endform %}
 
@@ -1469,16 +1485,18 @@
     const variantIdInput = document.getElementById('sds-variant-id');
     const quantityInput = document.getElementById('sds-quantity');
     
-    // Check if variantId is valid (not 0)
-    if (variantId && variantId !== 0) {
+    // Logic: If variantId is unique to this pack, use it with qty 1.
+    // If variantId is null/missing (meaning only 1 variant exists), use the base variant with qty = pack.
+    if (variantId) {
       variantIdInput.value = variantId;
-      quantityInput.value = 1; // It's a bundle variant
+      quantityInput.value = 1;
     } else {
-      // Fallback: Use first variant but change quantity
-      const firstVariantId = {{ product.variants[0].id | default: 0 }};
-      variantIdInput.value = firstVariantId;
-      quantityInput.value = pack; // Pack of 2 = Quantity 2
+      variantIdInput.value = "{{ product.variants[0].id }}";
+      quantityInput.value = pack;
     }
+
+    // Trigger 'change' event so native Shopify button knows the variant changed
+    variantIdInput.dispatchEvent(new Event('change', { bubbles: true }));
 
     // 3. Update main price display at top
     const mainPriceEl = document.querySelector('.sds-price__current');
@@ -1524,39 +1542,6 @@
     if (buySection) buySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  // ── BUY NOW (DIRECT CHECKOUT) ──
-  window.sdsBuyNow = function() {
-    const variantId = document.getElementById('sds-variant-id')?.value;
-    const quantity = document.getElementById('sds-quantity')?.value || 1;
-    
-    if (!variantId) {
-      window.location.href = '/cart';
-      return;
-    }
-
-    // Redirect to checkout with variant and quantity
-    // Most robust method: clear cart then add then redirect
-    fetch('/cart/clear.js', { method: 'POST' })
-      .then(() => fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: [{
-            id: variantId,
-            quantity: parseInt(quantity)
-          }]
-        })
-      }))
-      .then(response => {
-        if (!response.ok) throw new Error('Add failed');
-        window.location.href = '/checkout';
-      })
-      .catch(error => {
-        console.error('Buy Now failed:', error);
-        // Fallback: direct permalink (might not clear other items)
-        window.location.href = `/cart/${variantId}:${quantity}`;
-      });
-  };
 
   // ── ACCORDION TOGGLE ──
   window.sdsToggleAccordion = function(btn) {
