@@ -1,4 +1,4 @@
-<footer class="site-footer" style="background:#1a56db !important; padding: 40px 20px 40px 20px; text-align: left; border-top: none; margin:0; color: #ffffff !important;">
+<footer class="site-footer" style="background:#1a56db !important; padding: 50px 20px 40px 20px; text-align: left; border-top: none; margin:0; color: #ffffff !important;">
   <div class="container" style="max-width: 1200px; margin: 0 auto;">
     
     {% comment %} 0. BRAND HEADING {% endcomment %}
@@ -25,29 +25,9 @@
         </ul>
     </div>
 
-    {% comment %} 3. STABLE PAYMENT LOGOS STRIP {% endcomment %}
-    <div style="margin-bottom: 40px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-start; align-items: center;">
-        <div style="background: white; border-radius: 4px; padding: 5px 10px; height: 32px; display: flex; align-items: center; box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/s/assets/payment_icons/google_pay.svg" alt="Google Pay" style="height: 12px; width: auto;">
-        </div>
-        <div style="background: white; border-radius: 4px; padding: 5px 10px; height: 32px; display: flex; align-items: center; box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/s/assets/payment_icons/visa.svg" alt="Visa" style="height: 10px; width: auto;">
-        </div>
-        <div style="background: white; border-radius: 4px; padding: 5px 10px; height: 32px; display: flex; align-items: center; box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/s/assets/payment_icons/master.svg" alt="Mastercard" style="height: 16px; width: auto;">
-        </div>
-        <div style="background: white; border-radius: 4px; padding: 5px 10px; height: 32px; display: flex; align-items: center; box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/s/assets/payment_icons/american_express.svg" alt="Amex" style="height: 10px; width: auto;">
-        </div>
-        <div style="background: white; border-radius: 4px; padding: 5px 10px; height: 32px; display: flex; align-items: center; box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/s/assets/payment_icons/diners_club.svg" alt="Diners Club" style="height: 14px; width: auto;">
-        </div>
-        <div style="background: white; border-radius: 4px; padding: 5px 10px; height: 32px; display: flex; align-items: center; box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/s/assets/payment_icons/discover.svg" alt="Discover" style="height: 10px; width: auto;">
-        </div>
-        <div style="background: white; border-radius: 4px; padding: 5px 10px; height: 32px; display: flex; align-items: center; box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <img src="https://cdn.shopify.com/s/assets/payment_icons/maestro.svg" alt="Maestro" style="height: 16px; width: auto;">
-        </div>
+    {% comment %} 3. CUSTOM PAYMENT STRIP {% endcomment %}
+    <div style="margin-bottom: 40px;">
+        <img src="{{ 'payment-strip.png' | asset_url }}" alt="Secure Payments" style="height: 35px; width: auto; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
     </div>
 
     {% comment %} 4. COPYRIGHT & FOOTER LINKS {% endcomment %}
