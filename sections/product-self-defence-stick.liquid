@@ -55,7 +55,7 @@
           <span class="sds-star-badge">★</span>
           <span class="sds-star-badge">★</span>
           <span class="sds-star-badge">★</span>
-          <span class="sds-star-badge">★</span>
+          <span class="sds-star-badge sds-star-badge--partial">★</span>
         </span>
         <span class="sds-rating__text" style="font-size: 0.85rem;">Rated 4.7/5 by <strong>329+ Customers</strong></span>
       </div>
@@ -354,7 +354,7 @@
             <span class="sds-star-badge">★</span>
             <span class="sds-star-badge">★</span>
             <span class="sds-star-badge">★</span>
-            <span class="sds-star-badge">★</span>
+            <span class="sds-star-badge sds-star-badge--partial">★</span>
           </span>
           <span class="sds-rating__text" style="font-weight:600; color:var(--sds-text);">329 Reviews</span>
           <svg class="sds-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px; margin-left:2px;"><path d="M19 9l-7 7-7-7"></path></svg>
@@ -365,7 +365,9 @@
         <div class="sds-reviews__stats">
           <div class="sds-stats-main">
             <span class="sds-stats-score">4.7</span>
-            <div class="sds-stats-stars">★★★★★</div>
+            <div class="sds-stats-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span class="sds-star-text-partial">★</span>
+            </div>
           </div>
           <div class="sds-stats-bars">
             <div class="sds-stats-row">
@@ -742,6 +744,9 @@
     font-size: 0.7rem;
     border-radius: 3px;
   }
+  .sds-star-badge--partial {
+    background: linear-gradient(90deg, var(--sds-blue) 70%, #d1d5db 70%) !important;
+  }
   .sds-rating__text {
     font-size: 0.82rem;
     color: var(--sds-text-muted);
@@ -801,6 +806,15 @@
     color: var(--sds-blue);
     font-size: 1.25rem;
     margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+  }
+  .sds-star-text-partial {
+    background: linear-gradient(90deg, var(--sds-blue) 70%, #d1d5db 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
   }
   .sds-stats-bars {
     display: flex;
