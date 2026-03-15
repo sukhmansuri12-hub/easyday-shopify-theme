@@ -505,10 +505,11 @@
   .sds-wave-marquee {
     background: #1a56db;
     color: #ffffff;
-    padding: 12px 0 35px; /* Extra bottom padding for wave overlap */
+    padding: 12px 0 25px; /* Reduced from 35px to hide blue bar */
     position: relative;
     overflow: hidden;
     margin-top: 10px;
+    margin-bottom: -1px; /* Seamless transition */
   }
   .sds-marquee-track {
     display: flex;
@@ -545,7 +546,7 @@
   }
   .sds-wave-overlay svg {
     width: 100%;
-    height: 40px;
+    height: 50px; /* Increased from 40px for better coverage */
   }
   #MainContent { padding-top: 0 !important; margin-top: 0 !important; }
   .shopify-section:first-child { margin-top: 0 !important; }
