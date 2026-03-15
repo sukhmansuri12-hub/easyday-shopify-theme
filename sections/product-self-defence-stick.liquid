@@ -175,6 +175,17 @@
         {% endif %}
       </div>
     {% endform %}
+    
+    <!-- Payment Logos -->
+    <div class="sds-payment-logos">
+        <div class="sds-payment-icon">{{ 'google_pay' | payment_type_svg_tag }}</div>
+        <div class="sds-payment-icon">{{ 'visa' | payment_type_svg_tag }}</div>
+        <div class="sds-payment-icon">{{ 'master' | payment_type_svg_tag }}</div>
+        <div class="sds-payment-icon">{{ 'american_express' | payment_type_svg_tag }}</div>
+        <div class="sds-payment-icon">{{ 'diners_club' | payment_type_svg_tag }}</div>
+        <div class="sds-payment-icon">{{ 'discover' | payment_type_svg_tag }}</div>
+        <div class="sds-payment-icon">{{ 'maestro' | payment_type_svg_tag }}</div>
+    </div>
 
     <!-- Delivery Estimator (below CTAs) -->
     <div class="sds-delivery">
@@ -1145,7 +1156,26 @@
     transition: all 0.2s ease;
     text-decoration: none;
   }
-  .sds-btn-buynow-custom:active { transform: scale(0.98); }
+  /* Payment Logos */
+  .sds-payment-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 15px 0 20px;
+    flex-wrap: wrap;
+  }
+  .sds-payment-icon {
+    height: 20px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sds-payment-icon svg {
+    height: 100%;
+    width: auto;
+  }
 
   .sds-buynow-text-custom {
     font-size: 1.6rem;
