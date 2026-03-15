@@ -269,11 +269,16 @@
         <span class="sds-marquee-dot">•</span>
       </div>
     </div>
-    <!-- Wavy Bottom SVG Overlay -->
+    <!-- Wavy Bottom Moving Overlay -->
     <div class="sds-wave-overlay">
-       <svg viewBox="0 0 1440 120" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:40px; vertical-align:bottom;">
-         <path d="M0,64L48,69.3C96,75,192,85,288,85.3C384,85,480,75,576,64C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
-       </svg>
+      <div class="sds-wave-track">
+        <svg viewBox="0 0 1440 120" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:40px; vertical-align:bottom;">
+          <path d="M0,64L48,69.3C96,75,192,85,288,85.3C384,85,480,75,576,64C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
+        </svg>
+        <svg viewBox="0 0 1440 120" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:40px; vertical-align:bottom;">
+          <path d="M0,64L48,69.3C96,75,192,85,288,85.3C384,85,480,75,576,64C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
+        </svg>
+      </div>
     </div>
   </div>
   <div class="sds-description sds-section-spacing">
@@ -520,7 +525,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    animation: sdsMarqueeFast 8s linear infinite;
+    animation: sdsMarqueeFast 8.8s linear infinite; /* Slowed by 10% (was 8s) */
     padding-right: 15px;
   }
   .sds-marquee-content span {
@@ -539,18 +544,28 @@
   }
   .sds-wave-overlay {
     position: absolute;
-    bottom: 0; /* Sit exactly at the bottom */
+    bottom: 0;
     left: 0;
     width: 100%;
     line-height: 0;
     z-index: 2;
     pointer-events: none;
+    overflow: hidden;
   }
-  .sds-wave-overlay svg {
-    width: 100%;
+  .sds-wave-track {
+    display: flex;
+    width: 200%;
+    animation: sdsWaveMove 6s linear infinite;
+  }
+  .sds-wave-track svg {
+    width: 50%;
     height: 40px;
-    display: block; /* Ensure no whitespace */
+    display: block;
     vertical-align: bottom;
+  }
+  @keyframes sdsWaveMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
   #MainContent { padding-top: 0 !important; margin-top: 0 !important; }
   .shopify-section:first-child { margin-top: 0 !important; }
