@@ -7,28 +7,105 @@
 <section class="hero-section scroll-reveal" style="background-image: url({% if section.settings.bg_image %}{{ section.settings.bg_image | image_url }}{% else %}{{ 'easyday-hero-bg.jpg' | asset_url }}{% endif %});">
   <div class="hero-overlay"></div>
   <div class="container">
-    <div class="hero-content scroll-reveal">
+    <div class="hero-content">
       {%- if section.settings.heading != blank -%}
         <h1 class="hero-title">{{ section.settings.heading }}</h1>
       {%- endif -%}
       
       {%- if section.settings.subheading != blank -%}
-        <!-- Subheading Hidden for V25 Minimalism -->
-      {%- endif -%}
-
-      {%- if section.settings.description != blank -%}
-        <!-- Description Hidden for V25 Minimalism -->
+        <p class="hero-subtext">{{ section.settings.subheading }}</p>
       {%- endif -%}
       
       <div class="hero-buttons">
          {%- if section.settings.show_sale_btn -%}
-            <button class="btn btn-sale" onclick="document.querySelector('.featured-products-mock').scrollIntoView({behavior: 'smooth'})">SALE 50% OFF</button>
+            <button class="btn-hero-premium pulse-blue" onclick="document.querySelector('.featured-products-mock').scrollIntoView({behavior: 'smooth'})">
+              <span>EXPLORE SALE • 50% OFF</span>
+            </button>
          {%- endif -%}
-
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-section {
+    position: relative;
+    height: 80vh;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+  }
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(26,86,219,0.2) 100%);
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+    padding: 20px;
+  }
+  .hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+  }
+  .hero-subtext {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    opacity: 0.95;
+    font-weight: 400;
+    max-width: 500px;
+  }
+  .btn-hero-premium {
+    background: #1a56db;
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(26,86,219,0.4);
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .btn-hero-premium:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26,86,219,0.5);
+  }
+  @keyframes pulseBlue {
+    0% { box-shadow: 0 0 0 0 rgba(26, 86, 219, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(26, 86, 219, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(26, 86, 219, 0); }
+  }
+  .pulse-blue {
+    animation: pulseBlue 2s infinite;
+  }
+  @media (max-width: 768px) {
+    .hero-section { height: 60vh; min-height: 400px; }
+    .hero-title { font-size: 2.2rem; }
+    .hero-subtext { font-size: 1rem; }
+  }
+</style>
 
 {% schema %}
 {

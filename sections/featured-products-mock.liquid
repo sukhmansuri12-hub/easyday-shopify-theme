@@ -56,7 +56,7 @@
           {%- if splash_guard_product and splash_guard_product.available -%}
             <div class="product-card animate-on-scroll delay-1" data-animation="scale-in" data-product-handle="{{ splash_guard_product.handle }}">
               <div class="product-image-wrapper homepage-carousel">
-                <span class="mock-sale-badge" style="background: #FF6F00;">🎁 BUY 1 GET 1 FREE</span>
+                <span class="mock-sale-badge" style="background: #1a56db;">🎁 BUY 1 GET 1 FREE</span>
                 <a href="{{ splash_guard_product.url }}" class="product-link">
                   {%- if splash_guard_product.images.size > 1 -%}
                     {%- for image in splash_guard_product.images limit: 4 -%}
@@ -232,7 +232,7 @@
       position: absolute !important;
       top: -4px !important;
       right: -4px !important;
-      background: #ff6f00 !important;
+      background: #1a56db !important;
       color: white !important;
       border: none !important;
       width: 36px !important;
@@ -245,9 +245,9 @@
       justify-content: center !important;
       cursor: pointer !important;
       z-index: 9999 !important;
-      box-shadow: 0 3px 10px rgba(255, 111, 0, 0.5) !important;
+      box-shadow: 0 4px 12px rgba(26, 86, 219, 0.4) !important;
       pointer-events: auto !important;
-      transition: transform 0.2s ease !important;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   }
   
   .add-btn:hover {
@@ -261,8 +261,8 @@
   }
 
   .product-title {
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 700;
     margin-bottom: 5px;
     line-height: 1.3;
     display: -webkit-box;
@@ -270,6 +270,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     min-height: 2.6em; /* Align cards */
+    font-family: 'Poppins', sans-serif;
   }
 
   .product-title a { color: #333; text-decoration: none; }
@@ -281,9 +282,10 @@
   }
 
   .sale-price {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #333;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #1a56db;
+    font-family: 'Poppins', sans-serif;
   }
 
   .compare-price {
@@ -392,7 +394,7 @@ function quickAddToCart(productHandle) {
       
       setTimeout(() => {
         btn.textContent = originalText;
-        btn.style.background = '#1E88E5';
+        btn.style.background = '#1a56db';
         btn.disabled = false;
       }, 1500);
     })
@@ -405,7 +407,7 @@ function quickAddToCart(productHandle) {
       
       setTimeout(() => {
         btn.textContent = originalText;
-        btn.style.background = '#1E88E5';
+        btn.style.background = '#1a56db';
         btn.disabled = false;
       }, 2000);
     });

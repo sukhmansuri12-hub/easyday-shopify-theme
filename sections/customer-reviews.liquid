@@ -7,38 +7,33 @@
     <div class="reviews-header text-center" style="margin-bottom: 1rem;">
       <h2 class="section-title" style="margin-bottom: 5px;">Trusted by 1150+ Customers</h2>
       <div class="stars-rating" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-        <span style="color: #FFB300; font-size: 1.4rem;">★★★★<span style="position: relative; display: inline-block; width: 0.7em; overflow: hidden; vertical-align: top;">★</span></span>
-        <span style="font-weight: bold; color: #333; font-size: 1.1rem;">4.7/5</span>
+        <span style="color: #f59e0b; font-size: 1.4rem;">★★★★<span class="star-partial-gold">★</span></span>
+        <span style="font-weight: 800; color: #111827; font-size: 1.1rem; font-family: 'Poppins', sans-serif;">4.7/5</span>
       </div>
     </div>
 
-    <div class="reviews-grid masonry-style">
-        
-       {% comment %} Review 1 - Rotated Left {% endcomment %}
-       <div class="review-card" style="transform: rotate(-1deg); margin-top: 10px;">
-          <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
-              <span style="font-weight:bold;">Rahul S. <span style="color:green; font-size:0.8rem;">✔ Verified</span></span>
-              <span style="color:#FFB300;">★★★★★</span>
+       <div class="review-card">
+          <div class="review-header">
+              <span class="review-author">Rahul S. <span class="verified-badge">✓ Verified</span></span>
+              <span class="review-stars">★★★★★</span>
           </div>
-          <p class="review-text" style="font-size:0.9rem; margin-bottom:10px;">"Ordered the vegetable chopper and it saves me so much time in the kitchen. The blades are sharp and it's very easy to clean. Must buy for every home! Worth every rupee."</p>
+          <p class="review-text">"Ordered the vegetable chopper and it saves me so much time in the kitchen. The blades are sharp and it's very easy to clean. Must buy for every home! Worth every rupee."</p>
        </div>
 
-       {% comment %} Review 2 - Rotated Right {% endcomment %}
-       <div class="review-card" style="transform: rotate(1deg);">
-          <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
-              <span style="font-weight:bold;">Priya M. <span style="color:green; font-size:0.8rem;">✔ Verified</span></span>
-              <span style="color:#FFB300;">★★★★★</span>
+       <div class="review-card">
+          <div class="review-header">
+              <span class="review-author">Priya M. <span class="verified-badge">✓ Verified</span></span>
+              <span class="review-stars">★★★★★</span>
           </div>
-          <p class="review-text" style="font-size:0.9rem; margin-bottom:10px;">"Best gadgets store I've found online. Delivery was super fast and the cash on delivery option makes it very convenient. Products are exactly as shown in pictures. Very happy with my purchase."</p>
+          <p class="review-text">"Best gadgets store I've found online. Delivery was super fast and the cash on delivery option makes it very convenient. Products are exactly as shown in pictures. Very happy with my purchase."</p>
        </div>
 
-       {% comment %} Review 3 - Left {% endcomment %}
-       <div class="review-card" style="transform: rotate(-1deg); margin-top: 15px;">
-          <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
-              <span style="font-weight:bold;">Amit K. <span style="color:green; font-size:0.8rem;">✔ Verified</span></span>
-              <span style="color:#FFB300;">★★★★★</span>
+       <div class="review-card">
+          <div class="review-header">
+              <span class="review-author">Amit K. <span class="verified-badge">✓ Verified</span></span>
+              <span class="review-stars">★★★★★</span>
           </div>
-          <p class="review-text" style="font-size:0.9rem; margin-bottom:10px;">"Quality is very good compared to other online sites. Products are durable and well-packaged. Customer service is also responsive. Highly recommended to everyone looking for quality gadgets at reasonable prices."</p>
+          <p class="review-text">"Quality is very good compared to other online sites. Products are durable and well-packaged. Customer service is also responsive."</p>
        </div>
 
        {% comment %} Review 4 - Right {% endcomment %}
@@ -80,6 +75,40 @@
     margin-bottom: 0 !important;
   }
   
+  .stars-rating { margin-bottom: 4px; }
+  .star-partial-gold {
+     background: linear-gradient(90deg, #f59e0b 70%, #d1d5db 70%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     display: inline-block;
+  }
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    align-items: center;
+  }
+  .review-author {
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #111827;
+    font-size: 0.95rem;
+  }
+  .verified-badge {
+    color: #059669;
+    font-size: 0.75rem;
+    background: #ecfdf5;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 6px;
+    font-weight: 600;
+  }
+  .review-stars {
+    color: #f59e0b;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+  }
+  
   .reviews-grid {
     display: flex !important;
     overflow-x: auto !important;
@@ -95,26 +124,27 @@
   }
   
   .review-card {
-    min-width: 85% !important; /* Show 1 full + peek at next */
+    min-width: 85% !important;
     scroll-snap-align: center;
     background: white;
     padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Nice shadow */
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(26,86,219,0.06);
     margin: 0 !important;
-    transform: none !important; /* NO ROTATION */
-    border: 1px solid #f0f0f0;
+    border: 1px solid #f0f7ff;
+    transition: transform 0.3s ease;
   }
+  .review-card:hover { transform: translateY(-4px); }
   
   @media(min-width: 768px) {
       .review-card { min-width: 300px !important; }
   }
 
   .review-text {
-    font-style: italic;
-    color: #444;
-    line-height: 1.4;
-    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.6;
+    font-size: 0.92rem;
+    font-family: 'Inter', sans-serif;
   }
 </style>
 
