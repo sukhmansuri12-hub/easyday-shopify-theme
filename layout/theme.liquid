@@ -8,11 +8,11 @@
     <meta name="theme-color" content="{{ settings.color_primary_nav }}">
     <link rel="canonical" href="{{ canonical_url }}">
 
-    {%- comment -%}Favicon — hardcoded from theme assets{%- endcomment -%}
+    {%- comment -%} Favicon & App Icons {%- endcomment -%}
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon.png' | asset_url }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ 'favicon.png' | asset_url }}">
-    <link rel="apple-touch-icon" href="{{ 'favicon.png' | asset_url }}">
-    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'favicon.png' | asset_url }}">
 
 
     {%- unless settings.type_header_font.system? -%}
