@@ -8,11 +8,12 @@
     <meta name="theme-color" content="{{ settings.color_primary_nav }}">
     <link rel="canonical" href="{{ canonical_url }}">
 
-    {%- comment -%} Favicon & App Icons {%- endcomment -%}
-    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon.png' | asset_url }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon.png' | asset_url }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'favicon.png' | asset_url }}">
+    {%- comment -%} Favicon & App Icons - Force Refresh {%- endcomment -%}
+    <link rel="icon" href="{{ 'favicon-new.png' | asset_url | append: '&v=2' }}" type="image/png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-new.png' | asset_url | append: '&v=2' }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ 'favicon-new.png' | asset_url | append: '&v=2' }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'favicon-new.png' | asset_url | append: '&v=2' }}">
+    <link rel="shortcut icon" href="{{ 'favicon-new.png' | asset_url | append: '&v=2' }}" type="image/png">
 
 
     {%- unless settings.type_header_font.system? -%}
