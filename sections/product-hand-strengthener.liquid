@@ -1,0 +1,517 @@
+{% comment %}
+  Hand Strengthener - Premium Product Page
+  Mobile-First | Blue Brand Color | Prepaid Conversion Optimized
+{% endcomment %}
+
+{% render 'product-page-desktop.css' %}
+
+<section class="hs-page">
+
+  <!-- ═══════════════════════════════════════════
+       IMAGE GALLERY WITH ARROW NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <div class="hs-gallery-container" style="margin-top: 0; padding-top: 0;">
+    <div class="hs-gallery" id="hs-gallery" style="border-top: none;">
+      <div class="hs-gallery__track" id="hs-track">
+        {% for image in product.images %}
+          <div class="hs-gallery__slide">
+            <img
+              src="{{ image | img_url: 'master' }}"
+              alt="{{ product.title }} - Image {{ forloop.index }}"
+              loading="{{ forloop.first | default: 'eager' }}"
+            >
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- ── THUMBNAIL TRACK (navigation only at bottom) ── -->
+    <div class="hs-thumbnails-wrapper">
+      <button class="hs-thumb-arrow hs-thumb-arrow--prev" id="hs-thumb-prev">‹</button>
+      <div class="hs-thumbnails" id="hs-thumbnails">
+        {% for image in product.images %}
+          <div class="hs-thumb-item {% if forloop.first %}is-active{% endif %}" onclick="hsJumpToSlide({{ forloop.index0 }})">
+            <img src="{{ image | img_url: '140x140', crop: 'center' }}" alt="Thumb {{ forloop.index }}">
+          </div>
+        {% endfor %}
+      </div>
+      <button class="hs-thumb-arrow hs-thumb-arrow--next" id="hs-thumb-next">›</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PRODUCT INFO SECTION
+  ═══════════════════════════════════════════ -->
+  <div class="hs-info">
+
+    <!-- Rating (Static Summary) -->
+    <div class="hs-reviews__header" style="padding:0;">
+      <div class="hs-rating" style="margin-bottom:0;">
+        <span class="hs-rating__stars">
+          <span class="hs-star-badge">★</span>
+          <span class="hs-star-badge">★</span>
+          <span class="hs-star-badge">★</span>
+          <span class="hs-star-badge">★</span>
+          <span class="hs-star-badge hs-star-badge--partial">★</span>
+        </span>
+        <span class="hs-rating__text" style="font-size: 0.85rem;">Rated 4.8/5 by <strong>1,200+ Customers</strong></span>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h1 class="hs-title">{{ product.title }}</h1>
+
+    <!-- Price Row -->
+    <div class="hs-price-row">
+      <span class="hs-price__current">{{ product.price | money }}</span>
+      {% if product.compare_at_price > product.price %}
+        <span class="hs-price__compare">{{ product.compare_at_price | money }}</span>
+        {% assign savings_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+        <span class="hs-price__badge"><svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14" style="flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg> SAVE {{ savings_pct }}%</span>
+      {% endif %}
+    </div>
+
+    <!-- 3 Benefit Bullets -->
+    <div class="hs-benefits">
+      <p class="hs-benefits__headline">Build Unstoppable Grip Strength.</p>
+      <ul class="hs-benefits__list">
+        <li>
+          <span class="hs-benefit-icon">⚙️</span>
+          <span class="hs-benefit-text">Adjustable resistance — 10kg to 60kg</span>
+        </li>
+        <li>
+          <span class="hs-benefit-icon">✋</span>
+          <span class="hs-benefit-text">Ergonomic non-slip grip — comfortable design</span>
+        </li>
+        <li>
+          <span class="hs-benefit-icon">⛓️</span>
+          <span class="hs-benefit-text">Stainless steel spring — built to last years</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bundle Pack Selector -->
+    <div class="hs-bundle">
+      <div class="hs-bundle__title-wrapper">
+        <span class="hs-bundle__title-line"></span>
+        <span class="hs-bundle__title-text">BUNDLE OFFER</span>
+        <span class="hs-bundle__title-line"></span>
+      </div>
+      
+      {% assign v1 = product.variants[0] %}
+      {% assign v2 = product.variants[1] %}
+
+      <label class="hs-bundle__option hs-bundle__option--selected" id="hs-bundle-1" onclick="hsSelectBundle(1, this, {{ v1.id | default: 'null' }}, '{{ v1.price | money_without_trailing_zeros | default: 'Rs. 499' }}', '{{ v1.compare_at_price | money_without_trailing_zeros | default: 'Rs. 999' }}')">
+        <span class="hs-bundle__custom-radio" id="hs-radio-1"></span>
+        <span class="hs-bundle__details">
+          <span class="hs-bundle__pack">Pack of 1</span>
+          <span class="hs-bundle__sub">Perfect for daily training</span>
+        </span>
+        <span class="hs-bundle__price">
+          {{ v1.price | money_without_trailing_zeros | default: 'Rs. 499' }}
+          <span class="hs-bundle__compare">{{ v1.compare_at_price | money_without_trailing_zeros | default: 'Rs. 999' }}</span>
+        </span>
+      </label>
+
+      {% if v2 %}
+      <label class="hs-bundle__option" id="hs-bundle-2" onclick="hsSelectBundle(2, this, {{ v2.id | default: 'null' }}, '{{ v2.price | money_without_trailing_zeros | default: 'Rs. 899' }}', '{{ v2.compare_at_price | money_without_trailing_zeros | default: 'Rs. 1,998' }}')">
+        <span class="hs-bundle__custom-radio" id="hs-radio-2"></span>
+        <span class="hs-bundle__details">
+          <span class="hs-bundle__pack">Pack of 2</span>
+          <span class="hs-bundle__sub">Best value for both hands</span>
+        </span>
+        <span class="hs-bundle__price">
+          {{ v2.price | money_without_trailing_zeros | default: 'Rs. 899' }}
+          <span class="hs-bundle__compare">{{ v2.compare_at_price | money_without_trailing_zeros | default: 'Rs. 1,998' }}</span>
+        </span>
+      </label>
+      {% endif %}
+    </div>
+
+    <!-- Shopify Form -->
+    {% form 'product', product, id: 'hs-product-form' %}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="hs-variant-id">
+      <input type="hidden" name="quantity" value="1" id="hs-quantity">
+
+      <div class="hs-buy-section" id="hs-buy-section">
+        <button class="hs-btn-addtocart" type="submit" name="add" id="hs-addtocart-btn">
+          {% render 'icon-cart' %}
+          <span>Add to Cart</span>
+        </button>
+
+        <div class="hs-prepaid-badge">
+          <span class="hs-prepaid-badge__icon">⚡</span>
+          <span>Extra 10% Off on Prepaid Orders</span>
+        </div>
+
+        {% if section.settings.show_native_buy_now %}
+          <div style="margin-top: 15px;">
+            <style>
+              .shopify-payment-button__button--unbranded {
+                background-color: #1a56db !important;
+                color: #ffffff !important;
+                border-radius: 50px !important;
+                padding: 18px !important;
+                font-size: 0 !important;
+                font-weight: 700 !important;
+                text-transform: uppercase !important;
+                transition: transform 0.2s ease !important;
+                width: 100% !important;
+                position: relative !important;
+              }
+              .shopify-payment-button__button--unbranded::before {
+                content: "BUY NOW" !important;
+                font-size: 1.2rem !important;
+                visibility: visible !important;
+              }
+              .shopify-payment-button__button--unbranded:active {
+                transform: scale(0.98) !important;
+              }
+            </style>
+            {{ form | payment_button }}
+          </div>
+        {% endif %}
+      </div>
+    {% endform %}
+    
+    <!-- Payment Logos -->
+    <div class="hs-payment-logos">
+        <div class="hs-payment-icon">{{ 'google_pay' | payment_type_svg_tag }}</div>
+        <div class="hs-payment-icon">{{ 'visa' | payment_type_svg_tag }}</div>
+        <div class="hs-payment-icon">{{ 'master' | payment_type_svg_tag }}</div>
+        <div class="hs-payment-icon">{{ 'american_express' | payment_type_svg_tag }}</div>
+    </div>
+
+    <!-- Delivery Estimator -->
+    <div class="hs-delivery">
+      <span class="hs-delivery__icon">📦</span>
+      <div class="hs-delivery__text">
+        <span class="hs-delivery__label">Estimated Delivery</span>
+        <span class="hs-delivery__date" id="hs-delivery-date">Calculating...</span>
+      </div>
+      <span class="hs-delivery__badge">FREE</span>
+    </div>
+
+    <!-- Trust Strip -->
+    <div class="hs-trust-strip">
+      <div class="hs-trust-item">
+        <div class="hs-trust-icon-circle">
+          <svg viewBox="0 0 24 24" class="hs-trust-svg">
+            <path d="M6 14 v9 l6 -3 l6 3 v-9 z" fill="#1a56db"/>
+            <circle cx="12" cy="10" r="8" fill="#ffffff" stroke="#1a56db" stroke-width="2"/>
+            <path d="M12 4.5 l1.8 3.6 4 .6 -2.9 2.8 .7 4 -3.6 -1.9 -3.6 1.9 .7 -4 -2.9 -2.8 4 -.6 z" fill="#1a56db"/>
+          </svg>
+        </div>
+        <span>7-Day Easy<br>Returns</span>
+      </div>
+      <div class="hs-trust-item">
+        <div class="hs-trust-icon-circle">
+          <svg viewBox="0 0 24 24" class="hs-trust-svg">
+            <path d="M20 8h-3V4H3C1.9 4 1 4.9 1 6v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" fill="#1a56db"/>
+          </svg>
+        </div>
+        <span>Free<br>Shipping</span>
+      </div>
+      <div class="hs-trust-item">
+        <div class="hs-trust-icon-circle">
+          <svg viewBox="0 0 24 24" class="hs-trust-svg">
+            <path d="M2 9 L12 2 L22 9 H2 Z" fill="#1a56db"/>
+            <rect x="4" y="10" width="16" height="2" fill="#1a56db"/>
+            <rect x="5" y="13" width="2" height="6" fill="#1a56db"/>
+            <rect x="11" y="13" width="2" height="6" fill="#1a56db"/>
+            <rect x="17" y="13" width="2" height="6" fill="#1a56db"/>
+            <rect x="3" y="20" width="18" height="2" fill="#1a56db"/>
+            <path d="M14 14 l5 -2 l5 2 v4.5 c0 2.5 -2.5 5.5 -5 7.5 c-2.5 -2 -5 -5 -5 -7.5 z" fill="#ffffff"/>
+            <path d="M14 14 l5 -2 l5 2 v4.5 c0 2.5 -2.5 5.5 -5 7.5 c-2.5 -2 -5 -5 -5 -7.5 z" fill="#1a56db"/>
+            <path d="M16 18 l2 2 l3 -4" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span>Secure<br>checkout</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAVE MARQUEE -->
+  <div class="hs-wave-marquee">
+    <div class="hs-marquee-track">
+      <div class="hs-marquee-content">
+        <span>Trusted by 1,200+ Customers</span>
+        <span class="hs-marquee-dot">•</span>
+        <span>Recommended by Fitness Experts</span>
+        <span class="hs-marquee-dot">•</span>
+        <span>Premium Build Quality</span>
+        <span class="hs-marquee-dot">•</span>
+      </div>
+      <div class="hs-marquee-content">
+        <span>Trusted by 1,200+ Customers</span>
+        <span class="hs-marquee-dot">•</span>
+        <span>Recommended by Fitness Experts</span>
+        <span class="hs-marquee-dot">•</span>
+        <span>Premium Build Quality</span>
+        <span class="hs-marquee-dot">•</span>
+      </div>
+    </div>
+    <div class="hs-wave-overlay">
+       <svg viewBox="0 0 1440 120" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:40px; vertical-align:bottom;">
+         <path d="M0,64L48,69.3C96,75,192,85,288,85.3C384,85,480,75,576,64C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
+       </svg>
+    </div>
+  </div>
+
+  <div class="hs-description hs-section-spacing">
+    {%- if product.description != blank -%}
+      {{ product.description }}
+    {%- else -%}
+      <p style="text-align:center; padding:20px; color:#6b7280;">Please add a product description in Shopify Admin.</p>
+    {%- endif -%}
+  </div>
+
+  <!-- ACCORDION -->
+  <div class="hs-accordion hs-section-spacing">
+    <div class="hs-accordion__item">
+      <button class="hs-accordion__btn" onclick="hsToggleAccordion(this)">
+        <span class="hs-accordion__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <span class="hs-accordion__title">Quality Assurance</span>
+        <span class="hs-accordion__plus">+</span>
+      </button>
+      <div class="hs-accordion__content">
+        <p>Every hand strengthener is tested for spring tension and grip durability before shipping. We ensure a professional-grade fitness tool for your home workouts.</p>
+      </div>
+    </div>
+    <div class="hs-accordion__item">
+      <button class="hs-accordion__btn" onclick="hsToggleAccordion(this)">
+        <span class="hs-accordion__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span>
+        <span class="hs-accordion__title">Product Specifications</span>
+        <span class="hs-accordion__plus">+</span>
+      </button>
+      <div class="hs-accordion__content">
+        <ul style="padding-left: 20px; list-style-type: disc; margin: 0; line-height: 1.6;">
+          <li><strong>Material:</strong> High-quality PP + Stainless Steel Spring</li>
+          <li><strong>Tension:</strong> 10kg - 60kg Adjustable</li>
+          <li><strong>Grip:</strong> Ergonomic TPR non-slip handle</li>
+          <li><strong>Weight:</strong> 150g (Lightweight & Portable)</li>
+          <li><strong>Color:</strong> Professional Black & Blue</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="hs-reviews hs-section-spacing" id="hs-reviews-section">
+    <div class="hs-reviews__dropdown" style="padding: 0 16px 20px;">
+      <p style="text-align: center; color: #111827; font-family: 'Poppins', sans-serif; font-size: 1rem; margin: 0 0 15px; font-weight: 700; letter-spacing: 0.3px;">What our fitness community says</p>
+      <div class="hs-reviews__summary" onclick="hsToggleReviewDropdown()">
+        <div class="hs-rating">
+          <span class="hs-rating__score-inline">4.8</span>
+          <span class="hs-rating__stars">
+            <span class="hs-star-badge">★</span>
+            <span class="hs-star-badge">★</span>
+            <span class="hs-star-badge">★</span>
+            <span class="hs-star-badge">★</span>
+            <span class="hs-star-badge hs-star-badge--partial">★</span>
+          </span>
+          <span class="hs-rating__text" style="font-weight:600; color:#111827;">1,200 Reviews</span>
+          <svg class="hs-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px; margin-left:2px;"><path d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      
+      <div class="hs-reviews__details" id="hs-review-dropdown-content">
+        <div class="hs-reviews__stats">
+          <div class="hs-stats-main">
+            <span class="hs-stats-score">4.8</span>
+            <div class="hs-stats-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+          </div>
+          <button class="hs-btn-write-inline" type="button" onclick="hsOpenWriteReview()">Write a review</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Masonry 2-column grid -->
+    <div class="hs-reviews__masonry" id="hs-reviews-track">
+      <div class="hs-mcard">
+        <div class="hs-mcard__name">Arjun V.</div>
+        <div class="hs-mcard__stars">⭐⭐⭐⭐⭐</div>
+        <p class="hs-mcard__text">"Perfect for my fitness journey! The build quality is amazing and the tension is easy to adjust."</p>
+        <span class="hs-mcard__verified">✓ Verified</span>
+      </div>
+      <div class="hs-mcard">
+        <div class="hs-mcard__name">Sarah L.</div>
+        <div class="hs-mcard__stars">⭐⭐⭐⭐⭐</div>
+        <p class="hs-mcard__text">"I use it while working at my desk. It really helps with hand fatigue and stress relief."</p>
+        <span class="hs-mcard__verified">✓ Verified</span>
+      </div>
+      <div class="hs-mcard">
+        <div class="hs-mcard__name">Karan S.</div>
+        <div class="hs-mcard__stars">⭐⭐⭐⭐⭐</div>
+        <p class="hs-mcard__text">"Very durable and smooth. I have noticed a significant grip improvement in just two weeks."</p>
+        <span class="hs-mcard__verified">✓ Verified</span>
+      </div>
+    </div>
+
+    <div class="hs-write-review-wrap">
+      <button class="hs-write-review-btn" id="hs-write-review-btn" type="button" onclick="hsOpenWriteReview()">✍️ Write a Review</button>
+    </div>
+
+    <div class="hs-review-form" id="hs-review-form" style="display:none;">
+      <button class="hs-review-form__close" type="button" onclick="hsCloseWriteReview()">&times;</button>
+      <h3 class="hs-review-form__title">Share Your Experience</h3>
+      <div class="hs-review-form__stars" id="hs-star-picker">
+        <span class="hs-star-pick" data-val="1">★</span>
+        <span class="hs-star-pick" data-val="2">★</span>
+        <span class="hs-star-pick" data-val="3">★</span>
+        <span class="hs-star-pick" data-val="4">★</span>
+        <span class="hs-star-pick" data-val="5">★</span>
+      </div>
+      <input type="text" class="hs-review-form__input" id="hs-review-name" placeholder="Your Name" maxlength="50">
+      <textarea class="hs-review-form__textarea" id="hs-review-text" placeholder="Tell us about your strength progress..." maxlength="500" rows="4"></textarea>
+      <button class="hs-review-form__submit" type="button" onclick="hsSubmitReview()">Submit Review</button>
+    </div>
+  </div>
+
+  <!-- Final CTA -->
+  <div class="hs-final-cta">
+    <button class="hs-final-cta__btn" type="button" onclick="hsScrollToBuy()">
+      💪 GET YOUR STRENGTHENER NOW
+    </button>
+  </div>
+
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;600;700&display=swap');
+
+  :root {
+    --hs-blue: #1a56db;
+    --hs-text: #111827;
+    --hs-text-muted: #6b7280;
+    --hs-border: #e5e7eb;
+    --hs-bg: #ffffff;
+    --hs-bg-subtle: #f8faff;
+  }
+
+  .hs-page { font-family: 'Poppins', sans-serif; background: var(--hs-bg); color: var(--hs-text); padding-bottom: 70px; }
+  main { padding-top: 0 !important; }
+
+  /* GALLERY */
+  .hs-gallery { position: relative; overflow: hidden; background: #fff; width: 100%; }
+  .hs-gallery__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; width: 100%; transition: transform 0.3s; }
+  .hs-gallery__track::-webkit-scrollbar { display: none; }
+  .hs-gallery__slide { min-width: 100%; scroll-snap-align: start; display: flex; justify-content: center; }
+  .hs-gallery__slide img { width: 100%; height: auto; object-fit: contain; display: block; }
+  
+  .hs-thumbnails-wrapper { padding: 8px 10px; display: flex; align-items: center; gap: 8px; border-top: 1px solid #f0f0f0; }
+  .hs-thumbnails { display: flex; overflow-x: auto; gap: 12px; scrollbar-width: none; flex: 1; }
+  .hs-thumbnails::-webkit-scrollbar { display: none; }
+  .hs-thumb-item { min-width: 70px; width: 70px; height: 70px; border-radius: 12px; border: 1.5px solid transparent; overflow: hidden; }
+  .hs-thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+  .hs-thumb-item.is-active { border-color: #000; }
+  
+  .hs-thumb-arrow { background: #fff; border: 1px solid #e2e8f0; width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; }
+
+  /* TEXT & ACTIONS */
+  .hs-info { padding: 16px 16px 0; }
+  .hs-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .hs-star-badge { display: flex; align-items: center; justify-content: center; width: 17px; height: 17px; background: var(--hs-blue); color: #fff; font-size: 0.7rem; border-radius: 3px; }
+  .hs-star-badge--partial { background: linear-gradient(90deg, var(--hs-blue) 70%, #d1d5db 70%) !important; }
+  
+  .hs-title { font-size: 1.5rem; font-weight: 600; line-height: 1.25; margin: 0 0 14px; }
+  .hs-price-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+  .hs-price__current { font-size: 1.25rem; font-weight: 800; color: var(--hs-blue); }
+  .hs-price__compare { text-decoration: line-through; color: #9ca3af; font-size: 0.82rem; }
+  .hs-price__badge { background: var(--hs-blue); color: #fff; font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
+
+  /* BUNDLE */
+  .hs-bundle { margin-bottom: 16px; }
+  .hs-bundle__title-wrapper { display: flex; align-items: center; margin-bottom: 12px; }
+  .hs-bundle__title-line { flex-grow: 1; height: 1.5px; background: var(--hs-blue); }
+  .hs-bundle__title-text { font-size: 0.8rem; font-weight: 800; padding: 0 10px; text-transform: uppercase; }
+  .hs-bundle__option { display: flex; align-items: center; gap: 12px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; cursor: pointer; background: #fff; }
+  .hs-bundle__option--selected { border-color: var(--hs-blue); background: #e8f0fe; }
+  .hs-bundle__custom-radio { width: 20px; height: 20px; border: 2px solid #cbd5e1; border-radius: 50%; position: relative; }
+  .hs-bundle__option--selected .hs-bundle__custom-radio::after { content: ''; position: absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:10px; height:10px; border-radius:50%; background:var(--hs-blue); }
+  .hs-bundle__details { flex: 1; }
+  .hs-bundle__pack { font-size: 0.9rem; font-weight: 700; }
+  .hs-bundle__sub { font-size: 0.75rem; color: var(--hs-text-muted); }
+  .hs-bundle__price { font-size: 0.95rem; font-weight: 700; color: var(--hs-blue); text-align: right; }
+  .hs-bundle__compare { display: block; font-size: 0.75rem; text-decoration: line-through; color: #9ca3af; }
+
+  /* BUTTONS */
+  .hs-btn-addtocart { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: transparent; color: var(--hs-blue); border: 2px solid var(--hs-blue); border-radius: 50px; padding: 14px; font-weight: 700; font-size: 1.15rem; cursor: pointer; margin-bottom: 15px; }
+  .hs-prepaid-badge { display: flex; align-items: center; justify-content: center; gap: 6px; background: #ecfdf5; color: #059669; border: 1px solid #10b981; padding: 8px 16px; border-radius: 50px; font-size: 0.88rem; font-weight: 700; margin: 0 auto 12px; width: fit-content; }
+  
+  /* MARQUEE */
+  .hs-wave-marquee { background: #1a56db; color: #fff; padding: 12px 0 35px; position: relative; overflow: hidden; margin-top: 10px; }
+  .hs-marquee-track { display: flex; animation: hsMarquee 15s linear infinite; }
+  .hs-marquee-content { display: flex; gap: 40px; white-space: nowrap; padding-right: 40px; }
+  @keyframes hsMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .hs-wave-overlay { position: absolute; bottom: 0; width: 100%; height: 40px; }
+
+  /* REVIEWS */
+  .hs-reviews { background: var(--hs-bg-subtle); padding: 20px 0; border-top: 8px solid var(--hs-border); }
+  .hs-reviews__dropdown { cursor: pointer; }
+  .hs-reviews__masonry { columns: 2; column-gap: 10px; padding: 0 14px; }
+  .hs-mcard { break-inside: avoid; background: #fff; border-radius: 12px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--hs-border); }
+  .hs-mcard__name { font-weight: 700; font-size: 0.85rem; }
+  .hs-mcard__text { font-size: 0.78rem; color: var(--hs-text-muted); line-height: 1.5; }
+  .hs-mcard__verified { color: #16a34a; font-size: 0.68rem; font-weight: 700; }
+
+  /* FINAL CTA */
+  .hs-final-cta { padding: 20px 16px; background: var(--hs-bg-subtle); text-align: center; }
+  .hs-final-cta__btn { width: 100%; background: var(--hs-blue); color: #fff; border: none; border-radius: 50px; padding: 18px; font-size: 1.1rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(26,86,219,0.3); animation: hsPulse 2s infinite; }
+  @keyframes hsPulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+  
+  .hs-accordion__btn { width: 100%; border: none; background: transparent; display: flex; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--hs-border); cursor: pointer; text-align: left; }
+  .hs-accordion__title { flex: 1; font-weight: 600; }
+  .hs-accordion__content { display: none; padding: 10px 0; font-size: 0.85rem; color: var(--hs-text-muted); }
+</style>
+
+<script>
+(function() {
+  const hsTrack = document.getElementById('hs-track');
+  const hsThumbs = document.querySelectorAll('.hs-thumb-item');
+  const hsThumbScroll = document.getElementById('hs-thumbnails');
+  
+  let currentIndex = 0;
+  
+  window.hsJumpToSlide = function(index) {
+    currentIndex = index;
+    const slideWidth = hsTrack.clientWidth;
+    hsTrack.scrollTo({ left: slideWidth * index, behavior: 'smooth' });
+    hsThumbs.forEach((t, i) => t.classList.toggle('is-active', i === index));
+  };
+  
+  window.hsSelectBundle = function(pack, el, variantId, price, compare) {
+    document.querySelectorAll('.hs-bundle__option').forEach(o => o.classList.remove('hs-bundle__option--selected'));
+    el.classList.add('hs-bundle__option--selected');
+    document.getElementById('hs-variant-id').value = variantId || "{{ product.variants[0].id }}";
+    document.getElementById('hs-quantity').value = variantId ? 1 : pack;
+    document.querySelector('.hs-price__current').textContent = price;
+    if (compare) document.querySelector('.hs-price__compare').textContent = compare;
+  };
+
+  window.hsToggleAccordion = function(btn) {
+    const content = btn.nextElementSibling;
+    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  };
+
+  window.hsScrollToBuy = function() {
+    document.getElementById('hs-buy-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Hand Strengthener",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_native_buy_now",
+      "label": "Show Native Dynamic Buy Now Button",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
